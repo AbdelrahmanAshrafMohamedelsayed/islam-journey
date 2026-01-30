@@ -2,7 +2,7 @@
 
 /**
  * AmbientSoundButton Component
- * 
+ *
  * Floating button for controlling ambient mosque atmospheres.
  * Shows current atmosphere, volume control, and quick atmosphere switcher.
  */
@@ -10,7 +10,11 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import { Volume2, VolumeX, ChevronUp, Pause, Play } from "lucide-react";
-import { useAmbientSound, getAtmosphereInfo, getAllAtmospheres } from "@/lib/hooks/useAmbientSound";
+import {
+  useAmbientSound,
+  getAtmosphereInfo,
+  getAllAtmospheres,
+} from "@/lib/hooks/useAmbientSound";
 import type { AtmosphereType } from "@/lib/stores/narrativeStore";
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -72,7 +76,10 @@ export function AmbientSoundButton({
   // Close on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsExpanded(false);
         setShowVolumeSlider(false);
       }
@@ -114,12 +121,15 @@ export function AmbientSoundButton({
             <div className="p-2">
               {allAtmospheres.map((atmosphere) => {
                 const isSelected = currentAtmosphere === atmosphere.id;
-                const color = ATMOSPHERE_COLORS[atmosphere.id as AtmosphereType];
+                const color =
+                  ATMOSPHERE_COLORS[atmosphere.id as AtmosphereType];
 
                 return (
                   <motion.button
                     key={atmosphere.id}
-                    onClick={() => handleAtmosphereSelect(atmosphere.id as AtmosphereType)}
+                    onClick={() =>
+                      handleAtmosphereSelect(atmosphere.id as AtmosphereType)
+                    }
                     className={`
                       w-full flex items-center gap-3 px-3 py-2 rounded-xl
                       transition-colors duration-200
@@ -135,7 +145,9 @@ export function AmbientSoundButton({
 
                     {/* Info */}
                     <div className="flex-1 text-left">
-                      <p className="font-medium text-sm">{atmosphere.name.en}</p>
+                      <p className="font-medium text-sm">
+                        {atmosphere.name.en}
+                      </p>
                       <p className="text-xs text-muted-foreground line-clamp-1">
                         {atmosphere.description.en}
                       </p>
@@ -167,7 +179,9 @@ export function AmbientSoundButton({
                 <span className="text-2xl">🔇</span>
                 <div className="flex-1 text-left">
                   <p className="font-medium text-sm">Silent</p>
-                  <p className="text-xs text-muted-foreground">No ambient sounds</p>
+                  <p className="text-xs text-muted-foreground">
+                    No ambient sounds
+                  </p>
                 </div>
                 {currentAtmosphere === "silent" && (
                   <motion.div
@@ -230,7 +244,9 @@ export function AmbientSoundButton({
           active:scale-95
         `}
         style={{
-          borderColor: isPlaying ? `${ATMOSPHERE_COLORS[currentAtmosphere]}40` : undefined,
+          borderColor: isPlaying
+            ? `${ATMOSPHERE_COLORS[currentAtmosphere]}40`
+            : undefined,
           boxShadow: isPlaying
             ? `0 4px 20px ${ATMOSPHERE_COLORS[currentAtmosphere]}20`
             : undefined,
@@ -248,9 +264,7 @@ export function AmbientSoundButton({
         )}
 
         {/* Atmosphere icon */}
-        <span className="text-xl">
-          {ATMOSPHERE_ICONS[currentAtmosphere]}
-        </span>
+        <span className="text-xl">{ATMOSPHERE_ICONS[currentAtmosphere]}</span>
 
         {/* Status text */}
         <span className="text-sm font-medium hidden sm:inline">
@@ -311,7 +325,9 @@ interface AmbientSoundSelectorProps {
   className?: string;
 }
 
-export function AmbientSoundSelector({ className = "" }: AmbientSoundSelectorProps) {
+export function AmbientSoundSelector({
+  className = "",
+}: AmbientSoundSelectorProps) {
   const {
     isPlaying,
     currentAtmosphere,
@@ -338,9 +354,10 @@ export function AmbientSoundSelector({ className = "" }: AmbientSoundSelectorPro
               className={`
                 flex flex-col items-center gap-2 p-4 rounded-xl
                 border transition-all duration-200
-                ${isSelected
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/50 hover:bg-muted/30"
+                ${
+                  isSelected
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/50 hover:bg-muted/30"
                 }
               `}
               whileHover={{ scale: 1.02 }}

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button, AnimatedCard, FeatureCard } from "@/components/ui";
 import { JourneyMap } from "@/components/journey";
@@ -17,12 +18,135 @@ import {
   Star,
   Users,
   Zap,
+  Gamepad2,
+  Heart,
+  Award,
+  Moon,
+  Sun,
+  Volume2,
 } from "lucide-react";
+
+// Daily inspirational quotes
+const dailyQuotes = [
+  {
+    text: { en: "Verily, with hardship comes ease.", ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا" },
+    source: "Quran 94:6",
+  },
+  {
+    text: { en: "The best of people are those who are most beneficial to people.", ar: "خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ" },
+    source: "Hadith",
+  },
+  {
+    text: { en: "Seek knowledge from the cradle to the grave.", ar: "اطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ" },
+    source: "Wisdom",
+  },
+  {
+    text: { en: "Be in this world as if you were a stranger or a traveler.", ar: "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ" },
+    source: "Bukhari",
+  },
+  {
+    text: { en: "The strong person is not the one who can wrestle, but the one who controls himself when angry.", ar: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ" },
+    source: "Bukhari & Muslim",
+  },
+];
+
+// Character greetings based on time of day
+const getGreeting = (hour: number, isArabic: boolean) => {
+  if (hour >= 5 && hour < 12) {
+    return {
+      greeting: isArabic ? "صباح الخير! 🌅" : "Good Morning! 🌅",
+      message: isArabic 
+        ? "أتمنى أن تكون قد صليت الفجر. يوم جديد مليء بالفرص للتعلم!" 
+        : "Hope you prayed Fajr. A new day full of opportunities to learn!",
+      character: "Yusuf",
+    };
+  } else if (hour >= 12 && hour < 17) {
+    return {
+      greeting: isArabic ? "مرحباً! ☀️" : "Hello! ☀️",
+      message: isArabic 
+        ? "وقت رائع للتعلم. خذ استراحة واستمر في رحلتك!" 
+        : "Great time to learn. Take a break and continue your journey!",
+      character: "Fatima",
+    };
+  } else if (hour >= 17 && hour < 20) {
+    return {
+      greeting: isArabic ? "مساء النور! 🌆" : "Good Evening! 🌆",
+      message: isArabic 
+        ? "لا تنس صلاة المغرب. الوقت المثالي لبعض التعلم الهادئ." 
+        : "Don't forget Maghrib prayer. Perfect time for some quiet learning.",
+      character: "Bilal",
+    };
+  } else {
+    return {
+      greeting: isArabic ? "مساء الخير! 🌙" : "Good Night! 🌙",
+      message: isArabic 
+        ? "قبل النوم، لماذا لا تقرأ درساً قصيراً أو بعض الأذكار؟" 
+        : "Before bed, why not read a short lesson or some dhikr?",
+      character: "Khadijah",
+    };
+  }
+};
+
+// Character avatar component
+const CharacterGreeting = ({ character, greeting, message, isArabic }: { 
+  character: string; 
+  greeting: string; 
+  message: string;
+  isArabic: boolean;
+}) => {
+  const avatarColors: Record<string, string> = {
+    Yusuf: "from-blue-400 to-indigo-500",
+    Fatima: "from-rose-400 to-pink-500",
+    Bilal: "from-amber-400 to-orange-500",
+    Khadijah: "from-emerald-400 to-teal-500",
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      className="flex items-start gap-4 p-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-lg max-w-md"
+    >
+      <motion.div
+        className={`w-14 h-14 rounded-full bg-gradient-to-br ${avatarColors[character]} flex items-center justify-center text-white text-xl font-bold shadow-lg flex-shrink-0`}
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        {character.charAt(0)}
+      </motion.div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="font-bold text-slate-800 dark:text-white">{character}</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">
+            {isArabic ? "مرشدك" : "Your Guide"}
+          </span>
+        </div>
+        <p className="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">{greeting}</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{message}</p>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function HomePage() {
   const { language } = useSettingsStore();
   const { totalXp, level, streakDays } = useProgressStore();
   const isArabic = language === "ar";
+  
+  // Time-based greeting
+  const [currentHour, setCurrentHour] = useState(12);
+  const [dailyQuote, setDailyQuote] = useState(dailyQuotes[0]);
+  const [showGreeting, setShowGreeting] = useState(true);
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    setCurrentHour(hour);
+    // Pick a random quote for the day (based on date)
+    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+    setDailyQuote(dailyQuotes[dayOfYear % dailyQuotes.length]);
+  }, []);
+
+  const greetingData = getGreeting(currentHour, isArabic);
 
   const features = [
     {
@@ -81,6 +205,31 @@ export default function HomePage() {
 
   return (
     <div className="relative overflow-hidden">
+      {/* Character Greeting - Fixed Position */}
+      <AnimatePresence>
+        {showGreeting && (
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            className="fixed bottom-4 left-4 z-50 hidden md:block"
+          >
+            <CharacterGreeting
+              character={greetingData.character}
+              greeting={greetingData.greeting}
+              message={greetingData.message}
+              isArabic={isArabic}
+            />
+            <button
+              onClick={() => setShowGreeting(false)}
+              className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-xs hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            >
+              ×
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 pattern-arabesque">
         {/* Background decoration */}
@@ -179,6 +328,25 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </motion.div>
+
+          {/* Daily Inspiration Quote */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-12 p-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/50"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="w-5 h-5 text-amber-500" />
+              <span className="text-sm font-medium text-amber-700 dark:text-amber-300">
+                {isArabic ? "إلهام اليوم" : "Daily Inspiration"}
+              </span>
+            </div>
+            <p className="text-xl font-arabic text-slate-800 dark:text-white mb-2 leading-relaxed" dir={isArabic ? "rtl" : "ltr"}>
+              "{dailyQuote.text[isArabic ? "ar" : "en"]}"
+            </p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">— {dailyQuote.source}</p>
           </motion.div>
         </div>
 
@@ -392,11 +560,29 @@ export default function HomePage() {
               {
                 href: "/history",
                 icon: "🕰️",
-                title: isArabic ? "التاريخ الإسلامي" : "Islamic History",
+                title: isArabic ? "آلة الزمن" : "Time Traveler",
                 description: isArabic
-                  ? "استكشف أحداث السيرة النبوية"
-                  : "Explore the Prophet's life timeline",
+                  ? "عش أحداث التاريخ الإسلامي"
+                  : "Experience Islamic history immersively",
                 color: "amber",
+              },
+              {
+                href: "/games",
+                icon: "🎮",
+                title: isArabic ? "الألعاب" : "Games",
+                description: isArabic
+                  ? "تعلم وأنت تلعب"
+                  : "Learn while you play",
+                color: "purple",
+              },
+              {
+                href: "/dua",
+                icon: "🤲",
+                title: isArabic ? "الأدعية" : "Duas",
+                description: isArabic
+                  ? "مجموعة أدعية يومية"
+                  : "Daily dua collection",
+                color: "teal",
               },
               {
                 href: "/ramadan",
@@ -408,6 +594,15 @@ export default function HomePage() {
                 color: "indigo",
               },
               {
+                href: "/achievements",
+                icon: "🏆",
+                title: isArabic ? "الإنجازات" : "Achievements",
+                description: isArabic
+                  ? "اكتشف شاراتك وتقدمك"
+                  : "Discover your badges & progress",
+                color: "yellow",
+              },
+              {
                 href: "/misconceptions",
                 icon: "💡",
                 title: isArabic ? "رد الشبهات" : "Misconceptions",
@@ -415,6 +610,15 @@ export default function HomePage() {
                   ? "إجابات على الأسئلة الشائعة"
                   : "Answers to common questions",
                 color: "rose",
+              },
+              {
+                href: "/about",
+                icon: "ℹ️",
+                title: isArabic ? "عن التطبيق" : "About",
+                description: isArabic
+                  ? "تعرف على رحلة الإسلام"
+                  : "Learn about Islam Journey",
+                color: "blue",
               },
             ].map((item, index) => (
               <motion.div

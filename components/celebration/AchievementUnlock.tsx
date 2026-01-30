@@ -2,7 +2,7 @@
 
 /**
  * AchievementUnlock Component
- * 
+ *
  * Cinematic celebration animation when users unlock achievements,
  * complete chapters, or unlock new characters.
  */
@@ -34,12 +34,12 @@ interface AchievementUnlockProps {
 // ACHIEVEMENT BADGE
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function AchievementBadge({ 
-  icon, 
+function AchievementBadge({
+  icon,
   color,
-  size = 80 
-}: { 
-  icon: React.ReactNode; 
+  size = 80,
+}: {
+  icon: React.ReactNode;
   color: string;
   size?: number;
 }) {
@@ -89,9 +89,7 @@ function AchievementBadge({
         />
 
         {/* Icon */}
-        <div className="relative z-10 text-4xl">
-          {icon}
-        </div>
+        <div className="relative z-10 text-4xl">{icon}</div>
       </div>
 
       {/* Spinning ring */}
@@ -133,7 +131,7 @@ export function AchievementUnlock({
       // Stagger the animations
       setTimeout(() => setShowConfetti(true), 200);
       setTimeout(() => setShowContent(true), 400);
-      
+
       // Auto-dismiss after animation
       const dismissTimer = setTimeout(() => {
         onComplete?.();

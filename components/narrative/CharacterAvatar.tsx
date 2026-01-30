@@ -2,7 +2,7 @@
 
 /**
  * CharacterAvatar Component
- * 
+ *
  * Renders characters as beautiful silhouettes with geometric Islamic patterns.
  * Supports multiple emotions and smooth transitions between states.
  */
@@ -35,7 +35,10 @@ const SIZES = {
 };
 
 // Emotion-based animation variants
-const EMOTION_ANIMATIONS: Record<CharacterEmotion, { y: number[]; rotate: number[]; scale: number[] }> = {
+const EMOTION_ANIMATIONS: Record<
+  CharacterEmotion,
+  { y: number[]; rotate: number[]; scale: number[] }
+> = {
   neutral: { y: [0, -2, 0], rotate: [0, 0, 0], scale: [1, 1, 1] },
   happy: { y: [0, -4, 0], rotate: [-1, 1, -1], scale: [1, 1.02, 1] },
   thinking: { y: [0, 0, 0], rotate: [0, 2, 0], scale: [1, 1, 1] },
@@ -52,9 +55,19 @@ const EMOTION_ANIMATIONS: Record<CharacterEmotion, { y: number[]; rotate: number
 
 function GeometricPattern({ color, size }: { color: string; size: number }) {
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className="absolute opacity-40">
+    <svg
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      className="absolute opacity-40"
+    >
       <defs>
-        <pattern id="geometric" patternUnits="userSpaceOnUse" width="20" height="20">
+        <pattern
+          id="geometric"
+          patternUnits="userSpaceOnUse"
+          width="20"
+          height="20"
+        >
           <path
             d="M10 0 L20 10 L10 20 L0 10 Z"
             fill="none"
@@ -71,9 +84,19 @@ function GeometricPattern({ color, size }: { color: string; size: number }) {
 
 function ArabesquePattern({ color, size }: { color: string; size: number }) {
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className="absolute opacity-40">
+    <svg
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      className="absolute opacity-40"
+    >
       <defs>
-        <pattern id="arabesque" patternUnits="userSpaceOnUse" width="25" height="25">
+        <pattern
+          id="arabesque"
+          patternUnits="userSpaceOnUse"
+          width="25"
+          height="25"
+        >
           <path
             d="M12.5 0 Q25 12.5 12.5 25 Q0 12.5 12.5 0"
             fill="none"
@@ -95,9 +118,19 @@ function ArabesquePattern({ color, size }: { color: string; size: number }) {
 
 function CalligraphyPattern({ color, size }: { color: string; size: number }) {
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className="absolute opacity-30">
+    <svg
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      className="absolute opacity-30"
+    >
       <defs>
-        <pattern id="calligraphy" patternUnits="userSpaceOnUse" width="40" height="40">
+        <pattern
+          id="calligraphy"
+          patternUnits="userSpaceOnUse"
+          width="40"
+          height="40"
+        >
           {/* Stylized Bismillah-inspired curves */}
           <path
             d="M5 20 Q15 10 25 20 Q35 30 25 35 Q15 40 5 30 Z"
@@ -106,7 +139,14 @@ function CalligraphyPattern({ color, size }: { color: string; size: number }) {
             strokeWidth="1"
             strokeLinecap="round"
           />
-          <circle cx="30" cy="15" r="3" fill="none" stroke={color} strokeWidth="0.5" />
+          <circle
+            cx="30"
+            cy="15"
+            r="3"
+            fill="none"
+            stroke={color}
+            strokeWidth="0.5"
+          />
         </pattern>
       </defs>
       <rect width="100" height="100" fill="url(#calligraphy)" />
@@ -116,9 +156,19 @@ function CalligraphyPattern({ color, size }: { color: string; size: number }) {
 
 function StarsPattern({ color, size }: { color: string; size: number }) {
   return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className="absolute opacity-50">
+    <svg
+      viewBox="0 0 100 100"
+      width={size}
+      height={size}
+      className="absolute opacity-50"
+    >
       <defs>
-        <pattern id="stars" patternUnits="userSpaceOnUse" width="30" height="30">
+        <pattern
+          id="stars"
+          patternUnits="userSpaceOnUse"
+          width="30"
+          height="30"
+        >
           {/* 8-pointed Islamic star */}
           <path
             d="M15 0 L17 10 L25 8 L19 15 L25 22 L17 20 L15 30 L13 20 L5 22 L11 15 L5 8 L13 10 Z"
@@ -136,7 +186,15 @@ function StarsPattern({ color, size }: { color: string; size: number }) {
 }
 
 // Pattern selector
-function PatternOverlay({ style, color, size }: { style: string; color: string; size: number }) {
+function PatternOverlay({
+  style,
+  color,
+  size,
+}: {
+  style: string;
+  color: string;
+  size: number;
+}) {
   switch (style) {
     case "geometric":
       return <GeometricPattern color={color} size={size} />;
@@ -155,36 +213,48 @@ function PatternOverlay({ style, color, size }: { style: string; color: string; 
 // SILHOUETTE COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
 
-function Silhouette({ 
-  size, 
-  primaryColor, 
-  emotion 
-}: { 
-  size: number; 
+function Silhouette({
+  size,
+  primaryColor,
+  emotion,
+}: {
+  size: number;
   primaryColor: string;
   emotion: CharacterEmotion;
 }) {
   // Slightly different silhouette poses based on emotion
   const getHeadTilt = () => {
     switch (emotion) {
-      case "thinking": return 5;
-      case "happy": return -3;
-      case "excited": return -5;
-      case "peaceful": return 0;
-      case "encouraging": return -2;
-      default: return 0;
+      case "thinking":
+        return 5;
+      case "happy":
+        return -3;
+      case "excited":
+        return -5;
+      case "peaceful":
+        return 0;
+      case "encouraging":
+        return -2;
+      default:
+        return 0;
     }
   };
 
   return (
-    <svg 
-      viewBox="0 0 100 120" 
-      width={size} 
+    <svg
+      viewBox="0 0 100 120"
+      width={size}
       height={size * 1.2}
       className="relative z-10"
     >
       <defs>
-        <linearGradient id={`silhouette-gradient-${primaryColor}`} x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient
+          id={`silhouette-gradient-${primaryColor}`}
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
           <stop offset="0%" stopColor={primaryColor} stopOpacity="0.9" />
           <stop offset="100%" stopColor={primaryColor} stopOpacity="0.7" />
         </linearGradient>
@@ -192,7 +262,7 @@ function Silhouette({
           <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.3" />
         </filter>
       </defs>
-      
+
       {/* Head */}
       <motion.ellipse
         cx="50"
@@ -205,14 +275,14 @@ function Silhouette({
         transition={{ duration: 0.5 }}
         style={{ transformOrigin: "50px 40px" }}
       />
-      
+
       {/* Shoulders/Body */}
       <path
         d="M15 75 Q15 55 35 50 L50 48 L65 50 Q85 55 85 75 L85 120 L15 120 Z"
         fill={`url(#silhouette-gradient-${primaryColor})`}
         filter="url(#silhouette-shadow)"
       />
-      
+
       {/* Subtle clothing detail line */}
       <path
         d="M35 55 Q50 60 65 55"
@@ -244,7 +314,10 @@ export function CharacterAvatar({
   const animationVariant = EMOTION_ANIMATIONS[currentEmotion];
 
   // Generate unique pattern ID to prevent SVG conflicts
-  const patternId = useMemo(() => `pattern-${character.id}-${Math.random().toString(36).slice(2)}`, [character.id]);
+  const patternId = useMemo(
+    () => `pattern-${character.id}-${Math.random().toString(36).slice(2)}`,
+    [character.id],
+  );
 
   return (
     <motion.div
@@ -263,10 +336,14 @@ export function CharacterAvatar({
             backgroundColor: character.primaryColor,
             opacity: 0.2,
           }}
-          animate={animate ? {
-            opacity: [0.15, 0.25, 0.15],
-            scale: [1, 1.1, 1],
-          } : undefined}
+          animate={
+            animate
+              ? {
+                  opacity: [0.15, 0.25, 0.15],
+                  scale: [1, 1.1, 1],
+                }
+              : undefined
+          }
           transition={{
             duration: 3,
             repeat: Infinity,
@@ -284,11 +361,15 @@ export function CharacterAvatar({
           background: `linear-gradient(135deg, ${character.primaryColor}20, ${character.secondaryColor}30)`,
           border: `2px solid ${character.primaryColor}40`,
         }}
-        animate={animate ? {
-          y: animationVariant.y,
-          rotate: animationVariant.rotate,
-          scale: animationVariant.scale,
-        } : undefined}
+        animate={
+          animate
+            ? {
+                y: animationVariant.y,
+                rotate: animationVariant.rotate,
+                scale: animationVariant.scale,
+              }
+            : undefined
+        }
         transition={{
           duration: 2,
           repeat: Infinity,
@@ -321,7 +402,7 @@ export function CharacterAvatar({
             exit={{ opacity: 0, y: 5 }}
             className={`mt-2 text-center ${dimensions.name}`}
           >
-            <p 
+            <p
               className="font-semibold"
               style={{ color: character.primaryColor }}
             >
@@ -348,11 +429,11 @@ interface MiniAvatarProps {
   className?: string;
 }
 
-export function MiniAvatar({ 
-  character, 
-  emotion, 
+export function MiniAvatar({
+  character,
+  emotion,
   size = 40,
-  className = "" 
+  className = "",
 }: MiniAvatarProps) {
   const currentEmotion = emotion || character.defaultEmotion;
 

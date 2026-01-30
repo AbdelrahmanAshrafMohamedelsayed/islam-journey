@@ -2,7 +2,7 @@
 
 /**
  * StoryTransition Component
- * 
+ *
  * Cinematic scene transitions between lessons, chapters, and major events.
  * Creates immersive atmosphere changes (desert, mosque, night sky, dawn).
  */
@@ -39,36 +39,46 @@ interface SceneConfig {
 
 const SCENE_CONFIGS: Record<SceneType, SceneConfig> = {
   mosque: {
-    background: "linear-gradient(180deg, #1a365d 0%, #2d3748 50%, #1a202c 100%)",
-    overlay: "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
+    background:
+      "linear-gradient(180deg, #1a365d 0%, #2d3748 50%, #1a202c 100%)",
+    overlay:
+      "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)",
     particleColor: "#fcd34d",
     particleCount: 20,
     particleType: "light",
   },
   desert: {
-    background: "linear-gradient(180deg, #fef3c7 0%, #f59e0b 30%, #c2410c 70%, #7c2d12 100%)",
-    overlay: "linear-gradient(180deg, transparent 0%, rgba(194,65,12,0.3) 100%)",
+    background:
+      "linear-gradient(180deg, #fef3c7 0%, #f59e0b 30%, #c2410c 70%, #7c2d12 100%)",
+    overlay:
+      "linear-gradient(180deg, transparent 0%, rgba(194,65,12,0.3) 100%)",
     particleColor: "#fcd34d",
     particleCount: 30,
     particleType: "sand",
   },
   garden: {
-    background: "linear-gradient(180deg, #86efac 0%, #22c55e 40%, #15803d 100%)",
-    overlay: "radial-gradient(ellipse at bottom, transparent 0%, rgba(0,0,0,0.2) 100%)",
+    background:
+      "linear-gradient(180deg, #86efac 0%, #22c55e 40%, #15803d 100%)",
+    overlay:
+      "radial-gradient(ellipse at bottom, transparent 0%, rgba(0,0,0,0.2) 100%)",
     particleColor: "#86efac",
     particleCount: 15,
     particleType: "leaves",
   },
   night: {
-    background: "linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)",
-    overlay: "radial-gradient(ellipse at top, rgba(99,102,241,0.1) 0%, transparent 50%)",
+    background:
+      "linear-gradient(180deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)",
+    overlay:
+      "radial-gradient(ellipse at top, rgba(99,102,241,0.1) 0%, transparent 50%)",
     particleColor: "#ffffff",
     particleCount: 50,
     particleType: "stars",
   },
   dawn: {
-    background: "linear-gradient(180deg, #1e1b4b 0%, #4c1d95 20%, #db2777 50%, #fb923c 80%, #fcd34d 100%)",
-    overlay: "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 50%, rgba(251,146,60,0.2) 100%)",
+    background:
+      "linear-gradient(180deg, #1e1b4b 0%, #4c1d95 20%, #db2777 50%, #fb923c 80%, #fcd34d 100%)",
+    overlay:
+      "linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 50%, rgba(251,146,60,0.2) 100%)",
     particleColor: "#fcd34d",
     particleCount: 25,
     particleType: "light",
@@ -90,7 +100,7 @@ function StarParticle({ delay, color }: { delay: number; color: string }) {
   const size = Math.random() * 3 + 1;
   const x = Math.random() * 100;
   const y = Math.random() * 100;
-  
+
   return (
     <motion.div
       className="absolute rounded-full"
@@ -119,7 +129,7 @@ function StarParticle({ delay, color }: { delay: number; color: string }) {
 function SandParticle({ delay, color }: { delay: number; color: string }) {
   const startX = Math.random() * 100;
   const startY = Math.random() * 20 + 80;
-  
+
   return (
     <motion.div
       className="absolute rounded-full opacity-60"
@@ -149,7 +159,7 @@ function LightParticle({ delay, color }: { delay: number; color: string }) {
   const size = Math.random() * 4 + 2;
   const x = Math.random() * 100;
   const y = Math.random() * 100;
-  
+
   return (
     <motion.div
       className="absolute rounded-full blur-sm"
@@ -178,7 +188,7 @@ function LightParticle({ delay, color }: { delay: number; color: string }) {
 
 function LeafParticle({ delay, color }: { delay: number; color: string }) {
   const startX = Math.random() * 100;
-  
+
   return (
     <motion.div
       className="absolute"
@@ -209,7 +219,7 @@ function LeafParticle({ delay, color }: { delay: number; color: string }) {
 
 function ParticleField({ config }: { config: SceneConfig }) {
   const particles = Array.from({ length: config.particleCount }, (_, i) => i);
-  
+
   const ParticleComponent = {
     stars: StarParticle,
     sand: SandParticle,
@@ -252,15 +262,39 @@ function MosqueScene() {
         {/* Central dome */}
         <ellipse cx="200" cy="80" rx="60" ry="50" fill="url(#mosqueGradient)" />
         {/* Minaret left */}
-        <rect x="80" y="30" width="15" height="120" fill="url(#mosqueGradient)" />
+        <rect
+          x="80"
+          y="30"
+          width="15"
+          height="120"
+          fill="url(#mosqueGradient)"
+        />
         <ellipse cx="87.5" cy="30" rx="10" ry="8" fill="url(#mosqueGradient)" />
         {/* Minaret right */}
-        <rect x="305" y="30" width="15" height="120" fill="url(#mosqueGradient)" />
-        <ellipse cx="312.5" cy="30" rx="10" ry="8" fill="url(#mosqueGradient)" />
+        <rect
+          x="305"
+          y="30"
+          width="15"
+          height="120"
+          fill="url(#mosqueGradient)"
+        />
+        <ellipse
+          cx="312.5"
+          cy="30"
+          rx="10"
+          ry="8"
+          fill="url(#mosqueGradient)"
+        />
         {/* Base */}
-        <rect x="100" y="100" width="200" height="50" fill="url(#mosqueGradient)" />
+        <rect
+          x="100"
+          y="100"
+          width="200"
+          height="50"
+          fill="url(#mosqueGradient)"
+        />
       </svg>
-      
+
       {/* Lantern glow effects */}
       <motion.div
         className="absolute bottom-20 left-1/4 w-4 h-4 rounded-full bg-amber-400 blur-md"
@@ -296,7 +330,7 @@ function DesertScene() {
           opacity="0.4"
         />
       </svg>
-      
+
       {/* Sun/heat shimmer */}
       <motion.div
         className="absolute top-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-yellow-200 blur-3xl"
@@ -344,12 +378,13 @@ function DawnScene() {
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-1/2"
         style={{
-          background: "linear-gradient(0deg, rgba(251,146,60,0.4) 0%, transparent 100%)",
+          background:
+            "linear-gradient(0deg, rgba(251,146,60,0.4) 0%, transparent 100%)",
         }}
         animate={{ opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 5, repeat: Infinity }}
       />
-      
+
       {/* Rising sun */}
       <motion.div
         className="absolute bottom-0 left-1/2 -translate-x-1/2"
@@ -513,7 +548,7 @@ export function SceneBackground({
   children,
 }: SceneBackgroundProps) {
   const config = SCENE_CONFIGS[scene];
-  
+
   const opacityMap = {
     subtle: 0.15,
     medium: 0.4,
@@ -537,7 +572,9 @@ export function SceneBackground({
           <ParticleField
             config={{
               ...config,
-              particleCount: Math.floor(config.particleCount * opacityMap[intensity]),
+              particleCount: Math.floor(
+                config.particleCount * opacityMap[intensity],
+              ),
             }}
           />
         </div>

@@ -246,22 +246,46 @@ export default function SettingsPage() {
               ? "اختر الأجواء الصوتية المحيطة لتجربة روحانية غامرة"
               : "Choose ambient sounds for an immersive spiritual experience"}
           </p>
-          
+
           {/* Import AmbientSoundSelector dynamically to avoid SSR issues */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { id: "makkah", icon: "🕋", name: isArabic ? "مكة المكرمة" : "Makkah", desc: isArabic ? "أجواء المسجد الحرام" : "Masjid al-Haram" },
-              { id: "madinah", icon: "🌴", name: isArabic ? "المدينة المنورة" : "Madinah", desc: isArabic ? "سكينة وهدوء" : "Peaceful serenity" },
-              { id: "local", icon: "🕌", name: isArabic ? "المسجد المحلي" : "Local Mosque", desc: isArabic ? "تأمل هادئ" : "Quiet contemplation" },
-              { id: "silent", icon: "🔇", name: isArabic ? "صامت" : "Silent", desc: isArabic ? "بدون صوت" : "No ambient sound" },
+              {
+                id: "makkah",
+                icon: "🕋",
+                name: isArabic ? "مكة المكرمة" : "Makkah",
+                desc: isArabic ? "أجواء المسجد الحرام" : "Masjid al-Haram",
+              },
+              {
+                id: "madinah",
+                icon: "🌴",
+                name: isArabic ? "المدينة المنورة" : "Madinah",
+                desc: isArabic ? "سكينة وهدوء" : "Peaceful serenity",
+              },
+              {
+                id: "local",
+                icon: "🕌",
+                name: isArabic ? "المسجد المحلي" : "Local Mosque",
+                desc: isArabic ? "تأمل هادئ" : "Quiet contemplation",
+              },
+              {
+                id: "silent",
+                icon: "🔇",
+                name: isArabic ? "صامت" : "Silent",
+                desc: isArabic ? "بدون صوت" : "No ambient sound",
+              },
             ].map((atm) => (
               <button
                 key={atm.id}
                 className="p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition-all text-left"
               >
                 <span className="text-2xl mb-2 block">{atm.icon}</span>
-                <div className="font-medium text-slate-900 dark:text-white text-sm">{atm.name}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">{atm.desc}</div>
+                <div className="font-medium text-slate-900 dark:text-white text-sm">
+                  {atm.name}
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">
+                  {atm.desc}
+                </div>
               </button>
             ))}
           </div>

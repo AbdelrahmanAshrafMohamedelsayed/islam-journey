@@ -2,7 +2,7 @@
 
 /**
  * DialogueBox Component
- * 
+ *
  * Beautiful speech bubbles with typewriter effect for character dialogue.
  * Supports RTL for Arabic, character emotions, and smooth animations.
  */
@@ -49,7 +49,7 @@ interface DialogueSequenceProps {
 function useTypewriter(
   text: string,
   speed: number = 30,
-  onComplete?: () => void
+  onComplete?: () => void,
 ) {
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
@@ -57,7 +57,7 @@ function useTypewriter(
   useEffect(() => {
     setDisplayedText("");
     setIsComplete(false);
-    
+
     if (!text) return;
 
     let currentIndex = 0;
@@ -103,11 +103,11 @@ export function DialogueBox({
 }: DialogueBoxProps) {
   const { dialogueSpeedMultiplier } = useNarrativeStore();
   const baseSpeed = 30 / dialogueSpeedMultiplier;
-  
+
   const { displayedText, isComplete, skipToEnd } = useTypewriter(
     text,
     baseSpeed,
-    onComplete
+    onComplete,
   );
 
   // Auto-advance after completion
@@ -139,7 +139,12 @@ export function DialogueBox({
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 400, damping: 20, delay: 0.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 20,
+            delay: 0.1,
+          }}
         >
           <MiniAvatar
             character={character}
@@ -268,7 +273,7 @@ export function DialogueSequence({
 
   const handleNext = useCallback(() => {
     if (isAnimating) return;
-    
+
     if (currentIndex < dialogues.length - 1) {
       setIsAnimating(true);
       setTimeout(() => {

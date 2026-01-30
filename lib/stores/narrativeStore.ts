@@ -1,6 +1,6 @@
 /**
  * Narrative Store - Zustand store for tracking narrative progress
- * 
+ *
  * Manages:
  * - Current guide character selection
  * - Unlocked characters
@@ -17,7 +17,13 @@ import { persist } from "zustand/middleware";
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export type AtmosphereType = "makkah" | "madinah" | "local" | "silent";
-export type SceneType = "mosque" | "desert" | "garden" | "night" | "dawn" | "neutral";
+export type SceneType =
+  | "mosque"
+  | "desert"
+  | "garden"
+  | "night"
+  | "dawn"
+  | "neutral";
 
 export interface WisdomScroll {
   id: string;
@@ -41,27 +47,27 @@ export interface NarrativeState {
   activeCharacterId: string;
   unlockedCharacterIds: string[];
   characterDialogueHistory: Record<string, number>; // characterId -> times interacted
-  
+
   // Wisdom Scroll Collection
   collectedScrolls: WisdomScroll[];
   totalScrollsAvailable: number;
-  
+
   // Story Progress
   currentChapterNarrative: string | null;
   storyMilestones: StoryMilestone[];
   narrativeIntroCompleted: boolean;
-  
+
   // Scene & Atmosphere
   preferredAtmosphere: AtmosphereType;
   currentScene: SceneType;
   ambientSoundEnabled: boolean;
   ambientVolume: number; // 0-1
-  
+
   // Cinematic Features
   cinematicTransitionsEnabled: boolean;
   dialogueSpeedMultiplier: number; // 0.5 = slow, 1 = normal, 2 = fast
   autoAdvanceDialogue: boolean;
-  
+
   // Session State
   lastNarrativeInteraction: string | null; // ISO date
   narrativeSessionCount: number;
@@ -72,31 +78,33 @@ export interface NarrativeActions {
   setActiveCharacter: (characterId: string) => void;
   unlockCharacter: (characterId: string) => void;
   incrementCharacterInteraction: (characterId: string) => void;
-  
+
   // Wisdom Scroll Actions
   collectScroll: (scroll: Omit<WisdomScroll, "collectedAt">) => void;
   hasCollectedScroll: (scrollId: string) => boolean;
-  
+
   // Story Progress Actions
   setCurrentChapterNarrative: (chapterId: string | null) => void;
-  addStoryMilestone: (milestone: Omit<StoryMilestone, "achievedAt" | "celebrationShown">) => void;
+  addStoryMilestone: (
+    milestone: Omit<StoryMilestone, "achievedAt" | "celebrationShown">,
+  ) => void;
   markMilestoneCelebrationShown: (milestoneId: string) => void;
   completeNarrativeIntro: () => void;
-  
+
   // Scene & Atmosphere Actions
   setPreferredAtmosphere: (atmosphere: AtmosphereType) => void;
   setCurrentScene: (scene: SceneType) => void;
   setAmbientSoundEnabled: (enabled: boolean) => void;
   setAmbientVolume: (volume: number) => void;
-  
+
   // Cinematic Feature Actions
   setCinematicTransitionsEnabled: (enabled: boolean) => void;
   setDialogueSpeedMultiplier: (multiplier: number) => void;
   setAutoAdvanceDialogue: (enabled: boolean) => void;
-  
+
   // Session Actions
   recordNarrativeInteraction: () => void;
-  
+
   // Reset
   resetNarrativeProgress: () => void;
 }
@@ -110,27 +118,27 @@ const initialState: NarrativeState = {
   activeCharacterId: "yusuf",
   unlockedCharacterIds: ["yusuf"], // Yusuf is always unlocked
   characterDialogueHistory: {},
-  
+
   // Wisdom Scroll Collection
   collectedScrolls: [],
   totalScrollsAvailable: 50, // Total scrolls in the app
-  
+
   // Story Progress
   currentChapterNarrative: null,
   storyMilestones: [],
   narrativeIntroCompleted: false,
-  
+
   // Scene & Atmosphere - Madinah is the default peaceful atmosphere
   preferredAtmosphere: "madinah",
   currentScene: "neutral",
   ambientSoundEnabled: true,
   ambientVolume: 0.3,
-  
+
   // Cinematic Features
   cinematicTransitionsEnabled: true,
   dialogueSpeedMultiplier: 1,
   autoAdvanceDialogue: false,
-  
+
   // Session State
   lastNarrativeInteraction: null,
   narrativeSessionCount: 0,
@@ -148,7 +156,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Character Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       setActiveCharacter: (characterId) => {
         const { unlockedCharacterIds } = get();
         // Only allow switching to unlocked characters
@@ -160,8 +168,8 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       unlockCharacter: (characterId) => {
         const { unlockedCharacterIds } = get();
         if (!unlockedCharacterIds.includes(characterId)) {
-          set({ 
-            unlockedCharacterIds: [...unlockedCharacterIds, characterId] 
+          set({
+            unlockedCharacterIds: [...unlockedCharacterIds, characterId],
           });
         }
       },
@@ -179,7 +187,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Wisdom Scroll Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       collectScroll: (scroll) => {
         const { collectedScrolls } = get();
         // Don't add duplicates
@@ -201,7 +209,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Story Progress Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       setCurrentChapterNarrative: (chapterId) => {
         set({ currentChapterNarrative: chapterId });
       },
@@ -227,7 +235,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
         const { storyMilestones } = get();
         set({
           storyMilestones: storyMilestones.map((m) =>
-            m.id === milestoneId ? { ...m, celebrationShown: true } : m
+            m.id === milestoneId ? { ...m, celebrationShown: true } : m,
           ),
         });
       },
@@ -239,7 +247,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Scene & Atmosphere Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       setPreferredAtmosphere: (atmosphere) => {
         set({ preferredAtmosphere: atmosphere });
       },
@@ -259,13 +267,15 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Cinematic Feature Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       setCinematicTransitionsEnabled: (enabled) => {
         set({ cinematicTransitionsEnabled: enabled });
       },
 
       setDialogueSpeedMultiplier: (multiplier) => {
-        set({ dialogueSpeedMultiplier: Math.max(0.5, Math.min(3, multiplier)) });
+        set({
+          dialogueSpeedMultiplier: Math.max(0.5, Math.min(3, multiplier)),
+        });
       },
 
       setAutoAdvanceDialogue: (enabled) => {
@@ -275,7 +285,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Session Actions
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       recordNarrativeInteraction: () => {
         const { narrativeSessionCount } = get();
         set({
@@ -287,7 +297,7 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
       // ─────────────────────────────────────────────────────────────────────────
       // Reset
       // ─────────────────────────────────────────────────────────────────────────
-      
+
       resetNarrativeProgress: () => {
         set({
           ...initialState,
@@ -304,22 +314,29 @@ export const useNarrativeStore = create<NarrativeState & NarrativeActions>()(
     {
       name: "islam-journey-narrative",
       version: 1,
-    }
-  )
+    },
+  ),
 );
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // SELECTORS (for optimized re-renders)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export const selectActiveCharacterId = (state: NarrativeState) => state.activeCharacterId;
-export const selectUnlockedCharacters = (state: NarrativeState) => state.unlockedCharacterIds;
-export const selectCollectedScrolls = (state: NarrativeState) => state.collectedScrolls;
-export const selectScrollCount = (state: NarrativeState) => state.collectedScrolls.length;
-export const selectAtmosphere = (state: NarrativeState) => state.preferredAtmosphere;
-export const selectAmbientEnabled = (state: NarrativeState) => state.ambientSoundEnabled;
-export const selectCinematicEnabled = (state: NarrativeState) => state.cinematicTransitionsEnabled;
-export const selectPendingMilestones = (state: NarrativeState) => 
+export const selectActiveCharacterId = (state: NarrativeState) =>
+  state.activeCharacterId;
+export const selectUnlockedCharacters = (state: NarrativeState) =>
+  state.unlockedCharacterIds;
+export const selectCollectedScrolls = (state: NarrativeState) =>
+  state.collectedScrolls;
+export const selectScrollCount = (state: NarrativeState) =>
+  state.collectedScrolls.length;
+export const selectAtmosphere = (state: NarrativeState) =>
+  state.preferredAtmosphere;
+export const selectAmbientEnabled = (state: NarrativeState) =>
+  state.ambientSoundEnabled;
+export const selectCinematicEnabled = (state: NarrativeState) =>
+  state.cinematicTransitionsEnabled;
+export const selectPendingMilestones = (state: NarrativeState) =>
   state.storyMilestones.filter((m) => !m.celebrationShown);
 
 // ═══════════════════════════════════════════════════════════════════════════════

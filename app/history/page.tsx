@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  PanInfo,
+} from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -30,7 +36,15 @@ interface HistoricalScene {
   location: string;
   narrator: string;
   narration: { en: string; ar: string };
-  scene: "desert" | "cave" | "mosque" | "night" | "dawn" | "battle" | "journey" | "city";
+  scene:
+    | "desert"
+    | "cave"
+    | "mosque"
+    | "night"
+    | "dawn"
+    | "battle"
+    | "journey"
+    | "city";
   mood: "peaceful" | "dramatic" | "hopeful" | "solemn" | "triumphant";
   colors: {
     primary: string;
@@ -300,9 +314,19 @@ const SceneBackground = ({
         return (
           <>
             <div className="absolute top-16 right-16 w-24 h-24 rounded-full bg-gradient-to-br from-amber-300 to-orange-500 blur-sm opacity-80" />
-            <svg className="absolute bottom-0 left-0 right-0 h-1/2" viewBox="0 0 1440 320" preserveAspectRatio="none">
-              <path fill="rgba(217, 119, 6, 0.3)" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,192C960,203,1056,181,1152,149.3C1248,117,1344,75,1392,53.3L1440,32L1440,320L0,320Z" />
-              <path fill="rgba(180, 83, 9, 0.4)" d="M0,256L48,234.7C96,213,192,171,288,165.3C384,160,480,192,576,213.3C672,235,768,245,864,229.3C960,213,1056,171,1152,160C1248,149,1344,171,1392,181.3L1440,192L1440,320L0,320Z" />
+            <svg
+              className="absolute bottom-0 left-0 right-0 h-1/2"
+              viewBox="0 0 1440 320"
+              preserveAspectRatio="none"
+            >
+              <path
+                fill="rgba(217, 119, 6, 0.3)"
+                d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,192C960,203,1056,181,1152,149.3C1248,117,1344,75,1392,53.3L1440,32L1440,320L0,320Z"
+              />
+              <path
+                fill="rgba(180, 83, 9, 0.4)"
+                d="M0,256L48,234.7C96,213,192,171,288,165.3C384,160,480,192,576,213.3C672,235,768,245,864,229.3C960,213,1056,171,1152,160C1248,149,1344,171,1392,181.3L1440,192L1440,320L0,320Z"
+              />
             </svg>
           </>
         );
@@ -324,20 +348,57 @@ const SceneBackground = ({
         return (
           <>
             <div className="absolute bottom-0 left-0 right-0 h-2/3">
-              <svg className="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax slice">
-                <ellipse cx="400" cy="200" rx="120" ry="100" fill="rgba(0,0,0,0.3)" />
-                <rect x="150" y="100" width="20" height="300" fill="rgba(0,0,0,0.3)" />
-                <rect x="630" y="100" width="20" height="300" fill="rgba(0,0,0,0.3)" />
-                <polygon points="160,100 145,130 175,130" fill="rgba(0,0,0,0.3)" />
-                <polygon points="640,100 625,130 655,130" fill="rgba(0,0,0,0.3)" />
-                <rect x="200" y="250" width="400" height="150" fill="rgba(0,0,0,0.3)" />
+              <svg
+                className="w-full h-full"
+                viewBox="0 0 800 400"
+                preserveAspectRatio="xMidYMax slice"
+              >
+                <ellipse
+                  cx="400"
+                  cy="200"
+                  rx="120"
+                  ry="100"
+                  fill="rgba(0,0,0,0.3)"
+                />
+                <rect
+                  x="150"
+                  y="100"
+                  width="20"
+                  height="300"
+                  fill="rgba(0,0,0,0.3)"
+                />
+                <rect
+                  x="630"
+                  y="100"
+                  width="20"
+                  height="300"
+                  fill="rgba(0,0,0,0.3)"
+                />
+                <polygon
+                  points="160,100 145,130 175,130"
+                  fill="rgba(0,0,0,0.3)"
+                />
+                <polygon
+                  points="640,100 625,130 655,130"
+                  fill="rgba(0,0,0,0.3)"
+                />
+                <rect
+                  x="200"
+                  y="250"
+                  width="400"
+                  height="150"
+                  fill="rgba(0,0,0,0.3)"
+                />
               </svg>
             </div>
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-3 h-4 bg-amber-400/60 rounded-full blur-sm"
-                style={{ left: `${20 + i * 15}%`, top: `${50 + Math.sin(i) * 10}%` }}
+                style={{
+                  left: `${20 + i * 15}%`,
+                  top: `${50 + Math.sin(i) * 10}%`,
+                }}
                 animate={{ opacity: [0.4, 0.8, 0.4] }}
                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
               />
@@ -366,7 +427,11 @@ const SceneBackground = ({
                   top: `${Math.random() * 60}%`,
                 }}
                 animate={{ opacity: [0.3, 1, 0.3] }}
-                transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
+                transition={{
+                  duration: 2 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
               />
             ))}
           </>
@@ -392,9 +457,17 @@ const SceneBackground = ({
               <motion.div
                 key={i}
                 className="absolute rounded-full bg-amber-800/20 blur-2xl"
-                style={{ width: 100 + Math.random() * 100, height: 60, left: `${Math.random() * 100}%`, bottom: `${Math.random() * 30}%` }}
+                style={{
+                  width: 100 + Math.random() * 100,
+                  height: 60,
+                  left: `${Math.random() * 100}%`,
+                  bottom: `${Math.random() * 30}%`,
+                }}
                 animate={{ x: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 5 + Math.random() * 3, repeat: Infinity }}
+                transition={{
+                  duration: 5 + Math.random() * 3,
+                  repeat: Infinity,
+                }}
               />
             ))}
           </>
@@ -403,17 +476,37 @@ const SceneBackground = ({
       case "journey":
         return (
           <>
-            <svg className="absolute bottom-0 left-0 right-0 h-2/3" viewBox="0 0 800 400" preserveAspectRatio="none">
-              <path d="M0,350 Q200,300 400,320 Q600,340 800,300" fill="none" stroke="rgba(217, 119, 6, 0.4)" strokeWidth="20" strokeLinecap="round" />
+            <svg
+              className="absolute bottom-0 left-0 right-0 h-2/3"
+              viewBox="0 0 800 400"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M0,350 Q200,300 400,320 Q600,340 800,300"
+                fill="none"
+                stroke="rgba(217, 119, 6, 0.4)"
+                strokeWidth="20"
+                strokeLinecap="round"
+              />
             </svg>
             <motion.div
               className="absolute w-3 h-3 bg-amber-400/60 rounded-full"
               initial={{ left: "0%", bottom: "40%" }}
-              animate={{ left: ["0%", "50%", "100%"], bottom: ["40%", "35%", "38%"] }}
+              animate={{
+                left: ["0%", "50%", "100%"],
+                bottom: ["40%", "35%", "38%"],
+              }}
               transition={{ duration: 15, repeat: Infinity }}
             />
-            <svg className="absolute bottom-0 left-0 right-0 h-1/3" viewBox="0 0 800 200" preserveAspectRatio="none">
-              <polygon points="0,200 100,100 200,150 300,80 400,130 500,60 600,120 700,90 800,140 800,200" fill="rgba(30, 41, 59, 0.4)" />
+            <svg
+              className="absolute bottom-0 left-0 right-0 h-1/3"
+              viewBox="0 0 800 200"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                points="0,200 100,100 200,150 300,80 400,130 500,60 600,120 700,90 800,140 800,200"
+                fill="rgba(30, 41, 59, 0.4)"
+              />
             </svg>
           </>
         );
@@ -421,12 +514,46 @@ const SceneBackground = ({
       case "city":
         return (
           <>
-            <svg className="absolute bottom-0 left-0 right-0 h-1/2" viewBox="0 0 800 300" preserveAspectRatio="none">
-              <rect x="50" y="150" width="60" height="150" fill="rgba(0,0,0,0.3)" />
-              <rect x="130" y="100" width="80" height="200" fill="rgba(0,0,0,0.3)" />
-              <rect x="300" y="80" width="100" height="220" fill="rgba(0,0,0,0.3)" />
-              <ellipse cx="350" cy="80" rx="40" ry="30" fill="rgba(0,0,0,0.3)" />
-              <rect x="620" y="100" width="60" height="200" fill="rgba(0,0,0,0.3)" />
+            <svg
+              className="absolute bottom-0 left-0 right-0 h-1/2"
+              viewBox="0 0 800 300"
+              preserveAspectRatio="none"
+            >
+              <rect
+                x="50"
+                y="150"
+                width="60"
+                height="150"
+                fill="rgba(0,0,0,0.3)"
+              />
+              <rect
+                x="130"
+                y="100"
+                width="80"
+                height="200"
+                fill="rgba(0,0,0,0.3)"
+              />
+              <rect
+                x="300"
+                y="80"
+                width="100"
+                height="220"
+                fill="rgba(0,0,0,0.3)"
+              />
+              <ellipse
+                cx="350"
+                cy="80"
+                rx="40"
+                ry="30"
+                fill="rgba(0,0,0,0.3)"
+              />
+              <rect
+                x="620"
+                y="100"
+                width="60"
+                height="200"
+                fill="rgba(0,0,0,0.3)"
+              />
             </svg>
           </>
         );
@@ -437,7 +564,9 @@ const SceneBackground = ({
   };
 
   return (
-    <div className={`absolute inset-0 bg-gradient-to-b ${colors.primary} ${colors.secondary} ${colors.accent} overflow-hidden`}>
+    <div
+      className={`absolute inset-0 bg-gradient-to-b ${colors.primary} ${colors.secondary} ${colors.accent} overflow-hidden`}
+    >
       {getSceneElements()}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
     </div>
@@ -453,7 +582,9 @@ const MigrationMap = ({ from, to }: { from: string; to: string }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
     >
-      <div className="text-xs text-amber-400/80 mb-2 font-semibold">Migration Route</div>
+      <div className="text-xs text-amber-400/80 mb-2 font-semibold">
+        Migration Route
+      </div>
       <svg className="w-full h-20" viewBox="0 0 180 70">
         <motion.path
           d="M20,50 Q90,20 160,45"
@@ -470,19 +601,41 @@ const MigrationMap = ({ from, to }: { from: string; to: string }) => {
           fill="#fbbf24"
           initial={{ cx: 20, cy: 50 }}
           animate={{ cx: 160, cy: 45 }}
-          transition={{ duration: 3, delay: 1, repeat: Infinity, repeatDelay: 2 }}
+          transition={{
+            duration: 3,
+            delay: 1,
+            repeat: Infinity,
+            repeatDelay: 2,
+          }}
         />
-        <circle cx="20" cy="50" r="6" fill="none" stroke="#fbbf24" strokeWidth="2" />
-        <text x="20" y="65" textAnchor="middle" fill="white" fontSize="8">{from}</text>
+        <circle
+          cx="20"
+          cy="50"
+          r="6"
+          fill="none"
+          stroke="#fbbf24"
+          strokeWidth="2"
+        />
+        <text x="20" y="65" textAnchor="middle" fill="white" fontSize="8">
+          {from}
+        </text>
         <circle cx="160" cy="45" r="6" fill="#10b981" />
-        <text x="160" y="60" textAnchor="middle" fill="white" fontSize="8">{to}</text>
+        <text x="160" y="60" textAnchor="middle" fill="white" fontSize="8">
+          {to}
+        </text>
       </svg>
     </motion.div>
   );
 };
 
 // Narrator avatar
-const NarratorAvatar = ({ narrator, isActive }: { narrator: string; isActive: boolean }) => {
+const NarratorAvatar = ({
+  narrator,
+  isActive,
+}: {
+  narrator: string;
+  isActive: boolean;
+}) => {
   return (
     <motion.div
       className="relative"
@@ -535,7 +688,12 @@ const TypewriterText = ({ text }: { text: string }) => {
     <span>
       {displayText}
       {!isComplete && (
-        <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }}>|</motion.span>
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+        >
+          |
+        </motion.span>
       )}
     </span>
   );
@@ -570,7 +728,10 @@ export default function HistoryPage() {
     }
   }, [currentScene]);
 
-  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (
+    _: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo,
+  ) => {
     if (info.offset.x > 100) goToPrev();
     else if (info.offset.x < -100) goToNext();
   };
@@ -584,7 +745,9 @@ export default function HistoryPage() {
     } else if (autoPlayRef.current) {
       clearInterval(autoPlayRef.current);
     }
-    return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
   }, [isAutoPlaying, currentScene, goToNext]);
 
   useEffect(() => {
@@ -615,67 +778,137 @@ export default function HistoryPage() {
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.8 }}
           >
-            <SceneBackground scene={scene.scene} colors={scene.colors} mood={scene.mood} />
+            <SceneBackground
+              scene={scene.scene}
+              colors={scene.colors}
+              mood={scene.mood}
+            />
 
             <div className="absolute inset-0 flex flex-col">
               {/* Header */}
               <div className="relative z-50 flex items-center justify-between p-4 bg-gradient-to-b from-black/50 to-transparent">
                 <Link href="/journey">
-                  <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />} className="text-white/90 hover:text-white hover:bg-white/10">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    leftIcon={<ArrowLeft className="w-4 h-4" />}
+                    className="text-white/90 hover:text-white hover:bg-white/10"
+                  >
                     {lang === "en" ? "Exit" : "خروج"}
                   </Button>
                 </Link>
 
                 <div className="flex items-center gap-4">
-                  <button onClick={() => setIsAutoPlaying(!isAutoPlaying)} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
-                    {isAutoPlaying ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white" />}
+                  <button
+                    onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    {isAutoPlaying ? (
+                      <Pause className="w-4 h-4 text-white" />
+                    ) : (
+                      <Play className="w-4 h-4 text-white" />
+                    )}
                   </button>
-                  <button onClick={() => setIsNarrating(!isNarrating)} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
-                    {isNarrating ? <Volume2 className="w-4 h-4 text-white" /> : <VolumeX className="w-4 h-4 text-white" />}
+                  <button
+                    onClick={() => setIsNarrating(!isNarrating)}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                  >
+                    {isNarrating ? (
+                      <Volume2 className="w-4 h-4 text-white" />
+                    ) : (
+                      <VolumeX className="w-4 h-4 text-white" />
+                    )}
                   </button>
                 </div>
               </div>
 
               {/* Main Content */}
               <div className="flex-1 flex flex-col justify-end pb-32 px-4 md:px-8">
-                <motion.div className="flex items-center gap-3 mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                <motion.div
+                  className="flex items-center gap-3 mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
                   <div className="flex items-center gap-2 px-4 py-2 bg-amber-500/20 backdrop-blur-sm rounded-full border border-amber-500/30">
                     <Clock className="w-4 h-4 text-amber-400" />
-                    <span className="text-amber-300 font-bold">{scene.year} CE</span>
+                    <span className="text-amber-300 font-bold">
+                      {scene.year} CE
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                     <MapPin className="w-3 h-3 text-white/70" />
-                    <span className="text-white/80 text-sm">{scene.location}</span>
+                    <span className="text-white/80 text-sm">
+                      {scene.location}
+                    </span>
                   </div>
                 </motion.div>
 
-                <motion.h1 className="text-3xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                <motion.h1
+                  className="text-3xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                >
                   {scene.title[lang]}
                 </motion.h1>
 
-                <motion.p className="text-xl md:text-2xl text-amber-300/90 mb-6 drop-shadow-md" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                <motion.p
+                  className="text-xl md:text-2xl text-amber-300/90 mb-6 drop-shadow-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
                   {scene.subtitle[lang]}
                 </motion.p>
 
-                <motion.div className="max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-                  <p className={`text-white/90 text-base md:text-lg leading-relaxed ${!showFullDescription ? "line-clamp-3" : ""}`}>
+                <motion.div
+                  className="max-w-2xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <p
+                    className={`text-white/90 text-base md:text-lg leading-relaxed ${!showFullDescription ? "line-clamp-3" : ""}`}
+                  >
                     {scene.description[lang]}
                   </p>
-                  <button onClick={() => setShowFullDescription(!showFullDescription)} className="text-amber-400 text-sm mt-2 hover:text-amber-300 transition-colors">
-                    {showFullDescription ? (lang === "en" ? "Show less" : "أقل") : (lang === "en" ? "Read more" : "اقرأ المزيد")}
+                  <button
+                    onClick={() => setShowFullDescription(!showFullDescription)}
+                    className="text-amber-400 text-sm mt-2 hover:text-amber-300 transition-colors"
+                  >
+                    {showFullDescription
+                      ? lang === "en"
+                        ? "Show less"
+                        : "أقل"
+                      : lang === "en"
+                        ? "Read more"
+                        : "اقرأ المزيد"}
                   </button>
                 </motion.div>
 
                 {isNarrating && (
-                  <motion.div className="mt-6 max-w-xl bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
+                  <motion.div
+                    className="mt-6 max-w-xl bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 }}
+                  >
                     <div className="flex items-start gap-4">
-                      <NarratorAvatar narrator={scene.narrator} isActive={isNarrating} />
+                      <NarratorAvatar
+                        narrator={scene.narrator}
+                        isActive={isNarrating}
+                      />
                       <div className="flex-1">
                         <div className="text-sm text-emerald-400 font-semibold mb-1">
-                          {scene.narrator} {lang === "en" ? "narrates:" : "يروي:"}
+                          {scene.narrator}{" "}
+                          {lang === "en" ? "narrates:" : "يروي:"}
                         </div>
                         <p className="text-white/80 text-sm italic leading-relaxed">
-                          <TypewriterText key={scene.id} text={`"${scene.narration[lang]}"`} />
+                          <TypewriterText
+                            key={scene.id}
+                            text={`"${scene.narration[lang]}"`}
+                          />
                         </p>
                       </div>
                     </div>
@@ -687,16 +920,30 @@ export default function HistoryPage() {
               <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black/80 via-black/50 to-transparent pt-16 pb-6 px-4">
                 <div className="max-w-md mx-auto mb-4">
                   <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-                    <motion.div className="h-full bg-gradient-to-r from-amber-400 to-emerald-400" initial={{ width: 0 }} animate={{ width: `${progress}%` }} transition={{ duration: 0.3 }} />
+                    <motion.div
+                      className="h-full bg-gradient-to-r from-amber-400 to-emerald-400"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${progress}%` }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </div>
                   <div className="flex justify-between mt-2 text-xs text-white/50">
-                    <span>{currentScene + 1} / {historicalScenes.length}</span>
+                    <span>
+                      {currentScene + 1} / {historicalScenes.length}
+                    </span>
                     <span>{scene.era}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-center gap-4">
-                  <Button variant="ghost" size="lg" onClick={goToPrev} disabled={currentScene === 0} leftIcon={<ChevronLeft className="w-5 h-5" />} className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30">
+                  <Button
+                    variant="ghost"
+                    size="lg"
+                    onClick={goToPrev}
+                    disabled={currentScene === 0}
+                    leftIcon={<ChevronLeft className="w-5 h-5" />}
+                    className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30"
+                  >
                     {lang === "en" ? "Previous" : "السابق"}
                   </Button>
 
@@ -704,25 +951,53 @@ export default function HistoryPage() {
                     {historicalScenes.map((_, idx) => (
                       <button
                         key={idx}
-                        onClick={() => { setCurrentScene(idx); setIsNarrating(true); setShowFullDescription(false); }}
+                        onClick={() => {
+                          setCurrentScene(idx);
+                          setIsNarrating(true);
+                          setShowFullDescription(false);
+                        }}
                         className={`w-2 h-2 rounded-full transition-all ${idx === currentScene ? "bg-amber-400 w-6" : idx < currentScene ? "bg-emerald-500/60" : "bg-white/30"}`}
                       />
                     ))}
                   </div>
 
-                  <Button variant="ghost" size="lg" onClick={goToNext} disabled={currentScene === historicalScenes.length - 1} rightIcon={<ChevronRight className="w-5 h-5" />} className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30">
+                  <Button
+                    variant="ghost"
+                    size="lg"
+                    onClick={goToNext}
+                    disabled={currentScene === historicalScenes.length - 1}
+                    rightIcon={<ChevronRight className="w-5 h-5" />}
+                    className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30"
+                  >
                     {lang === "en" ? "Next" : "التالي"}
                   </Button>
                 </div>
 
-                <motion.p className="text-center text-white/40 text-xs mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
-                  {lang === "en" ? "Swipe or use arrow keys to navigate" : "اسحب أو استخدم مفاتيح الأسهم للتنقل"}
+                <motion.p
+                  className="text-center text-white/40 text-xs mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2 }}
+                >
+                  {lang === "en"
+                    ? "Swipe or use arrow keys to navigate"
+                    : "اسحب أو استخدم مفاتيح الأسهم للتنقل"}
                 </motion.p>
               </div>
 
-              {scene.mapRoute && <MigrationMap from={scene.mapRoute.from} to={scene.mapRoute.to} />}
+              {scene.mapRoute && (
+                <MigrationMap
+                  from={scene.mapRoute.from}
+                  to={scene.mapRoute.to}
+                />
+              )}
 
-              <motion.div className="absolute top-24 right-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+              <motion.div
+                className="absolute top-24 right-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
                 <Sparkles className="w-6 h-6 text-amber-400/50" />
               </motion.div>
             </div>
@@ -733,19 +1008,27 @@ export default function HistoryPage() {
       {/* Era quick navigation */}
       <div className="absolute top-20 right-4 z-50 hidden md:block">
         <div className="bg-black/40 backdrop-blur-md rounded-xl p-2 border border-white/10">
-          {["Pre-Islam", "Revelation", "Hijrah", "Victory", "Completion"].map((era) => {
-            const eraScene = historicalScenes.findIndex((s) => s.era === era);
-            const isActive = scene.era === era;
-            return (
-              <button
-                key={era}
-                onClick={() => { if (eraScene >= 0) { setCurrentScene(eraScene); setIsNarrating(true); setShowFullDescription(false); } }}
-                className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-amber-500/30 text-amber-300" : "text-white/60 hover:text-white hover:bg-white/10"}`}
-              >
-                {era}
-              </button>
-            );
-          })}
+          {["Pre-Islam", "Revelation", "Hijrah", "Victory", "Completion"].map(
+            (era) => {
+              const eraScene = historicalScenes.findIndex((s) => s.era === era);
+              const isActive = scene.era === era;
+              return (
+                <button
+                  key={era}
+                  onClick={() => {
+                    if (eraScene >= 0) {
+                      setCurrentScene(eraScene);
+                      setIsNarrating(true);
+                      setShowFullDescription(false);
+                    }
+                  }}
+                  className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-amber-500/30 text-amber-300" : "text-white/60 hover:text-white hover:bg-white/10"}`}
+                >
+                  {era}
+                </button>
+              );
+            },
+          )}
         </div>
       </div>
     </div>

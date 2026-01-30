@@ -2,7 +2,7 @@
 
 /**
  * LevelUpCelebration Component
- * 
+ *
  * Full-screen dramatic level transition animation
  * with radial burst, light rays, and cinematic reveal.
  */
@@ -186,13 +186,15 @@ export function LevelUpCelebration({
   xpEarned,
   onComplete,
 }: LevelUpCelebrationProps) {
-  const [phase, setPhase] = useState<"intro" | "transition" | "reveal" | "complete">("intro");
+  const [phase, setPhase] = useState<
+    "intro" | "transition" | "reveal" | "complete"
+  >("intro");
   const newLevelColors = getLevelColors(toLevel);
 
   useEffect(() => {
     if (isActive) {
       setPhase("intro");
-      
+
       // Animation timeline
       const timers = [
         setTimeout(() => setPhase("transition"), 800),
@@ -245,7 +247,12 @@ export function LevelUpCelebration({
               isActive={true}
               particleCount={80}
               duration={3500}
-              colors={[newLevelColors.primary, newLevelColors.secondary, "#fcd34d", "#ffffff"]}
+              colors={[
+                newLevelColors.primary,
+                newLevelColors.secondary,
+                "#fcd34d",
+                "#ffffff",
+              ]}
             />
           )}
 
@@ -254,7 +261,7 @@ export function LevelUpCelebration({
             {/* "Level Up" text */}
             <motion.div
               initial={{ opacity: 0, y: -30 }}
-              animate={{ 
+              animate={{
                 opacity: phase === "intro" ? 1 : 0,
                 y: phase === "intro" ? 0 : -50,
               }}
@@ -328,7 +335,7 @@ export function LevelUpCelebration({
                   <p className="text-xl text-white/70">
                     MashaAllah! Keep going!
                   </p>
-                  
+
                   {xpEarned && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -338,7 +345,9 @@ export function LevelUpCelebration({
                       style={{ backgroundColor: `${newLevelColors.primary}30` }}
                     >
                       <span className="text-yellow-400">⭐</span>
-                      <span className="text-white font-medium">+{xpEarned} XP Earned</span>
+                      <span className="text-white font-medium">
+                        +{xpEarned} XP Earned
+                      </span>
                     </motion.div>
                   )}
                 </motion.div>

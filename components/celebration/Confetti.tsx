@@ -2,7 +2,7 @@
 
 /**
  * Confetti Component
- * 
+ *
  * Beautiful celebration effects with Islamic-themed particles:
  * - Crescents, stars, geometric shapes
  * - Bursting animations for achievements and milestones
@@ -110,7 +110,15 @@ function DiamondShape({ color, size }: { color: string; size: number }) {
   );
 }
 
-function ShapeRenderer({ shape, color, size }: { shape: string; color: string; size: number }) {
+function ShapeRenderer({
+  shape,
+  color,
+  size,
+}: {
+  shape: string;
+  color: string;
+  size: number;
+}) {
   switch (shape) {
     case "crescent":
       return <CrescentShape color={color} size={size} />;
@@ -149,8 +157,18 @@ function ConfettiParticle({ particle }: { particle: Particle }) {
       animate={{
         opacity: [1, 1, 1, 0],
         y: [0, -200 - particle.yVelocity * 300, -100, 400],
-        x: [0, particle.xVelocity * 150, particle.xVelocity * 200, particle.xVelocity * 250],
-        rotate: [0, particle.rotation * 2, particle.rotation * 4, particle.rotation * 6],
+        x: [
+          0,
+          particle.xVelocity * 150,
+          particle.xVelocity * 200,
+          particle.xVelocity * 250,
+        ],
+        rotate: [
+          0,
+          particle.rotation * 2,
+          particle.rotation * 4,
+          particle.rotation * 6,
+        ],
         scale: [0, 1.2, 1, 0.8],
       }}
       transition={{
@@ -159,7 +177,11 @@ function ConfettiParticle({ particle }: { particle: Particle }) {
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
     >
-      <ShapeRenderer shape={particle.shape} color={particle.color} size={size} />
+      <ShapeRenderer
+        shape={particle.shape}
+        color={particle.color}
+        size={size}
+      />
     </motion.div>
   );
 }
@@ -248,10 +270,13 @@ export function Fireworks({
       }
 
       // Clean up
-      const cleanup = setTimeout(() => {
-        setActiveBursts([]);
-        onComplete?.();
-      }, burstCount * 400 + 3000);
+      const cleanup = setTimeout(
+        () => {
+          setActiveBursts([]);
+          onComplete?.();
+        },
+        burstCount * 400 + 3000,
+      );
 
       return () => clearTimeout(cleanup);
     }
@@ -267,11 +292,7 @@ export function Fireworks({
             left: `${20 + burstId * 30}%`,
           }}
         >
-          <Confetti
-            isActive={true}
-            particleCount={30}
-            duration={2500}
-          />
+          <Confetti isActive={true} particleCount={30} duration={2500} />
         </div>
       ))}
     </>
@@ -308,7 +329,7 @@ export function Sparkle({
   return (
     <div className={`relative inline-block ${className}`}>
       {children}
-      
+
       <AnimatePresence>
         {isActive && (
           <>
