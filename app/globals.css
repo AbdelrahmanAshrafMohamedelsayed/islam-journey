@@ -1,0 +1,490 @@
+@import "tailwindcss";
+
+/* ==========================================
+   NEW MUSLIM JOURNEY - GLOBAL STYLES
+   ========================================== */
+
+/* CSS Custom Properties */
+:root {
+  /* Light theme colors */
+  --background: #fdfbf7;
+  --background-secondary: #f5f0e8;
+  --foreground: #1a1a2e;
+  --foreground-secondary: #4a5568;
+
+  /* Primary colors - Emerald */
+  --primary: #10b981;
+  --primary-light: #d1fae5;
+  --primary-dark: #047857;
+
+  /* Secondary colors - Gold */
+  --gold: #eab308;
+  --gold-light: #fef9c3;
+  --gold-dark: #a16207;
+
+  /* Accent colors - Deep Blue */
+  --accent: #3b82f6;
+  --accent-dark: #0a1929;
+
+  /* Borders */
+  --border: #e8e0d4;
+  --border-dark: #d4c9b8;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a1929;
+    --background-secondary: #132f4c;
+    --foreground: #f5f5f5;
+    --foreground-secondary: #b0bec5;
+    --border: #1e3a5f;
+    --border-dark: #2d4a6f;
+  }
+}
+
+/* Tailwind theme integration */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  font-family: "Amiri", "Noto Naskh Arabic", serif;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: inherit;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Islamic geometric pattern background */
+.pattern-arabesque {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.pattern-stars {
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23eab308' fill-opacity='0.05'%3E%3Cpath d='M40 0l5 15h15l-12.5 9.5L52.5 40 40 30.5 27.5 40l5-15.5L20 15h15z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #10b981 0%, #14b8a6 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #eab308 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card with arabesque border */
+.card-arabesque {
+  position: relative;
+}
+
+.card-arabesque::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #10b981, #eab308, #10b981);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glowing button */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4, #10b981);
+  background-size: 300% 300%;
+  animation: gradient-shift 3s ease infinite;
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0.7;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Islamic arch shape */
+.arch-top {
+  border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+}
+
+/* Responsive typography */
+.text-responsive-xl {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+.text-responsive-lg {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.text-responsive-md {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+}
+
+/* ==========================================
+   MOBILE & PWA OPTIMIZATIONS
+   ========================================== */
+
+/* Safe area insets for notches and home indicators */
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-inset-left: env(safe-area-inset-left, 0px);
+}
+
+/* PWA standalone mode adjustments */
+@media all and (display-mode: standalone) {
+  body {
+    /* Extra padding for notch on iOS */
+    padding-top: var(--safe-area-inset-top);
+  }
+
+  /* Adjust navbar for standalone mode */
+  .navbar-standalone {
+    padding-top: calc(0.75rem + var(--safe-area-inset-top));
+  }
+
+  /* Hide browser-specific UI hints */
+  .browser-only {
+    display: none !important;
+  }
+
+  /* Show standalone-specific elements */
+  .standalone-only {
+    display: flex !important;
+  }
+}
+
+/* Bottom navigation safe area */
+.safe-area-bottom {
+  padding-bottom: calc(1rem + var(--safe-area-inset-bottom));
+}
+
+/* Fixed header with safe area */
+.safe-area-top {
+  padding-top: calc(0.75rem + var(--safe-area-inset-top));
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Mobile touch devices - larger touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Disable hover effects that don't work on touch */
+  .hover-only:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Add active state for touch feedback */
+  .touch-active:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+
+  /* Prevent long-press context menu on interactive elements */
+  .no-context-menu {
+    -webkit-touch-callout: none;
+  }
+}
+
+/* Prevent text selection on mobile UI elements */
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling with momentum */
+.scroll-smooth {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* Prevent pull-to-refresh on PWA */
+html {
+  overscroll-behavior-y: contain;
+}
+
+body {
+  /* Prevent elastic scrolling on iOS */
+  overscroll-behavior: none;
+  /* Prevent text size adjustment */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Keyboard open adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .keyboard-hide {
+    display: none !important;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-gradient,
+  .animate-shimmer {
+    animation: none !important;
+  }
+}
+
+/* ==========================================
+   CAPACITOR NATIVE APP STYLES
+   ========================================== */
+
+/* Native app specific overrides */
+.capacitor-app {
+  /* Disable overscroll effects */
+  overscroll-behavior: none;
+}
+
+/* iOS specific styles */
+@supports (-webkit-touch-callout: none) {
+  /* iOS only */
+  input,
+  textarea {
+    font-size: 16px; /* Prevent zoom on focus */
+  }
+
+  /* Fix iOS input styling */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+}
+
+/* Android specific styles via media query */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   LOADING & SPLASH STATES
+   ========================================== */
+
+/* App loading state */
+.app-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+/* Splash screen styles */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e3a5f 100%);
+}
+
+/* ==========================================
+   INSTALL PROMPT STYLES
+   ========================================== */
+
+.install-prompt {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+@media (min-width: 768px) {
+  .install-prompt {
+    left: auto;
+    right: 1rem;
+    width: 400px;
+  }
+}

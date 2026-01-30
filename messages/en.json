@@ -1,0 +1,296 @@
+{
+  "metadata": {
+    "title": "New Muslim Journey",
+    "description": "Your interactive guide to discovering Islam"
+  },
+  "common": {
+    "appName": "New Muslim Journey",
+    "loading": "Loading...",
+    "continue": "Continue",
+    "start": "Start",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "done": "Done",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "share": "Share",
+    "download": "Download",
+    "play": "Play",
+    "pause": "Pause",
+    "replay": "Replay",
+    "yes": "Yes",
+    "no": "No",
+    "or": "or",
+    "and": "and"
+  },
+  "nav": {
+    "home": "Home",
+    "journey": "Journey",
+    "practice": "Practice",
+    "quran": "Quran",
+    "history": "History",
+    "misconceptions": "Misconceptions",
+    "fasting": "Ramadan",
+    "games": "Games",
+    "achievements": "Achievements",
+    "settings": "Settings",
+    "profile": "Profile"
+  },
+  "landing": {
+    "hero": {
+      "title": "Begin Your Journey to Islam",
+      "subtitle": "An interactive, gamified experience designed for new Muslims and those curious about the faith",
+      "cta": "Start Your Journey",
+      "learnMore": "Learn More"
+    },
+    "features": {
+      "title": "What You'll Discover",
+      "interactive": {
+        "title": "Interactive Learning",
+        "description": "Learn through engaging simulations of prayer, ablution, and more"
+      },
+      "guided": {
+        "title": "Guided Journey",
+        "description": "Progress through carefully structured chapters at your own pace"
+      },
+      "bilingual": {
+        "title": "Bilingual Support",
+        "description": "Full content in English and Arabic with audio recitations"
+      },
+      "gamified": {
+        "title": "Gamified Progress",
+        "description": "Earn XP, unlock achievements, and track your spiritual growth"
+      },
+      "history": {
+        "title": "Rich History",
+        "description": "Explore Islamic history, prophets' stories, and civilization"
+      },
+      "misconceptions": {
+        "title": "Clear Answers",
+        "description": "Address common misconceptions with evidence-based responses"
+      }
+    },
+    "journey": {
+      "title": "Your Path Through the Pillars",
+      "subtitle": "A structured journey through the foundations of Islam"
+    },
+    "testimonials": {
+      "title": "What Others Say"
+    },
+    "cta": {
+      "title": "Ready to Begin?",
+      "subtitle": "Join thousands of seekers on their path to understanding",
+      "button": "Start Free Journey"
+    }
+  },
+  "chapters": {
+    "shahada": {
+      "title": "The Declaration of Faith",
+      "subtitle": "Shahada",
+      "description": "Understand the meaning and significance of becoming Muslim"
+    },
+    "wudu": {
+      "title": "Purification",
+      "subtitle": "Wudu",
+      "description": "Learn the ritual ablution that purifies body and soul"
+    },
+    "salah": {
+      "title": "The Prayer",
+      "subtitle": "Salah",
+      "description": "Master the five daily prayers that connect you to Allah"
+    },
+    "quran": {
+      "title": "The Holy Book",
+      "subtitle": "Quran",
+      "description": "Begin your journey with the words of Allah"
+    },
+    "sawm": {
+      "title": "Fasting",
+      "subtitle": "Sawm",
+      "description": "Experience the spiritual discipline of Ramadan"
+    },
+    "zakat": {
+      "title": "Charity",
+      "subtitle": "Zakat",
+      "description": "Learn how giving purifies wealth and helps others"
+    },
+    "hajj": {
+      "title": "The Pilgrimage",
+      "subtitle": "Hajj",
+      "description": "Discover the journey of a lifetime to Mecca"
+    }
+  },
+  "gamification": {
+    "xp": "XP",
+    "level": "Level",
+    "streak": "Day Streak",
+    "achievements": "Achievements",
+    "progress": "Progress",
+    "levelUp": "Level Up!",
+    "newAchievement": "New Achievement!",
+    "keepGoing": "Keep going!",
+    "levels": {
+      "seeker": "Seeker",
+      "learner": "Learner",
+      "student": "Student",
+      "practitioner": "Practitioner",
+      "devoted": "Devoted",
+      "scholar": "Scholar",
+      "teacher": "Teacher",
+      "guide": "Guide",
+      "master": "Master",
+      "enlightened": "Enlightened"
+    }
+  },
+  "simulation": {
+    "wudu": {
+      "title": "Wudu Simulation",
+      "intro": "Let's learn the steps of ablution together",
+      "step": "Step {number}",
+      "complete": "Wudu Complete!",
+      "tryAgain": "Try Again",
+      "steps": {
+        "intention": "Make your intention (Niyyah)",
+        "hands": "Wash your hands three times",
+        "mouth": "Rinse your mouth three times",
+        "nose": "Clean your nose three times",
+        "face": "Wash your face three times",
+        "arms": "Wash your arms to the elbows",
+        "head": "Wipe your head once",
+        "ears": "Clean your ears",
+        "feet": "Wash your feet to the ankles"
+      }
+    },
+    "salah": {
+      "title": "Prayer Simulation",
+      "intro": "Learn the movements and recitations of Salah",
+      "position": "Position",
+      "recitation": "Recitation",
+      "positions": {
+        "standing": "Standing (Qiyam)",
+        "bowing": "Bowing (Ruku)",
+        "rising": "Rising (I'tidal)",
+        "prostrating": "Prostration (Sujud)",
+        "sitting": "Sitting (Juloos)",
+        "tasleem": "Ending (Tasleem)"
+      }
+    }
+  },
+  "quiz": {
+    "title": "Quiz Time!",
+    "question": "Question {current} of {total}",
+    "score": "Your Score",
+    "correct": "Correct!",
+    "incorrect": "Not quite right",
+    "explanation": "Explanation",
+    "tryAgain": "Try Again",
+    "nextQuestion": "Next Question",
+    "complete": "Quiz Complete!",
+    "passed": "Congratulations! You passed!",
+    "failed": "Keep learning and try again"
+  },
+  "misconceptions": {
+    "title": "Addressing Misconceptions",
+    "subtitle": "Evidence-based responses to common questions about Islam",
+    "categories": {
+      "women": "Women in Islam",
+      "violence": "Violence & Peace",
+      "quran": "Quran & Scripture",
+      "prophet": "Prophet Muhammad ﷺ",
+      "shariah": "Islamic Law",
+      "science": "Science & Faith",
+      "west": "Islam & The West",
+      "practices": "Religious Practices"
+    },
+    "evidence": "Evidence",
+    "videos": "Related Videos",
+    "quotes": "Scholar Quotes",
+    "related": "Related Topics"
+  },
+  "history": {
+    "title": "Islamic History",
+    "subtitle": "Journey through time from the Prophet ﷺ to today",
+    "timeline": "Timeline",
+    "prophets": "Stories of Prophets",
+    "companions": "The Companions",
+    "civilizations": "Islamic Civilization",
+    "eras": {
+      "pre-islamic": "Pre-Islamic Arabia",
+      "prophetic": "Prophetic Era",
+      "rashidun": "Rightly Guided Caliphs",
+      "umayyad": "Umayyad Dynasty",
+      "abbasid": "Abbasid Golden Age",
+      "regional": "Regional Dynasties",
+      "ottoman": "Ottoman Empire",
+      "modern": "Modern Era"
+    }
+  },
+  "fasting": {
+    "title": "Ramadan Journey",
+    "countdown": "Days until Ramadan",
+    "tracker": "Fasting Tracker",
+    "suhoor": "Suhoor",
+    "iftar": "Iftar",
+    "timeUntilIftar": "Time until Iftar",
+    "daysCompleted": "Days Completed",
+    "todaysDua": "Today's Dua",
+    "tips": "Fasting Tips",
+    "goals": "My Ramadan Goals",
+    "prayerTimes": "Prayer Times",
+    "mood": "How are you feeling?",
+    "logDay": "Log Today's Fast"
+  },
+  "quranPlayer": {
+    "title": "Quran Recitation",
+    "surah": "Surah",
+    "ayah": "Ayah",
+    "reciter": "Reciter",
+    "translation": "Translation",
+    "transliteration": "Transliteration",
+    "bookmark": "Bookmark",
+    "repeat": "Repeat",
+    "speed": "Speed"
+  },
+  "games": {
+    "title": "Learning Games",
+    "quiz": "Quiz Challenge",
+    "memory": "Memory Match",
+    "puzzle": "Word Puzzle",
+    "highScore": "High Score",
+    "play": "Play Now"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "fontSize": "Font Size",
+    "audio": "Audio",
+    "animations": "Animations",
+    "notifications": "Notifications",
+    "account": "Account",
+    "privacy": "Privacy",
+    "about": "About"
+  },
+  "errors": {
+    "generic": "Something went wrong",
+    "network": "Please check your internet connection",
+    "notFound": "Page not found",
+    "unauthorized": "Please sign in to continue"
+  },
+  "greetings": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "bismillah": "In the name of Allah",
+    "assalamu": "Peace be upon you"
+  }
+}
