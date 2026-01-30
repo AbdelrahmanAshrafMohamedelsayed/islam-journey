@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
 import createNextIntlPlugin from "next-intl/plugin";
 
+// Check if building for mobile (Capacitor)
+const isMobileBuild = process.env.NEXT_PUBLIC_BUILD_TARGET === "mobile";
+
 // Initialize next-intl plugin
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
@@ -24,8 +27,8 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    // For static export (Capacitor), uncomment:
-    // unoptimized: true,
+    // For static export (Capacitor), use unoptimized images
+    unoptimized: isMobileBuild,
     remotePatterns: [
       {
         protocol: "https",
@@ -44,9 +47,11 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 
-  // For Capacitor static export, uncomment:
-  // output: 'export',
-  // trailingSlash: true,
+  // For Capacitor static export
+  ...(isMobileBuild && {
+    output: "export",
+    trailingSlash: true,
+  }),
 };
 
 // Apply both plugins - order matters: next-intl first, then Serwist

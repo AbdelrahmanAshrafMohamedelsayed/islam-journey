@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui";
+import { ModeSwitcher } from "@/components/ui/ModeSwitcher";
 import { JourneyMap } from "@/components/journey";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
 import { XPProgress, StreakCounter } from "@/components/ui/Progress";
@@ -14,13 +15,17 @@ import {
   Star,
   ChevronRight,
   Play,
+  Unlock,
+  Map,
+  Layers,
 } from "lucide-react";
 
 export default function JourneyPage() {
-  const { language } = useSettingsStore();
+  const { language, learningMode } = useSettingsStore();
   const { totalXp, level, streakDays, completedChapters, completedLessons } =
     useProgressStore();
   const isArabic = language === "ar";
+  const isJourneyMode = learningMode === "journey";
 
   // Calculate XP progress for the current level
   const levelThresholds = [
@@ -135,69 +140,106 @@ export default function JourneyPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h1 className="text-responsive-lg font-bold text-slate-900 dark:text-white mb-4">
             {isArabic ? "رحلتك الإسلامية" : "Your Islamic Journey"}
           </h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-6">
             {isArabic
               ? "تقدم عبر أركان الإسلام الخمسة وتعلم أساسيات الدين الحنيف"
               : "Progress through the Five Pillars of Islam and learn the foundations of the faith"}
           </p>
+
+          {/* Mode Switcher */}
+          <div className="flex justify-center">
+            <ModeSwitcher compact />
+          </div>
         </motion.div>
 
-        {/* Stats Cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
-        >
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="text-emerald-600 dark:text-emerald-400">
-                  {stat.icon}
+        {/* Stats Cards - Only show in Journey Mode */}
+        {isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
+          >
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700"
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="text-emerald-600 dark:text-emerald-400">
+                    {stat.icon}
+                  </div>
+                  <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                    {stat.value}
+                  </span>
                 </div>
-                <span className="text-2xl font-bold text-slate-900 dark:text-white">
-                  {stat.value}
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {stat.label}
                 </span>
               </div>
-              <span className="text-sm text-slate-600 dark:text-slate-400">
-                {stat.label}
-              </span>
+            ))}
+          </motion.div>
+        )}
+
+        {/* XP Progress - Only show in Journey Mode */}
+        {isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 mb-12"
+          >
+            <XPProgress
+              currentXp={totalXp}
+              levelXp={levelXp}
+              nextLevelXp={nextLevelXp}
+              level={level}
+            />
+          </motion.div>
+        )}
+
+        {/* Free Modules Info Banner - Only show in Modules Mode */}
+        {!isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 mb-12 text-white"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <Unlock className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg">
+                  {isArabic ? "وضع الوحدات الحرة" : "Free Modules Mode"}
+                </h3>
+                <p className="text-blue-100 text-sm">
+                  {isArabic
+                    ? "جميع المحتويات مفتوحة - تعلم أي موضوع تريده!"
+                    : "All content unlocked - learn any topic you want!"}
+                </p>
+              </div>
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
+        )}
 
-        {/* XP Progress */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 mb-12"
-        >
-          <XPProgress
-            currentXp={totalXp}
-            levelXp={levelXp}
-            nextLevelXp={nextLevelXp}
-            level={level}
-          />
-        </motion.div>
-
-        {/* Journey Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-16"
-        >
-          <JourneyMap />
-        </motion.div>
+        {/* Journey Map - Only show in Journey Mode */}
+        {isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-16"
+          >
+            <JourneyMap />
+          </motion.div>
+        )}
 
         {/* Chapters Grid */}
         <motion.div
@@ -212,7 +254,9 @@ export default function JourneyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {chaptersList.map((chapter, index) => {
               const isCompleted = completedChapters.includes(chapter.id as any);
+              // In Modules mode, nothing is locked
               const isLocked =
+                isJourneyMode &&
                 index > 0 &&
                 !completedChapters.includes(chaptersList[index - 1].id as any);
 
@@ -240,7 +284,7 @@ export default function JourneyPage() {
                             ? `فصل ${chapter.number}`
                             : `Chapter ${chapter.number}`}
                         </div>
-                        {isCompleted && (
+                        {isCompleted && isJourneyMode && (
                           <div className="absolute bottom-4 right-4">
                             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                               <Trophy className="w-5 h-5 text-amber-500" />
@@ -271,10 +315,14 @@ export default function JourneyPage() {
                           {!isLocked && (
                             <Button
                               size="sm"
-                              variant={isCompleted ? "outline" : "primary"}
+                              variant={
+                                isCompleted && isJourneyMode
+                                  ? "outline"
+                                  : "primary"
+                              }
                               rightIcon={<ChevronRight className="w-4 h-4" />}
                             >
-                              {isCompleted
+                              {isCompleted && isJourneyMode
                                 ? isArabic
                                   ? "مراجعة"
                                   : "Review"

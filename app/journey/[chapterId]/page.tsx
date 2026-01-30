@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
 import { ProgressBar } from "@/components/ui/Progress";
+import { ModeSwitcher } from "@/components/ui/ModeSwitcher";
 import {
   ArrowLeft,
   BookOpen,
@@ -15,6 +16,7 @@ import {
   Clock,
   Star,
   ChevronRight,
+  Unlock,
 } from "lucide-react";
 
 // Chapter data
@@ -357,9 +359,10 @@ const chaptersData = {
 export default function ChapterPage() {
   const params = useParams();
   const chapterId = params.chapterId as string;
-  const { language } = useSettingsStore();
+  const { language, learningMode } = useSettingsStore();
   const { completedLessons, completeLesson, addXp } = useProgressStore();
   const isArabic = language === "ar";
+  const isJourneyMode = learningMode === "journey";
 
   const chapter = chaptersData[chapterId as keyof typeof chaptersData];
 
@@ -451,24 +454,44 @@ export default function ChapterPage() {
           </div>
         </motion.div>
 
-        {/* Progress Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 mb-8"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-slate-600 dark:text-slate-400">
-              {isArabic ? "تقدم الفصل" : "Chapter Progress"}
-            </span>
-            <span className="font-bold text-slate-900 dark:text-white">
-              {completedCount}/{chapter.lessons.length}{" "}
-              {isArabic ? "مكتمل" : "completed"}
-            </span>
-          </div>
-          <ProgressBar value={progress} variant="default" showLabel />
-        </motion.div>
+        {/* Progress Card - Only show in Journey Mode */}
+        {isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 mb-8"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-slate-600 dark:text-slate-400">
+                {isArabic ? "تقدم الفصل" : "Chapter Progress"}
+              </span>
+              <span className="font-bold text-slate-900 dark:text-white">
+                {completedCount}/{chapter.lessons.length}{" "}
+                {isArabic ? "مكتمل" : "completed"}
+              </span>
+            </div>
+            <ProgressBar value={progress} variant="default" showLabel />
+          </motion.div>
+        )}
+
+        {/* Free Modules Banner - Only show in Modules Mode */}
+        {!isJourneyMode && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-4 mb-8 text-white flex items-center justify-between"
+          >
+            <div className="flex items-center gap-3">
+              <Unlock className="w-5 h-5" />
+              <span className="font-medium">
+                {isArabic ? "جميع الدروس مفتوحة" : "All lessons unlocked"}
+              </span>
+            </div>
+            <ModeSwitcher compact />
+          </motion.div>
+        )}
 
         {/* Lessons List */}
         <motion.div
@@ -486,7 +509,8 @@ export default function ChapterPage() {
               const previousCompleted =
                 index === 0 ||
                 completedLessons.includes(chapter.lessons[index - 1].id);
-              const isLocked = !previousCompleted;
+              // In Modules mode, nothing is locked
+              const isLocked = isJourneyMode && !previousCompleted;
 
               return (
                 <motion.div
@@ -503,7 +527,7 @@ export default function ChapterPage() {
                       className={`flex items-center gap-4 p-4 rounded-xl border transition-all duration-200 ${
                         isLocked
                           ? "bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-60"
-                          : isCompleted
+                          : isCompleted && isJourneyMode
                             ? "bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800"
                             : "bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md"
                       }`}
@@ -513,14 +537,14 @@ export default function ChapterPage() {
                         className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold ${
                           isLocked
                             ? "bg-slate-200 dark:bg-slate-700 text-slate-400 dark:text-slate-500"
-                            : isCompleted
+                            : isCompleted && isJourneyMode
                               ? "bg-emerald-500 text-white"
                               : "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400"
                         }`}
                       >
                         {isLocked ? (
                           <Lock className="w-5 h-5" />
-                        ) : isCompleted ? (
+                        ) : isCompleted && isJourneyMode ? (
                           <CheckCircle2 className="w-6 h-6" />
                         ) : (
                           index + 1
@@ -573,7 +597,7 @@ export default function ChapterPage() {
                       {/* Action */}
                       {!isLocked && (
                         <div className="flex items-center gap-2">
-                          {isCompleted && (
+                          {isCompleted && isJourneyMode && (
                             <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
                               <Star className="w-4 h-4 fill-current" />
                               <span className="text-sm font-medium">
@@ -583,7 +607,7 @@ export default function ChapterPage() {
                           )}
                           <ChevronRight
                             className={`w-5 h-5 ${
-                              isCompleted
+                              isCompleted && isJourneyMode
                                 ? "text-emerald-500"
                                 : "text-slate-400 dark:text-slate-500"
                             }`}

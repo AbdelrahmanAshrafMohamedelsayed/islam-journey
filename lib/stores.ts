@@ -9,15 +9,29 @@ import type {
 import { calculateLevel } from "@/lib/utils";
 
 // ==========================================
+// LEARNING MODE TYPE
+// ==========================================
+export type LearningMode = "journey" | "modules";
+// journey = gamified path with levels, XP, locked/unlocked content
+// modules = free access to all content without restrictions
+
+// ==========================================
 // SETTINGS STORE
 // ==========================================
 interface SettingsState extends AppSettings {
+  // Learning mode
+  learningMode: LearningMode;
+  hasCompletedOnboarding: boolean;
+
   setLanguage: (lang: "en" | "ar") => void;
   setTheme: (theme: "light" | "dark" | "system") => void;
   setFontSize: (size: "small" | "medium" | "large") => void;
   toggleAudio: () => void;
   toggleAnimations: () => void;
   toggleNotifications: () => void;
+  setLearningMode: (mode: LearningMode) => void;
+  completeOnboarding: () => void;
+  resetOnboarding: () => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -29,6 +43,8 @@ export const useSettingsStore = create<SettingsState>()(
       audioEnabled: true,
       animationsEnabled: true,
       notificationsEnabled: true,
+      learningMode: "journey",
+      hasCompletedOnboarding: false,
 
       setLanguage: (language) => set({ language }),
       setTheme: (theme) => set({ theme }),
@@ -39,6 +55,9 @@ export const useSettingsStore = create<SettingsState>()(
         set((state) => ({ animationsEnabled: !state.animationsEnabled })),
       toggleNotifications: () =>
         set((state) => ({ notificationsEnabled: !state.notificationsEnabled })),
+      setLearningMode: (learningMode) => set({ learningMode }),
+      completeOnboarding: () => set({ hasCompletedOnboarding: true }),
+      resetOnboarding: () => set({ hasCompletedOnboarding: false }),
     }),
     {
       name: "islam-journey-settings",
@@ -55,8 +74,11 @@ interface ProgressState extends JourneyProgress {
   completeChapter: (chapterId: ChapterId) => void;
   setCurrentLesson: (lessonId: string | undefined) => void;
   addXp: (amount: number) => void;
+  addXP: (amount: number) => void; // Alias for addXp
   updateStreak: () => void;
   resetProgress: () => void;
+  isLessonCompleted: (lessonId: string) => boolean;
+  isChapterCompleted: (chapterId: ChapterId) => boolean;
 }
 
 const initialProgress: JourneyProgress = {
@@ -126,6 +148,19 @@ export const useProgressStore = create<ProgressState>()(
         });
       },
 
+      // Alias for addXp (for consistency in component usage)
+      addXP: (amount) => {
+        const state = get();
+        const newXp = state.totalXp + amount;
+        const newLevel = calculateLevel(newXp);
+
+        set({
+          totalXp: newXp,
+          level: newLevel,
+          lastActivityDate: new Date(),
+        });
+      },
+
       updateStreak: () => {
         const state = get();
         const today = new Date();
@@ -152,6 +187,14 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       resetProgress: () => set(initialProgress),
+
+      isLessonCompleted: (lessonId) => {
+        return get().completedLessons.includes(lessonId);
+      },
+
+      isChapterCompleted: (chapterId) => {
+        return get().completedChapters.includes(chapterId);
+      },
     }),
     {
       name: "islam-journey-progress",
