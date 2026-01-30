@@ -359,6 +359,92 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Quick Access Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-responsive-lg font-bold text-slate-900 dark:text-white mb-4">
+              {isArabic ? "استكشف المزيد" : "Explore More"}
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400">
+              {isArabic
+                ? "أدوات وموارد إضافية لرحلتك الإسلامية"
+                : "Additional tools and resources for your Islamic journey"}
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                href: "/quran",
+                icon: "📖",
+                title: isArabic ? "القرآن الكريم" : "Quran Reader",
+                description: isArabic
+                  ? "اقرأ واستمع للقرآن مع الترجمة"
+                  : "Read & listen to Quran with translation",
+                color: "emerald",
+              },
+              {
+                href: "/history",
+                icon: "🕰️",
+                title: isArabic ? "التاريخ الإسلامي" : "Islamic History",
+                description: isArabic
+                  ? "استكشف أحداث السيرة النبوية"
+                  : "Explore the Prophet's life timeline",
+                color: "amber",
+              },
+              {
+                href: "/ramadan",
+                icon: "🌙",
+                title: isArabic ? "متتبع رمضان" : "Ramadan Tracker",
+                description: isArabic
+                  ? "تتبع صيامك وعباداتك في رمضان"
+                  : "Track your fasting and worship",
+                color: "indigo",
+              },
+              {
+                href: "/misconceptions",
+                icon: "💡",
+                title: isArabic ? "رد الشبهات" : "Misconceptions",
+                description: isArabic
+                  ? "إجابات على الأسئلة الشائعة"
+                  : "Answers to common questions",
+                color: "rose",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={item.href}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link href={item.href}>
+                  <AnimatedCard
+                    variant="elevated"
+                    padding="lg"
+                    className="h-full text-center hover:scale-105 transition-transform"
+                  >
+                    <div className="text-4xl mb-4">{item.icon}</div>
+                    <h3 className="font-bold text-slate-900 dark:text-white mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                      {item.description}
+                    </p>
+                  </AnimatedCard>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">

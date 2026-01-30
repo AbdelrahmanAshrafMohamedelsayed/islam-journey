@@ -1,422 +1,752 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform, PanInfo } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
   Clock,
   MapPin,
-  ChevronDown,
-  ChevronUp,
-  Star,
-  Book,
-  Users,
-  Swords,
-  Building2,
-  Moon,
+  ChevronLeft,
+  ChevronRight,
+  Volume2,
+  VolumeX,
+  Sparkles,
+  Play,
+  Pause,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { useSettingsStore } from "@/lib/stores";
+import { useNarrativeStore } from "@/lib/stores/narrativeStore";
 
-// Historical events data
-const timelineEvents = [
+// Historical events with enhanced narrative data
+interface HistoricalScene {
+  id: string;
+  year: number;
+  era: string;
+  title: { en: string; ar: string };
+  subtitle: { en: string; ar: string };
+  description: { en: string; ar: string };
+  location: string;
+  narrator: string;
+  narration: { en: string; ar: string };
+  scene: "desert" | "cave" | "mosque" | "night" | "dawn" | "battle" | "journey" | "city";
+  mood: "peaceful" | "dramatic" | "hopeful" | "solemn" | "triumphant";
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+  };
+  mapRoute?: { from: string; to: string };
+}
+
+const historicalScenes: HistoricalScene[] = [
   {
+    id: "birth",
     year: 570,
     era: "Pre-Islam",
-    title: { en: "Birth of Prophet Muhammad ﷺ", ar: "ولادة النبي محمد ﷺ" },
+    title: { en: "The Year of the Elephant", ar: "عام الفيل" },
+    subtitle: { en: "Birth of the Final Prophet", ar: "ولادة خاتم الأنبياء" },
     description: {
-      en: "Prophet Muhammad ﷺ was born in Makkah in the Year of the Elephant. His father Abdullah had passed away before his birth, and his mother Aminah passed away when he was six. He was raised by his grandfather Abdul Muttalib and later by his uncle Abu Talib.",
-      ar: "وُلد النبي محمد ﷺ في مكة في عام الفيل. توفي والده عبدالله قبل ولادته، وتوفيت أمه آمنة عندما كان عمره ست سنوات. ربّاه جده عبد المطلب ثم عمه أبو طالب.",
+      en: "In the blessed city of Makkah, under the protection of the Sacred House, a child was born who would change the world forever. His father had passed before his birth, and he was named Muhammad - 'The Praised One.'",
+      ar: "في مكة المباركة، تحت حماية البيت الحرام، ولد طفل سيغير العالم إلى الأبد. توفي والده قبل ولادته، وسُمي محمداً - المحمود.",
     },
     location: "Makkah",
-    icon: Star,
-    color: "emerald",
+    narrator: "Khadijah",
+    narration: {
+      en: "The stars shone brighter that night, as if the heavens themselves celebrated. Little did the world know that the final messenger had arrived...",
+      ar: "تألقت النجوم في تلك الليلة كأن السماوات نفسها تحتفل. لم يكن العالم يعلم أن خاتم المرسلين قد جاء...",
+    },
+    scene: "night",
+    mood: "peaceful",
+    colors: {
+      primary: "from-indigo-950",
+      secondary: "via-purple-900",
+      accent: "to-slate-900",
+    },
   },
   {
+    id: "revelation",
     year: 610,
     era: "Revelation",
-    title: { en: "First Revelation", ar: "الوحي الأول" },
+    title: { en: "The First Light", ar: "النور الأول" },
+    subtitle: { en: "Iqra - Read!", ar: "اقرأ!" },
     description: {
-      en: 'Angel Jibreel (Gabriel) appeared to Prophet Muhammad ﷺ in the Cave of Hira during the month of Ramadan. The first words revealed were "Read! In the name of your Lord who created." This marked the beginning of the Quranic revelation.',
-      ar: 'ظهر الملاك جبريل للنبي محمد ﷺ في غار حراء في شهر رمضان. أول الكلمات المُنزلة كانت "اقرأ باسم ربك الذي خلق." هذا شكّل بداية نزول القرآن.',
+      en: "In the solitude of Cave Hira, during the sacred month of Ramadan, Angel Jibreel descended with the first words of the Quran. 'Read!' he commanded, and with those words, prophecy returned to mankind.",
+      ar: "في عزلة غار حراء، في شهر رمضان المبارك، نزل الملك جبريل بأولى آيات القرآن. 'اقرأ!' أمره، وبتلك الكلمات عادت النبوة للبشرية.",
     },
-    location: "Cave of Hira, Makkah",
-    icon: Book,
-    color: "amber",
+    location: "Cave Hira, Mount Noor",
+    narrator: "Abu Bakr",
+    narration: {
+      en: "When he returned from the mountain, trembling with awe, Khadijah wrapped him in her cloak and spoke words of comfort. She knew in her heart - her husband was chosen by Allah.",
+      ar: "حين عاد من الجبل، يرتجف من الرهبة، لفته خديجة بردائها وقالت كلمات مطمئنة. علمت في قلبها - زوجها اختاره الله.",
+    },
+    scene: "cave",
+    mood: "dramatic",
+    colors: {
+      primary: "from-amber-900",
+      secondary: "via-orange-800",
+      accent: "to-stone-900",
+    },
   },
   {
-    year: 613,
-    era: "Revelation",
-    title: { en: "Public Preaching Begins", ar: "بداية الدعوة العلنية" },
-    description: {
-      en: "After three years of private invitation to Islam, Prophet Muhammad ﷺ was commanded to preach publicly. This led to increasing persecution of early Muslims by the Quraysh.",
-      ar: "بعد ثلاث سنوات من الدعوة السرية للإسلام، أُمر النبي محمد ﷺ بالدعوة العلنية. أدى هذا إلى تزايد اضطهاد المسلمين الأوائل من قِبل قريش.",
-    },
-    location: "Makkah",
-    icon: Users,
-    color: "blue",
-  },
-  {
+    id: "persecution",
     year: 615,
     era: "Persecution",
-    title: {
-      en: "First Migration to Abyssinia",
-      ar: "الهجرة الأولى إلى الحبشة",
-    },
+    title: { en: "The First Migration", ar: "الهجرة الأولى" },
+    subtitle: { en: "Seeking Refuge in Abyssinia", ar: "اللجوء إلى الحبشة" },
     description: {
-      en: "Due to intense persecution, a group of Muslims migrated to Abyssinia (Ethiopia) seeking protection from the Christian King Negus (Najashi). The king listened to their message and allowed them to stay.",
-      ar: "بسبب الاضطهاد الشديد، هاجرت مجموعة من المسلمين إلى الحبشة (إثيوبيا) طلباً للحماية من الملك المسيحي النجاشي. استمع الملك لرسالتهم وسمح لهم بالبقاء.",
+      en: "As persecution intensified, the Prophet sent his followers to seek refuge with the just Christian king of Abyssinia. This was the first Hijrah in Islam, a testament to the believers' courage.",
+      ar: "مع تصاعد الاضطهاد، أرسل النبي ﷺ أتباعه للجوء إلى الملك المسيحي العادل في الحبشة. كانت هذه أول هجرة في الإسلام، شاهدة على شجاعة المؤمنين.",
     },
-    location: "Abyssinia (Ethiopia)",
-    icon: MapPin,
-    color: "purple",
+    location: "Makkah to Abyssinia",
+    narrator: "Bilal",
+    narration: {
+      en: "I remember those days... Dragged through the burning streets, a boulder crushing my chest, yet all I could say was 'Ahad, Ahad' - One God, One God. Freedom would come, but not yet.",
+      ar: "أتذكر تلك الأيام... مجروراً عبر الشوارع الملتهبة، صخرة تسحق صدري، ومع ذلك كل ما أستطيع قوله 'أحد، أحد'. الحرية ستأتي، لكن ليس بعد.",
+    },
+    scene: "desert",
+    mood: "dramatic",
+    colors: {
+      primary: "from-orange-900",
+      secondary: "via-red-800",
+      accent: "to-amber-950",
+    },
+    mapRoute: { from: "Makkah", to: "Abyssinia" },
   },
   {
+    id: "isra",
     year: 619,
-    era: "Persecution",
-    title: { en: "Year of Sorrow", ar: "عام الحزن" },
-    description: {
-      en: "Both the Prophet's beloved wife Khadijah and his protective uncle Abu Talib passed away. This was a deeply difficult time for the Prophet ﷺ, losing two of his greatest supporters.",
-      ar: "توفيت زوجة النبي الحبيبة خديجة وعمه الحامي أبو طالب. كان هذا وقتاً صعباً جداً للنبي ﷺ، بفقدانه اثنين من أعظم مؤيديه.",
-    },
-    location: "Makkah",
-    icon: Moon,
-    color: "slate",
-  },
-  {
-    year: 620,
     era: "Miracles",
-    title: { en: "Isra and Mi'raj (Night Journey)", ar: "الإسراء والمعراج" },
+    title: { en: "The Night Journey", ar: "الإسراء والمعراج" },
+    subtitle: { en: "From Makkah to the Heavens", ar: "من مكة إلى السماوات" },
     description: {
-      en: "Prophet Muhammad ﷺ was miraculously transported from Makkah to Jerusalem (Isra) and then ascended through the heavens (Mi'raj). During this journey, the five daily prayers were prescribed.",
-      ar: "نُقل النبي محمد ﷺ بمعجزة من مكة إلى القدس (الإسراء) ثم صعد عبر السماوات (المعراج). خلال هذه الرحلة، فُرضت الصلوات الخمس اليومية.",
+      en: "On a single miraculous night, the Prophet was taken from Makkah to Jerusalem, then ascended through the seven heavens. He met the prophets of old and received the gift of five daily prayers.",
+      ar: "في ليلة معجزة واحدة، أُسري بالنبي ﷺ من مكة إلى القدس، ثم عرج عبر السماوات السبع. التقى بالأنبياء السابقين وتلقى هدية الصلوات الخمس.",
     },
-    location: "Makkah to Jerusalem to Heavens",
-    icon: Star,
-    color: "emerald",
+    location: "Makkah to Jerusalem to The Heavens",
+    narrator: "Salman",
+    narration: {
+      en: "Beyond the stars, beyond the furthest galaxies, to a place where no creation had ever reached. There, in the Divine Presence, the prayers were ordained - a direct connection between servant and Creator.",
+      ar: "ما وراء النجوم، ما وراء أبعد المجرات، إلى مكان لم يصله خلق من قبل. هناك، في الحضرة الإلهية، فُرضت الصلوات - اتصال مباشر بين العبد والخالق.",
+    },
+    scene: "night",
+    mood: "solemn",
+    colors: {
+      primary: "from-violet-950",
+      secondary: "via-indigo-900",
+      accent: "to-blue-950",
+    },
   },
   {
+    id: "hijrah",
     year: 622,
     era: "Hijrah",
-    title: {
-      en: "The Hijrah (Migration to Madinah)",
-      ar: "الهجرة إلى المدينة",
-    },
+    title: { en: "The Great Migration", ar: "الهجرة الكبرى" },
+    subtitle: { en: "A New Beginning", ar: "بداية جديدة" },
     description: {
-      en: "Prophet Muhammad ﷺ and the Muslims migrated from Makkah to Madinah. This event is so significant that it marks the beginning of the Islamic calendar. In Madinah, the first Islamic community was established.",
-      ar: "هاجر النبي محمد ﷺ والمسلمون من مكة إلى المدينة. هذا الحدث مهم جداً لدرجة أنه يُمثل بداية التقويم الإسلامي. في المدينة، تأسس أول مجتمع إسلامي.",
+      en: "Under the cover of night, with assassins at his door, the Prophet and Abu Bakr embarked on the 450km journey to Madinah. This Hijrah would mark Year One of the Islamic calendar.",
+      ar: "تحت جنح الليل، مع القتلة على بابه، انطلق النبي ﷺ وأبو بكر في رحلة 450 كم إلى المدينة. هذه الهجرة ستكون السنة الأولى في التقويم الإسلامي.",
     },
-    location: "From Makkah to Madinah",
-    icon: MapPin,
-    color: "emerald",
+    location: "Makkah to Madinah",
+    narrator: "Abu Bakr",
+    narration: {
+      en: "In the cave of Thawr, with the enemy's footsteps above us, I trembled. But he said, 'Grieve not, Allah is with us.' A spider spun its web, a dove built her nest - and the enemies turned away.",
+      ar: "في غار ثور، مع خطوات العدو فوقنا، ارتجفت. لكنه قال: 'لا تحزن، إن الله معنا.' نسج العنكبوت شبكته، بنت الحمامة عشها - وانصرف الأعداء.",
+    },
+    scene: "journey",
+    mood: "hopeful",
+    colors: {
+      primary: "from-emerald-900",
+      secondary: "via-teal-800",
+      accent: "to-cyan-950",
+    },
+    mapRoute: { from: "Makkah", to: "Madinah" },
   },
   {
+    id: "badr",
     year: 624,
     era: "Madinah Period",
-    title: { en: "Battle of Badr", ar: "غزوة بدر" },
+    title: { en: "The Day of Criterion", ar: "يوم الفرقان" },
+    subtitle: { en: "Victory at Badr", ar: "النصر في بدر" },
     description: {
-      en: "The first major battle between Muslims and the Quraysh. Despite being outnumbered (313 vs 1000), the Muslims achieved a decisive victory. This battle is mentioned in the Quran as a day when Allah sent angels to help.",
-      ar: "أول معركة كبرى بين المسلمين وقريش. رغم قلة عددهم (313 ضد 1000)، حقق المسلمون نصراً حاسماً. هذه المعركة مذكورة في القرآن كيوم أرسل فيه الله ملائكة للمساعدة.",
+      en: "313 believers faced an army of 1,000. The Prophet prayed through the night, and Allah sent angels to fight alongside the Muslims. This victory proved that truth would triumph.",
+      ar: "313 مؤمناً واجهوا جيشاً من 1000. صلى النبي ﷺ طوال الليل، وأرسل الله ملائكة للقتال مع المسلمين. هذا النصر أثبت أن الحق سينتصر.",
     },
-    location: "Badr (near Madinah)",
-    icon: Swords,
-    color: "red",
+    location: "Wells of Badr",
+    narrator: "Bilal",
+    narration: {
+      en: "The sands trembled that day. I watched men who had once tortured me now flee before the army of truth. Allah had fulfilled His promise - the oppressed would one day be free.",
+      ar: "ارتجفت الرمال في ذلك اليوم. شاهدت رجالاً عذبوني ذات يوم يفرون الآن أمام جيش الحق. وفى الله بوعده - المظلومون سيتحررون يوماً.",
+    },
+    scene: "battle",
+    mood: "triumphant",
+    colors: {
+      primary: "from-red-900",
+      secondary: "via-orange-800",
+      accent: "to-amber-900",
+    },
   },
   {
-    year: 625,
-    era: "Madinah Period",
-    title: { en: "Battle of Uhud", ar: "غزوة أحد" },
-    description: {
-      en: "The Quraysh sought revenge for Badr. The battle taught important lessons about obedience and patience. The Prophet ﷺ was injured, and many companions were martyred including Hamza, the Prophet's uncle.",
-      ar: "سعت قريش للانتقام من بدر. المعركة علّمت دروساً مهمة عن الطاعة والصبر. أُصيب النبي ﷺ، واستُشهد كثير من الصحابة بما فيهم حمزة، عم النبي.",
-    },
-    location: "Mount Uhud (near Madinah)",
-    icon: Swords,
-    color: "orange",
-  },
-  {
+    id: "trench",
     year: 627,
     era: "Madinah Period",
-    title: { en: "Battle of the Trench", ar: "غزوة الخندق" },
+    title: { en: "The Siege of Madinah", ar: "حصار المدينة" },
+    subtitle: { en: "Battle of the Trench", ar: "غزوة الخندق" },
     description: {
-      en: "A coalition of 10,000 soldiers besieged Madinah. Following Salman al-Farisi's suggestion, the Muslims dug a trench to defend the city. The siege failed, marking a turning point in the conflict.",
-      ar: "حاصر تحالف من 10,000 جندي المدينة. باتباع اقتراح سلمان الفارسي، حفر المسلمون خندقاً للدفاع عن المدينة. فشل الحصار، مما شكّل نقطة تحول في الصراع.",
+      en: "10,000 warriors surrounded Madinah. On Salman al-Farisi's advice, the Muslims dug a trench - a strategy unknown to the Arabs. Faith and innovation together saved the city.",
+      ar: "10,000 محارب حاصروا المدينة. بنصيحة سلمان الفارسي، حفر المسلمون خندقاً - استراتيجية لم يعرفها العرب. الإيمان والابتكار معاً أنقذا المدينة.",
     },
     location: "Madinah",
-    icon: Swords,
-    color: "blue",
-  },
-  {
-    year: 628,
-    era: "Madinah Period",
-    title: { en: "Treaty of Hudaybiyyah", ar: "صلح الحديبية" },
-    description: {
-      en: 'A peace treaty was signed between Muslims and the Quraysh. Though initially seeming unfavorable to Muslims, it was called "a clear victory" in the Quran and allowed Islam to spread rapidly.',
-      ar: 'وُقعت معاهدة سلام بين المسلمين وقريش. رغم أنها بدت في البداية غير مواتية للمسلمين، سُميت "فتحاً مبيناً" في القرآن وسمحت للإسلام بالانتشار السريع.',
+    narrator: "Salman",
+    narration: {
+      en: "They thought it strange - a Persian suggesting defense tactics! But the Prophet embraced every good idea, from any source. That is the beauty of Islam - wisdom belongs to all.",
+      ar: "اعتقدوا أنه غريب - فارسي يقترح تكتيكات دفاعية! لكن النبي ﷺ رحب بكل فكرة جيدة، من أي مصدر. هذا جمال الإسلام - الحكمة للجميع.",
     },
-    location: "Hudaybiyyah (near Makkah)",
-    icon: Users,
-    color: "teal",
+    scene: "battle",
+    mood: "dramatic",
+    colors: {
+      primary: "from-slate-800",
+      secondary: "via-stone-700",
+      accent: "to-zinc-900",
+    },
   },
   {
+    id: "conquest",
     year: 630,
     era: "Victory",
-    title: { en: "Conquest of Makkah", ar: "فتح مكة" },
+    title: { en: "The Peaceful Conquest", ar: "الفتح السلمي" },
+    subtitle: { en: "Return to Makkah", ar: "العودة إلى مكة" },
     description: {
-      en: "The Prophet ﷺ led 10,000 Muslims to Makkah. The city was taken peacefully, and the Prophet ﷺ declared a general amnesty. He entered the Ka'bah and removed all idols, restoring it to the worship of One God.",
-      ar: "قاد النبي ﷺ 10,000 مسلم إلى مكة. فُتحت المدينة سلمياً، وأعلن النبي ﷺ عفواً عاماً. دخل الكعبة وأزال جميع الأصنام، مُعيداً إياها لعبادة الله الواحد.",
+      en: "Eight years after being driven out, the Prophet returned with 10,000 believers. Not a single drop of blood was shed. He entered the Ka'bah, removed 360 idols, and declared: 'Truth has come, and falsehood has vanished.'",
+      ar: "بعد ثماني سنوات من الطرد، عاد النبي ﷺ مع 10,000 مؤمن. لم تُسفك قطرة دم واحدة. دخل الكعبة، أزال 360 صنماً، وأعلن: 'جاء الحق وزهق الباطل.'",
     },
     location: "Makkah",
-    icon: Building2,
-    color: "emerald",
+    narrator: "Khadijah",
+    narration: {
+      en: "If only I had lived to see it... The house we once fled now welcomes us home. The Prophet's mercy that day taught humanity the meaning of true victory - not revenge, but forgiveness.",
+      ar: "لو عشت لأرى ذلك... البيت الذي هربنا منه يوماً يرحب بنا الآن. رحمة النبي في ذلك اليوم علمت البشرية معنى النصر الحقيقي - ليس الانتقام، بل المغفرة.",
+    },
+    scene: "mosque",
+    mood: "triumphant",
+    colors: {
+      primary: "from-emerald-800",
+      secondary: "via-green-700",
+      accent: "to-teal-900",
+    },
   },
   {
+    id: "farewell",
     year: 632,
     era: "Completion",
-    title: {
-      en: "Farewell Pilgrimage & Completion of Islam",
-      ar: "حجة الوداع وإتمام الإسلام",
-    },
+    title: { en: "The Final Sermon", ar: "خطبة الوداع" },
+    subtitle: { en: "Farewell Pilgrimage", ar: "حجة الوداع" },
     description: {
-      en: 'The Prophet ﷺ performed his only Hajj, delivering the famous Farewell Sermon to over 100,000 pilgrims. During this time, the verse was revealed: "Today I have perfected your religion for you."',
-      ar: 'أدى النبي ﷺ حجته الوحيدة، مُلقياً خطبة الوداع الشهيرة على أكثر من 100,000 حاج. خلال هذا الوقت، نزلت الآية: "اليوم أكملت لكم دينكم."',
+      en: "Over 100,000 pilgrims gathered at Arafat. The Prophet delivered his final sermon, proclaiming the equality of all humans. Then the verse descended: 'Today I have perfected your religion.'",
+      ar: "اجتمع أكثر من 100,000 حاج في عرفات. ألقى النبي ﷺ خطبته الأخيرة، معلناً مساواة جميع البشر. ثم نزلت الآية: 'اليوم أكملت لكم دينكم.'",
     },
-    location: "Makkah & Arafat",
-    icon: Building2,
-    color: "amber",
+    location: "Mount Arafat",
+    narrator: "Bilal",
+    narration: {
+      en: "When he said 'Have I conveyed the message?' and we cried 'Yes!', tears streamed down my face. I knew then... our beloved Prophet's time with us was coming to an end.",
+      ar: "حين قال 'هل بلغت؟' وصرخنا 'نعم!'، انهمرت الدموع من عيني. علمت حينها... أن وقت نبينا الحبيب معنا يقترب من نهايته.",
+    },
+    scene: "dawn",
+    mood: "solemn",
+    colors: {
+      primary: "from-amber-800",
+      secondary: "via-yellow-700",
+      accent: "to-orange-900",
+    },
   },
   {
+    id: "legacy",
     year: 632,
     era: "Completion",
-    title: { en: "Passing of Prophet Muhammad ﷺ", ar: "وفاة النبي محمد ﷺ" },
+    title: { en: "The Eternal Legacy", ar: "الإرث الخالد" },
+    subtitle: { en: "A Light That Never Fades", ar: "نور لا ينطفئ" },
     description: {
-      en: "The Prophet ﷺ passed away in Madinah at age 63. His mission was complete - Islam had been perfected and would continue through his companions and followers for generations to come.",
-      ar: "توفي النبي ﷺ في المدينة عن عمر 63 عاماً. اكتملت مهمته - أُتم الإسلام وسيستمر من خلال صحابته وأتباعه للأجيال القادمة.",
+      en: "The Prophet passed away in Madinah, his head resting on Aisha's lap. But his message lives on - carried by billions across centuries, a light guiding humanity until the Day of Judgment.",
+      ar: "توفي النبي ﷺ في المدينة، رأسه في حجر عائشة. لكن رسالته باقية - يحملها المليارات عبر القرون، نور يهدي البشرية إلى يوم القيامة.",
     },
     location: "Madinah",
-    icon: Moon,
-    color: "slate",
+    narrator: "Abu Bakr",
+    narration: {
+      en: "When I announced his passing, people wept. But I said: 'Whoever worshipped Muhammad, know that Muhammad has died. But whoever worships Allah, know that Allah is Ever-Living and never dies.'",
+      ar: "حين أعلنت وفاته، بكى الناس. لكنني قلت: 'من كان يعبد محمداً، فإن محمداً قد مات. ومن كان يعبد الله، فإن الله حي لا يموت.'",
+    },
+    scene: "mosque",
+    mood: "peaceful",
+    colors: {
+      primary: "from-slate-900",
+      secondary: "via-slate-800",
+      accent: "to-slate-950",
+    },
   },
 ];
 
-const eras = [
-  "All",
-  "Pre-Islam",
-  "Revelation",
-  "Persecution",
-  "Miracles",
-  "Hijrah",
-  "Madinah Period",
-  "Victory",
-  "Completion",
-];
+// Scene background component with parallax effect
+const SceneBackground = ({
+  scene,
+  colors,
+}: {
+  scene: HistoricalScene["scene"];
+  colors: HistoricalScene["colors"];
+  mood?: HistoricalScene["mood"];
+}) => {
+  const getSceneElements = () => {
+    switch (scene) {
+      case "desert":
+        return (
+          <>
+            <div className="absolute top-16 right-16 w-24 h-24 rounded-full bg-gradient-to-br from-amber-300 to-orange-500 blur-sm opacity-80" />
+            <svg className="absolute bottom-0 left-0 right-0 h-1/2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+              <path fill="rgba(217, 119, 6, 0.3)" d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,144C672,139,768,181,864,192C960,203,1056,181,1152,149.3C1248,117,1344,75,1392,53.3L1440,32L1440,320L0,320Z" />
+              <path fill="rgba(180, 83, 9, 0.4)" d="M0,256L48,234.7C96,213,192,171,288,165.3C384,160,480,192,576,213.3C672,235,768,245,864,229.3C960,213,1056,171,1152,160C1248,149,1344,171,1392,181.3L1440,192L1440,320L0,320Z" />
+            </svg>
+          </>
+        );
 
-export default function HistoryPage() {
-  const { language: lang } = useSettingsStore();
-  const [selectedEra, setSelectedEra] = useState("All");
-  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
+      case "cave":
+        return (
+          <>
+            <div className="absolute top-1/4 right-1/4 w-48 h-64 bg-gradient-to-b from-amber-400/30 to-transparent blur-2xl rounded-full transform -rotate-12" />
+            <motion.div
+              className="absolute top-1/4 right-1/3 w-32 h-96 bg-gradient-to-b from-amber-300/40 to-transparent"
+              style={{ transform: "rotate(-15deg)" }}
+              animate={{ opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 4, repeat: Infinity }}
+            />
+          </>
+        );
 
-  const filteredEvents =
-    selectedEra === "All"
-      ? timelineEvents
-      : timelineEvents.filter((e) => e.era === selectedEra);
+      case "mosque":
+        return (
+          <>
+            <div className="absolute bottom-0 left-0 right-0 h-2/3">
+              <svg className="w-full h-full" viewBox="0 0 800 400" preserveAspectRatio="xMidYMax slice">
+                <ellipse cx="400" cy="200" rx="120" ry="100" fill="rgba(0,0,0,0.3)" />
+                <rect x="150" y="100" width="20" height="300" fill="rgba(0,0,0,0.3)" />
+                <rect x="630" y="100" width="20" height="300" fill="rgba(0,0,0,0.3)" />
+                <polygon points="160,100 145,130 175,130" fill="rgba(0,0,0,0.3)" />
+                <polygon points="640,100 625,130 655,130" fill="rgba(0,0,0,0.3)" />
+                <rect x="200" y="250" width="400" height="150" fill="rgba(0,0,0,0.3)" />
+              </svg>
+            </div>
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-3 h-4 bg-amber-400/60 rounded-full blur-sm"
+                style={{ left: `${20 + i * 15}%`, top: `${50 + Math.sin(i) * 10}%` }}
+                animate={{ opacity: [0.4, 0.8, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+              />
+            ))}
+          </>
+        );
 
-  const colorMap: Record<string, string> = {
-    emerald: "bg-emerald-500",
-    amber: "bg-amber-500",
-    blue: "bg-blue-500",
-    purple: "bg-purple-500",
-    slate: "bg-slate-500",
-    red: "bg-red-500",
-    orange: "bg-orange-500",
-    teal: "bg-teal-500",
+      case "night":
+        return (
+          <>
+            <motion.div
+              className="absolute top-12 right-20 w-20 h-20"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 6, repeat: Infinity }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-amber-200 rounded-full shadow-lg shadow-amber-200/30" />
+            </motion.div>
+            {[...Array(30)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: Math.random() * 2 + 1,
+                  height: Math.random() * 2 + 1,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 60}%`,
+                }}
+                animate={{ opacity: [0.3, 1, 0.3] }}
+                transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
+              />
+            ))}
+          </>
+        );
+
+      case "dawn":
+        return (
+          <>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-amber-400/30 via-orange-300/20 to-transparent" />
+            <motion.div
+              className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-32 h-32 rounded-full bg-gradient-to-t from-amber-400 to-yellow-300"
+              animate={{ y: [20, 0, 20] }}
+              transition={{ duration: 10, repeat: Infinity }}
+            />
+          </>
+        );
+
+      case "battle":
+        return (
+          <>
+            <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-red-900/30 to-transparent" />
+            {[...Array(5)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full bg-amber-800/20 blur-2xl"
+                style={{ width: 100 + Math.random() * 100, height: 60, left: `${Math.random() * 100}%`, bottom: `${Math.random() * 30}%` }}
+                animate={{ x: [0, 50, 0], opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 5 + Math.random() * 3, repeat: Infinity }}
+              />
+            ))}
+          </>
+        );
+
+      case "journey":
+        return (
+          <>
+            <svg className="absolute bottom-0 left-0 right-0 h-2/3" viewBox="0 0 800 400" preserveAspectRatio="none">
+              <path d="M0,350 Q200,300 400,320 Q600,340 800,300" fill="none" stroke="rgba(217, 119, 6, 0.4)" strokeWidth="20" strokeLinecap="round" />
+            </svg>
+            <motion.div
+              className="absolute w-3 h-3 bg-amber-400/60 rounded-full"
+              initial={{ left: "0%", bottom: "40%" }}
+              animate={{ left: ["0%", "50%", "100%"], bottom: ["40%", "35%", "38%"] }}
+              transition={{ duration: 15, repeat: Infinity }}
+            />
+            <svg className="absolute bottom-0 left-0 right-0 h-1/3" viewBox="0 0 800 200" preserveAspectRatio="none">
+              <polygon points="0,200 100,100 200,150 300,80 400,130 500,60 600,120 700,90 800,140 800,200" fill="rgba(30, 41, 59, 0.4)" />
+            </svg>
+          </>
+        );
+
+      case "city":
+        return (
+          <>
+            <svg className="absolute bottom-0 left-0 right-0 h-1/2" viewBox="0 0 800 300" preserveAspectRatio="none">
+              <rect x="50" y="150" width="60" height="150" fill="rgba(0,0,0,0.3)" />
+              <rect x="130" y="100" width="80" height="200" fill="rgba(0,0,0,0.3)" />
+              <rect x="300" y="80" width="100" height="220" fill="rgba(0,0,0,0.3)" />
+              <ellipse cx="350" cy="80" rx="40" ry="30" fill="rgba(0,0,0,0.3)" />
+              <rect x="620" y="100" width="60" height="200" fill="rgba(0,0,0,0.3)" />
+            </svg>
+          </>
+        );
+
+      default:
+        return null;
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-4xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/journey">
-              <Button
-                variant="ghost"
-                size="sm"
-                leftIcon={<ArrowLeft className="w-4 h-4" />}
-              >
-                {lang === "en" ? "Back" : "رجوع"}
-              </Button>
-            </Link>
-            <h1 className="text-lg font-bold text-slate-900 dark:text-white">
-              {lang === "en" ? "Islamic History" : "التاريخ الإسلامي"}
-            </h1>
-            <div className="w-20" /> {/* Spacer for centering */}
-          </div>
-        </div>
-      </div>
+    <div className={`absolute inset-0 bg-gradient-to-b ${colors.primary} ${colors.secondary} ${colors.accent} overflow-hidden`}>
+      {getSceneElements()}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+    </div>
+  );
+};
 
-      {/* Hero Section */}
-      <div className="max-w-4xl mx-auto px-4 py-8">
+// Animated migration map
+const MigrationMap = ({ from, to }: { from: string; to: string }) => {
+  return (
+    <motion.div
+      className="absolute bottom-8 left-8 w-48 h-32 bg-black/40 backdrop-blur-md rounded-xl p-3 border border-white/10"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5 }}
+    >
+      <div className="text-xs text-amber-400/80 mb-2 font-semibold">Migration Route</div>
+      <svg className="w-full h-20" viewBox="0 0 180 70">
+        <motion.path
+          d="M20,50 Q90,20 160,45"
+          fill="none"
+          stroke="rgba(251, 191, 36, 0.6)"
+          strokeWidth="2"
+          strokeDasharray="4,4"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 2, delay: 0.8 }}
+        />
+        <motion.circle
+          r="4"
+          fill="#fbbf24"
+          initial={{ cx: 20, cy: 50 }}
+          animate={{ cx: 160, cy: 45 }}
+          transition={{ duration: 3, delay: 1, repeat: Infinity, repeatDelay: 2 }}
+        />
+        <circle cx="20" cy="50" r="6" fill="none" stroke="#fbbf24" strokeWidth="2" />
+        <text x="20" y="65" textAnchor="middle" fill="white" fontSize="8">{from}</text>
+        <circle cx="160" cy="45" r="6" fill="#10b981" />
+        <text x="160" y="60" textAnchor="middle" fill="white" fontSize="8">{to}</text>
+      </svg>
+    </motion.div>
+  );
+};
+
+// Narrator avatar
+const NarratorAvatar = ({ narrator, isActive }: { narrator: string; isActive: boolean }) => {
+  return (
+    <motion.div
+      className="relative"
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
+      <motion.div
+        className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg"
+        animate={isActive ? { scale: [1, 1.05, 1] } : {}}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        {narrator.charAt(0)}
+      </motion.div>
+      {isActive && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="absolute -bottom-1 -right-1 w-5 h-5 bg-amber-500 rounded-full flex items-center justify-center"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Clock className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">
-            {lang === "en" ? "Journey Through Time" : "رحلة عبر الزمن"}
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 max-w-lg mx-auto">
-            {lang === "en"
-              ? "Explore the key events in the life of Prophet Muhammad ﷺ and the early days of Islam"
-              : "استكشف الأحداث الرئيسية في حياة النبي محمد ﷺ وأيام الإسلام الأولى"}
-          </p>
+          <Volume2 className="w-3 h-3 text-white" />
         </motion.div>
+      )}
+    </motion.div>
+  );
+};
 
-        {/* Era Filter */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {eras.map((era) => (
-            <button
-              key={era}
-              onClick={() => setSelectedEra(era)}
-              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                selectedEra === era
-                  ? "bg-emerald-600 text-white"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
-              }`}
-            >
-              {era}
-            </button>
-          ))}
-        </div>
+// Typewriter text effect
+const TypewriterText = ({ text }: { text: string }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 transform md:-translate-x-1/2" />
+  useEffect(() => {
+    setDisplayText("");
+    setIsComplete(false);
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < text.length) {
+        setDisplayText(text.slice(0, index + 1));
+        index++;
+      } else {
+        setIsComplete(true);
+        clearInterval(timer);
+      }
+    }, 30);
+    return () => clearInterval(timer);
+  }, [text]);
 
-          {/* Events */}
-          <div className="space-y-6">
-            <AnimatePresence>
-              {filteredEvents.map((event, index) => {
-                const Icon = event.icon;
-                const isExpanded = expandedEvent === index;
-                const isEven = index % 2 === 0;
+  return (
+    <span>
+      {displayText}
+      {!isComplete && (
+        <motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }}>|</motion.span>
+      )}
+    </span>
+  );
+};
 
-                return (
-                  <motion.div
-                    key={event.year + event.title.en}
-                    initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className={`relative flex items-start ${
-                      isEven ? "md:flex-row" : "md:flex-row-reverse"
-                    }`}
-                  >
-                    {/* Timeline dot */}
-                    <div
-                      className={`absolute left-4 md:left-1/2 w-8 h-8 rounded-full ${colorMap[event.color]} flex items-center justify-center transform -translate-x-1/2 z-10 shadow-lg`}
-                    >
-                      <Icon className="w-4 h-4 text-white" />
-                    </div>
+export default function HistoryPage() {
+  const { language: lang } = useSettingsStore();
+  const [currentScene, setCurrentScene] = useState(0);
+  const [isNarrating, setIsNarrating] = useState(true);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
+  const x = useMotionValue(0);
+  const opacity = useTransform(x, [-200, 0, 200], [0.5, 1, 0.5]);
 
-                    {/* Content */}
-                    <div
-                      className={`ml-12 md:ml-0 md:w-[45%] ${isEven ? "md:pr-8 md:text-right" : "md:pl-8 md:text-left"}`}
-                    >
-                      <Card
-                        variant="default"
-                        padding="md"
-                        className="cursor-pointer hover:shadow-lg transition-shadow"
-                        onClick={() =>
-                          setExpandedEvent(isExpanded ? null : index)
-                        }
-                      >
-                        {/* Year badge */}
-                        <div
-                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium mb-2 ${colorMap[event.color]} bg-opacity-20 text-${event.color}-700 dark:text-${event.color}-400`}
-                          style={{
-                            backgroundColor: `var(--${event.color}-100, #f0fdf4)`,
-                          }}
-                        >
-                          <Clock className="w-3 h-3" />
-                          <span>{event.year} CE</span>
+  const scene = historicalScenes[currentScene];
+  const progress = ((currentScene + 1) / historicalScenes.length) * 100;
+
+  const goToNext = useCallback(() => {
+    if (currentScene < historicalScenes.length - 1) {
+      setCurrentScene((prev) => prev + 1);
+      setIsNarrating(true);
+      setShowFullDescription(false);
+    }
+  }, [currentScene]);
+
+  const goToPrev = useCallback(() => {
+    if (currentScene > 0) {
+      setCurrentScene((prev) => prev - 1);
+      setIsNarrating(true);
+      setShowFullDescription(false);
+    }
+  }, [currentScene]);
+
+  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    if (info.offset.x > 100) goToPrev();
+    else if (info.offset.x < -100) goToNext();
+  };
+
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        if (currentScene < historicalScenes.length - 1) goToNext();
+        else setIsAutoPlaying(false);
+      }, 10000);
+    } else if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+    }
+    return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
+  }, [isAutoPlaying, currentScene, goToNext]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === " ") goToNext();
+      else if (e.key === "ArrowLeft") goToPrev();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [goToNext, goToPrev]);
+
+  return (
+    <div className="fixed inset-0 bg-black overflow-hidden">
+      <motion.div
+        className="absolute inset-0 cursor-grab active:cursor-grabbing"
+        style={{ x, opacity }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.2}
+        onDragEnd={handleDragEnd}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={scene.id}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.8 }}
+          >
+            <SceneBackground scene={scene.scene} colors={scene.colors} mood={scene.mood} />
+
+            <div className="absolute inset-0 flex flex-col">
+              {/* Header */}
+              <div className="relative z-50 flex items-center justify-between p-4 bg-gradient-to-b from-black/50 to-transparent">
+                <Link href="/journey">
+                  <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />} className="text-white/90 hover:text-white hover:bg-white/10">
+                    {lang === "en" ? "Exit" : "خروج"}
+                  </Button>
+                </Link>
+
+                <div className="flex items-center gap-4">
+                  <button onClick={() => setIsAutoPlaying(!isAutoPlaying)} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                    {isAutoPlaying ? <Pause className="w-4 h-4 text-white" /> : <Play className="w-4 h-4 text-white" />}
+                  </button>
+                  <button onClick={() => setIsNarrating(!isNarrating)} className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+                    {isNarrating ? <Volume2 className="w-4 h-4 text-white" /> : <VolumeX className="w-4 h-4 text-white" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Content */}
+              <div className="flex-1 flex flex-col justify-end pb-32 px-4 md:px-8">
+                <motion.div className="flex items-center gap-3 mb-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-amber-500/20 backdrop-blur-sm rounded-full border border-amber-500/30">
+                    <Clock className="w-4 h-4 text-amber-400" />
+                    <span className="text-amber-300 font-bold">{scene.year} CE</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                    <MapPin className="w-3 h-3 text-white/70" />
+                    <span className="text-white/80 text-sm">{scene.location}</span>
+                  </div>
+                </motion.div>
+
+                <motion.h1 className="text-3xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+                  {scene.title[lang]}
+                </motion.h1>
+
+                <motion.p className="text-xl md:text-2xl text-amber-300/90 mb-6 drop-shadow-md" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                  {scene.subtitle[lang]}
+                </motion.p>
+
+                <motion.div className="max-w-2xl" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                  <p className={`text-white/90 text-base md:text-lg leading-relaxed ${!showFullDescription ? "line-clamp-3" : ""}`}>
+                    {scene.description[lang]}
+                  </p>
+                  <button onClick={() => setShowFullDescription(!showFullDescription)} className="text-amber-400 text-sm mt-2 hover:text-amber-300 transition-colors">
+                    {showFullDescription ? (lang === "en" ? "Show less" : "أقل") : (lang === "en" ? "Read more" : "اقرأ المزيد")}
+                  </button>
+                </motion.div>
+
+                {isNarrating && (
+                  <motion.div className="mt-6 max-w-xl bg-black/40 backdrop-blur-md rounded-2xl p-4 border border-white/10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
+                    <div className="flex items-start gap-4">
+                      <NarratorAvatar narrator={scene.narrator} isActive={isNarrating} />
+                      <div className="flex-1">
+                        <div className="text-sm text-emerald-400 font-semibold mb-1">
+                          {scene.narrator} {lang === "en" ? "narrates:" : "يروي:"}
                         </div>
-
-                        <h3 className="font-bold text-slate-900 dark:text-white mb-1">
-                          {event.title[lang]}
-                        </h3>
-
-                        <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400 mb-2">
-                          <MapPin className="w-3 h-3" />
-                          <span>{event.location}</span>
-                        </div>
-
-                        <AnimatePresence>
-                          {isExpanded && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                            >
-                              <p className="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                                {event.description[lang]}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-
-                        <button className="flex items-center gap-1 text-sm text-emerald-600 dark:text-emerald-400 mt-2">
-                          {isExpanded ? (
-                            <>
-                              <ChevronUp className="w-4 h-4" />
-                              {lang === "en" ? "Show less" : "أقل"}
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown className="w-4 h-4" />
-                              {lang === "en" ? "Read more" : "اقرأ المزيد"}
-                            </>
-                          )}
-                        </button>
-                      </Card>
+                        <p className="text-white/80 text-sm italic leading-relaxed">
+                          <TypewriterText key={scene.id} text={`"${scene.narration[lang]}"`} />
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </div>
-        </div>
+                )}
+              </div>
 
-        {/* Info Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-12"
-        >
-          <Card variant="gradient" padding="lg" className="text-center">
-            <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">
-              {lang === "en" ? "Continue Learning" : "تابع التعلم"}
-            </h3>
-            <p className="text-slate-600 dark:text-slate-400 mb-4">
-              {lang === "en"
-                ? "Dive deeper into Islamic history through our comprehensive lessons"
-                : "تعمق أكثر في التاريخ الإسلامي من خلال دروسنا الشاملة"}
-            </p>
-            <Link href="/journey">
-              <Button variant="primary">
-                {lang === "en" ? "Back to Journey" : "العودة للرحلة"}
-              </Button>
-            </Link>
-          </Card>
-        </motion.div>
+              {/* Navigation */}
+              <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black/80 via-black/50 to-transparent pt-16 pb-6 px-4">
+                <div className="max-w-md mx-auto mb-4">
+                  <div className="h-1 bg-white/20 rounded-full overflow-hidden">
+                    <motion.div className="h-full bg-gradient-to-r from-amber-400 to-emerald-400" initial={{ width: 0 }} animate={{ width: `${progress}%` }} transition={{ duration: 0.3 }} />
+                  </div>
+                  <div className="flex justify-between mt-2 text-xs text-white/50">
+                    <span>{currentScene + 1} / {historicalScenes.length}</span>
+                    <span>{scene.era}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center gap-4">
+                  <Button variant="ghost" size="lg" onClick={goToPrev} disabled={currentScene === 0} leftIcon={<ChevronLeft className="w-5 h-5" />} className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30">
+                    {lang === "en" ? "Previous" : "السابق"}
+                  </Button>
+
+                  <div className="flex gap-1">
+                    {historicalScenes.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => { setCurrentScene(idx); setIsNarrating(true); setShowFullDescription(false); }}
+                        className={`w-2 h-2 rounded-full transition-all ${idx === currentScene ? "bg-amber-400 w-6" : idx < currentScene ? "bg-emerald-500/60" : "bg-white/30"}`}
+                      />
+                    ))}
+                  </div>
+
+                  <Button variant="ghost" size="lg" onClick={goToNext} disabled={currentScene === historicalScenes.length - 1} rightIcon={<ChevronRight className="w-5 h-5" />} className="text-white/80 hover:text-white hover:bg-white/10 disabled:opacity-30">
+                    {lang === "en" ? "Next" : "التالي"}
+                  </Button>
+                </div>
+
+                <motion.p className="text-center text-white/40 text-xs mt-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }}>
+                  {lang === "en" ? "Swipe or use arrow keys to navigate" : "اسحب أو استخدم مفاتيح الأسهم للتنقل"}
+                </motion.p>
+              </div>
+
+              {scene.mapRoute && <MigrationMap from={scene.mapRoute.from} to={scene.mapRoute.to} />}
+
+              <motion.div className="absolute top-24 right-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                <Sparkles className="w-6 h-6 text-amber-400/50" />
+              </motion.div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+
+      {/* Era quick navigation */}
+      <div className="absolute top-20 right-4 z-50 hidden md:block">
+        <div className="bg-black/40 backdrop-blur-md rounded-xl p-2 border border-white/10">
+          {["Pre-Islam", "Revelation", "Hijrah", "Victory", "Completion"].map((era) => {
+            const eraScene = historicalScenes.findIndex((s) => s.era === era);
+            const isActive = scene.era === era;
+            return (
+              <button
+                key={era}
+                onClick={() => { if (eraScene >= 0) { setCurrentScene(eraScene); setIsNarrating(true); setShowFullDescription(false); } }}
+                className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${isActive ? "bg-amber-500/30 text-amber-300" : "text-white/60 hover:text-white hover:bg-white/10"}`}
+              >
+                {era}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

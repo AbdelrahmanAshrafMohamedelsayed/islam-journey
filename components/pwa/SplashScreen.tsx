@@ -1,12 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface SplashScreenProps {
   onComplete?: () => void;
   minimumDuration?: number;
 }
+
+// Pre-computed star positions to avoid hydration mismatch
+const generateStars = (count: number, seed: number) => {
+  const stars = [];
+  for (let i = 0; i < count; i++) {
+    // Use deterministic pseudo-random based on index
+    const hash = ((i + seed) * 2654435761) % 1000;
+    stars.push({
+      width: (hash % 30) / 10 + 1,
+      height: ((hash * 7) % 30) / 10 + 1,
+      left: ((hash * 13) % 1000) / 10,
+      top: ((hash * 17) % 1000) / 10,
+      duration: 2 + ((hash * 23) % 30) / 10,
+      delay: ((hash * 29) % 20) / 10,
+    });
+  }
+  return stars;
+};
+
+const STARS = generateStars(80, 42);
 
 export function SplashScreen({
   onComplete,
@@ -63,15 +83,15 @@ export function SplashScreen({
 
           {/* Animated stars */}
           <div className="absolute inset-0 overflow-hidden">
-            {[...Array(80)].map((_, i) => (
+            {STARS.map((star, i) => (
               <motion.div
                 key={i}
                 className="absolute rounded-full bg-white"
                 style={{
-                  width: Math.random() * 3 + 1,
-                  height: Math.random() * 3 + 1,
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  width: star.width,
+                  height: star.height,
+                  left: `${star.left}%`,
+                  top: `${star.top}%`,
                 }}
                 initial={{ opacity: 0 }}
                 animate={{
@@ -79,9 +99,9 @@ export function SplashScreen({
                   scale: [0.5, 1, 0.5],
                 }}
                 transition={{
-                  duration: 2 + Math.random() * 3,
+                  duration: star.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
+                  delay: star.delay,
                 }}
               />
             ))}

@@ -456,7 +456,7 @@ export interface Ayah {
 // ==========================================
 export interface AppSettings {
   language: "en" | "ar";
-  theme: "light" | "dark" | "system";
+  theme: "light" | "dark" | "system" | "mosque";
   fontSize: "small" | "medium" | "large";
   audioEnabled: boolean;
   animationsEnabled: boolean;

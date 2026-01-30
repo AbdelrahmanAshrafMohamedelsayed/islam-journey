@@ -98,6 +98,31 @@ export const islamicTheme = {
     },
   },
 
+  // Mosque Mode - Dim warm lantern light for prayers
+  mosque: {
+    background: {
+      primary: "#1a1510", // Very dark warm brown
+      secondary: "#241d15", // Slightly lighter
+      tertiary: "#2e251a", // Card backgrounds
+      card: "#2a2118",
+    },
+    text: {
+      primary: "#e8dcc8", // Warm cream
+      secondary: "#b8a890", // Muted warm
+      tertiary: "#8a7a68", // Dimmed warm
+      inverse: "#1a1510",
+    },
+    border: {
+      light: "#3d3225",
+      medium: "#4d4035",
+      dark: "#5d5045",
+    },
+    accent: {
+      glow: "rgba(251, 191, 36, 0.15)", // Soft golden glow
+      lantern: "#fbbf24", // Lantern yellow
+    },
+  },
+
   // Typography
   fonts: {
     arabic: '"Amiri", "Noto Naskh Arabic", serif',

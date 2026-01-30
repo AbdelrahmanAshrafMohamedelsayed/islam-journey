@@ -20,6 +20,8 @@ import {
   Bell,
   Volume2,
   VolumeX,
+  Lamp,
+  Music,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -166,7 +168,7 @@ export default function SettingsPage() {
             {isArabic ? "المظهر" : "Theme"}
           </h2>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <button
               onClick={() => setTheme("light")}
               className={`p-4 rounded-xl border-2 transition-all ${
@@ -196,6 +198,23 @@ export default function SettingsPage() {
             </button>
 
             <button
+              onClick={() => setTheme("mosque")}
+              className={`p-4 rounded-xl border-2 transition-all ${
+                theme === "mosque"
+                  ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
+                  : "border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600"
+              }`}
+            >
+              <Lamp className="w-6 h-6 mx-auto mb-2 text-amber-500" />
+              <div className="text-sm font-medium text-slate-900 dark:text-white">
+                {isArabic ? "المسجد" : "Mosque"}
+              </div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                {isArabic ? "إضاءة خافتة" : "Dim for prayers"}
+              </div>
+            </button>
+
+            <button
               onClick={() => setTheme("system")}
               className={`p-4 rounded-xl border-2 transition-all ${
                 theme === "system"
@@ -208,6 +227,43 @@ export default function SettingsPage() {
                 {isArabic ? "النظام" : "System"}
               </div>
             </button>
+          </div>
+        </motion.div>
+
+        {/* Ambient Sound Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.22 }}
+          className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 mb-6"
+        >
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+            <Music className="w-5 h-5 text-emerald-500" />
+            {isArabic ? "أجواء المسجد" : "Mosque Atmosphere"}
+          </h2>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+            {isArabic
+              ? "اختر الأجواء الصوتية المحيطة لتجربة روحانية غامرة"
+              : "Choose ambient sounds for an immersive spiritual experience"}
+          </p>
+          
+          {/* Import AmbientSoundSelector dynamically to avoid SSR issues */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { id: "makkah", icon: "🕋", name: isArabic ? "مكة المكرمة" : "Makkah", desc: isArabic ? "أجواء المسجد الحرام" : "Masjid al-Haram" },
+              { id: "madinah", icon: "🌴", name: isArabic ? "المدينة المنورة" : "Madinah", desc: isArabic ? "سكينة وهدوء" : "Peaceful serenity" },
+              { id: "local", icon: "🕌", name: isArabic ? "المسجد المحلي" : "Local Mosque", desc: isArabic ? "تأمل هادئ" : "Quiet contemplation" },
+              { id: "silent", icon: "🔇", name: isArabic ? "صامت" : "Silent", desc: isArabic ? "بدون صوت" : "No ambient sound" },
+            ].map((atm) => (
+              <button
+                key={atm.id}
+                className="p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition-all text-left"
+              >
+                <span className="text-2xl mb-2 block">{atm.icon}</span>
+                <div className="font-medium text-slate-900 dark:text-white text-sm">{atm.name}</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">{atm.desc}</div>
+              </button>
+            ))}
           </div>
         </motion.div>
 

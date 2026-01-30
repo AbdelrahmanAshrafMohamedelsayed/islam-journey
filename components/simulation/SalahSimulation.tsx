@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button, Card } from "@/components/ui";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
+import { PrayerAnimation } from "./PrayerAnimation";
+import { useAudio } from "@/lib/hooks/useAudio";
 import {
   ArrowLeft,
   ArrowRight,
@@ -15,6 +17,7 @@ import {
   Play,
   Trophy,
   Volume2,
+  VolumeX,
 } from "lucide-react";
 
 interface SalahPosition {
@@ -29,6 +32,17 @@ interface SalahPosition {
   };
   times?: number;
   positionImage: string; // emoji representation
+  animationPosition:
+    | "standing"
+    | "standing-hands-raised"
+    | "standing-hands-chest"
+    | "bowing"
+    | "standing-from-bow"
+    | "prostrating"
+    | "sitting"
+    | "sitting-tasleem-right"
+    | "sitting-tasleem-left";
+  audioKey?: string; // key for audio playback
   tip?: { en: string; ar: string };
   isOptional?: boolean;
 }
@@ -49,6 +63,8 @@ const salahPositions: SalahPosition[] = [
       meaning: { en: "Allah is the Greatest", ar: "الله أكبر" },
     },
     positionImage: "🧍",
+    animationPosition: "standing-hands-raised",
+    audioKey: "takbir",
     tip: {
       en: "After this takbir, place your right hand over your left on your chest. Keep your eyes looking at the place of prostration.",
       ar: "بعد هذه التكبيرة، ضع يدك اليمنى فوق اليسرى على صدرك. أبقِ عينيك على موضع السجود.",
@@ -73,6 +89,8 @@ const salahPositions: SalahPosition[] = [
       },
     },
     positionImage: "🧍",
+    animationPosition: "standing-hands-chest",
+    audioKey: "fatiha",
     tip: {
       en: 'Say "Ameen" (O Allah, accept) after completing Al-Fatiha.',
       ar: 'قل "آمين" بعد إتمام الفاتحة.',
@@ -97,6 +115,8 @@ const salahPositions: SalahPosition[] = [
       },
     },
     positionImage: "🧍",
+    animationPosition: "standing-hands-chest",
+    audioKey: "ikhlas",
     isOptional: false, // Only in first 2 rakaat
   },
   {
@@ -117,6 +137,8 @@ const salahPositions: SalahPosition[] = [
     },
     times: 3,
     positionImage: "🙇",
+    animationPosition: "bowing",
+    audioKey: "tasbeeh_ruku",
     tip: {
       en: "Keep your head in line with your back, don't raise it up or let it hang down.",
       ar: "أبقِ رأسك على مستوى ظهرك، لا ترفعه أو تدعه يتدلى.",
@@ -139,6 +161,8 @@ const salahPositions: SalahPosition[] = [
       },
     },
     positionImage: "🧍",
+    animationPosition: "standing-from-bow",
+    audioKey: "tasmee",
   },
   {
     id: "sujud-1",
@@ -158,6 +182,8 @@ const salahPositions: SalahPosition[] = [
     },
     times: 3,
     positionImage: "🙏",
+    animationPosition: "prostrating",
+    audioKey: "tasbeeh_sujud",
     tip: {
       en: "This is when you're closest to Allah! Make personal du'a (supplication) here after the prescribed words.",
       ar: "هذا عندما تكون أقرب إلى الله! ادعُ هنا بعد الأذكار المحددة.",
@@ -177,6 +203,7 @@ const salahPositions: SalahPosition[] = [
       meaning: { en: "My Lord, forgive me", ar: "رب اغفر لي" },
     },
     positionImage: "🧎",
+    animationPosition: "sitting",
   },
   {
     id: "sujud-2",
@@ -196,6 +223,8 @@ const salahPositions: SalahPosition[] = [
     },
     times: 3,
     positionImage: "🙏",
+    animationPosition: "prostrating",
+    audioKey: "tasbeeh_sujud",
   },
   {
     id: "second-rakah-note",
@@ -211,6 +240,8 @@ const salahPositions: SalahPosition[] = [
       meaning: { en: "Allah is the Greatest", ar: "الله أكبر" },
     },
     positionImage: "🧍",
+    animationPosition: "standing-hands-chest",
+    audioKey: "takbir",
     tip: {
       en: "After the second sujud of the second rak'ah, remain seated for Tashahhud.",
       ar: "بعد السجدة الثانية من الركعة الثانية، ابقَ جالساً للتشهد.",
@@ -235,6 +266,8 @@ const salahPositions: SalahPosition[] = [
       },
     },
     positionImage: "🧎",
+    animationPosition: "sitting",
+    audioKey: "tashahud",
     tip: {
       en: 'Point your index finger during "Ashhadu an la ilaha illallah" - this is part of the Sunnah.',
       ar: 'أشر بسبابتك عند "أشهد أن لا إله إلا الله" - هذا من السنة.',
@@ -259,6 +292,7 @@ const salahPositions: SalahPosition[] = [
       },
     },
     positionImage: "🧎",
+    animationPosition: "sitting",
   },
   {
     id: "tasleem",
@@ -278,6 +312,8 @@ const salahPositions: SalahPosition[] = [
     },
     times: 2,
     positionImage: "😊",
+    animationPosition: "sitting-tasleem-right",
+    audioKey: "tasleem",
     tip: {
       en: "Turn right first, then left. This marks the end of your prayer. You may now make personal du'a!",
       ar: "التفت يميناً أولاً، ثم يساراً. هذا يُنهي صلاتك. يمكنك الآن الدعاء!",
@@ -292,6 +328,8 @@ interface SalahSimulationProps {
 export function SalahSimulation({ chapterId }: SalahSimulationProps) {
   const { language } = useSettingsStore();
   const { addXP } = useProgressStore();
+  const { speak, speakPhrase, play, isPlaying, isMuted, toggleMute } =
+    useAudio();
 
   const [currentPosition, setCurrentPosition] = useState(0);
   const [started, setStarted] = useState(false);
@@ -299,11 +337,26 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
   const [showTip, setShowTip] = useState(false);
   const [repetitionCount, setRepetitionCount] = useState(0);
   const [showTranslation, setShowTranslation] = useState(true);
+  const [autoPlay, setAutoPlay] = useState(false);
 
   const lang = language as "en" | "ar";
 
   const position = salahPositions[currentPosition];
   const progress = ((currentPosition + 1) / salahPositions.length) * 100;
+
+  // Play audio for current position when it changes
+  useEffect(() => {
+    if (started && !completed && autoPlay && position.audioKey) {
+      // Use Quran audio for fatiha and ikhlas, speech for others
+      if (position.audioKey === "fatiha") {
+        play("fatiha");
+      } else if (position.audioKey === "ikhlas") {
+        play("ikhlas");
+      } else {
+        speak(position.recitation.arabic, "ar");
+      }
+    }
+  }, [currentPosition, started, completed, autoPlay, position, play, speak]);
 
   const handleStart = useCallback(() => {
     setStarted(true);
@@ -311,6 +364,16 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
     setCompleted(false);
     setRepetitionCount(0);
   }, []);
+
+  const handlePlayRecitation = useCallback(() => {
+    if (position.audioKey === "fatiha") {
+      play("fatiha");
+    } else if (position.audioKey === "ikhlas") {
+      play("ikhlas");
+    } else {
+      speak(position.recitation.arabic, "ar");
+    }
+  }, [position, play, speak]);
 
   const handleNext = useCallback(() => {
     const times = position.times || 1;
@@ -500,6 +563,29 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
               transition={{ duration: 0.3 }}
             />
           </div>
+
+          {/* Audio Controls */}
+          <div className="flex items-center justify-center gap-2 mt-3">
+            <Button
+              variant={autoPlay ? "primary" : "outline"}
+              size="sm"
+              onClick={() => setAutoPlay(!autoPlay)}
+              leftIcon={<Play className="w-4 h-4" />}
+            >
+              {lang === "en" ? "Auto-play" : "تشغيل تلقائي"}
+            </Button>
+            <Button
+              variant={isMuted ? "outline" : "ghost"}
+              size="sm"
+              onClick={toggleMute}
+            >
+              {isMuted ? (
+                <VolumeX className="w-4 h-4" />
+              ) : (
+                <Volume2 className="w-4 h-4" />
+              )}
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -528,24 +614,23 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
               )}
             </div>
 
-            {/* Position illustration */}
-            <div className="flex justify-center mb-4">
-              <motion.div
-                className="w-28 h-28 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center relative"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
-                <span className="text-6xl">{position.positionImage}</span>
+            {/* Animated Prayer Figure */}
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <PrayerAnimation
+                  position={position.animationPosition}
+                  size="lg"
+                  showGlow={true}
+                />
 
                 {/* Counter badge */}
                 {position.times && position.times > 1 && (
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <div className="absolute -top-2 -right-2 w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
                     {repetitionCount + 1}/{position.times}
                   </div>
                 )}
-              </motion.div>
+              </div>
             </div>
-
             {/* Description */}
             <Card className="mb-4">
               <p className="text-slate-700 dark:text-slate-300 text-sm text-center">
@@ -559,19 +644,46 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
                 <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">
                   {lang === "en" ? "Recitation" : "الذكر"}
                 </span>
-                <button
-                  onClick={() => setShowTranslation(!showTranslation)}
-                  className="text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-1"
-                >
-                  <Volume2 className="w-4 h-4" />
-                  {showTranslation
-                    ? lang === "en"
-                      ? "Hide meaning"
-                      : "إخفاء المعنى"
-                    : lang === "en"
-                      ? "Show meaning"
-                      : "إظهار المعنى"}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handlePlayRecitation}
+                    disabled={isPlaying}
+                    className={`text-sm flex items-center gap-1 px-2 py-1 rounded-lg transition-colors ${
+                      isPlaying
+                        ? "bg-emerald-200 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-300"
+                        : "bg-emerald-100 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-200 dark:hover:bg-emerald-800"
+                    }`}
+                  >
+                    {isPlaying ? (
+                      <>
+                        <motion.div
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ repeat: Infinity, duration: 0.5 }}
+                        >
+                          <Volume2 className="w-4 h-4" />
+                        </motion.div>
+                        {lang === "en" ? "Playing..." : "جارِ التشغيل..."}
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4" />
+                        {lang === "en" ? "Listen" : "استمع"}
+                      </>
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setShowTranslation(!showTranslation)}
+                    className="text-sm text-emerald-600 dark:text-emerald-400 flex items-center gap-1"
+                  >
+                    {showTranslation
+                      ? lang === "en"
+                        ? "Hide meaning"
+                        : "إخفاء المعنى"
+                      : lang === "en"
+                        ? "Show meaning"
+                        : "إظهار المعنى"}
+                  </button>
+                </div>
               </div>
 
               {/* Arabic */}

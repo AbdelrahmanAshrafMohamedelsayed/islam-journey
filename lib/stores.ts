@@ -24,7 +24,7 @@ interface SettingsState extends AppSettings {
   hasCompletedOnboarding: boolean;
 
   setLanguage: (lang: "en" | "ar") => void;
-  setTheme: (theme: "light" | "dark" | "system") => void;
+  setTheme: (theme: "light" | "dark" | "system" | "mosque") => void;
   setFontSize: (size: "small" | "medium" | "large") => void;
   toggleAudio: () => void;
   toggleAnimations: () => void;
