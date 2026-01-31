@@ -27,7 +27,6 @@ import {
 const navItems = [
   { href: "/", label: "Home", labelAr: "الرئيسية", icon: Home },
   { href: "/journey", label: "Journey", labelAr: "الرحلة", icon: Map },
-  { href: "/quran", label: "Quran", labelAr: "القرآن", icon: BookOpen },
   { href: "/history", label: "History", labelAr: "التاريخ", icon: History },
   {
     href: "/misconceptions",

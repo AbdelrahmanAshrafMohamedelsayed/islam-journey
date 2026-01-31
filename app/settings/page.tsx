@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
+import { useNarrativeStore } from "@/lib/stores/narrativeStore";
 import { ModeSwitcher } from "@/components/ui/ModeSwitcher";
 import {
   ArrowLeft,
@@ -38,6 +39,7 @@ export default function SettingsPage() {
   } = useSettingsStore();
   const { resetProgress, totalXp, level, completedLessons, streakDays } =
     useProgressStore();
+  const { preferredAtmosphere, setPreferredAtmosphere } = useNarrativeStore();
   const isArabic = language === "ar";
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [notifications, setNotifications] = useState(true);
@@ -251,25 +253,25 @@ export default function SettingsPage() {
           <div className="grid grid-cols-2 gap-3">
             {[
               {
-                id: "makkah",
+                id: "makkah" as const,
                 icon: "🕋",
                 name: isArabic ? "مكة المكرمة" : "Makkah",
                 desc: isArabic ? "أجواء المسجد الحرام" : "Masjid al-Haram",
               },
               {
-                id: "madinah",
+                id: "madinah" as const,
                 icon: "🌴",
                 name: isArabic ? "المدينة المنورة" : "Madinah",
                 desc: isArabic ? "سكينة وهدوء" : "Peaceful serenity",
               },
               {
-                id: "local",
+                id: "local" as const,
                 icon: "🕌",
                 name: isArabic ? "المسجد المحلي" : "Local Mosque",
                 desc: isArabic ? "تأمل هادئ" : "Quiet contemplation",
               },
               {
-                id: "silent",
+                id: "silent" as const,
                 icon: "🔇",
                 name: isArabic ? "صامت" : "Silent",
                 desc: isArabic ? "بدون صوت" : "No ambient sound",
@@ -277,7 +279,12 @@ export default function SettingsPage() {
             ].map((atm) => (
               <button
                 key={atm.id}
-                className="p-4 rounded-xl border-2 border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition-all text-left"
+                onClick={() => setPreferredAtmosphere(atm.id)}
+                className={`p-4 rounded-xl border-2 transition-all text-left ${
+                  preferredAtmosphere === atm.id
+                    ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950"
+                    : "border-slate-200 dark:border-slate-700 hover:border-emerald-500"
+                }`}
               >
                 <span className="text-2xl mb-2 block">{atm.icon}</span>
                 <div className="font-medium text-slate-900 dark:text-white text-sm">

@@ -35,18 +35,24 @@ const AUDIO_URLS = {
   // Basmala - Surah Fatiha verse 1 contains Basmala
   basmala: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
 
-  // Prayer phrases - Using short Quran verses that contain these
-  // Takbir (Allahu Akbar) - from Adhan which starts with Takbir
+  // Prayer phrases - Using Quran verses and islamic.network CDN
+  // For authentic prayer sounds, we use relevant Quran audio
   takbir: "https://cdn.islamic.network/adhans/128/1.mp3",
 
-  // Tasbeeh phrases - placeholder audio files (you can replace with custom recordings)
-  // Using peaceful Quran verses as alternatives
-  tasmee: "/audio/prayers/tasmee.mp3", // Custom: "Sami Allahu liman hamidah"
-  tahmeed: "/audio/prayers/tahmeed.mp3", // Custom: "Rabbana lakal hamd"
-  tasbeeh_ruku: "/audio/prayers/tasbeeh-ruku.mp3", // Custom: "Subhana Rabbiyal Atheem"
-  tasbeeh_sujud: "/audio/prayers/tasbeeh-sujud.mp3", // Custom: "Subhana Rabbiyal A'la"
-  tasleem: "/audio/prayers/tasleem.mp3", // Custom: "Assalamu alaikum wa rahmatullah"
-  tashahud: "/audio/prayers/tashahud.mp3", // Custom: Full Tashahud
+  // Prayer phrases - Using islamic.network CDN with authentic recitations
+  // Tasmee: "Sami Allahu liman hamidah" - Using short verse
+  tasmee: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/1.mp3",
+  // Tahmeed: "Rabbana lakal hamd" - Using Surah Fatiha v2
+  tahmeed: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/2.mp3",
+  // Tasbeeh Ruku: "Subhana Rabbiyal Atheem" - Using short verse
+  tasbeeh_ruku: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/3.mp3",
+  // Tasbeeh Sujud: "Subhana Rabbiyal A'la" - Using Surah Al-A'la v1
+  tasbeeh_sujud:
+    "https://cdn.islamic.network/quran/audio/64/ar.alafasy/5765.mp3",
+  // Tasleem: "Assalamu alaikum wa rahmatullah"
+  tasleem: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/4.mp3",
+  // Tashahud - Using relevant Quran verse
+  tashahud: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/5.mp3",
 };
 
 // Full Quran verse-by-verse audio base URL

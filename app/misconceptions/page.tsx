@@ -158,6 +158,142 @@ const misconceptions = [
       ar: "المخطوطات القديمة مثل مخطوطة برمنغهام (حوالي 645 م) ومخطوطات صنعاء تطابق قرآن اليوم تماماً. لا يوجد نص ديني آخر بهذا المستوى من الحفظ.",
     },
   },
+  {
+    id: 9,
+    category: "violence",
+    icon: Shield,
+    myth: {
+      en: "Muslims hate non-Muslims",
+      ar: "المسلمون يكرهون غير المسلمين",
+    },
+    truth: {
+      en: "Islam teaches respect for all of humanity as children of Adam. Muslims are commanded to be just and kind even to those who disagree with them, and to maintain good relations with neighbors of all faiths.",
+      ar: "الإسلام يعلم احترام جميع البشرية كأبناء آدم. المسلمون مأمورون بالعدل واللطف حتى مع من يختلفون معهم، والحفاظ على علاقات طيبة مع الجيران من جميع الأديان.",
+    },
+    evidence: {
+      en: 'The Quran says: "Allah does not forbid you from being kind and just to those who do not fight you because of religion." (60:8) The Prophet ﷺ had Jewish and Christian neighbors he treated with kindness.',
+      ar: 'القرآن يقول: "لا ينهاكم الله عن الذين لم يقاتلوكم في الدين أن تبروهم وتقسطوا إليهم." (60:8) كان للنبي ﷺ جيران يهود ومسيحيون عاملهم بلطف.',
+    },
+  },
+  {
+    id: 10,
+    category: "women",
+    icon: Heart,
+    myth: {
+      en: "Muslim women cannot work or be educated",
+      ar: "المرأة المسلمة لا تستطيع العمل أو التعلم",
+    },
+    truth: {
+      en: "Islam encourages education for both men and women equally. The Prophet ﷺ said 'Seeking knowledge is an obligation upon every Muslim.' History is filled with Muslim women scholars, doctors, teachers, and business owners.",
+      ar: "الإسلام يشجع التعليم للرجال والنساء على حد سواء. قال النبي ﷺ 'طلب العلم فريضة على كل مسلم.' التاريخ مليء بالعالمات والطبيبات والمعلمات وصاحبات الأعمال المسلمات.",
+    },
+    evidence: {
+      en: "Khadijah was a successful businesswoman. Aisha taught over 2,000 students. Fatima al-Fihri founded the world's first university (University of Al Quaraouiyine, 859 CE). Rufaida Al-Aslamia was the first female Muslim nurse.",
+      ar: "خديجة كانت سيدة أعمال ناجحة. عائشة علمت أكثر من 2,000 طالب. فاطمة الفهرية أسست أول جامعة في العالم (جامعة القرويين، 859 م). رفيدة الأسلمية كانت أول ممرضة مسلمة.",
+    },
+  },
+  {
+    id: 11,
+    category: "other",
+    icon: Scale,
+    myth: {
+      en: "Sharia law is barbaric and oppressive",
+      ar: "الشريعة بربرية وقمعية",
+    },
+    truth: {
+      en: "Sharia primarily governs personal worship, charity, fasting, and ethics. Criminal law is a small part and has strict requirements for evidence (4 witnesses for serious crimes). Its goal is justice, protection of life, religion, intellect, lineage, and property.",
+      ar: "الشريعة تحكم بشكل أساسي العبادة الشخصية والزكاة والصيام والأخلاق. القانون الجنائي جزء صغير وله متطلبات صارمة للأدلة (4 شهود للجرائم الخطيرة). هدفها العدالة وحماية الحياة والدين والعقل والنسل والمال.",
+    },
+    evidence: {
+      en: "Sharia principles include presumption of innocence, protection of minorities, mandatory charity (zakat), kindness to animals, and environmental stewardship. The Prophet ﷺ never once implemented harsh punishments during his lifetime in Madinah.",
+      ar: "مبادئ الشريعة تشمل افتراض البراءة وحماية الأقليات والزكاة الإلزامية والرفق بالحيوان والحفاظ على البيئة. لم ينفذ النبي ﷺ عقوبات قاسية خلال حياته في المدينة.",
+    },
+  },
+  {
+    id: 12,
+    category: "women",
+    icon: Heart,
+    myth: {
+      en: "Men can beat their wives in Islam",
+      ar: "يمكن للرجال ضرب زوجاتهم في الإسلام",
+    },
+    truth: {
+      en: "The Prophet ﷺ never struck a woman and said the best men are those who treat their wives best. He explicitly condemned domestic violence. Quran verse 4:34 has been misinterpreted - scholars explain it as a symbolic gesture, not actual hitting.",
+      ar: "النبي ﷺ لم يضرب امرأة قط وقال أن أفضل الرجال من يعامل زوجته أفضل معاملة. أدان بشكل صريح العنف الأسري. الآية 4:34 أُسيء فهمها - العلماء يشرحون أنها إشارة رمزية وليس ضرباً فعلياً.",
+    },
+    evidence: {
+      en: 'The Prophet ﷺ said: "The best of you is the best to his family, and I am the best of you to my family." He also said: "A believing man should not hate a believing woman; if he dislikes one of her characteristics, he will be pleased with another."',
+      ar: 'قال النبي ﷺ: "خيركم خيركم لأهله، وأنا خيركم لأهلي." وقال أيضاً: "لا يفرك مؤمن مؤمنة، إن كره منها خلقاً رضي منها آخر."',
+    },
+  },
+  {
+    id: 13,
+    category: "science",
+    icon: Sparkles,
+    myth: {
+      en: "Islam and evolution cannot coexist",
+      ar: "الإسلام والتطور لا يمكن أن يتعايشا",
+    },
+    truth: {
+      en: "Many Muslim scholars have engaged with evolutionary theory since the 9th century. Al-Jahiz wrote about natural selection 1000 years before Darwin. Islam encourages scientific inquiry; the Quran invites reflection on nature repeatedly.",
+      ar: "كثير من العلماء المسلمين تعاملوا مع نظرية التطور منذ القرن التاسع. الجاحظ كتب عن الانتقاء الطبيعي قبل 1000 سنة من داروين. الإسلام يشجع البحث العلمي؛ القرآن يدعو للتأمل في الطبيعة مراراً.",
+    },
+    evidence: {
+      en: 'The Quran says: "Do they not look at the camels, how they are created?" (88:17) and "Travel through the earth and observe how He began creation." (29:20) - both are invitations to scientific observation.',
+      ar: 'القرآن يقول: "أفلا ينظرون إلى الإبل كيف خلقت" (88:17) و"قل سيروا في الأرض فانظروا كيف بدأ الخلق" (29:20) - كلاهما دعوة للملاحظة العلمية.',
+    },
+  },
+  {
+    id: 14,
+    category: "forced",
+    icon: Users,
+    myth: {
+      en: "Islam was spread by the sword",
+      ar: "الإسلام انتشر بالسيف",
+    },
+    truth: {
+      en: "Indonesia, Malaysia, and Sub-Saharan Africa - some of the largest Muslim populations - converted through trade and peaceful preaching, not conquest. Muslims ruled Spain and India for centuries without mass conversion by force.",
+      ar: "إندونيسيا وماليزيا وأفريقيا جنوب الصحراء - من أكبر التجمعات المسلمة - تحولت من خلال التجارة والدعوة السلمية، لا الفتح. حكم المسلمون إسبانيا والهند لقرون دون تحويل جماعي بالقوة.",
+    },
+    evidence: {
+      en: "If Islam spread only by sword, why did millions of Hindus remain in India after 800 years of Muslim rule? Why do millions of Christians live in Egypt, Lebanon, and Syria after 1,400 years? Forced conversion is simply forbidden.",
+      ar: "إذا انتشر الإسلام بالسيف فقط، لماذا بقي ملايين الهندوس في الهند بعد 800 سنة من الحكم الإسلامي؟ لماذا يعيش ملايين المسيحيين في مصر ولبنان وسوريا بعد 1,400 سنة؟ التحويل بالإكراه محرم ببساطة.",
+    },
+  },
+  {
+    id: 15,
+    category: "other",
+    icon: BookOpen,
+    myth: {
+      en: "Muhammad ﷺ wrote the Quran himself",
+      ar: "محمد ﷺ كتب القرآن بنفسه",
+    },
+    truth: {
+      en: "The Prophet ﷺ was known to be illiterate - he could neither read nor write. The Quran was revealed over 23 years and memorized/written by his companions. Its literary excellence baffled the greatest Arab poets of his time.",
+      ar: "النبي ﷺ كان معروفاً بأنه أمي - لم يكن يقرأ ولا يكتب. نزل القرآن على مدى 23 سنة وحفظه وكتبه صحابته. تفوقه الأدبي أذهل أعظم شعراء العرب في زمنه.",
+    },
+    evidence: {
+      en: 'The Quran challenged Arabs to produce even a single chapter like it: "If you are in doubt about what We have revealed to Our servant, then produce a surah like it." (2:23) - a challenge unmet for 1,400 years.',
+      ar: 'القرآن تحدى العرب لإنتاج سورة واحدة مثله: "وإن كنتم في ريب مما نزلنا على عبدنا فأتوا بسورة من مثله" (2:23) - تحدٍ لم يُجب عليه منذ 1,400 سنة.',
+    },
+  },
+  {
+    id: 16,
+    category: "other",
+    icon: Scale,
+    myth: {
+      en: "Muslims don't believe in Jesus",
+      ar: "المسلمون لا يؤمنون بعيسى",
+    },
+    truth: {
+      en: "Muslims deeply revere Jesus (Isa) as one of the mightiest prophets. They believe in his virgin birth, his miracles, and his return before the Day of Judgment. Denying any prophet disqualifies one from being Muslim.",
+      ar: "المسلمون يبجلون عيسى عليه السلام بعمق كأحد أعظم الأنبياء. يؤمنون بولادته العذرية ومعجزاته وعودته قبل يوم القيامة. إنكار أي نبي يُخرج الشخص من الإسلام.",
+    },
+    evidence: {
+      en: "Jesus is mentioned 25 times in the Quran. Mary (Maryam) has an entire chapter named after her - the only woman with a chapter in her name. The Quran describes Jesus's miracles: healing the blind, raising the dead by God's permission.",
+      ar: "عيسى مذكور 25 مرة في القرآن. مريم لها سورة كاملة باسمها - المرأة الوحيدة التي سُميت سورة باسمها. القرآن يصف معجزات عيسى: شفاء الأعمى وإحياء الموتى بإذن الله.",
+    },
+  },
 ];
 
 const categories = [

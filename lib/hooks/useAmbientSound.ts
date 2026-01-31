@@ -62,14 +62,14 @@ export const AMBIENT_SOUNDS: Record<AtmosphereType, AmbientSound> = {
     },
     layers: [
       {
-        // Crowd murmur / tawaf sounds (placeholder - use actual hosted file)
-        url: "/audio/ambient/makkah-crowd.mp3",
-        volume: 0.3,
+        // Crowd murmur ambient - from freesound CDN (Creative Commons)
+        url: "https://cdn.freesound.org/previews/456/456051_5121236-lq.mp3",
+        volume: 0.25,
         loop: true,
       },
       {
-        // Distant adhan echo
-        url: "/audio/ambient/makkah-echo.mp3",
+        // Soft reverberant ambience
+        url: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
         volume: 0.15,
         loop: true,
       },
@@ -84,20 +84,20 @@ export const AMBIENT_SOUNDS: Record<AtmosphereType, AmbientSound> = {
     },
     layers: [
       {
-        // Soft birds chirping
-        url: "/audio/ambient/madinah-birds.mp3",
-        volume: 0.25,
-        loop: true,
-      },
-      {
-        // Gentle fountain / water
-        url: "/audio/ambient/madinah-fountain.mp3",
+        // Morning birds chirping - from freesound CDN
+        url: "https://cdn.freesound.org/previews/531/531947_2489088-lq.mp3",
         volume: 0.2,
         loop: true,
       },
       {
-        // Soft breeze
-        url: "/audio/ambient/madinah-breeze.mp3",
+        // Gentle fountain water - from freesound CDN
+        url: "https://cdn.freesound.org/previews/467/467008_9497060-lq.mp3",
+        volume: 0.18,
+        loop: true,
+      },
+      {
+        // Soft wind breeze - from freesound CDN
+        url: "https://cdn.freesound.org/previews/572/572335_7037-lq.mp3",
         volume: 0.1,
         loop: true,
       },
@@ -112,15 +112,15 @@ export const AMBIENT_SOUNDS: Record<AtmosphereType, AmbientSound> = {
     },
     layers: [
       {
-        // Soft room tone / silence
-        url: "/audio/ambient/mosque-quiet.mp3",
-        volume: 0.15,
+        // Quiet room ambience - from freesound CDN
+        url: "https://cdn.freesound.org/previews/370/370934_5450487-lq.mp3",
+        volume: 0.12,
         loop: true,
       },
       {
-        // Subtle clock ticking (optional)
-        url: "/audio/ambient/mosque-ambience.mp3",
-        volume: 0.1,
+        // Subtle indoor atmosphere
+        url: "https://cdn.freesound.org/previews/560/560403_12408507-lq.mp3",
+        volume: 0.08,
         loop: true,
       },
     ],

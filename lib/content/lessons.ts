@@ -50,6 +50,7 @@ export interface LessonSection {
   mediaAlt?: string;
   posterUrl?: string; // For video thumbnails
   loop?: boolean; // For animations - default true
+  backupUrls?: string[]; // Backup URLs for videos if main URL fails
   // For Quran/Hadith - can be string or bilingual object
   reference?: string | { en: string; ar: string };
   transliteration?: string;
@@ -250,7 +251,11 @@ export const shahadaLessons: LessonContent[] = [
           en: "Watch: Understanding the Shahada - The Gateway to Islam",
           ar: "شاهد: فهم الشهادة - بوابة الإسلام",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=zN3JX8WpBOY",
+        mediaUrl: "https://www.youtube.com/watch?v=a6aGwtBHp7I",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=5DWwJ39N2Lw",
+          "https://www.youtube.com/watch?v=h8_w1xJCGuM",
+        ],
       },
       {
         id: "intro",
@@ -267,8 +272,7 @@ export const shahadaLessons: LessonContent[] = [
           en: "The Shahada opens the door to a new life",
           ar: "الشهادة تفتح باب حياة جديدة",
         },
-        mediaUrl:
-          "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        mediaUrl: "https://assets5.lottiefiles.com/packages/lf20_fclga8fl.json",
         loop: true,
       },
       {

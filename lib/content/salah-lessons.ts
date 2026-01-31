@@ -23,8 +23,11 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Watch: The Beauty and Importance of Prayer in Islam",
           ar: "شاهد: جمال وأهمية الصلاة في الإسلام",
         },
-        // Real YouTube video about Salah importance
-        mediaUrl: "https://www.youtube.com/watch?v=I9fDC9I3pjo",
+        mediaUrl: "https://www.youtube.com/watch?v=T4auGhmeBlw",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=zalLv1AXhPg",
+          "https://www.youtube.com/watch?v=W8_-E5iQ-yw",
+        ],
       },
       {
         id: "salah-importance-section-1",
@@ -41,9 +44,7 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "The spiritual journey of prayer connects you directly to Allah",
           ar: "الرحلة الروحية للصلاة تربطك مباشرة بالله",
         },
-        // Real Lottie animation - praying person
-        mediaUrl:
-          "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
+        mediaUrl: "https://assets2.lottiefiles.com/packages/lf20_szlepvdh.json",
         loop: true,
       },
       {

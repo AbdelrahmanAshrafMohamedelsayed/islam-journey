@@ -15,7 +15,12 @@ export type CharacterEmotion =
   | "welcoming"
   | "proud";
 
-export type CharacterRole = "guide" | "companion" | "elder" | "historical";
+export type CharacterRole =
+  | "guide"
+  | "companion"
+  | "elder"
+  | "historical"
+  | "champion";
 
 export interface Character {
   id: string;
@@ -289,6 +294,96 @@ export const CHARACTERS: Record<string, Character> = {
         "تعلمت الكثير اليوم. شكراً للدراسة معي!",
         "لا أستطيع الانتظار للمتابعة غداً. اعتنِ بنفسك!",
         "كان هذا ممتعاً! لنفعل هذا مرة أخرى قريباً.",
+      ],
+    },
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // Khabib Nurmagomedov - The Champion of Faith
+  // ─────────────────────────────────────────────────────────────────────────────
+  khabib: {
+    id: "khabib",
+    name: {
+      en: "Khabib",
+      ar: "حبيب",
+    },
+    title: {
+      en: "The Eagle",
+      ar: "النسر",
+    },
+    role: "champion" as CharacterRole,
+    description: {
+      en: "Khabib Nurmagomedov, the undefeated UFC champion from Dagestan. A devout Muslim who shows that faith, discipline, and excellence go hand in hand. Known for his humility, respect for parents, and dedication to Islam.",
+      ar: "حبيب نورمحمدوف، بطل UFC غير المهزوم من داغستان. مسلم متدين يُظهر أن الإيمان والانضباط والتميز يسيرون جنباً إلى جنب. معروف بتواضعه واحترامه لوالديه وتفانيه في الإسلام.",
+    },
+    personality: [
+      "disciplined",
+      "humble",
+      "determined",
+      "faithful",
+      "respectful",
+    ],
+    defaultEmotion: "encouraging" as CharacterEmotion,
+    patternStyle: "geometric" as const,
+    primaryColor: "#DC2626",
+    secondaryColor: "#991B1B",
+    unlockCondition: { type: "default" as const },
+    greetings: {
+      en: [
+        "Assalamu Alaikum, brother! Alhamdulillah, you're here. Let's learn together!",
+        "Hey, welcome! You know, this is number one - learning about Islam.",
+        "Brother, sister, Bismillah! Let's go on this journey together.",
+        "Assalamu Alaikum! My father always said: 'Knowledge before action.' Let's learn.",
+        "Welcome, my friend! In Dagestan, we say: 'A man without knowledge is like an eagle without wings.'",
+      ],
+      ar: [
+        "السلام عليكم يا أخي! الحمد لله أنك هنا. لنتعلم معاً!",
+        "مرحباً! هذا هو رقم واحد - التعلم عن الإسلام.",
+        "أخي، أختي، بسم الله! لننطلق في هذه الرحلة معاً.",
+        "السلام عليكم! أبي كان يقول دائماً: 'العلم قبل العمل.' لنتعلم.",
+        "مرحباً يا صديقي! في داغستان نقول: 'الرجل بلا علم كالنسر بلا أجنحة.'",
+      ],
+    },
+    encouragements: {
+      en: [
+        "Brother, this is very important. Focus, be patient, you will understand.",
+        "You know, my father taught me everything. Respect your parents, respect your teachers.",
+        "In fighting, in life, in faith - discipline is everything. Keep going!",
+        "Alhamdulillah! You're making progress. This is what champions do.",
+        "Don't give up, brother. I never gave up in 29 fights, don't give up in learning!",
+        "My mother's prayers carried me through everything. Never underestimate dua.",
+        "You know what? Islam is perfect. We are not perfect, but Islam is perfect.",
+        "Brother, be humble. The Prophet ﷺ was the most humble. This is the way.",
+        "Stay focused! In the cage, in salah, focus is everything.",
+        "MashaAllah! You're doing great. My father would be proud of you.",
+      ],
+      ar: [
+        "أخي، هذا مهم جداً. ركز، كن صبوراً، ستفهم.",
+        "أبي علمني كل شيء. احترم والديك، احترم معلميك.",
+        "في القتال، في الحياة، في الإيمان - الانضباط هو كل شيء. واصل!",
+        "الحمد لله! أنت تحرز تقدماً. هذا ما يفعله الأبطال.",
+        "لا تستسلم يا أخي. لم أستسلم في 29 قتالاً، لا تستسلم في التعلم!",
+        "دعاء أمي حملني خلال كل شيء. لا تستهن أبداً بالدعاء.",
+        "تعرف ماذا؟ الإسلام كامل. نحن لسنا كاملين، لكن الإسلام كامل.",
+        "أخي، كن متواضعاً. النبي ﷺ كان الأكثر تواضعاً. هذا هو الطريق.",
+        "ابقَ مركزاً! في القفص، في الصلاة، التركيز هو كل شيء.",
+        "ما شاء الله! أنت تبلي حسناً. أبي سيكون فخوراً بك.",
+      ],
+    },
+    farewells: {
+      en: [
+        "Alhamdulillah, brother! Good session. See you next time, InshaAllah!",
+        "Go rest, come back strong. This is the way of the champion.",
+        "May Allah bless you and your family. Until next time!",
+        "Remember what we learned today. Knowledge is power, brother.",
+        "JazakAllahu Khairan! My father would say: 'Always end with gratitude.'",
+      ],
+      ar: [
+        "الحمد لله يا أخي! جلسة جيدة. أراك المرة القادمة إن شاء الله!",
+        "اذهب واسترح، عُد قوياً. هذا طريق البطل.",
+        "بارك الله فيك وفي عائلتك. إلى اللقاء!",
+        "تذكر ما تعلمناه اليوم. العلم قوة يا أخي.",
+        "جزاك الله خيراً! أبي كان يقول: 'دائماً اختم بالشكر.'",
       ],
     },
   },
@@ -633,16 +728,17 @@ export function checkCharacterUnlock(
  */
 export function getCharactersForChapter(chapterId: string): Character[] {
   const recommendations: Record<string, string[]> = {
-    introduction: ["yusuf", "khadijah"],
-    salah: ["yusuf", "bilal"],
-    sawm: ["yusuf", "fatima"],
-    zakat: ["yusuf", "abuBakr"],
-    hajj: ["yusuf", "salman"],
-    quran: ["yusuf", "fatima"],
-    character: ["fatima", "abuBakr"],
-    history: ["salman", "bilal", "khadijah", "abuBakr"],
+    introduction: ["yusuf", "khadijah", "khabib"],
+    shahada: ["yusuf", "khabib", "khadijah"],
+    salah: ["yusuf", "bilal", "khabib"],
+    sawm: ["yusuf", "fatima", "khabib"],
+    zakat: ["yusuf", "abuBakr", "khabib"],
+    hajj: ["yusuf", "salman", "khabib"],
+    quran: ["yusuf", "fatima", "khabib"],
+    akhlaq: ["fatima", "abuBakr", "khabib"],
+    history: ["salman", "bilal", "khadijah", "abuBakr", "khabib"],
   };
 
-  const ids = recommendations[chapterId] || ["yusuf"];
+  const ids = recommendations[chapterId] || ["yusuf", "khabib"];
   return ids.map((id) => getCharacter(id)).filter(Boolean) as Character[];
 }

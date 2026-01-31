@@ -10,7 +10,7 @@ export default function WuduSimulationPage() {
       animate={{ opacity: 1 }}
       className="min-h-screen bg-linear-to-br from-blue-50 to-cyan-50 dark:from-gray-900 dark:to-gray-800"
     >
-      <WuduSimulation />
+      <WuduSimulation chapterId="salah" />
     </motion.div>
   );
 }

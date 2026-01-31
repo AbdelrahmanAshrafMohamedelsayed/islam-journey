@@ -10,7 +10,7 @@ export default function SalahSimulationPage() {
       animate={{ opacity: 1 }}
       className="min-h-screen bg-linear-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800"
     >
-      <SalahSimulation />
+      <SalahSimulation chapterId="salah" />
     </motion.div>
   );
 }

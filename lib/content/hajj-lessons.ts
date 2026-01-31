@@ -273,7 +273,11 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
           en: "Watch: The Journey of a Lifetime - Understanding Hajj",
           ar: "شاهد: رحلة العمر - فهم الحج",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=1Yz-kvn8yZE",
+        mediaUrl: "https://www.youtube.com/watch?v=1MWbz8jXJTw",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=NbQ6_cJvP_o",
+          "https://www.youtube.com/watch?v=y-X9yS5Etyg",
+        ],
       },
       {
         id: "hajj-animation",
@@ -282,8 +286,7 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
           en: "Millions of pilgrims gather around the Kaaba in unity",
           ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
         },
-        mediaUrl:
-          "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        mediaUrl: "https://assets5.lottiefiles.com/packages/lf20_fmfcvtbf.json",
         loop: true,
       },
       {

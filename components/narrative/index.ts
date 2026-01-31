@@ -15,3 +15,9 @@ export {
   SceneBackground,
   QuickTransition,
 } from "./StoryTransition";
+export {
+  CharacterBubble,
+  getCharacterGreeting,
+  getCharacterEncouragement,
+  getCharacterFarewell,
+} from "./CharacterBubble";

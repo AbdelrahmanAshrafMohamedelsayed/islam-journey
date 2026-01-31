@@ -163,7 +163,11 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
           en: "Watch: What is Zakat and Why is it Important?",
           ar: "شاهد: ما هي الزكاة ولماذا هي مهمة؟",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=Y5jNXLj8b9Q",
+        mediaUrl: "https://www.youtube.com/watch?v=V_rLlPqHv4c",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=y7X_mLc7E3w",
+          "https://www.youtube.com/watch?v=BOqN9cErvgY",
+        ],
       },
       {
         id: "zakat-animation",
@@ -172,8 +176,7 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
           en: "Zakat purifies wealth and spreads blessings",
           ar: "الزكاة تطهر المال وتنشر البركات",
         },
-        mediaUrl:
-          "https://lottie.host/7e4e7e5e-3e2c-4b8f-9c1c-4b9e8c3d5e1a/giving-charity.json",
+        mediaUrl: "https://assets9.lottiefiles.com/packages/lf20_bq485nmk.json",
         loop: true,
       },
       {

@@ -211,7 +211,11 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
           en: "Watch: The Beauty and Wisdom of Fasting in Ramadan",
           ar: "شاهد: جمال وحكمة الصيام في رمضان",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=D1RbSBCNpvQ",
+        mediaUrl: "https://www.youtube.com/watch?v=pEDO5NBBJWQ",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=qHQ9xEBG2nM",
+          "https://www.youtube.com/watch?v=VDIP5R0I8QU",
+        ],
       },
       {
         id: "sawm-animation",
@@ -220,8 +224,7 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
           en: "The blessed month of Ramadan brings peace and reflection",
           ar: "شهر رمضان المبارك يجلب السلام والتأمل",
         },
-        mediaUrl:
-          "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
+        mediaUrl: "https://assets4.lottiefiles.com/packages/lf20_xlmz9xwm.json",
         loop: true,
       },
       {

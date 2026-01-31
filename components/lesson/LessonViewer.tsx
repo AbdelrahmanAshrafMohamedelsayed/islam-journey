@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button, Card } from "@/components/ui";
 import { ProgressBar } from "@/components/ui/Progress";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
@@ -14,6 +16,12 @@ import {
   type LessonContent,
   type LessonSection,
 } from "@/lib/content/lessons";
+import { 
+  CharacterBubble, 
+  getCharacterGreeting, 
+  getCharacterEncouragement 
+} from "@/components/narrative";
+import { getCharactersForChapter } from "@/lib/content/characters";
 import {
   ArrowLeft,
   ArrowRight,
@@ -157,8 +165,19 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
   const [showGlossary, setShowGlossary] = useState<string | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
+  const [showCharacterIntro, setShowCharacterIntro] = useState(true);
 
   const lang = language as "en" | "ar";
+
+  // Get recommended character for this chapter
+  const recommendedCharacters = useMemo(() => getCharactersForChapter(chapterId), [chapterId]);
+  const primaryCharacter = recommendedCharacters[0]?.id || "yusuf";
+  
+  // Generate greeting message once
+  const characterGreeting = useMemo(() => 
+    getCharacterGreeting(primaryCharacter, lang), 
+    [primaryCharacter, lang]
+  );
 
   useEffect(() => {
     const lessonData = getLessonById(lessonId);
@@ -258,80 +277,33 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="prose prose-lg dark:prose-invert max-w-none"
+        dir={lang === "ar" ? "rtl" : "ltr"}
       >
-        <div className="text-slate-700 dark:text-slate-300 leading-relaxed">
-          {content.split("\n\n").map((paragraph, i) => {
-            // Handle headers
-            if (paragraph.startsWith("## ")) {
-              return (
-                <h2
-                  key={i}
-                  className="text-xl font-bold text-slate-900 dark:text-white mt-6 mb-3"
-                >
-                  {paragraph.slice(3)}
-                </h2>
-              );
-            }
-            if (paragraph.startsWith("### ")) {
-              return (
-                <h3
-                  key={i}
-                  className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2"
-                >
-                  {paragraph.slice(4)}
-                </h3>
-              );
-            }
-            // Handle bullet lists
-            if (paragraph.includes("\n- ") || paragraph.startsWith("- ")) {
-              const lines = paragraph.split("\n");
-              return (
-                <ul key={i} className="list-none space-y-2 my-4">
-                  {lines.map((line, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      {line.startsWith("- ") && (
-                        <>
-                          <span className="text-emerald-500 mt-1">•</span>
-                          <span>{renderTextWithGlossary(line.slice(2))}</span>
-                        </>
-                      )}
-                      {!line.startsWith("- ") && line.trim() && (
-                        <span>{renderTextWithGlossary(line)}</span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              );
-            }
-            // Handle numbered lists
-            if (/^\d+\./.test(paragraph)) {
-              const lines = paragraph.split("\n");
-              return (
-                <ol key={i} className="list-none space-y-2 my-4">
-                  {lines.map((line, j) => {
-                    const match = line.match(/^(\d+)\.\s*(.*)$/);
-                    if (match) {
-                      return (
-                        <li key={j} className="flex items-start gap-3">
-                          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                            {match[1]}.
-                          </span>
-                          <span>{renderTextWithGlossary(match[2])}</span>
-                        </li>
-                      );
-                    }
-                    return <li key={j}>{renderTextWithGlossary(line)}</li>;
-                  })}
-                </ol>
-              );
-            }
-            // Regular paragraph
-            return (
-              <p key={i} className="mb-4">
-                {renderTextWithGlossary(paragraph)}
-              </p>
-            );
-          })}
+        <div className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}>
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]}
+            components={{
+              p: ({children}) => <p className="mb-4">{children}</p>,
+              strong: ({children}) => <strong className="text-slate-900 dark:text-white font-bold">{children}</strong>,
+              h2: ({children}) => <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-6 mb-3">{children}</h2>,
+              h3: ({children}) => <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">{children}</h3>,
+              ul: ({children}) => <ul className="list-none space-y-2 my-4">{children}</ul>,
+              ol: ({children}) => <ol className="list-none space-y-2 my-4">{children}</ol>,
+              li: ({children}) => (
+                <li className="flex items-start gap-2">
+                  <span className="text-emerald-500 mt-1">•</span>
+                  <span>{children}</span>
+                </li>
+              ),
+              blockquote: ({children}) => (
+                <blockquote className="border-l-4 border-emerald-500 pl-4 italic my-4 text-slate-600 dark:text-slate-400">
+                  {children}
+                </blockquote>
+              ),
+            }}
+          >
+            {content}
+          </ReactMarkdown>
         </div>
       </motion.div>
     );
@@ -353,24 +325,32 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="prose prose-lg dark:prose-invert max-w-none"
+            dir={lang === "ar" ? "rtl" : "ltr"}
           >
-            <div className="text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
-              {content.split("\n").map((paragraph, i) => (
-                <p key={i} className="mb-4">
-                  {paragraph.startsWith("**") ? (
-                    <strong className="text-slate-900 dark:text-white">
-                      {paragraph.replace(/\*\*/g, "")}
-                    </strong>
-                  ) : paragraph.startsWith("•") ? (
-                    <span className="flex items-start gap-2">
+            <div className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}>
+              <ReactMarkdown 
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  p: ({children}) => <p className="mb-4">{children}</p>,
+                  strong: ({children}) => <strong className="text-slate-900 dark:text-white font-bold">{children}</strong>,
+                  h3: ({children}) => <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">{children}</h3>,
+                  ul: ({children}) => <ul className="list-none space-y-2 my-4">{children}</ul>,
+                  ol: ({children}) => <ol className="list-none space-y-2 my-4">{children}</ol>,
+                  li: ({children}) => (
+                    <li className="flex items-start gap-2">
                       <span className="text-emerald-500 mt-1">•</span>
-                      <span>{renderTextWithGlossary(paragraph.slice(2))}</span>
-                    </span>
-                  ) : (
-                    renderTextWithGlossary(paragraph)
-                  )}
-                </p>
-              ))}
+                      <span>{children}</span>
+                    </li>
+                  ),
+                  blockquote: ({children}) => (
+                    <blockquote className="border-l-4 border-emerald-500 pl-4 italic my-4 text-slate-600 dark:text-slate-400">
+                      {children}
+                    </blockquote>
+                  ),
+                }}
+              >
+                {content}
+              </ReactMarkdown>
             </div>
           </motion.div>
         );
@@ -421,6 +401,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                 </span>
               </div>
               <p
+                dir={lang === "ar" ? "rtl" : "ltr"}
                 className={`text-xl ${lang === "ar" ? "font-arabic text-right" : ""} text-slate-800 dark:text-slate-200 leading-relaxed`}
               >
                 "{content}"
@@ -453,7 +434,10 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                   Hadith - {sourceRef}
                 </span>
               </div>
-              <p className="text-lg italic text-slate-700 dark:text-slate-300">
+              <p 
+                dir={lang === "ar" ? "rtl" : "ltr"}
+                className={`text-lg italic text-slate-700 dark:text-slate-300 ${lang === "ar" ? "font-arabic text-right" : ""}`}
+              >
                 {content}
               </p>
             </Card>
@@ -469,15 +453,15 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-6"
           >
             <Card className="bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800">
-              <div className="flex items-start gap-3">
+              <div className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}>
                 <div className="p-2 bg-emerald-100 dark:bg-emerald-800 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <div>
-                  <p className="font-semibold text-emerald-800 dark:text-emerald-300 mb-1">
+                <div dir={lang === "ar" ? "rtl" : "ltr"}>
+                  <p className={`font-semibold text-emerald-800 dark:text-emerald-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}>
                     {lang === "en" ? "Tip" : "نصيحة"}
                   </p>
-                  <p className="text-emerald-700 dark:text-emerald-400">
+                  <p className={`text-emerald-700 dark:text-emerald-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}>
                     {content}
                   </p>
                 </div>
@@ -495,15 +479,15 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-6"
           >
             <Card className="bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800">
-              <div className="flex items-start gap-3">
+              <div className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}>
                 <div className="p-2 bg-amber-100 dark:bg-amber-800 rounded-lg">
                   <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                 </div>
-                <div>
-                  <p className="font-semibold text-amber-800 dark:text-amber-300 mb-1">
+                <div dir={lang === "ar" ? "rtl" : "ltr"}>
+                  <p className={`font-semibold text-amber-800 dark:text-amber-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}>
                     {lang === "en" ? "Note" : "ملاحظة"}
                   </p>
-                  <p className="text-amber-700 dark:text-amber-400">
+                  <p className={`text-amber-700 dark:text-amber-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}>
                     {content}
                   </p>
                 </div>
@@ -764,6 +748,32 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             </p>
           )}
         </motion.div>
+
+        {/* Character Introduction (shown only on first section) */}
+        <AnimatePresence>
+          {showCharacterIntro && currentSectionIndex === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mb-8"
+            >
+              <CharacterBubble
+                characterId={primaryCharacter}
+                message={characterGreeting}
+                emotion="welcoming"
+                position="left"
+                lang={lang}
+              />
+              <button
+                onClick={() => setShowCharacterIntro(false)}
+                className="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors ml-16"
+              >
+                {lang === "en" ? "Hide greeting" : "إخفاء التحية"}
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Section Content */}
         <AnimatePresence mode="wait">
