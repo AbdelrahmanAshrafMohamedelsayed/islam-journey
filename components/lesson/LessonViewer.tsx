@@ -16,10 +16,10 @@ import {
   type LessonContent,
   type LessonSection,
 } from "@/lib/content/lessons";
-import { 
-  CharacterBubble, 
-  getCharacterGreeting, 
-  getCharacterEncouragement 
+import {
+  CharacterBubble,
+  getCharacterGreeting,
+  getCharacterEncouragement,
 } from "@/components/narrative";
 import { getCharactersForChapter } from "@/lib/content/characters";
 import {
@@ -170,13 +170,16 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
   const lang = language as "en" | "ar";
 
   // Get recommended character for this chapter
-  const recommendedCharacters = useMemo(() => getCharactersForChapter(chapterId), [chapterId]);
+  const recommendedCharacters = useMemo(
+    () => getCharactersForChapter(chapterId),
+    [chapterId],
+  );
   const primaryCharacter = recommendedCharacters[0]?.id || "yusuf";
-  
+
   // Generate greeting message once
-  const characterGreeting = useMemo(() => 
-    getCharacterGreeting(primaryCharacter, lang), 
-    [primaryCharacter, lang]
+  const characterGreeting = useMemo(
+    () => getCharacterGreeting(primaryCharacter, lang),
+    [primaryCharacter, lang],
   );
 
   useEffect(() => {
@@ -279,23 +282,41 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
         className="prose prose-lg dark:prose-invert max-w-none"
         dir={lang === "ar" ? "rtl" : "ltr"}
       >
-        <div className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}>
-          <ReactMarkdown 
+        <div
+          className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}
+        >
+          <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              p: ({children}) => <p className="mb-4">{children}</p>,
-              strong: ({children}) => <strong className="text-slate-900 dark:text-white font-bold">{children}</strong>,
-              h2: ({children}) => <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-6 mb-3">{children}</h2>,
-              h3: ({children}) => <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">{children}</h3>,
-              ul: ({children}) => <ul className="list-none space-y-2 my-4">{children}</ul>,
-              ol: ({children}) => <ol className="list-none space-y-2 my-4">{children}</ol>,
-              li: ({children}) => (
+              p: ({ children }) => <p className="mb-4">{children}</p>,
+              strong: ({ children }) => (
+                <strong className="text-slate-900 dark:text-white font-bold">
+                  {children}
+                </strong>
+              ),
+              h2: ({ children }) => (
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-6 mb-3">
+                  {children}
+                </h2>
+              ),
+              h3: ({ children }) => (
+                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">
+                  {children}
+                </h3>
+              ),
+              ul: ({ children }) => (
+                <ul className="list-none space-y-2 my-4">{children}</ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="list-none space-y-2 my-4">{children}</ol>
+              ),
+              li: ({ children }) => (
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-1">•</span>
                   <span>{children}</span>
                 </li>
               ),
-              blockquote: ({children}) => (
+              blockquote: ({ children }) => (
                 <blockquote className="border-l-4 border-emerald-500 pl-4 italic my-4 text-slate-600 dark:text-slate-400">
                   {children}
                 </blockquote>
@@ -327,22 +348,36 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="prose prose-lg dark:prose-invert max-w-none"
             dir={lang === "ar" ? "rtl" : "ltr"}
           >
-            <div className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}>
-              <ReactMarkdown 
+            <div
+              className={`text-slate-700 dark:text-slate-300 leading-relaxed ${lang === "ar" ? "text-right font-arabic" : ""}`}
+            >
+              <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  p: ({children}) => <p className="mb-4">{children}</p>,
-                  strong: ({children}) => <strong className="text-slate-900 dark:text-white font-bold">{children}</strong>,
-                  h3: ({children}) => <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">{children}</h3>,
-                  ul: ({children}) => <ul className="list-none space-y-2 my-4">{children}</ul>,
-                  ol: ({children}) => <ol className="list-none space-y-2 my-4">{children}</ol>,
-                  li: ({children}) => (
+                  p: ({ children }) => <p className="mb-4">{children}</p>,
+                  strong: ({ children }) => (
+                    <strong className="text-slate-900 dark:text-white font-bold">
+                      {children}
+                    </strong>
+                  ),
+                  h3: ({ children }) => (
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mt-4 mb-2">
+                      {children}
+                    </h3>
+                  ),
+                  ul: ({ children }) => (
+                    <ul className="list-none space-y-2 my-4">{children}</ul>
+                  ),
+                  ol: ({ children }) => (
+                    <ol className="list-none space-y-2 my-4">{children}</ol>
+                  ),
+                  li: ({ children }) => (
                     <li className="flex items-start gap-2">
                       <span className="text-emerald-500 mt-1">•</span>
                       <span>{children}</span>
                     </li>
                   ),
-                  blockquote: ({children}) => (
+                  blockquote: ({ children }) => (
                     <blockquote className="border-l-4 border-emerald-500 pl-4 italic my-4 text-slate-600 dark:text-slate-400">
                       {children}
                     </blockquote>
@@ -434,7 +469,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                   Hadith - {sourceRef}
                 </span>
               </div>
-              <p 
+              <p
                 dir={lang === "ar" ? "rtl" : "ltr"}
                 className={`text-lg italic text-slate-700 dark:text-slate-300 ${lang === "ar" ? "font-arabic text-right" : ""}`}
               >
@@ -453,15 +488,21 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-6"
           >
             <Card className="bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800">
-              <div className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}>
+              <div
+                className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}
+              >
                 <div className="p-2 bg-emerald-100 dark:bg-emerald-800 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
                 <div dir={lang === "ar" ? "rtl" : "ltr"}>
-                  <p className={`font-semibold text-emerald-800 dark:text-emerald-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}>
+                  <p
+                    className={`font-semibold text-emerald-800 dark:text-emerald-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}
+                  >
                     {lang === "en" ? "Tip" : "نصيحة"}
                   </p>
-                  <p className={`text-emerald-700 dark:text-emerald-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}>
+                  <p
+                    className={`text-emerald-700 dark:text-emerald-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}
+                  >
                     {content}
                   </p>
                 </div>
@@ -479,15 +520,21 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-6"
           >
             <Card className="bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800">
-              <div className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}>
+              <div
+                className={`flex items-start gap-3 ${lang === "ar" ? "flex-row-reverse" : ""}`}
+              >
                 <div className="p-2 bg-amber-100 dark:bg-amber-800 rounded-lg">
                   <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
                 </div>
                 <div dir={lang === "ar" ? "rtl" : "ltr"}>
-                  <p className={`font-semibold text-amber-800 dark:text-amber-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}>
+                  <p
+                    className={`font-semibold text-amber-800 dark:text-amber-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}
+                  >
                     {lang === "en" ? "Note" : "ملاحظة"}
                   </p>
-                  <p className={`text-amber-700 dark:text-amber-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}>
+                  <p
+                    className={`text-amber-700 dark:text-amber-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}
+                  >
                     {content}
                   </p>
                 </div>

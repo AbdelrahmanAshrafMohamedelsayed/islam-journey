@@ -2,14 +2,18 @@
 
 /**
  * CharacterBubble Component
- * 
+ *
  * Displays a character with a speech bubble for dialogue in lessons.
  * Used to make learning more engaging and narrative-driven.
  */
 
 import { motion } from "framer-motion";
 import { CharacterAvatar } from "./CharacterAvatar";
-import { CHARACTERS, type Character, type CharacterEmotion } from "@/lib/content/characters";
+import {
+  CHARACTERS,
+  type Character,
+  type CharacterEmotion,
+} from "@/lib/content/characters";
 
 interface CharacterBubbleProps {
   characterId: string;
@@ -29,7 +33,7 @@ export function CharacterBubble({
   className = "",
 }: CharacterBubbleProps) {
   const character = CHARACTERS[characterId];
-  
+
   if (!character) return null;
 
   const isRight = position === "right";
@@ -53,16 +57,20 @@ export function CharacterBubble({
       </div>
 
       {/* Speech Bubble */}
-      <div className={`flex-1 max-w-md ${isRight ? "text-right" : "text-left"}`}>
+      <div
+        className={`flex-1 max-w-md ${isRight ? "text-right" : "text-left"}`}
+      >
         {/* Character Name */}
-        <p className={`text-xs font-medium mb-1 ${
-          characterId === "khabib" 
-            ? "text-amber-600 dark:text-amber-400" 
-            : "text-emerald-600 dark:text-emerald-400"
-        }`}>
+        <p
+          className={`text-xs font-medium mb-1 ${
+            characterId === "khabib"
+              ? "text-amber-600 dark:text-amber-400"
+              : "text-emerald-600 dark:text-emerald-400"
+          }`}
+        >
           {character.name[lang as keyof typeof character.name]}
         </p>
-        
+
         {/* Message Bubble */}
         <motion.div
           initial={{ scale: 0.95, opacity: 0 }}
@@ -70,29 +78,34 @@ export function CharacterBubble({
           transition={{ delay: 0.1 }}
           className={`
             relative inline-block px-4 py-3 rounded-2xl
-            ${characterId === "khabib" 
-              ? "bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800" 
-              : "bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800"
+            ${
+              characterId === "khabib"
+                ? "bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800"
+                : "bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800"
             }
             ${isRight ? "rounded-br-none" : "rounded-bl-none"}
           `}
           dir={isArabic ? "rtl" : "ltr"}
         >
-          <p className={`text-sm text-slate-700 dark:text-slate-300 leading-relaxed ${isArabic ? "font-arabic" : ""}`}>
+          <p
+            className={`text-sm text-slate-700 dark:text-slate-300 leading-relaxed ${isArabic ? "font-arabic" : ""}`}
+          >
             {message}
           </p>
-          
+
           {/* Bubble Tail */}
-          <div 
+          <div
             className={`
               absolute bottom-0 w-3 h-3
-              ${characterId === "khabib" 
-                ? "bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800" 
-                : "bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800"
+              ${
+                characterId === "khabib"
+                  ? "bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800"
+                  : "bg-emerald-50 dark:bg-emerald-900/30 border-emerald-200 dark:border-emerald-800"
               }
-              ${isRight 
-                ? "right-0 translate-x-1/2 border-r border-b rounded-br-lg -rotate-45" 
-                : "left-0 -translate-x-1/2 border-l border-b rounded-bl-lg rotate-45"
+              ${
+                isRight
+                  ? "right-0 translate-x-1/2 border-r border-b rounded-br-lg -rotate-45"
+                  : "left-0 -translate-x-1/2 border-l border-b rounded-bl-lg rotate-45"
               }
             `}
           />
@@ -105,10 +118,13 @@ export function CharacterBubble({
 /**
  * Get a random greeting from a character
  */
-export function getCharacterGreeting(characterId: string, lang: "en" | "ar"): string {
+export function getCharacterGreeting(
+  characterId: string,
+  lang: "en" | "ar",
+): string {
   const character = CHARACTERS[characterId];
   if (!character) return "";
-  
+
   const greetings = character.greetings[lang];
   return greetings[Math.floor(Math.random() * greetings.length)];
 }
@@ -116,10 +132,13 @@ export function getCharacterGreeting(characterId: string, lang: "en" | "ar"): st
 /**
  * Get a random encouragement from a character
  */
-export function getCharacterEncouragement(characterId: string, lang: "en" | "ar"): string {
+export function getCharacterEncouragement(
+  characterId: string,
+  lang: "en" | "ar",
+): string {
   const character = CHARACTERS[characterId];
   if (!character) return "";
-  
+
   const encouragements = character.encouragements[lang];
   return encouragements[Math.floor(Math.random() * encouragements.length)];
 }
@@ -127,10 +146,13 @@ export function getCharacterEncouragement(characterId: string, lang: "en" | "ar"
 /**
  * Get a random farewell from a character
  */
-export function getCharacterFarewell(characterId: string, lang: "en" | "ar"): string {
+export function getCharacterFarewell(
+  characterId: string,
+  lang: "en" | "ar",
+): string {
   const character = CHARACTERS[characterId];
   if (!character) return "";
-  
+
   const farewells = character.farewells[lang];
   return farewells[Math.floor(Math.random() * farewells.length)];
 }

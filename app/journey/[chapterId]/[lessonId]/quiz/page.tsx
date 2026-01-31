@@ -12,6 +12,6 @@ interface QuizPageProps {
 
 export default function QuizPage({ params }: QuizPageProps) {
   const { chapterId, lessonId } = use(params);
-  
+
   return <QuizComponent lessonId={lessonId} chapterId={chapterId} />;
 }
