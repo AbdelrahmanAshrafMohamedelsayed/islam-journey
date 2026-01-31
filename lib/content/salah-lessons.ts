@@ -445,7 +445,8 @@ export const salahLessons: Record<string, LessonContent> = {
           ar: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
         },
         reference: { en: "Surah Al-Fatiha 1:1-7", ar: "سورة الفاتحة ١:١-٧" },
-        mediaUrl: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
       },
       {
         id: "salah-fatiha-transliteration",
@@ -474,7 +475,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Dhikr of Ruku - Say 3 times",
           ar: "ذكر الركوع - قلها 3 مرات",
         },
-        transliteration: "Subhana Rabbiyal 'Atheem - Glory be to my Lord, the Most Great",
+        transliteration:
+          "Subhana Rabbiyal 'Atheem - Glory be to my Lord, the Most Great",
       },
       {
         id: "salah-rise-ruku",
@@ -487,7 +489,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Rising from Ruku",
           ar: "القيام من الركوع",
         },
-        transliteration: "Sami' Allahu liman hamidah, Rabbana wa lakal hamd - Allah hears those who praise Him, Our Lord, to You belongs all praise",
+        transliteration:
+          "Sami' Allahu liman hamidah, Rabbana wa lakal hamd - Allah hears those who praise Him, Our Lord, to You belongs all praise",
       },
       {
         id: "salah-sujud-title",
@@ -508,7 +511,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Dhikr of Sujud - Say 3 times",
           ar: "ذكر السجود - قلها 3 مرات",
         },
-        transliteration: "Subhana Rabbiyal A'la - Glory be to my Lord, the Most High",
+        transliteration:
+          "Subhana Rabbiyal A'la - Glory be to my Lord, the Most High",
       },
       {
         id: "salah-sujud-hadith",
@@ -541,7 +545,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "At-Tashahhud - The Testimony",
           ar: "التشهد",
         },
-        transliteration: "At-tahiyyatu lillahi was-salawatu wat-tayyibat, As-salamu 'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh, As-salamu 'alayna wa 'ala 'ibadillahis-saliheen, Ashhadu an la ilaha illallah wa ashhadu anna Muhammadan 'abduhu wa rasuluh",
+        transliteration:
+          "At-tahiyyatu lillahi was-salawatu wat-tayyibat, As-salamu 'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh, As-salamu 'alayna wa 'ala 'ibadillahis-saliheen, Ashhadu an la ilaha illallah wa ashhadu anna Muhammadan 'abduhu wa rasuluh",
       },
       {
         id: "salah-salawat-title",
@@ -562,7 +567,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "As-Salawat Al-Ibrahimiyyah",
           ar: "الصلوات الإبراهيمية",
         },
-        transliteration: "Allahumma salli 'ala Muhammad wa 'ala aali Muhammad, kama sallayta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed. Allahumma barik 'ala Muhammad wa 'ala aali Muhammad, kama barakta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed",
+        transliteration:
+          "Allahumma salli 'ala Muhammad wa 'ala aali Muhammad, kama sallayta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed. Allahumma barik 'ala Muhammad wa 'ala aali Muhammad, kama barakta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed",
       },
       {
         id: "salah-tasleem-title",
@@ -583,7 +589,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Tasleem - Say twice (right then left)",
           ar: "التسليم - قلها مرتين (يميناً ثم يساراً)",
         },
-        transliteration: "As-salamu 'alaykum wa rahmatullah - Peace and mercy of Allah be upon you",
+        transliteration:
+          "As-salamu 'alaykum wa rahmatullah - Peace and mercy of Allah be upon you",
       },
       {
         id: "salah-recitations-tips",

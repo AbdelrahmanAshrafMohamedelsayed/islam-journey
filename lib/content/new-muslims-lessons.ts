@@ -34,7 +34,7 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         type: "text",
         content: {
           en: "# 🛡️ Protection, Not Restriction\n\nAs a new Muslim, you might hear about things that are \"haram\" (forbidden). But here's a beautiful perspective:\n\n**Allah doesn't forbid things to make life difficult - He forbids things to PROTECT us.**\n\nImagine a loving parent telling their child not to touch fire. The child might not understand why, but the parent knows the danger. Similarly, Allah, who created us and knows us better than we know ourselves, guides us away from harm.\n\nLet's explore what Allah has protected us from, and understand the wisdom behind each...",
-          ar: "# 🛡️ حماية، وليس قيود\n\nكمسلم جديد، قد تسمع عن أشياء \"حرام\" (محرمة). لكن هنا منظور جميل:\n\n**الله لا يحرم الأشياء ليجعل الحياة صعبة - بل يحرمها ليحمينا.**\n\nتخيل أبًا محبًا يقول لطفله ألا يلمس النار. قد لا يفهم الطفل لماذا، لكن الأب يعرف الخطر. وبالمثل، الله الذي خلقنا ويعرفنا أفضل مما نعرف أنفسنا، يرشدنا بعيدًا عن الضرر.\n\nدعونا نستكشف ما حمانا الله منه، ونفهم الحكمة وراء كل...",
+          ar: '# 🛡️ حماية، وليس قيود\n\nكمسلم جديد، قد تسمع عن أشياء "حرام" (محرمة). لكن هنا منظور جميل:\n\n**الله لا يحرم الأشياء ليجعل الحياة صعبة - بل يحرمها ليحمينا.**\n\nتخيل أبًا محبًا يقول لطفله ألا يلمس النار. قد لا يفهم الطفل لماذا، لكن الأب يعرف الخطر. وبالمثل، الله الذي خلقنا ويعرفنا أفضل مما نعرف أنفسنا، يرشدنا بعيدًا عن الضرر.\n\nدعونا نستكشف ما حمانا الله منه، ونفهم الحكمة وراء كل...',
         },
       },
       {
@@ -61,7 +61,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "وَلَا تَقْرَبُوا الزِّنَا ۖ إِنَّهُ كَانَ فَاحِشَةً وَسَاءَ سَبِيلًا",
         },
         reference: { en: "Quran 17:32", ar: "سورة الإسراء ١٧:٣٢" },
-        transliteration: "And do not approach unlawful sexual intercourse. Indeed, it is ever an immorality and is evil as a way.",
+        transliteration:
+          "And do not approach unlawful sexual intercourse. Indeed, it is ever an immorality and is evil as a way.",
       },
       {
         id: "haram-alcohol",
@@ -79,7 +80,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "يَا أَيُّهَا الَّذِينَ آمَنُوا إِنَّمَا الْخَمْرُ وَالْمَيْسِرُ وَالْأَنصَابُ وَالْأَزْلَامُ رِجْسٌ مِّنْ عَمَلِ الشَّيْطَانِ فَاجْتَنِبُوهُ لَعَلَّكُمْ تُفْلِحُونَ",
         },
         reference: { en: "Quran 5:90", ar: "سورة المائدة ٥:٩٠" },
-        transliteration: "O you who believe! Intoxicants, gambling, idols, and divining arrows are an abomination of Satan's doing: avoid them that you may prosper.",
+        transliteration:
+          "O you who believe! Intoxicants, gambling, idols, and divining arrows are an abomination of Satan's doing: avoid them that you may prosper.",
       },
       {
         id: "haram-gambling",
@@ -101,8 +103,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         id: "haram-lying-hadith",
         type: "hadith",
         content: {
-          en: "\"Truthfulness leads to righteousness, and righteousness leads to Paradise. A person keeps telling the truth until he is recorded with Allah as truthful. Lying leads to wickedness, and wickedness leads to the Fire. A person keeps lying until he is recorded with Allah as a liar.\"",
-          ar: "\"إن الصدق يهدي إلى البر، وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً.\"",
+          en: '"Truthfulness leads to righteousness, and righteousness leads to Paradise. A person keeps telling the truth until he is recorded with Allah as truthful. Lying leads to wickedness, and wickedness leads to the Fire. A person keeps lying until he is recorded with Allah as a liar."',
+          ar: '"إن الصدق يهدي إلى البر، وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً."',
         },
         source: {
           en: "Prophet Muhammad ﷺ (Bukhari & Muslim)",
@@ -125,7 +127,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "وَلَا يَغْتَب بَّعْضُكُم بَعْضًا ۚ أَيُحِبُّ أَحَدُكُمْ أَن يَأْكُلَ لَحْمَ أَخِيهِ مَيْتًا فَكَرِهْتُمُوهُ ۚ وَاتَّقُوا اللَّهَ ۚ إِنَّ اللَّهَ تَوَّابٌ رَّحِيمٌ",
         },
         reference: { en: "Quran 49:12", ar: "سورة الحجرات ٤٩:١٢" },
-        transliteration: "And do not backbite one another. Would one of you like to eat the flesh of his dead brother? You would hate it. And fear Allah; indeed, Allah is Accepting of repentance and Merciful.",
+        transliteration:
+          "And do not backbite one another. Would one of you like to eat the flesh of his dead brother? You would hate it. And fear Allah; indeed, Allah is Accepting of repentance and Merciful.",
       },
       {
         id: "haram-gaze",
@@ -143,7 +146,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ ۚ ذَٰلِكَ أَزْكَىٰ لَهُمْ",
         },
         reference: { en: "Quran 24:30", ar: "سورة النور ٢٤:٣٠" },
-        transliteration: "Tell the believing men to lower their gaze and guard their chastity. That is purer for them.",
+        transliteration:
+          "Tell the believing men to lower their gaze and guard their chastity. That is purer for them.",
       },
       {
         id: "haram-hijab",
@@ -161,7 +165,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا يُؤْذَيْنَ",
         },
         reference: { en: "Quran 33:59", ar: "سورة الأحزاب ٣٣:٥٩" },
-        transliteration: "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves their outer garments. That is more suitable that they will be known and not be abused.",
+        transliteration:
+          "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves their outer garments. That is more suitable that they will be known and not be abused.",
       },
       {
         id: "haram-murder",
@@ -179,7 +184,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "مَن قَتَلَ نَفْسًا بِغَيْرِ نَفْسٍ أَوْ فَسَادٍ فِي الْأَرْضِ فَكَأَنَّمَا قَتَلَ النَّاسَ جَمِيعًا وَمَنْ أَحْيَاهَا فَكَأَنَّمَا أَحْيَا النَّاسَ جَمِيعًا",
         },
         reference: { en: "Quran 5:32", ar: "سورة المائدة ٥:٣٢" },
-        transliteration: "Whoever kills a soul unless for a soul or for corruption in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely.",
+        transliteration:
+          "Whoever kills a soul unless for a soul or for corruption in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely.",
       },
       {
         id: "haram-hope",
@@ -197,14 +203,15 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           ar: "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا ۚ إِنَّهُ هُوَ الْغَفُورُ الرَّحِيمُ",
         },
         reference: { en: "Quran 39:53", ar: "سورة الزمر ٣٩:٥٣" },
-        transliteration: "Say, 'O My servants who have transgressed against themselves, do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'",
+        transliteration:
+          "Say, 'O My servants who have transgressed against themselves, do not despair of the mercy of Allah. Indeed, Allah forgives all sins. Indeed, it is He who is the Forgiving, the Merciful.'",
       },
       {
         id: "haram-conclusion",
         type: "tip",
         content: {
-          en: "**Remember:**\n\n✅ Every prohibition has wisdom behind it\n✅ Allah wants to protect you, not punish you\n✅ Struggling against sin is itself rewarded\n✅ The door of repentance is always open\n✅ Progress, not perfection - take it one step at a time\n\n*\"Indeed, with hardship comes ease.\"* - Quran 94:6",
-          ar: "**تذكر:**\n\n✅ كل تحريم له حكمة وراءه\n✅ الله يريد أن يحميك، لا أن يعاقبك\n✅ مجاهدة الذنب بحد ذاتها مُثابة\n✅ باب التوبة مفتوح دائمًا\n✅ التقدم، وليس الكمال - خطوة بخطوة\n\n*\"إِنَّ مَعَ الْعُسْرِ يُسْرًا\"* - القرآن ٩٤:٦",
+          en: '**Remember:**\n\n✅ Every prohibition has wisdom behind it\n✅ Allah wants to protect you, not punish you\n✅ Struggling against sin is itself rewarded\n✅ The door of repentance is always open\n✅ Progress, not perfection - take it one step at a time\n\n*"Indeed, with hardship comes ease."* - Quran 94:6',
+          ar: '**تذكر:**\n\n✅ كل تحريم له حكمة وراءه\n✅ الله يريد أن يحميك، لا أن يعاقبك\n✅ مجاهدة الذنب بحد ذاتها مُثابة\n✅ باب التوبة مفتوح دائمًا\n✅ التقدم، وليس الكمال - خطوة بخطوة\n\n*"إِنَّ مَعَ الْعُسْرِ يُسْرًا"* - القرآن ٩٤:٦',
         },
       },
     ],
@@ -253,7 +260,10 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         },
         options: [
           { en: "Lying about someone", ar: "الكذب على شخص" },
-          { en: "Speaking truth about someone in their absence that they would dislike", ar: "قول الحق عن شخص في غيابه مما يكرهه" },
+          {
+            en: "Speaking truth about someone in their absence that they would dislike",
+            ar: "قول الحق عن شخص في غيابه مما يكرهه",
+          },
           { en: "Praising someone", ar: "مدح شخص" },
           { en: "Asking about someone", ar: "السؤال عن شخص" },
         ],

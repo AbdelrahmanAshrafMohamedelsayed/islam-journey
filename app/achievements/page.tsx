@@ -21,7 +21,11 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/Progress";
-import { useSettingsStore, useProgressStore, useAchievementsStore } from "@/lib/stores";
+import {
+  useSettingsStore,
+  useProgressStore,
+  useAchievementsStore,
+} from "@/lib/stores";
 import type { Achievement } from "@/types";
 
 interface AchievementDefinition {
@@ -39,13 +43,8 @@ interface AchievementDefinition {
 
 export default function AchievementsPage() {
   const { language: lang } = useSettingsStore();
-  const {
-    completedLessons,
-    completedChapters,
-    totalXp,
-    level,
-    streakDays,
-  } = useProgressStore();
+  const { completedLessons, completedChapters, totalXp, level, streakDays } =
+    useProgressStore();
   const { unlockedAchievements, unlockAchievement } = useAchievementsStore();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -151,7 +150,10 @@ export default function AchievementsPage() {
     {
       id: "streak-3",
       title: { en: "Getting Started", ar: "البداية" },
-      description: { en: "Maintain a 3-day streak", ar: "حافظ على سلسلة 3 أيام" },
+      description: {
+        en: "Maintain a 3-day streak",
+        ar: "حافظ على سلسلة 3 أيام",
+      },
       icon: Flame,
       iconName: "flame",
       category: "streak",
@@ -163,7 +165,10 @@ export default function AchievementsPage() {
     {
       id: "streak-7",
       title: { en: "Week Warrior", ar: "محارب الأسبوع" },
-      description: { en: "Maintain a 7-day streak", ar: "حافظ على سلسلة 7 أيام" },
+      description: {
+        en: "Maintain a 7-day streak",
+        ar: "حافظ على سلسلة 7 أيام",
+      },
       icon: Flame,
       iconName: "flame",
       category: "streak",
@@ -175,7 +180,10 @@ export default function AchievementsPage() {
     {
       id: "streak-14",
       title: { en: "Fortnight Fighter", ar: "مقاتل الأسبوعين" },
-      description: { en: "Maintain a 14-day streak", ar: "حافظ على سلسلة 14 يوماً" },
+      description: {
+        en: "Maintain a 14-day streak",
+        ar: "حافظ على سلسلة 14 يوماً",
+      },
       icon: Flame,
       iconName: "flame",
       category: "streak",
@@ -187,7 +195,10 @@ export default function AchievementsPage() {
     {
       id: "streak-30",
       title: { en: "Monthly Master", ar: "سيد الشهر" },
-      description: { en: "Maintain a 30-day streak", ar: "حافظ على سلسلة 30 يوماً" },
+      description: {
+        en: "Maintain a 30-day streak",
+        ar: "حافظ على سلسلة 30 يوماً",
+      },
       icon: Flame,
       iconName: "flame",
       category: "streak",
@@ -267,13 +278,16 @@ export default function AchievementsPage() {
       category: "special",
       rarity: "common",
       requiredValue: 1,
-      getProgress: () => completedLessons.length > 0 ? 1 : 0,
+      getProgress: () => (completedLessons.length > 0 ? 1 : 0),
       xpReward: 50,
     },
     {
       id: "perfect-score",
       title: { en: "Perfect Score", ar: "علامة كاملة" },
-      description: { en: "Get 100% on any quiz", ar: "احصل على 100% في أي اختبار" },
+      description: {
+        en: "Get 100% on any quiz",
+        ar: "احصل على 100% في أي اختبار",
+      },
       icon: Crown,
       iconName: "crown",
       category: "special",
@@ -304,11 +318,22 @@ export default function AchievementsPage() {
   useEffect(() => {
     achievementDefinitions.forEach((achievement) => {
       const progress = achievement.getProgress();
-      if (progress >= achievement.requiredValue && !unlockedAchievements.includes(achievement.id)) {
+      if (
+        progress >= achievement.requiredValue &&
+        !unlockedAchievements.includes(achievement.id)
+      ) {
         unlockAchievement(convertToAchievement(achievement));
       }
     });
-  }, [completedLessons, completedChapters, totalXp, level, streakDays, unlockedAchievements, unlockAchievement]);
+  }, [
+    completedLessons,
+    completedChapters,
+    totalXp,
+    level,
+    streakDays,
+    unlockedAchievements,
+    unlockAchievement,
+  ]);
 
   const categories = [
     { id: "all", label: { en: "All", ar: "الكل" }, icon: Trophy },
@@ -318,9 +343,10 @@ export default function AchievementsPage() {
     { id: "special", label: { en: "Special", ar: "خاصة" }, icon: Sparkles },
   ];
 
-  const filteredAchievements = selectedCategory === "all"
-    ? achievementDefinitions
-    : achievementDefinitions.filter((a) => a.category === selectedCategory);
+  const filteredAchievements =
+    selectedCategory === "all"
+      ? achievementDefinitions
+      : achievementDefinitions.filter((a) => a.category === selectedCategory);
 
   const totalUnlocked = unlockedAchievements.length;
   const totalAchievements = achievementDefinitions.length;
@@ -332,7 +358,11 @@ export default function AchievementsPage() {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/journey">
-              <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+              <Button
+                variant="ghost"
+                size="sm"
+                leftIcon={<ArrowLeft className="w-4 h-4" />}
+              >
                 {lang === "en" ? "Back" : "رجوع"}
               </Button>
             </Link>
@@ -372,15 +402,21 @@ export default function AchievementsPage() {
                 {lang === "en" ? "Overall Progress" : "التقدم العام"}
               </h2>
               <p className="text-sm text-slate-500">
-                {Math.round((totalUnlocked / totalAchievements) * 100)}% {lang === "en" ? "complete" : "مكتمل"}
+                {Math.round((totalUnlocked / totalAchievements) * 100)}%{" "}
+                {lang === "en" ? "complete" : "مكتمل"}
               </p>
             </div>
             <div className="text-right">
-              <p className="text-3xl font-bold text-amber-500">{totalUnlocked}</p>
+              <p className="text-3xl font-bold text-amber-500">
+                {totalUnlocked}
+              </p>
               <p className="text-sm text-slate-500">/ {totalAchievements}</p>
             </div>
           </div>
-          <ProgressBar value={(totalUnlocked / totalAchievements) * 100} showLabel={false} />
+          <ProgressBar
+            value={(totalUnlocked / totalAchievements) * 100}
+            showLabel={false}
+          />
         </Card>
 
         {/* Category Filter */}
@@ -410,7 +446,10 @@ export default function AchievementsPage() {
             const Icon = achievement.icon;
             const progress = achievement.getProgress();
             const isUnlocked = unlockedAchievements.includes(achievement.id);
-            const progressPercent = Math.min((progress / achievement.requiredValue) * 100, 100);
+            const progressPercent = Math.min(
+              (progress / achievement.requiredValue) * 100,
+              100,
+            );
 
             return (
               <motion.div
@@ -423,7 +462,9 @@ export default function AchievementsPage() {
                   variant={isUnlocked ? "gradient" : "default"}
                   padding="md"
                   className={`relative overflow-hidden ${
-                    isUnlocked ? "border-amber-200 dark:border-amber-800" : "opacity-80"
+                    isUnlocked
+                      ? "border-amber-200 dark:border-amber-800"
+                      : "opacity-80"
                   }`}
                 >
                   {isUnlocked && (
@@ -478,7 +519,9 @@ export default function AchievementsPage() {
                         <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                           <Sparkles className="w-3 h-3" />
                           {lang === "en" ? "Unlocked!" : "تم الفتح!"}
-                          <span className="text-amber-500 ml-2">+{achievement.xpReward} XP</span>
+                          <span className="text-amber-500 ml-2">
+                            +{achievement.xpReward} XP
+                          </span>
                         </span>
                       )}
                     </div>
@@ -506,21 +549,27 @@ export default function AchievementsPage() {
             </div>
             <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
               <Flame className="w-6 h-6 text-orange-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">{streakDays}</p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                {streakDays}
+              </p>
               <p className="text-xs text-slate-500">
                 {lang === "en" ? "Day Streak" : "أيام متتالية"}
               </p>
             </div>
             <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
               <Zap className="w-6 h-6 text-amber-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalXp}</p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                {totalXp}
+              </p>
               <p className="text-xs text-slate-500">
                 {lang === "en" ? "Total XP" : "مجموع النقاط"}
               </p>
             </div>
             <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
               <Star className="w-6 h-6 text-purple-500 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-slate-900 dark:text-white">{level}</p>
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                {level}
+              </p>
               <p className="text-xs text-slate-500">
                 {lang === "en" ? "Level" : "المستوى"}
               </p>

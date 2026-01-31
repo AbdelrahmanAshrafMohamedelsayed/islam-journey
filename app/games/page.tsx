@@ -462,7 +462,9 @@ const MemoryGame = ({
       isFlipped: false,
       isMatched: false,
     }));
-    const shuffled = [...englishCards, ...arabicCards].sort(() => Math.random() - 0.5);
+    const shuffled = [...englishCards, ...arabicCards].sort(
+      () => Math.random() - 0.5,
+    );
     setCards(shuffled);
     setFlippedCards([]);
     setMoves(0);
@@ -596,16 +598,18 @@ const MemoryGame = ({
       {/* Instructions */}
       <div className="mb-4 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm text-slate-600 dark:text-slate-400">
         <p className="mb-2">
-          {lang === "en" 
+          {lang === "en"
             ? "🎯 Find matching pairs: Match each English word with its Arabic translation"
             : "🎯 اعثر على الأزواج: طابق كل كلمة إنجليزية مع ترجمتها العربية"}
         </p>
         <div className="flex gap-4 text-xs">
           <span className="flex items-center gap-1">
-            <span className="w-4 h-4 rounded bg-blue-500"></span> {lang === "en" ? "English" : "إنجليزي"}
+            <span className="w-4 h-4 rounded bg-blue-500"></span>{" "}
+            {lang === "en" ? "English" : "إنجليزي"}
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-4 h-4 rounded bg-emerald-500"></span> {lang === "en" ? "Arabic" : "عربي"}
+            <span className="w-4 h-4 rounded bg-emerald-500"></span>{" "}
+            {lang === "en" ? "Arabic" : "عربي"}
           </span>
         </div>
       </div>
@@ -637,7 +641,9 @@ const MemoryGame = ({
                 <span className="absolute top-1 left-1 text-xs opacity-75 px-1 rounded bg-white/20">
                   {card.isEnglish ? "EN" : "عربي"}
                 </span>
-                <span className={`text-lg ${card.isEnglish ? "" : "font-arabic"}`}>
+                <span
+                  className={`text-lg ${card.isEnglish ? "" : "font-arabic"}`}
+                >
                   {card.content}
                 </span>
               </>
