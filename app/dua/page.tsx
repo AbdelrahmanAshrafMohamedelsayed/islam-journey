@@ -39,8 +39,10 @@ const duas: Dua[] = [
   {
     id: "morning-1",
     title: { en: "Morning Remembrance", ar: "أذكار الصباح" },
-    arabic: "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
-    transliteration: "Asbahna wa asbahal mulku lillah, walhamdu lillah, la ilaha illallahu wahdahu la shareeka lah",
+    arabic:
+      "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
+    transliteration:
+      "Asbahna wa asbahal mulku lillah, walhamdu lillah, la ilaha illallahu wahdahu la shareeka lah",
     translation: {
       en: "We have reached the morning and at this very time unto Allah belongs all sovereignty. All praise is for Allah. None has the right to be worshipped except Allah alone, without any partner.",
       ar: "دخلنا في الصباح ودخل الملك لله والحمد لله لا إله إلا الله وحده لا شريك له",
@@ -51,8 +53,10 @@ const duas: Dua[] = [
   {
     id: "evening-1",
     title: { en: "Evening Remembrance", ar: "أذكار المساء" },
-    arabic: "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
-    transliteration: "Amsayna wa amsal mulku lillah, walhamdu lillah, la ilaha illallahu wahdahu la shareeka lah",
+    arabic:
+      "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ",
+    transliteration:
+      "Amsayna wa amsal mulku lillah, walhamdu lillah, la ilaha illallahu wahdahu la shareeka lah",
     translation: {
       en: "We have reached the evening and at this very time unto Allah belongs all sovereignty. All praise is for Allah. None has the right to be worshipped except Allah alone, without any partner.",
       ar: "دخلنا في المساء ودخل الملك لله والحمد لله لا إله إلا الله وحده لا شريك له",
@@ -75,8 +79,10 @@ const duas: Dua[] = [
   {
     id: "wake-1",
     title: { en: "Upon Waking Up", ar: "عند الاستيقاظ" },
-    arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
-    transliteration: "Alhamdu lillahil-lathee ahyana ba'da ma amatana wa ilayhin-nushoor",
+    arabic:
+      "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+    transliteration:
+      "Alhamdu lillahil-lathee ahyana ba'da ma amatana wa ilayhin-nushoor",
     translation: {
       en: "All praise is for Allah who gave us life after having taken it from us and unto Him is the resurrection.",
       ar: "الحمد لله الذي أحيانا بعدما أماتنا وإليه النشور",
@@ -99,8 +105,10 @@ const duas: Dua[] = [
   {
     id: "food-after",
     title: { en: "After Eating", ar: "بعد الطعام" },
-    arabic: "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
-    transliteration: "Alhamdu lillahil-lathee at'amana wa saqana wa ja'alna muslimeen",
+    arabic:
+      "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ",
+    transliteration:
+      "Alhamdu lillahil-lathee at'amana wa saqana wa ja'alna muslimeen",
     translation: {
       en: "All praise is for Allah who fed us, gave us drink, and made us Muslims.",
       ar: "الحمد لله الذي أطعمنا وسقانا وجعلنا مسلمين",
@@ -111,8 +119,10 @@ const duas: Dua[] = [
   {
     id: "travel-1",
     title: { en: "When Starting a Journey", ar: "عند السفر" },
-    arabic: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
-    transliteration: "Subhanal-lathee sakh-khara lana hatha wama kunna lahu muqrineen, wa inna ila Rabbina lamunqaliboon",
+    arabic:
+      "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+    transliteration:
+      "Subhanal-lathee sakh-khara lana hatha wama kunna lahu muqrineen, wa inna ila Rabbina lamunqaliboon",
     translation: {
       en: "Glory unto Him Who created this transportation for us though we were unable to create it on our own. And unto our Lord we shall return.",
       ar: "سبحان الذي سخر لنا هذا وما كنا له مقرنين وإنا إلى ربنا لمنقلبون",
@@ -123,8 +133,10 @@ const duas: Dua[] = [
   {
     id: "home-enter",
     title: { en: "Entering Home", ar: "دخول المنزل" },
-    arabic: "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
-    transliteration: "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Allahi Rabbina tawakkalna",
+    arabic:
+      "بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا",
+    transliteration:
+      "Bismillahi walajna, wa bismillahi kharajna, wa 'ala Allahi Rabbina tawakkalna",
     translation: {
       en: "In the name of Allah we enter, in the name of Allah we leave, and upon our Lord we depend.",
       ar: "بسم الله ولجنا وبسم الله خرجنا وعلى الله ربنا توكلنا",
@@ -147,8 +159,10 @@ const duas: Dua[] = [
   {
     id: "distress-1",
     title: { en: "During Distress", ar: "عند الكرب" },
-    arabic: "لاَ إِلَهَ إِلاَّ اللَّهُ الْعَظِيمُ الْحَلِيمُ، لاَ إِلَهَ إِلاَّ اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ",
-    transliteration: "La ilaha illallahul-'Atheemul-Haleem, la ilaha illallahu Rabbul-'Arshil-'Atheem",
+    arabic:
+      "لاَ إِلَهَ إِلاَّ اللَّهُ الْعَظِيمُ الْحَلِيمُ، لاَ إِلَهَ إِلاَّ اللَّهُ رَبُّ الْعَرْشِ الْعَظِيمِ",
+    transliteration:
+      "La ilaha illallahul-'Atheemul-Haleem, la ilaha illallahu Rabbul-'Arshil-'Atheem",
     translation: {
       en: "There is no god but Allah, the Mighty, the Forbearing. There is no god but Allah, Lord of the Magnificent Throne.",
       ar: "لا إله إلا الله العظيم الحليم لا إله إلا الله رب العرش العظيم",
@@ -159,8 +173,10 @@ const duas: Dua[] = [
   {
     id: "forgiveness-1",
     title: { en: "Seeking Forgiveness", ar: "الاستغفار" },
-    arabic: "أَسْتَغْفِرُ اللَّهَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
-    transliteration: "Astaghfirullaha-lathee la ilaha illa huwal-Hayyul-Qayyoomu wa atoobu ilayhi",
+    arabic:
+      "أَسْتَغْفِرُ اللَّهَ الَّذِي لاَ إِلَهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ",
+    transliteration:
+      "Astaghfirullaha-lathee la ilaha illa huwal-Hayyul-Qayyoomu wa atoobu ilayhi",
     translation: {
       en: "I seek forgiveness from Allah, besides Whom there is no god, the Ever-Living, the Self-Subsisting, and I turn to Him in repentance.",
       ar: "أستغفر الله الذي لا إله إلا هو الحي القيوم وأتوب إليه",
@@ -183,20 +199,57 @@ const duas: Dua[] = [
 ];
 
 const categories = [
-  { id: "all", label: { en: "All Duas", ar: "جميع الأدعية" }, icon: <BookOpen className="w-4 h-4" /> },
-  { id: "morning", label: { en: "Morning", ar: "الصباح" }, icon: <Sunrise className="w-4 h-4" /> },
-  { id: "evening", label: { en: "Evening", ar: "المساء" }, icon: <Sunset className="w-4 h-4" /> },
-  { id: "sleep", label: { en: "Sleep", ar: "النوم" }, icon: <Moon className="w-4 h-4" /> },
-  { id: "wake", label: { en: "Wake Up", ar: "الاستيقاظ" }, icon: <Sun className="w-4 h-4" /> },
-  { id: "food", label: { en: "Food", ar: "الطعام" }, icon: <Heart className="w-4 h-4" /> },
-  { id: "travel", label: { en: "Travel", ar: "السفر" }, icon: <Cloud className="w-4 h-4" /> },
-  { id: "protection", label: { en: "Protection", ar: "الحماية" }, icon: <Star className="w-4 h-4" /> },
+  {
+    id: "all",
+    label: { en: "All Duas", ar: "جميع الأدعية" },
+    icon: <BookOpen className="w-4 h-4" />,
+  },
+  {
+    id: "morning",
+    label: { en: "Morning", ar: "الصباح" },
+    icon: <Sunrise className="w-4 h-4" />,
+  },
+  {
+    id: "evening",
+    label: { en: "Evening", ar: "المساء" },
+    icon: <Sunset className="w-4 h-4" />,
+  },
+  {
+    id: "sleep",
+    label: { en: "Sleep", ar: "النوم" },
+    icon: <Moon className="w-4 h-4" />,
+  },
+  {
+    id: "wake",
+    label: { en: "Wake Up", ar: "الاستيقاظ" },
+    icon: <Sun className="w-4 h-4" />,
+  },
+  {
+    id: "food",
+    label: { en: "Food", ar: "الطعام" },
+    icon: <Heart className="w-4 h-4" />,
+  },
+  {
+    id: "travel",
+    label: { en: "Travel", ar: "السفر" },
+    icon: <Cloud className="w-4 h-4" />,
+  },
+  {
+    id: "protection",
+    label: { en: "Protection", ar: "الحماية" },
+    icon: <Star className="w-4 h-4" />,
+  },
 ];
 
 // Dua Card Component
-const DuaCard = ({ dua, lang, isSaved, onToggleSave }: { 
-  dua: Dua; 
-  lang: "en" | "ar"; 
+const DuaCard = ({
+  dua,
+  lang,
+  isSaved,
+  onToggleSave,
+}: {
+  dua: Dua;
+  lang: "en" | "ar";
   isSaved: boolean;
   onToggleSave: () => void;
 }) => {
@@ -221,8 +274,12 @@ const DuaCard = ({ dua, lang, isSaved, onToggleSave }: {
       <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="font-bold text-slate-800 dark:text-white">{dua.title[lang]}</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">{dua.reference}</p>
+            <h3 className="font-bold text-slate-800 dark:text-white">
+              {dua.title[lang]}
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {dua.reference}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             <motion.button
@@ -242,7 +299,10 @@ const DuaCard = ({ dua, lang, isSaved, onToggleSave }: {
 
       {/* Arabic Text */}
       <div className="p-4">
-        <p className="text-2xl text-right font-arabic leading-loose text-slate-800 dark:text-white mb-4" dir="rtl">
+        <p
+          className="text-2xl text-right font-arabic leading-loose text-slate-800 dark:text-white mb-4"
+          dir="rtl"
+        >
           {dua.arabic}
         </p>
 
@@ -250,9 +310,13 @@ const DuaCard = ({ dua, lang, isSaved, onToggleSave }: {
           onClick={() => setExpanded(!expanded)}
           className="text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
         >
-          {expanded 
-            ? (lang === "en" ? "Show less" : "أقل") 
-            : (lang === "en" ? "Show transliteration & translation" : "عرض النطق والترجمة")}
+          {expanded
+            ? lang === "en"
+              ? "Show less"
+              : "أقل"
+            : lang === "en"
+              ? "Show transliteration & translation"
+              : "عرض النطق والترجمة"}
         </button>
 
         <AnimatePresence>
@@ -268,13 +332,17 @@ const DuaCard = ({ dua, lang, isSaved, onToggleSave }: {
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">
                     {lang === "en" ? "Transliteration" : "النطق"}
                   </p>
-                  <p className="text-slate-600 dark:text-slate-300 italic">{dua.transliteration}</p>
+                  <p className="text-slate-600 dark:text-slate-300 italic">
+                    {dua.transliteration}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">
                     {lang === "en" ? "Translation" : "الترجمة"}
                   </p>
-                  <p className="text-slate-600 dark:text-slate-300">{dua.translation[lang]}</p>
+                  <p className="text-slate-600 dark:text-slate-300">
+                    {dua.translation[lang]}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -288,9 +356,21 @@ const DuaCard = ({ dua, lang, isSaved, onToggleSave }: {
           variant="outline"
           size="sm"
           onClick={copyToClipboard}
-          leftIcon={copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+          leftIcon={
+            copied ? (
+              <Check className="w-4 h-4 text-emerald-500" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )
+          }
         >
-          {copied ? (lang === "en" ? "Copied!" : "تم النسخ!") : (lang === "en" ? "Copy" : "نسخ")}
+          {copied
+            ? lang === "en"
+              ? "Copied!"
+              : "تم النسخ!"
+            : lang === "en"
+              ? "Copy"
+              : "نسخ"}
         </Button>
       </div>
     </motion.div>
@@ -317,12 +397,15 @@ export default function DuaPage() {
 
   const toggleSaveDua = (duaId: string) => {
     setSavedDuas((prev) =>
-      prev.includes(duaId) ? prev.filter((id) => id !== duaId) : [...prev, duaId]
+      prev.includes(duaId)
+        ? prev.filter((id) => id !== duaId)
+        : [...prev, duaId],
     );
   };
 
   const filteredDuas = duas.filter((dua) => {
-    const matchesCategory = selectedCategory === "all" || dua.category === selectedCategory;
+    const matchesCategory =
+      selectedCategory === "all" || dua.category === selectedCategory;
     const matchesSearch =
       searchQuery === "" ||
       dua.title.en.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -339,7 +422,11 @@ export default function DuaPage() {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <Link href="/journey">
-              <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+              <Button
+                variant="ghost"
+                size="sm"
+                leftIcon={<ArrowLeft className="w-4 h-4" />}
+              >
                 {lang === "en" ? "Journey" : "الرحلة"}
               </Button>
             </Link>
@@ -352,8 +439,8 @@ export default function DuaPage() {
             <button
               onClick={() => setShowSavedOnly(!showSavedOnly)}
               className={`p-2 rounded-full transition-colors ${
-                showSavedOnly 
-                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" 
+                showSavedOnly
+                  ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
                   : "text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
               }`}
             >
@@ -372,7 +459,9 @@ export default function DuaPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={lang === "en" ? "Search duas..." : "ابحث عن الأدعية..."}
+              placeholder={
+                lang === "en" ? "Search duas..." : "ابحث عن الأدعية..."
+              }
               className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border-none focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-white placeholder-slate-400"
             />
           </div>
@@ -387,9 +476,10 @@ export default function DuaPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`
                   flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all
-                  ${selectedCategory === cat.id
-                    ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
+                  ${
+                    selectedCategory === cat.id
+                      ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
+                      : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
                   }
                 `}
               >
@@ -406,7 +496,8 @@ export default function DuaPage() {
         {/* Results count */}
         <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
           {filteredDuas.length} {lang === "en" ? "duas found" : "دعاء"}
-          {showSavedOnly && ` (${lang === "en" ? "saved only" : "المحفوظة فقط"})`}
+          {showSavedOnly &&
+            ` (${lang === "en" ? "saved only" : "المحفوظة فقط"})`}
         </p>
 
         {/* Duas Grid */}
@@ -437,7 +528,9 @@ export default function DuaPage() {
               {lang === "en" ? "No duas found" : "لم يتم العثور على أدعية"}
             </h3>
             <p className="text-slate-500 dark:text-slate-400">
-              {lang === "en" ? "Try adjusting your search or filters" : "حاول تعديل البحث أو الفلاتر"}
+              {lang === "en"
+                ? "Try adjusting your search or filters"
+                : "حاول تعديل البحث أو الفلاتر"}
             </p>
           </motion.div>
         )}
@@ -457,11 +550,13 @@ export default function DuaPage() {
                 {lang === "en" ? "Daily Reminder" : "تذكير يومي"}
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mb-3">
-                {lang === "en" 
-                  ? "The Prophet ﷺ said: \"The supplication of every one of you is granted if he does not grow impatient.\"" 
-                  : "قال النبي ﷺ: \"يُستجاب لأحدكم ما لم يعجل\""}
+                {lang === "en"
+                  ? 'The Prophet ﷺ said: "The supplication of every one of you is granted if he does not grow impatient."'
+                  : 'قال النبي ﷺ: "يُستجاب لأحدكم ما لم يعجل"'}
               </p>
-              <p className="text-xs text-slate-500">— Sahih al-Bukhari & Muslim</p>
+              <p className="text-xs text-slate-500">
+                — Sahih al-Bukhari & Muslim
+              </p>
             </div>
           </div>
         </motion.div>

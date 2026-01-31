@@ -40,7 +40,10 @@ interface MemoryCard {
 
 const triviaQuestions: TriviaQuestion[] = [
   {
-    question: { en: "How many times do Muslims pray each day?", ar: "كم مرة يصلي المسلمون كل يوم؟" },
+    question: {
+      en: "How many times do Muslims pray each day?",
+      ar: "كم مرة يصلي المسلمون كل يوم؟",
+    },
     options: [
       { en: "3 times", ar: "3 مرات" },
       { en: "5 times", ar: "5 مرات" },
@@ -54,7 +57,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "What is the holy book of Islam?", ar: "ما هو الكتاب المقدس في الإسلام؟" },
+    question: {
+      en: "What is the holy book of Islam?",
+      ar: "ما هو الكتاب المقدس في الإسلام؟",
+    },
     options: [
       { en: "Torah", ar: "التوراة" },
       { en: "Bible", ar: "الإنجيل" },
@@ -68,7 +74,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "What is the first pillar of Islam?", ar: "ما هو الركن الأول في الإسلام؟" },
+    question: {
+      en: "What is the first pillar of Islam?",
+      ar: "ما هو الركن الأول في الإسلام؟",
+    },
     options: [
       { en: "Salah (Prayer)", ar: "الصلاة" },
       { en: "Shahada (Declaration of Faith)", ar: "الشهادة" },
@@ -82,7 +91,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "In which month do Muslims fast?", ar: "في أي شهر يصوم المسلمون؟" },
+    question: {
+      en: "In which month do Muslims fast?",
+      ar: "في أي شهر يصوم المسلمون؟",
+    },
     options: [
       { en: "Shaban", ar: "شعبان" },
       { en: "Ramadan", ar: "رمضان" },
@@ -96,7 +108,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "What city do Muslims face when praying?", ar: "ما المدينة التي يتوجه إليها المسلمون عند الصلاة؟" },
+    question: {
+      en: "What city do Muslims face when praying?",
+      ar: "ما المدينة التي يتوجه إليها المسلمون عند الصلاة؟",
+    },
     options: [
       { en: "Madinah", ar: "المدينة" },
       { en: "Jerusalem", ar: "القدس" },
@@ -110,7 +125,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "How many chapters (surahs) are in the Quran?", ar: "كم عدد السور في القرآن؟" },
+    question: {
+      en: "How many chapters (surahs) are in the Quran?",
+      ar: "كم عدد السور في القرآن؟",
+    },
     options: [
       { en: "99", ar: "99" },
       { en: "114", ar: "114" },
@@ -124,7 +142,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "What is the name of the angel who revealed the Quran?", ar: "ما اسم الملك الذي أنزل القرآن؟" },
+    question: {
+      en: "What is the name of the angel who revealed the Quran?",
+      ar: "ما اسم الملك الذي أنزل القرآن؟",
+    },
     options: [
       { en: "Mikail", ar: "ميكائيل" },
       { en: "Israfil", ar: "إسرافيل" },
@@ -138,7 +159,10 @@ const triviaQuestions: TriviaQuestion[] = [
     },
   },
   {
-    question: { en: "What percentage of wealth is given as Zakat?", ar: "ما نسبة المال التي تُعطى كزكاة؟" },
+    question: {
+      en: "What percentage of wealth is given as Zakat?",
+      ar: "ما نسبة المال التي تُعطى كزكاة؟",
+    },
     options: [
       { en: "1%", ar: "1%" },
       { en: "2.5%", ar: "2.5%" },
@@ -163,10 +187,22 @@ const memoryPairs = [
 ];
 
 const wordScrambles = [
-  { word: "QURAN", hint: { en: "Holy book of Islam", ar: "الكتاب المقدس في الإسلام" } },
-  { word: "SALAH", hint: { en: "Prayer performed 5 times daily", ar: "الصلاة التي تؤدى 5 مرات يومياً" } },
+  {
+    word: "QURAN",
+    hint: { en: "Holy book of Islam", ar: "الكتاب المقدس في الإسلام" },
+  },
+  {
+    word: "SALAH",
+    hint: {
+      en: "Prayer performed 5 times daily",
+      ar: "الصلاة التي تؤدى 5 مرات يومياً",
+    },
+  },
   { word: "RAMADAN", hint: { en: "Month of fasting", ar: "شهر الصيام" } },
-  { word: "MAKKAH", hint: { en: "Holiest city in Islam", ar: "أقدس مدينة في الإسلام" } },
+  {
+    word: "MAKKAH",
+    hint: { en: "Holiest city in Islam", ar: "أقدس مدينة في الإسلام" },
+  },
   { word: "ZAKAT", hint: { en: "Obligatory charity", ar: "الصدقة الواجبة" } },
   { word: "HAJJ", hint: { en: "Pilgrimage to Makkah", ar: "الحج إلى مكة" } },
   { word: "IMAN", hint: { en: "Faith in Arabic", ar: "الإيمان بالعربية" } },
@@ -174,7 +210,13 @@ const wordScrambles = [
 ];
 
 // Trivia Game Component
-const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void }) => {
+const TriviaGame = ({
+  lang,
+  onBack,
+}: {
+  lang: "en" | "ar";
+  onBack: () => void;
+}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -217,7 +259,9 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
   };
 
   if (gameComplete) {
-    const percentage = Math.round((score / (triviaQuestions.length * 10)) * 100);
+    const percentage = Math.round(
+      (score / (triviaQuestions.length * 10)) * 100,
+    );
     return (
       <motion.div
         className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4"
@@ -239,13 +283,22 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
         </p>
         <p className="text-slate-600 dark:text-slate-300 mb-8">
           {percentage >= 80
-            ? lang === "en" ? "Excellent! You're a true scholar! 🌟" : "ممتاز! أنت عالم حقيقي! 🌟"
+            ? lang === "en"
+              ? "Excellent! You're a true scholar! 🌟"
+              : "ممتاز! أنت عالم حقيقي! 🌟"
             : percentage >= 50
-            ? lang === "en" ? "Good job! Keep learning! 📚" : "أحسنت! استمر في التعلم! 📚"
-            : lang === "en" ? "Keep practicing! You'll improve! 💪" : "استمر في التدريب! ستتحسن! 💪"}
+              ? lang === "en"
+                ? "Good job! Keep learning! 📚"
+                : "أحسنت! استمر في التعلم! 📚"
+              : lang === "en"
+                ? "Keep practicing! You'll improve! 💪"
+                : "استمر في التدريب! ستتحسن! 💪"}
         </p>
         <div className="flex gap-4">
-          <Button onClick={resetGame} leftIcon={<RotateCcw className="w-4 h-4" />}>
+          <Button
+            onClick={resetGame}
+            leftIcon={<RotateCcw className="w-4 h-4" />}
+          >
             {lang === "en" ? "Play Again" : "العب مرة أخرى"}
           </Button>
           <Button variant="outline" onClick={onBack}>
@@ -274,12 +327,16 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
               animate={{ scale: 1 }}
             >
               <Zap className="w-4 h-4 text-orange-500" />
-              <span className="text-orange-600 dark:text-orange-400 text-sm font-semibold">{streak}x</span>
+              <span className="text-orange-600 dark:text-orange-400 text-sm font-semibold">
+                {streak}x
+              </span>
             </motion.div>
           )}
           <div className="flex items-center gap-1">
             <Star className="w-5 h-5 text-amber-500" />
-            <span className="font-bold text-slate-800 dark:text-white">{score}</span>
+            <span className="font-bold text-slate-800 dark:text-white">
+              {score}
+            </span>
           </div>
         </div>
       </div>
@@ -289,7 +346,9 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
         <motion.div
           className="h-full bg-gradient-to-r from-emerald-500 to-teal-500"
           initial={{ width: 0 }}
-          animate={{ width: `${((currentQuestion + 1) / triviaQuestions.length) * 100}%` }}
+          animate={{
+            width: `${((currentQuestion + 1) / triviaQuestions.length) * 100}%`,
+          }}
         />
       </div>
 
@@ -327,7 +386,9 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
                   whileHover={selectedAnswer === null ? { scale: 1.02 } : {}}
                   whileTap={selectedAnswer === null ? { scale: 0.98 } : {}}
                 >
-                  <span className="font-medium text-slate-800 dark:text-white">{option[lang]}</span>
+                  <span className="font-medium text-slate-800 dark:text-white">
+                    {option[lang]}
+                  </span>
                   {showCorrect && (
                     <motion.div
                       className="absolute right-4 top-1/2 -translate-y-1/2"
@@ -357,7 +418,9 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <p className="text-slate-600 dark:text-slate-300 text-sm">{question.explanation[lang]}</p>
+              <p className="text-slate-600 dark:text-slate-300 text-sm">
+                {question.explanation[lang]}
+              </p>
             </motion.div>
           )}
         </motion.div>
@@ -367,7 +430,13 @@ const TriviaGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
 };
 
 // Memory Game Component
-const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void }) => {
+const MemoryGame = ({
+  lang,
+  onBack,
+}: {
+  lang: "en" | "ar";
+  onBack: () => void;
+}) => {
   const [cards, setCards] = useState<MemoryCard[]>([]);
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
@@ -395,7 +464,13 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
   }, [initGame]);
 
   const handleCardClick = (id: number) => {
-    if (isChecking || flippedCards.length >= 2 || cards[id].isFlipped || cards[id].isMatched) return;
+    if (
+      isChecking ||
+      flippedCards.length >= 2 ||
+      cards[id].isFlipped ||
+      cards[id].isMatched
+    )
+      return;
 
     const newCards = [...cards];
     newCards[id].isFlipped = true;
@@ -410,12 +485,15 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
       const secondCard = newCards[id];
 
       const isMatch =
-        (firstCard.content === secondCard.arabic || firstCard.arabic === secondCard.content) ||
-        (memoryPairs.some(
+        firstCard.content === secondCard.arabic ||
+        firstCard.arabic === secondCard.content ||
+        memoryPairs.some(
           (p) =>
-            (p.content === firstCard.content && p.arabic === secondCard.content) ||
-            (p.arabic === firstCard.content && p.content === secondCard.content)
-        ));
+            (p.content === firstCard.content &&
+              p.arabic === secondCard.content) ||
+            (p.arabic === firstCard.content &&
+              p.content === secondCard.content),
+        );
 
       setTimeout(() => {
         if (isMatch) {
@@ -455,17 +533,28 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
           {lang === "en" ? "Memory Master!" : "سيد الذاكرة!"}
         </h2>
         <p className="text-slate-600 dark:text-slate-300 mb-2">
-          {lang === "en" ? `Completed in ${moves} moves` : `أكملت في ${moves} حركة`}
+          {lang === "en"
+            ? `Completed in ${moves} moves`
+            : `أكملت في ${moves} حركة`}
         </p>
         <p className="text-emerald-500 mb-8">
           {moves <= 8
-            ? lang === "en" ? "Perfect memory! 🧠✨" : "ذاكرة مثالية! 🧠✨"
+            ? lang === "en"
+              ? "Perfect memory! 🧠✨"
+              : "ذاكرة مثالية! 🧠✨"
             : moves <= 12
-            ? lang === "en" ? "Great job! 🌟" : "عمل رائع! 🌟"
-            : lang === "en" ? "Keep practicing! 💪" : "استمر في التدريب! 💪"}
+              ? lang === "en"
+                ? "Great job! 🌟"
+                : "عمل رائع! 🌟"
+              : lang === "en"
+                ? "Keep practicing! 💪"
+                : "استمر في التدريب! 💪"}
         </p>
         <div className="flex gap-4">
-          <Button onClick={initGame} leftIcon={<RotateCcw className="w-4 h-4" />}>
+          <Button
+            onClick={initGame}
+            leftIcon={<RotateCcw className="w-4 h-4" />}
+          >
             {lang === "en" ? "Play Again" : "العب مرة أخرى"}
           </Button>
           <Button variant="outline" onClick={onBack}>
@@ -482,7 +571,9 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
         <div className="flex items-center gap-2">
           <Brain className="w-5 h-5 text-purple-500" />
           <span className="text-slate-600 dark:text-slate-300">
-            {lang === "en" ? "Match English with Arabic" : "طابق الإنجليزية مع العربية"}
+            {lang === "en"
+              ? "Match English with Arabic"
+              : "طابق الإنجليزية مع العربية"}
           </span>
         </div>
         <div className="flex items-center gap-1 px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full">
@@ -499,20 +590,27 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
             onClick={() => handleCardClick(card.id)}
             className={`
               aspect-square rounded-xl text-center font-bold transition-all
-              ${card.isFlipped || card.isMatched
-                ? "bg-gradient-to-br from-emerald-400 to-teal-500 text-white"
-                : "bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800"
+              ${
+                card.isFlipped || card.isMatched
+                  ? "bg-gradient-to-br from-emerald-400 to-teal-500 text-white"
+                  : "bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800"
               }
               ${card.isMatched ? "opacity-60" : ""}
             `}
-            whileHover={!card.isFlipped && !card.isMatched ? { scale: 1.05 } : {}}
+            whileHover={
+              !card.isFlipped && !card.isMatched ? { scale: 1.05 } : {}
+            }
             whileTap={!card.isFlipped && !card.isMatched ? { scale: 0.95 } : {}}
             animate={card.isFlipped ? { rotateY: 180 } : { rotateY: 0 }}
           >
-            <span className={`text-lg ${card.isFlipped || card.isMatched ? "block" : "hidden"}`}>
+            <span
+              className={`text-lg ${card.isFlipped || card.isMatched ? "block" : "hidden"}`}
+            >
               {card.content}
             </span>
-            {!card.isFlipped && !card.isMatched && <Sparkles className="w-6 h-6 mx-auto text-slate-400 dark:text-slate-500" />}
+            {!card.isFlipped && !card.isMatched && (
+              <Sparkles className="w-6 h-6 mx-auto text-slate-400 dark:text-slate-500" />
+            )}
           </motion.button>
         ))}
       </div>
@@ -521,7 +619,13 @@ const MemoryGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void })
 };
 
 // Word Scramble Game Component
-const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => void }) => {
+const WordScrambleGame = ({
+  lang,
+  onBack,
+}: {
+  lang: "en" | "ar";
+  onBack: () => void;
+}) => {
   const [currentWord, setCurrentWord] = useState(0);
   const [scrambled, setScrambled] = useState("");
   const [userInput, setUserInput] = useState("");
@@ -534,7 +638,10 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
   const word = wordScrambles[currentWord];
 
   const scrambleWord = useCallback((w: string) => {
-    return w.split("").sort(() => Math.random() - 0.5).join("");
+    return w
+      .split("")
+      .sort(() => Math.random() - 0.5)
+      .join("");
   }, []);
 
   useEffect(() => {
@@ -600,7 +707,10 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
           {score}
         </p>
         <div className="flex gap-4">
-          <Button onClick={resetGame} leftIcon={<RotateCcw className="w-4 h-4" />}>
+          <Button
+            onClick={resetGame}
+            leftIcon={<RotateCcw className="w-4 h-4" />}
+          >
             {lang === "en" ? "Play Again" : "العب مرة أخرى"}
           </Button>
           <Button variant="outline" onClick={onBack}>
@@ -621,15 +731,23 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <div className={`flex items-center gap-1 px-3 py-1 rounded-full ${timeLeft <= 10 ? "bg-red-100 dark:bg-red-900/30" : "bg-slate-100 dark:bg-slate-800"}`}>
-            <Clock className={`w-4 h-4 ${timeLeft <= 10 ? "text-red-500" : "text-slate-500"}`} />
-            <span className={`text-sm font-medium ${timeLeft <= 10 ? "text-red-500" : "text-slate-600 dark:text-slate-300"}`}>
+          <div
+            className={`flex items-center gap-1 px-3 py-1 rounded-full ${timeLeft <= 10 ? "bg-red-100 dark:bg-red-900/30" : "bg-slate-100 dark:bg-slate-800"}`}
+          >
+            <Clock
+              className={`w-4 h-4 ${timeLeft <= 10 ? "text-red-500" : "text-slate-500"}`}
+            />
+            <span
+              className={`text-sm font-medium ${timeLeft <= 10 ? "text-red-500" : "text-slate-600 dark:text-slate-300"}`}
+            >
               {timeLeft}s
             </span>
           </div>
           <div className="flex items-center gap-1">
             <Star className="w-5 h-5 text-amber-500" />
-            <span className="font-bold text-slate-800 dark:text-white">{score}</span>
+            <span className="font-bold text-slate-800 dark:text-white">
+              {score}
+            </span>
           </div>
         </div>
       </div>
@@ -656,7 +774,8 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              {lang === "en" ? "Hint: " : "تلميح: "}{word.hint[lang]}
+              {lang === "en" ? "Hint: " : "تلميح: "}
+              {word.hint[lang]}
             </motion.p>
           )}
 
@@ -666,7 +785,9 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
               value={userInput}
               onChange={(e) => setUserInput(e.target.value.toUpperCase())}
               onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              placeholder={lang === "en" ? "Type your answer..." : "اكتب إجابتك..."}
+              placeholder={
+                lang === "en" ? "Type your answer..." : "اكتب إجابتك..."
+              }
               className={`
                 flex-1 px-4 py-3 rounded-xl border-2 text-center font-bold text-lg uppercase
                 ${isCorrect === true ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30" : ""}
@@ -685,7 +806,9 @@ const WordScrambleGame = ({ lang, onBack }: { lang: "en" | "ar"; onBack: () => v
               onClick={() => setShowHint(true)}
               className="text-blue-500 text-sm hover:text-blue-600 transition-colors"
             >
-              {lang === "en" ? "Need a hint? (-5 points)" : "تحتاج تلميح؟ (-5 نقاط)"}
+              {lang === "en"
+                ? "Need a hint? (-5 points)"
+                : "تحتاج تلميح؟ (-5 نقاط)"}
             </button>
           )}
         </motion.div>
@@ -703,7 +826,10 @@ export default function GamesPage() {
     {
       id: "trivia" as GameMode,
       title: { en: "Islamic Trivia", ar: "مسابقة إسلامية" },
-      description: { en: "Test your knowledge with fun questions!", ar: "اختبر معلوماتك بأسئلة ممتعة!" },
+      description: {
+        en: "Test your knowledge with fun questions!",
+        ar: "اختبر معلوماتك بأسئلة ممتعة!",
+      },
       icon: <Brain className="w-8 h-8" />,
       color: "from-emerald-400 to-teal-500",
       bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
@@ -711,7 +837,10 @@ export default function GamesPage() {
     {
       id: "memory" as GameMode,
       title: { en: "Memory Match", ar: "مطابقة الذاكرة" },
-      description: { en: "Match English words with Arabic!", ar: "طابق الكلمات الإنجليزية مع العربية!" },
+      description: {
+        en: "Match English words with Arabic!",
+        ar: "طابق الكلمات الإنجليزية مع العربية!",
+      },
       icon: <Sparkles className="w-8 h-8" />,
       color: "from-purple-400 to-pink-500",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
@@ -719,7 +848,10 @@ export default function GamesPage() {
     {
       id: "word-scramble" as GameMode,
       title: { en: "Word Scramble", ar: "ترتيب الكلمات" },
-      description: { en: "Unscramble Islamic terms!", ar: "رتب المصطلحات الإسلامية!" },
+      description: {
+        en: "Unscramble Islamic terms!",
+        ar: "رتب المصطلحات الإسلامية!",
+      },
       icon: <Shuffle className="w-8 h-8" />,
       color: "from-blue-400 to-indigo-500",
       bgColor: "bg-blue-50 dark:bg-blue-900/20",
@@ -733,12 +865,21 @@ export default function GamesPage() {
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {gameMode !== "menu" ? (
-              <Button variant="ghost" size="sm" onClick={() => setGameMode("menu")} leftIcon={<ArrowLeft className="w-4 h-4" />}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setGameMode("menu")}
+                leftIcon={<ArrowLeft className="w-4 h-4" />}
+              >
                 {lang === "en" ? "Back" : "رجوع"}
               </Button>
             ) : (
               <Link href="/journey">
-                <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  leftIcon={<ArrowLeft className="w-4 h-4" />}
+                >
                   {lang === "en" ? "Journey" : "الرحلة"}
                 </Button>
               </Link>
@@ -776,7 +917,9 @@ export default function GamesPage() {
                   {lang === "en" ? "Islamic Games" : "الألعاب الإسلامية"}
                 </h1>
                 <p className="text-slate-600 dark:text-slate-400">
-                  {lang === "en" ? "Learn while having fun!" : "تعلم وأنت تستمتع!"}
+                  {lang === "en"
+                    ? "Learn while having fun!"
+                    : "تعلم وأنت تستمتع!"}
                 </p>
               </div>
 
@@ -793,7 +936,9 @@ export default function GamesPage() {
                     whileHover={{ scale: 1.02, y: -4 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${game.color} text-white mb-4 group-hover:scale-110 transition-transform`}>
+                    <div
+                      className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${game.color} text-white mb-4 group-hover:scale-110 transition-transform`}
+                    >
                       {game.icon}
                     </div>
                     <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-1">
@@ -821,16 +966,28 @@ export default function GamesPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">0</p>
-                    <p className="text-xs text-slate-500">{lang === "en" ? "Games Played" : "ألعاب لُعبت"}</p>
+                    <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+                      0
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {lang === "en" ? "Games Played" : "ألعاب لُعبت"}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">0</p>
-                    <p className="text-xs text-slate-500">{lang === "en" ? "High Score" : "أعلى نتيجة"}</p>
+                    <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                      0
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {lang === "en" ? "High Score" : "أعلى نتيجة"}
+                    </p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">0</p>
-                    <p className="text-xs text-slate-500">{lang === "en" ? "Perfect Rounds" : "جولات مثالية"}</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      0
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {lang === "en" ? "Perfect Rounds" : "جولات مثالية"}
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -866,7 +1023,10 @@ export default function GamesPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <WordScrambleGame lang={lang} onBack={() => setGameMode("menu")} />
+              <WordScrambleGame
+                lang={lang}
+                onBack={() => setGameMode("menu")}
+              />
             </motion.div>
           )}
         </AnimatePresence>

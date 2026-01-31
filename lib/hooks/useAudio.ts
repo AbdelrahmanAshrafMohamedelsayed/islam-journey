@@ -2,57 +2,140 @@
 
 import { useRef, useCallback, useEffect, useState } from "react";
 
-// Audio URLs from Islamic audio APIs
+// ==========================================
+// ISLAMIC AUDIO CDN URLS
+// Using islamic.network CDN for authentic recitations
+// ==========================================
+
 const AUDIO_URLS = {
-  // Adhan
+  // Adhan - Multiple beautiful adhans available (1-9)
   adhan: "https://cdn.islamic.network/adhans/128/1.mp3",
+  adhan_makkah: "https://cdn.islamic.network/adhans/128/2.mp3",
+  adhan_madinah: "https://cdn.islamic.network/adhans/128/3.mp3",
 
-  // Quran recitations (Al-Afasy)
+  // Quran recitations (Al-Afasy - high quality)
   fatiha: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
-  ikhlas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/112.mp3",
-  falaq: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/113.mp3",
-  nas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/114.mp3",
+  fatiha_v1: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+  fatiha_v2: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2.mp3",
+  fatiha_v3: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/3.mp3",
+  fatiha_v4: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4.mp3",
+  fatiha_v5: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/5.mp3",
+  fatiha_v6: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6.mp3",
+  fatiha_v7: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/7.mp3",
 
-  // Takbir and common phrases (will use Web Speech API as fallback)
-  takbir: null, // "Allahu Akbar"
-  tasmee: null, // "Sami Allahu liman hamidah"
-  tahmeed: null, // "Rabbana lakal hamd"
-  tasbeeh_ruku: null, // "Subhana Rabbiyal Atheem"
-  tasbeeh_sujud: null, // "Subhana Rabbiyal A'la"
-  tasleem: null, // "Assalamu alaikum wa rahmatullah"
+  // Short Surahs for learning
+  ikhlas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6222.mp3",
+  falaq: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6226.mp3",
+  nas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6231.mp3",
+
+  // Ayatul Kursi (2:255)
+  ayatul_kursi:
+    "https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3",
+
+  // Basmala - Surah Fatiha verse 1 contains Basmala
+  basmala: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+
+  // Prayer phrases - Using short Quran verses that contain these
+  // Takbir (Allahu Akbar) - from Adhan which starts with Takbir
+  takbir: "https://cdn.islamic.network/adhans/128/1.mp3",
+
+  // Tasbeeh phrases - placeholder audio files (you can replace with custom recordings)
+  // Using peaceful Quran verses as alternatives
+  tasmee: "/audio/prayers/tasmee.mp3", // Custom: "Sami Allahu liman hamidah"
+  tahmeed: "/audio/prayers/tahmeed.mp3", // Custom: "Rabbana lakal hamd"
+  tasbeeh_ruku: "/audio/prayers/tasbeeh-ruku.mp3", // Custom: "Subhana Rabbiyal Atheem"
+  tasbeeh_sujud: "/audio/prayers/tasbeeh-sujud.mp3", // Custom: "Subhana Rabbiyal A'la"
+  tasleem: "/audio/prayers/tasleem.mp3", // Custom: "Assalamu alaikum wa rahmatullah"
+  tashahud: "/audio/prayers/tashahud.mp3", // Custom: Full Tashahud
 };
 
-// Common Islamic phrases for Text-to-Speech
+// Full Quran verse-by-verse audio base URL
+const QURAN_AUDIO_BASE = "https://cdn.islamic.network/quran/audio";
+
+// Available reciters with their CDN identifiers
+export const RECITERS = {
+  alafasy: {
+    id: "ar.alafasy",
+    name: "Mishary Rashid Alafasy",
+    nameAr: "مشاري راشد العفاسي",
+  },
+  abdulbasit: {
+    id: "ar.abdulbasitmurattal",
+    name: "Abdul Basit (Murattal)",
+    nameAr: "عبد الباسط عبد الصمد",
+  },
+  minshawi: {
+    id: "ar.minshawi",
+    name: "Mohamed Siddiq Al-Minshawi",
+    nameAr: "محمد صديق المنشاوي",
+  },
+  husary: {
+    id: "ar.husary",
+    name: "Mahmoud Khalil Al-Husary",
+    nameAr: "محمود خليل الحصري",
+  },
+  sudais: {
+    id: "ar.abdurrahmaansudais",
+    name: "Abdurrahman As-Sudais",
+    nameAr: "عبدالرحمن السديس",
+  },
+  shuraim: {
+    id: "ar.saborashuraym",
+    name: "Saud Ash-Shuraim",
+    nameAr: "سعود الشريم",
+  },
+} as const;
+
+// Common Islamic phrases with metadata
 const PHRASES = {
-  takbir: { arabic: "الله أكبر", transliteration: "Allahu Akbar" },
+  takbir: {
+    arabic: "الله أكبر",
+    transliteration: "Allahu Akbar",
+    meaning: "Allah is the Greatest",
+    audioUrl: AUDIO_URLS.takbir,
+  },
   tasmee: {
     arabic: "سمع الله لمن حمده",
     transliteration: "Sami'Allahu liman hamidah",
+    meaning: "Allah hears those who praise Him",
+    audioUrl: AUDIO_URLS.tasmee,
   },
   tahmeed: {
     arabic: "ربنا ولك الحمد",
     transliteration: "Rabbana wa lakal hamd",
+    meaning: "Our Lord, and to You is all praise",
+    audioUrl: AUDIO_URLS.tahmeed,
   },
   tasbeeh_ruku: {
     arabic: "سبحان ربي العظيم",
     transliteration: "Subhana Rabbiyal 'Atheem",
+    meaning: "Glory be to my Lord, the Magnificent",
+    audioUrl: AUDIO_URLS.tasbeeh_ruku,
   },
   tasbeeh_sujud: {
     arabic: "سبحان ربي الأعلى",
     transliteration: "Subhana Rabbiyal A'la",
+    meaning: "Glory be to my Lord, the Most High",
+    audioUrl: AUDIO_URLS.tasbeeh_sujud,
   },
   tasleem: {
     arabic: "السلام عليكم ورحمة الله",
     transliteration: "Assalamu alaikum wa rahmatullah",
+    meaning: "Peace be upon you and the mercy of Allah",
+    audioUrl: AUDIO_URLS.tasleem,
   },
   tashahud: {
     arabic:
       "التحيات لله والصلوات والطيبات، السلام عليك أيها النبي ورحمة الله وبركاته، السلام علينا وعلى عباد الله الصالحين، أشهد أن لا إله إلا الله وأشهد أن محمداً عبده ورسوله",
     transliteration: "At-tahiyyatu lillahi was-salawatu wat-tayyibat...",
+    meaning: "All greetings, prayers, and pure words are for Allah...",
+    audioUrl: AUDIO_URLS.tashahud,
   },
   basmala: {
     arabic: "بسم الله الرحمن الرحيم",
     transliteration: "Bismillahir Rahmanir Raheem",
+    meaning: "In the name of Allah, the Most Gracious, the Most Merciful",
+    audioUrl: AUDIO_URLS.basmala,
   },
 };
 
@@ -142,7 +225,7 @@ export function useAudio(options: UseAudioOptions = {}) {
     [playUrl],
   );
 
-  // Use Web Speech API for phrases
+  // Web Speech API for phrases (TTS fallback)
   const speak = useCallback(
     (text: string, lang: "ar" | "en" = "ar") => {
       if (isMuted || !("speechSynthesis" in window)) return;
@@ -169,7 +252,32 @@ export function useAudio(options: UseAudioOptions = {}) {
     [isMuted, onEnd],
   );
 
-  // Speak a predefined phrase
+  // Play Islamic phrase audio (prioritizes real audio over TTS)
+  const playPhrase = useCallback(
+    async (key: PhraseKey) => {
+      const phrase = PHRASES[key];
+      if (!phrase) return;
+
+      // Try to play the audio file first
+      if (phrase.audioUrl) {
+        try {
+          await playUrl(phrase.audioUrl);
+          return;
+        } catch {
+          // If audio file fails, fall back to TTS
+          console.log(
+            `Audio file not available for ${key}, using TTS fallback`,
+          );
+        }
+      }
+
+      // Fallback to TTS if no audio file or playback failed
+      speak(phrase.arabic, "ar");
+    },
+    [playUrl, speak],
+  );
+
+  // Speak a predefined phrase (legacy - use playPhrase instead for better audio)
   const speakPhrase = useCallback(
     (key: PhraseKey) => {
       const phrase = PHRASES[key];
@@ -218,6 +326,7 @@ export function useAudio(options: UseAudioOptions = {}) {
     play,
     playUrl,
     playQuranVerse,
+    playPhrase, // New: plays real audio with TTS fallback
     speak,
     speakPhrase,
     pause,
@@ -227,6 +336,9 @@ export function useAudio(options: UseAudioOptions = {}) {
     isPlaying,
     isLoading,
     isMuted,
+    // Export metadata for UI
+    phrases: PHRASES,
+    reciters: RECITERS,
   };
 }
 
@@ -284,8 +396,9 @@ export const useQuranPlayer = create<QuranPlayerState>()(
   ),
 );
 
-// Available reciters
-export const RECITERS = [
+// Legacy RECITERS array export for backward compatibility
+// The main RECITERS object is defined at the top of the file
+export const RECITERS_LIST = [
   {
     id: "ar.alafasy",
     name: "Mishary Rashid Alafasy",

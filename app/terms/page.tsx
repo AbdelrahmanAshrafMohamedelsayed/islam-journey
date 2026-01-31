@@ -2,7 +2,15 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, FileText, CheckCircle, AlertTriangle, Scale, Users, Globe } from "lucide-react";
+import {
+  ArrowLeft,
+  FileText,
+  CheckCircle,
+  AlertTriangle,
+  Scale,
+  Users,
+  Globe,
+} from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useSettingsStore } from "@/lib/stores";
 
@@ -138,7 +146,11 @@ In no event shall Islam Journey be liable for any damages arising from the use o
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/settings">
-            <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+            <Button
+              variant="ghost"
+              size="sm"
+              leftIcon={<ArrowLeft className="w-4 h-4" />}
+            >
               {lang === "en" ? "Back" : "رجوع"}
             </Button>
           </Link>
@@ -171,7 +183,9 @@ In no event shall Islam Journey be liable for any damages arising from the use o
               : "يرجى قراءة هذه الشروط بعناية قبل استخدام رحلة الإسلام."}
           </p>
           <p className="text-sm text-slate-500 dark:text-slate-500 mt-4">
-            {lang === "en" ? "Last updated: January 2025" : "آخر تحديث: يناير 2025"}
+            {lang === "en"
+              ? "Last updated: January 2025"
+              : "آخر تحديث: يناير 2025"}
           </p>
         </motion.div>
 

@@ -17,12 +17,34 @@ export const salahLessons: Record<string, LessonContent> = {
     xpReward: 50,
     sections: [
       {
+        id: "salah-importance-intro-video",
+        type: "video",
+        content: {
+          en: "Watch: Introduction to Salah - Your Daily Connection with Allah",
+          ar: "شاهد: مقدمة عن الصلاة - اتصالك اليومي بالله",
+        },
+        // Placeholder - replace with actual video URL
+        mediaUrl: "/videos/salah/introduction.mp4",
+        posterUrl: "/images/salah/intro-poster.jpg",
+      },
+      {
         id: "salah-importance-section-1",
         type: "text",
         content: {
           en: 'Welcome to one of the most important lessons in your Islamic journey! **Salah** (prayer) is the second pillar of Islam and is often called the "backbone" of the religion. While the Shahada brings you into Islam, Salah is what keeps your faith alive and growing every single day.',
           ar: 'مرحباً بكم في أحد أهم الدروس في رحلتكم الإسلامية! **الصلاة** هي الركن الثاني من أركان الإسلام وغالباً ما تُسمى "عمود" الدين. بينما الشهادة تُدخلك الإسلام، الصلاة هي ما يُبقي إيمانك حياً وينمو كل يوم.',
         },
+      },
+      {
+        id: "salah-importance-animation",
+        type: "animation",
+        content: {
+          en: "The spiritual journey of prayer connects you directly to Allah",
+          ar: "الرحلة الروحية للصلاة تربطك مباشرة بالله",
+        },
+        // Placeholder - replace with actual Lottie animation URL
+        mediaUrl: "https://lottie.host/embed/prayer-connection.json",
+        loop: true,
       },
       {
         id: "salah-importance-section-2",
@@ -45,6 +67,64 @@ export const salahLessons: Record<string, LessonContent> = {
         },
       },
       {
+        id: "salah-importance-interactive",
+        type: "interactive",
+        content: {
+          en: "Tap to discover the benefits of Salah",
+          ar: "اضغط لاكتشاف فوائد الصلاة",
+        },
+        items: [
+          {
+            label: { en: "Spiritual Cleansing", ar: "التطهير الروحي" },
+            detail: {
+              en: "Each prayer washes away sins committed since the last prayer",
+              ar: "كل صلاة تغسل الذنوب المرتكبة منذ الصلاة السابقة",
+            },
+            icon: "✨",
+          },
+          {
+            label: { en: "Direct Connection", ar: "اتصال مباشر" },
+            detail: {
+              en: "No intermediaries - you speak directly to Allah",
+              ar: "لا وسطاء - تتحدث مباشرة إلى الله",
+            },
+            icon: "🤲",
+          },
+          {
+            label: { en: "Life Structure", ar: "تنظيم الحياة" },
+            detail: {
+              en: "Five prayers give rhythm and purpose to your day",
+              ar: "خمس صلوات تعطي إيقاعاً وهدفاً ليومك",
+            },
+            icon: "⏰",
+          },
+          {
+            label: { en: "Peace & Tranquility", ar: "السلام والطمأنينة" },
+            detail: {
+              en: "A sanctuary from worldly stress to reconnect with your Lord",
+              ar: "ملاذ من ضغوط الدنيا للتواصل مع ربك",
+            },
+            icon: "🕊️",
+          },
+          {
+            label: { en: "Protection", ar: "الحماية" },
+            detail: {
+              en: "Regular prayer naturally keeps you away from harmful actions",
+              ar: "الصلاة المنتظمة تبعدك طبيعياً عن الأفعال الضارة",
+            },
+            icon: "🛡️",
+          },
+          {
+            label: { en: "Immense Reward", ar: "أجر عظيم" },
+            detail: {
+              en: "5 prayers carry the reward of 50 - Allah's special mercy",
+              ar: "5 صلوات بأجر 50 - رحمة الله الخاصة",
+            },
+            icon: "⭐",
+          },
+        ],
+      },
+      {
         id: "salah-importance-section-4",
         type: "quran",
         content: {
@@ -54,12 +134,32 @@ export const salahLessons: Record<string, LessonContent> = {
         reference: { en: "Quran 29:45", ar: "القرآن 29:45" },
       },
       {
+        id: "salah-importance-audio",
+        type: "audio",
+        content: {
+          en: "Listen to the Adhan (Call to Prayer)",
+          ar: "استمع إلى الأذان",
+        },
+        mediaUrl: "https://cdn.islamic.network/adhans/128/1.mp3",
+        transliteration: "Allahu Akbar, Allahu Akbar...",
+      },
+      {
         id: "salah-importance-section-5",
         type: "text",
         content: {
           en: "### What Salah Does for You\n\n1. **Direct Connection to Allah** - No priests, no intermediaries. You stand directly before your Creator five times a day.\n\n2. **Spiritual Cleansing** - Just as you wash your body, prayer washes your soul. Each prayer erases sins committed since the previous prayer.\n\n3. **Life Structure** - The five daily prayers give rhythm and purpose to your day, reminding you of what truly matters.\n\n4. **Protection from Sin** - Regular prayer naturally keeps you away from harmful actions. When you speak to Allah five times daily, it becomes harder to disobey Him.\n\n5. **Peace and Tranquility** - In a world full of stress, prayer is your sanctuary. It's your time to disconnect from worldly worries and reconnect with your Lord.",
           ar: "### ماذا تفعل الصلاة لك\n\n1. **اتصال مباشر بالله** - لا كهنة، لا وسطاء. تقف مباشرة أمام خالقك خمس مرات في اليوم.\n\n2. **تطهير روحي** - كما تغسل جسمك، الصلاة تغسل روحك. كل صلاة تمحو الذنوب المرتكبة منذ الصلاة السابقة.\n\n3. **هيكلة الحياة** - الصلوات الخمس اليومية تعطي إيقاعاً وهدفاً ليومك، تذكرك بما يهم حقاً.\n\n4. **حماية من الذنب** - الصلاة المنتظمة تبعدك طبيعياً عن الأفعال الضارة. عندما تتحدث إلى الله خمس مرات يومياً، يصبح من الصعب عصيانه.\n\n5. **السلام والطمأنينة** - في عالم مليء بالضغوط، الصلاة هي ملاذك. إنه وقتك للانفصال عن هموم الدنيا والتواصل مع ربك.",
         },
+      },
+      {
+        id: "salah-importance-image",
+        type: "image",
+        content: {
+          en: "The five daily prayers throughout the day",
+          ar: "الصلوات الخمس اليومية على مدار اليوم",
+        },
+        mediaUrl: "/images/salah/five-prayers-timeline.png",
+        mediaAlt: "Timeline showing the five daily prayer times",
       },
       {
         id: "salah-importance-section-6",

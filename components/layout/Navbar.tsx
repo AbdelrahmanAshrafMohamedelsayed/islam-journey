@@ -55,9 +55,33 @@ export function Navbar() {
     setLanguage(language === "en" ? "ar" : "en");
   };
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+  // Cycle through themes: light → dark → mosque → light
+  const cycleTheme = () => {
+    const themeOrder: Array<"light" | "dark" | "mosque"> = [
+      "light",
+      "dark",
+      "mosque",
+    ];
+    const currentIndex = themeOrder.indexOf(
+      theme as "light" | "dark" | "mosque",
+    );
+    const nextIndex = (currentIndex + 1) % themeOrder.length;
+    setTheme(themeOrder[nextIndex]);
   };
+
+  // Get theme icon and label
+  const getThemeIcon = () => {
+    switch (theme) {
+      case "dark":
+        return { icon: <Moon className="w-5 h-5" />, label: "Dark" };
+      case "mosque":
+        return { icon: <span className="text-lg">🕌</span>, label: "Mosque" };
+      default:
+        return { icon: <Sun className="w-5 h-5" />, label: "Light" };
+    }
+  };
+
+  const themeInfo = getThemeIcon();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
@@ -131,15 +155,16 @@ export function Navbar() {
 
             {/* Theme toggle */}
             <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              aria-label="Toggle theme"
+              onClick={cycleTheme}
+              className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative group"
+              aria-label={`Theme: ${themeInfo.label}. Click to change.`}
+              title={`Theme: ${themeInfo.label}`}
             >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {themeInfo.icon}
+              {/* Tooltip */}
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                {themeInfo.label}
+              </span>
             </button>
 
             {/* Settings */}

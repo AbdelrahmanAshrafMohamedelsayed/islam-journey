@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { Button, Card } from "@/components/ui";
 import { ProgressBar } from "@/components/ui/Progress";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
@@ -27,7 +29,119 @@ import {
   AlertTriangle,
   Quote,
   BookMarked,
+  Play,
+  Pause,
+  Maximize2,
+  RotateCcw,
 } from "lucide-react";
+
+// Dynamically import Lottie player to avoid SSR issues
+const Player = dynamic(
+  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+  { ssr: false },
+);
+
+// Interactive Section Component for tap-to-reveal, clickable elements
+function InteractiveSection({
+  section,
+  lang,
+  content,
+}: {
+  section: LessonSection;
+  lang: "en" | "ar";
+  content: string;
+}) {
+  const [revealed, setRevealed] = useState<Set<number>>(new Set());
+  const [completed, setCompleted] = useState(false);
+
+  // Parse interactive items from section data
+  const items = section.items || [];
+
+  const handleReveal = (index: number) => {
+    const newRevealed = new Set(revealed);
+    newRevealed.add(index);
+    setRevealed(newRevealed);
+
+    if (newRevealed.size === items.length) {
+      setCompleted(true);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="my-8"
+    >
+      <Card variant="glass" padding="lg">
+        <div className="text-center mb-6">
+          <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-2">
+            {content || (lang === "en" ? "Tap to learn" : "اضغط للتعلم")}
+          </h3>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            {lang === "en"
+              ? `${revealed.size} of ${items.length} discovered`
+              : `${revealed.size} من ${items.length} مكتشفة`}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {items.map(
+            (
+              item: {
+                label: { en: string; ar: string };
+                detail: { en: string; ar: string };
+                icon?: string;
+              },
+              index: number,
+            ) => (
+              <motion.button
+                key={index}
+                onClick={() => handleReveal(index)}
+                className={`p-4 rounded-xl transition-all ${
+                  revealed.has(index)
+                    ? "bg-emerald-100 dark:bg-emerald-900/50 border-2 border-emerald-500"
+                    : "bg-slate-100 dark:bg-slate-800 border-2 border-transparent hover:border-emerald-300 dark:hover:border-emerald-700"
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="text-2xl mb-2">{item.icon || "✨"}</div>
+                <div className="font-medium text-slate-800 dark:text-slate-200 text-sm">
+                  {item.label[lang]}
+                </div>
+                {revealed.has(index) && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-2 text-xs text-emerald-600 dark:text-emerald-400"
+                  >
+                    {item.detail[lang]}
+                  </motion.div>
+                )}
+              </motion.button>
+            ),
+          )}
+        </div>
+
+        {completed && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mt-6 text-center"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-900/50 rounded-full text-emerald-700 dark:text-emerald-300">
+              <CheckCircle2 className="w-5 h-5" />
+              <span className="font-medium">
+                {lang === "en" ? "All discovered!" : "تم اكتشاف الكل!"}
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </Card>
+    </motion.div>
+  );
+}
 
 interface LessonViewerProps {
   lessonId: string;
@@ -393,6 +507,205 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                     {content}
                   </p>
                 </div>
+              </div>
+            </Card>
+          </motion.div>
+        );
+
+      // Video section - for instructional videos
+      case "video":
+        return (
+          <motion.div
+            key={section.id || `video-${currentSectionIndex}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="my-8"
+          >
+            <Card variant="glass" padding="none" className="overflow-hidden">
+              <div className="aspect-video relative bg-slate-900 rounded-t-xl overflow-hidden">
+                {section.mediaUrl ? (
+                  section.mediaUrl.includes("youtube.com") ||
+                  section.mediaUrl.includes("youtu.be") ? (
+                    <iframe
+                      src={section.mediaUrl
+                        .replace("watch?v=", "embed/")
+                        .replace("youtu.be/", "youtube.com/embed/")}
+                      title={content}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      src={section.mediaUrl}
+                      controls
+                      className="w-full h-full object-contain"
+                      poster={section.posterUrl}
+                      preload="metadata"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  )
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-slate-400">
+                    <div className="text-center">
+                      <Play className="w-16 h-16 mx-auto mb-2 opacity-50" />
+                      <p>
+                        {lang === "en"
+                          ? "Video coming soon"
+                          : "الفيديو قادم قريباً"}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              {content && (
+                <div className="p-4 bg-slate-50 dark:bg-slate-800/50">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    {content}
+                  </p>
+                </div>
+              )}
+            </Card>
+          </motion.div>
+        );
+
+      // Animation section - for Lottie animations
+      case "animation":
+        return (
+          <motion.div
+            key={section.id || `animation-${currentSectionIndex}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="my-8"
+          >
+            <Card variant="glass" padding="lg" className="text-center">
+              <div className="relative w-full max-w-md mx-auto aspect-square">
+                {section.mediaUrl ? (
+                  <Player
+                    src={section.mediaUrl}
+                    autoplay
+                    loop={section.loop !== false}
+                    className="w-full h-full"
+                    background="transparent"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-xl">
+                    <div className="text-center">
+                      <RotateCcw className="w-12 h-12 mx-auto mb-2 opacity-50 animate-spin" />
+                      <p className="text-sm">
+                        {lang === "en"
+                          ? "Animation loading..."
+                          : "جاري تحميل الرسوم المتحركة..."}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              {content && (
+                <p className="mt-4 text-slate-700 dark:text-slate-300">
+                  {content}
+                </p>
+              )}
+            </Card>
+          </motion.div>
+        );
+
+      // Image section - for illustrative images with zoom
+      case "image":
+        return (
+          <motion.div
+            key={section.id || `image-${currentSectionIndex}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="my-8"
+          >
+            <Card
+              variant="glass"
+              padding="none"
+              className="overflow-hidden group"
+            >
+              <div className="relative aspect-video bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                {section.mediaUrl ? (
+                  <>
+                    <Image
+                      src={section.mediaUrl}
+                      alt={content || "Lesson illustration"}
+                      fill
+                      className="object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <button
+                      className="absolute top-2 right-2 p-2 bg-black/50 rounded-lg text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => {
+                        // Open image in full screen modal
+                        window.open(section.mediaUrl, "_blank");
+                      }}
+                    >
+                      <Maximize2 className="w-4 h-4" />
+                    </button>
+                  </>
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-slate-400">
+                    <p>
+                      {lang === "en"
+                        ? "Image coming soon"
+                        : "الصورة قادمة قريباً"}
+                    </p>
+                  </div>
+                )}
+              </div>
+              {content && (
+                <div className="p-4">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center italic">
+                    {content}
+                  </p>
+                </div>
+              )}
+            </Card>
+          </motion.div>
+        );
+
+      // Interactive section - for tap-to-reveal, clickable diagrams, etc.
+      case "interactive":
+        return (
+          <InteractiveSection
+            key={section.id || `interactive-${currentSectionIndex}`}
+            section={section}
+            lang={lang}
+            content={content}
+          />
+        );
+
+      // Audio section - for recitations or pronunciation guides
+      case "audio":
+        return (
+          <motion.div
+            key={section.id || `audio-${currentSectionIndex}`}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="my-6"
+          >
+            <Card variant="glass" className="flex items-center gap-4">
+              <button
+                className="p-4 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl text-emerald-600 dark:text-emerald-400 hover:bg-emerald-200 dark:hover:bg-emerald-800/50 transition-colors"
+                onClick={() => {
+                  if (section.mediaUrl) {
+                    const audio = new Audio(section.mediaUrl);
+                    audio.play();
+                  }
+                }}
+              >
+                <Volume2 className="w-6 h-6" />
+              </button>
+              <div className="flex-1">
+                <p className="font-medium text-slate-800 dark:text-slate-200">
+                  {content}
+                </p>
+                {section.transliteration && (
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400 italic">
+                    {section.transliteration}
+                  </p>
+                )}
               </div>
             </Card>
           </motion.div>

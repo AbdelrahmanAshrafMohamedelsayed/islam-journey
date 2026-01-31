@@ -29,23 +29,38 @@ import {
 // Daily inspirational quotes
 const dailyQuotes = [
   {
-    text: { en: "Verily, with hardship comes ease.", ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا" },
+    text: {
+      en: "Verily, with hardship comes ease.",
+      ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+    },
     source: "Quran 94:6",
   },
   {
-    text: { en: "The best of people are those who are most beneficial to people.", ar: "خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ" },
+    text: {
+      en: "The best of people are those who are most beneficial to people.",
+      ar: "خَيْرُ النَّاسِ أَنْفَعُهُمْ لِلنَّاسِ",
+    },
     source: "Hadith",
   },
   {
-    text: { en: "Seek knowledge from the cradle to the grave.", ar: "اطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ" },
+    text: {
+      en: "Seek knowledge from the cradle to the grave.",
+      ar: "اطْلُبُوا الْعِلْمَ مِنَ الْمَهْدِ إِلَى اللَّحْدِ",
+    },
     source: "Wisdom",
   },
   {
-    text: { en: "Be in this world as if you were a stranger or a traveler.", ar: "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ" },
+    text: {
+      en: "Be in this world as if you were a stranger or a traveler.",
+      ar: "كُنْ فِي الدُّنْيَا كَأَنَّكَ غَرِيبٌ أَوْ عَابِرُ سَبِيلٍ",
+    },
     source: "Bukhari",
   },
   {
-    text: { en: "The strong person is not the one who can wrestle, but the one who controls himself when angry.", ar: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ" },
+    text: {
+      en: "The strong person is not the one who can wrestle, but the one who controls himself when angry.",
+      ar: "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ، إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ",
+    },
     source: "Bukhari & Muslim",
   },
 ];
@@ -55,32 +70,32 @@ const getGreeting = (hour: number, isArabic: boolean) => {
   if (hour >= 5 && hour < 12) {
     return {
       greeting: isArabic ? "صباح الخير! 🌅" : "Good Morning! 🌅",
-      message: isArabic 
-        ? "أتمنى أن تكون قد صليت الفجر. يوم جديد مليء بالفرص للتعلم!" 
+      message: isArabic
+        ? "أتمنى أن تكون قد صليت الفجر. يوم جديد مليء بالفرص للتعلم!"
         : "Hope you prayed Fajr. A new day full of opportunities to learn!",
       character: "Yusuf",
     };
   } else if (hour >= 12 && hour < 17) {
     return {
       greeting: isArabic ? "مرحباً! ☀️" : "Hello! ☀️",
-      message: isArabic 
-        ? "وقت رائع للتعلم. خذ استراحة واستمر في رحلتك!" 
+      message: isArabic
+        ? "وقت رائع للتعلم. خذ استراحة واستمر في رحلتك!"
         : "Great time to learn. Take a break and continue your journey!",
       character: "Fatima",
     };
   } else if (hour >= 17 && hour < 20) {
     return {
       greeting: isArabic ? "مساء النور! 🌆" : "Good Evening! 🌆",
-      message: isArabic 
-        ? "لا تنس صلاة المغرب. الوقت المثالي لبعض التعلم الهادئ." 
+      message: isArabic
+        ? "لا تنس صلاة المغرب. الوقت المثالي لبعض التعلم الهادئ."
         : "Don't forget Maghrib prayer. Perfect time for some quiet learning.",
       character: "Bilal",
     };
   } else {
     return {
       greeting: isArabic ? "مساء الخير! 🌙" : "Good Night! 🌙",
-      message: isArabic 
-        ? "قبل النوم، لماذا لا تقرأ درساً قصيراً أو بعض الأذكار؟" 
+      message: isArabic
+        ? "قبل النوم، لماذا لا تقرأ درساً قصيراً أو بعض الأذكار؟"
         : "Before bed, why not read a short lesson or some dhikr?",
       character: "Khadijah",
     };
@@ -88,9 +103,14 @@ const getGreeting = (hour: number, isArabic: boolean) => {
 };
 
 // Character avatar component
-const CharacterGreeting = ({ character, greeting, message, isArabic }: { 
-  character: string; 
-  greeting: string; 
+const CharacterGreeting = ({
+  character,
+  greeting,
+  message,
+  isArabic,
+}: {
+  character: string;
+  greeting: string;
   message: string;
   isArabic: boolean;
 }) => {
@@ -116,12 +136,16 @@ const CharacterGreeting = ({ character, greeting, message, isArabic }: {
       </motion.div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <span className="font-bold text-slate-800 dark:text-white">{character}</span>
+          <span className="font-bold text-slate-800 dark:text-white">
+            {character}
+          </span>
           <span className="text-xs text-slate-500 dark:text-slate-400">
             {isArabic ? "مرشدك" : "Your Guide"}
           </span>
         </div>
-        <p className="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">{greeting}</p>
+        <p className="font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+          {greeting}
+        </p>
         <p className="text-sm text-slate-600 dark:text-slate-300">{message}</p>
       </div>
     </motion.div>
@@ -132,7 +156,7 @@ export default function HomePage() {
   const { language } = useSettingsStore();
   const { totalXp, level, streakDays } = useProgressStore();
   const isArabic = language === "ar";
-  
+
   // Time-based greeting
   const [currentHour, setCurrentHour] = useState(12);
   const [dailyQuote, setDailyQuote] = useState(dailyQuotes[0]);
@@ -142,7 +166,10 @@ export default function HomePage() {
     const hour = new Date().getHours();
     setCurrentHour(hour);
     // Pick a random quote for the day (based on date)
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+    const dayOfYear = Math.floor(
+      (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) /
+        86400000,
+    );
     setDailyQuote(dailyQuotes[dayOfYear % dailyQuotes.length]);
   }, []);
 
@@ -343,10 +370,15 @@ export default function HomePage() {
                 {isArabic ? "إلهام اليوم" : "Daily Inspiration"}
               </span>
             </div>
-            <p className="text-xl font-arabic text-slate-800 dark:text-white mb-2 leading-relaxed" dir={isArabic ? "rtl" : "ltr"}>
+            <p
+              className="text-xl font-arabic text-slate-800 dark:text-white mb-2 leading-relaxed"
+              dir={isArabic ? "rtl" : "ltr"}
+            >
               "{dailyQuote.text[isArabic ? "ar" : "en"]}"
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">— {dailyQuote.source}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              — {dailyQuote.source}
+            </p>
           </motion.div>
         </div>
 

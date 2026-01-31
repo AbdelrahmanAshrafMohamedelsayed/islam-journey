@@ -37,9 +37,19 @@
   --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.3);
 }
 
-/* Dark theme */
+/* Dark theme - class based */
+.dark {
+  --background: #0a1929;
+  --background-secondary: #132f4c;
+  --foreground: #f5f5f5;
+  --foreground-secondary: #b0bec5;
+  --border: #1e3a5f;
+  --border-dark: #2d4a6f;
+}
+
+/* Dark theme - system preference fallback */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.mosque) {
     --background: #0a1929;
     --background-secondary: #132f4c;
     --foreground: #f5f5f5;
@@ -47,6 +57,136 @@
     --border: #1e3a5f;
     --border-dark: #2d4a6f;
   }
+}
+
+/* ==========================================
+   MOSQUE ATMOSPHERE THEME
+   Warm lantern-lit ambiance for prayers
+   ========================================== */
+.mosque {
+  --background: #1a1510;
+  --background-secondary: #241d15;
+  --foreground: #e8dcc8;
+  --foreground-secondary: #b8a890;
+  --primary: #10b981;
+  --primary-light: #2a4a3a;
+  --primary-dark: #047857;
+  --gold: #fbbf24;
+  --gold-light: #3d3520;
+  --gold-dark: #a16207;
+  --border: #3d3428;
+  --border-dark: #4d4438;
+  --accent-glow: rgba(251, 191, 36, 0.15);
+}
+
+/* Mosque theme background gradient */
+.mosque body,
+.mosque {
+  background: linear-gradient(
+    180deg,
+    #1a1510 0%,
+    #1f1812 50%,
+    #1a1510 100%
+  ) !important;
+}
+
+/* Mosque theme - override Tailwind utilities */
+.mosque .bg-white {
+  background-color: #2a2118 !important;
+}
+
+.mosque .bg-slate-50,
+.mosque .bg-slate-100 {
+  background-color: #241d15 !important;
+}
+
+.mosque .bg-slate-900 {
+  background-color: #1a1510 !important;
+}
+
+.mosque .text-slate-900,
+.mosque .text-slate-800 {
+  color: #e8dcc8 !important;
+}
+
+.mosque .text-slate-600,
+.mosque .text-slate-500,
+.mosque .text-slate-400 {
+  color: #b8a890 !important;
+}
+
+.mosque .border-slate-200,
+.mosque .border-slate-300,
+.mosque .border-slate-800 {
+  border-color: #3d3428 !important;
+}
+
+/* Mosque lantern glow effects */
+.mosque .glow-lantern {
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.2),
+    0 0 60px rgba(251, 191, 36, 0.1);
+}
+
+/* Mosque card styling */
+.mosque .bg-white\/80,
+.mosque .dark\:bg-slate-900\/80 {
+  background-color: rgba(42, 33, 24, 0.9) !important;
+}
+
+/* Mosque ambient pattern overlay */
+.mosque::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      ellipse at top,
+      rgba(251, 191, 36, 0.03) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom,
+      rgba(16, 185, 129, 0.02) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mosque floating lantern particles */
+@keyframes lantern-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.mosque .animate-float {
+  animation: lantern-float 4s ease-in-out infinite;
+}
+
+/* Mosque golden glow pulse */
+@keyframes golden-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.4);
+  }
+}
+
+.mosque .animate-pulse-glow {
+  animation: golden-pulse 3s ease-in-out infinite;
 }
 
 /* Tailwind theme integration */

@@ -5,6 +5,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { Navbar, Footer } from "@/components/layout";
 import { ToastContainer } from "@/components/ui";
 import { InstallPrompt, SplashScreen } from "@/components/pwa";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -103,14 +104,16 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <NextIntlClientProvider messages={messages}>
-          <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-1 pt-16">{children}</main>
-            <Footer />
-          </div>
-          <ToastContainer />
-          <InstallPrompt />
-          <SplashScreen />
+          <ThemeProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-1 pt-16">{children}</main>
+              <Footer />
+            </div>
+            <ToastContainer />
+            <InstallPrompt />
+            <SplashScreen />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

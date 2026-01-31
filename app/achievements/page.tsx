@@ -55,7 +55,10 @@ const achievements: Achievement[] = [
   {
     id: "five-pillars",
     title: { en: "Pillar Master", ar: "سيد الأركان" },
-    description: { en: "Complete all Five Pillars chapters", ar: "أكمل جميع فصول أركان الإسلام الخمسة" },
+    description: {
+      en: "Complete all Five Pillars chapters",
+      ar: "أكمل جميع فصول أركان الإسلام الخمسة",
+    },
     icon: <Star className="w-6 h-6" />,
     category: "learning",
     progress: 3,
@@ -79,7 +82,10 @@ const achievements: Achievement[] = [
   {
     id: "dua-collector",
     title: { en: "Dua Collector", ar: "جامع الأدعية" },
-    description: { en: "Save 20 duas to your collection", ar: "احفظ 20 دعاء في مجموعتك" },
+    description: {
+      en: "Save 20 duas to your collection",
+      ar: "احفظ 20 دعاء في مجموعتك",
+    },
     icon: <Heart className="w-6 h-6" />,
     category: "learning",
     progress: 5,
@@ -93,7 +99,10 @@ const achievements: Achievement[] = [
   {
     id: "week-streak",
     title: { en: "Week Warrior", ar: "محارب الأسبوع" },
-    description: { en: "Maintain a 7-day learning streak", ar: "حافظ على سلسلة تعلم لمدة 7 أيام" },
+    description: {
+      en: "Maintain a 7-day learning streak",
+      ar: "حافظ على سلسلة تعلم لمدة 7 أيام",
+    },
     icon: <Flame className="w-6 h-6" />,
     category: "streak",
     progress: 5,
@@ -105,7 +114,10 @@ const achievements: Achievement[] = [
   {
     id: "month-streak",
     title: { en: "Month Master", ar: "سيد الشهر" },
-    description: { en: "Maintain a 30-day learning streak", ar: "حافظ على سلسلة تعلم لمدة 30 يوماً" },
+    description: {
+      en: "Maintain a 30-day learning streak",
+      ar: "حافظ على سلسلة تعلم لمدة 30 يوماً",
+    },
     icon: <Calendar className="w-6 h-6" />,
     category: "streak",
     progress: 5,
@@ -117,7 +129,10 @@ const achievements: Achievement[] = [
   {
     id: "ramadan-complete",
     title: { en: "Ramadan Champion", ar: "بطل رمضان" },
-    description: { en: "Complete daily lessons throughout Ramadan", ar: "أكمل الدروس اليومية طوال رمضان" },
+    description: {
+      en: "Complete daily lessons throughout Ramadan",
+      ar: "أكمل الدروس اليومية طوال رمضان",
+    },
     icon: <Moon className="w-6 h-6" />,
     category: "streak",
     progress: 0,
@@ -181,7 +196,10 @@ const achievements: Achievement[] = [
   {
     id: "night-owl",
     title: { en: "Night Owl", ar: "بومة الليل" },
-    description: { en: "Complete a lesson after midnight", ar: "أكمل درساً بعد منتصف الليل" },
+    description: {
+      en: "Complete a lesson after midnight",
+      ar: "أكمل درساً بعد منتصف الليل",
+    },
     icon: <Moon className="w-6 h-6" />,
     category: "special",
     progress: 0,
@@ -193,7 +211,10 @@ const achievements: Achievement[] = [
   {
     id: "early-bird",
     title: { en: "Early Bird", ar: "الطائر المبكر" },
-    description: { en: "Complete a lesson before Fajr", ar: "أكمل درساً قبل الفجر" },
+    description: {
+      en: "Complete a lesson before Fajr",
+      ar: "أكمل درساً قبل الفجر",
+    },
     icon: <Clock className="w-6 h-6" />,
     category: "special",
     progress: 1,
@@ -206,7 +227,10 @@ const achievements: Achievement[] = [
   {
     id: "perfectionist",
     title: { en: "Perfectionist", ar: "الكمالي" },
-    description: { en: "Get 100% on 10 quizzes", ar: "احصل على 100% في 10 اختبارات" },
+    description: {
+      en: "Get 100% on 10 quizzes",
+      ar: "احصل على 100% في 10 اختبارات",
+    },
     icon: <Medal className="w-6 h-6" />,
     category: "special",
     progress: 3,
@@ -218,7 +242,10 @@ const achievements: Achievement[] = [
   {
     id: "historian",
     title: { en: "Islamic Historian", ar: "المؤرخ الإسلامي" },
-    description: { en: "View all historical events in Time Traveler", ar: "شاهد جميع الأحداث التاريخية في آلة الزمن" },
+    description: {
+      en: "View all historical events in Time Traveler",
+      ar: "شاهد جميع الأحداث التاريخية في آلة الزمن",
+    },
     icon: <Clock className="w-6 h-6" />,
     category: "special",
     progress: 6,
@@ -258,11 +285,11 @@ const rarityLabels = {
 };
 
 // Achievement Card Component
-const AchievementCard = ({ 
-  achievement, 
-  lang 
-}: { 
-  achievement: Achievement; 
+const AchievementCard = ({
+  achievement,
+  lang,
+}: {
+  achievement: Achievement;
   lang: "en" | "ar";
 }) => {
   const progress = (achievement.progress / achievement.maxProgress) * 100;
@@ -287,30 +314,37 @@ const AchievementCard = ({
       <div className="p-4">
         <div className="flex items-start gap-4">
           {/* Icon */}
-          <div className={`
+          <div
+            className={`
             w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0
-            ${achievement.unlocked 
-              ? `bg-gradient-to-br ${rarityColors[achievement.rarity]} text-white shadow-lg` 
-              : "bg-slate-200 dark:bg-slate-700 text-slate-400"
+            ${
+              achievement.unlocked
+                ? `bg-gradient-to-br ${rarityColors[achievement.rarity]} text-white shadow-lg`
+                : "bg-slate-200 dark:bg-slate-700 text-slate-400"
             }
-          `}>
+          `}
+          >
             {achievement.icon}
           </div>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className={`font-bold truncate ${achievement.unlocked ? "text-slate-800 dark:text-white" : "text-slate-500 dark:text-slate-400"}`}>
+              <h3
+                className={`font-bold truncate ${achievement.unlocked ? "text-slate-800 dark:text-white" : "text-slate-500 dark:text-slate-400"}`}
+              >
                 {achievement.title[lang]}
               </h3>
               {achievement.unlocked && (
-                <span className={`
+                <span
+                  className={`
                   text-xs px-2 py-0.5 rounded-full font-medium
                   ${achievement.rarity === "legendary" ? "bg-amber-200 text-amber-800" : ""}
                   ${achievement.rarity === "epic" ? "bg-purple-200 text-purple-800" : ""}
                   ${achievement.rarity === "rare" ? "bg-blue-200 text-blue-800" : ""}
                   ${achievement.rarity === "common" ? "bg-slate-200 text-slate-700" : ""}
-                `}>
+                `}
+                >
                   {rarityLabels[achievement.rarity][lang]}
                 </span>
               )}
@@ -331,7 +365,9 @@ const AchievementCard = ({
                   />
                 </div>
                 <div className="flex justify-between text-xs text-slate-400">
-                  <span>{achievement.progress} / {achievement.maxProgress}</span>
+                  <span>
+                    {achievement.progress} / {achievement.maxProgress}
+                  </span>
                   <span>+{achievement.xpReward} XP</span>
                 </div>
               </div>
@@ -341,7 +377,9 @@ const AchievementCard = ({
             {achievement.unlocked && achievement.unlockedAt && (
               <div className="flex items-center gap-2 text-xs text-slate-400">
                 <Trophy className="w-3 h-3" />
-                <span>{lang === "en" ? "Unlocked" : "فُتح"} {achievement.unlockedAt}</span>
+                <span>
+                  {lang === "en" ? "Unlocked" : "فُتح"} {achievement.unlockedAt}
+                </span>
               </div>
             )}
           </div>
@@ -353,14 +391,19 @@ const AchievementCard = ({
 
 export default function AchievementsPage() {
   const { language: lang } = useSettingsStore();
-  const [selectedCategory, setSelectedCategory] = useState<"all" | Achievement["category"]>("all");
+  const [selectedCategory, setSelectedCategory] = useState<
+    "all" | Achievement["category"]
+  >("all");
   const [showUnlockedOnly, setShowUnlockedOnly] = useState(false);
 
   const unlockedCount = achievements.filter((a) => a.unlocked).length;
-  const totalXP = achievements.filter((a) => a.unlocked).reduce((sum, a) => sum + a.xpReward, 0);
+  const totalXP = achievements
+    .filter((a) => a.unlocked)
+    .reduce((sum, a) => sum + a.xpReward, 0);
 
   const filteredAchievements = achievements.filter((a) => {
-    const matchesCategory = selectedCategory === "all" || a.category === selectedCategory;
+    const matchesCategory =
+      selectedCategory === "all" || a.category === selectedCategory;
     const matchesUnlocked = !showUnlockedOnly || a.unlocked;
     return matchesCategory && matchesUnlocked;
   });
@@ -372,7 +415,11 @@ export default function AchievementsPage() {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/journey">
-              <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+              <Button
+                variant="ghost"
+                size="sm"
+                leftIcon={<ArrowLeft className="w-4 h-4" />}
+              >
                 {lang === "en" ? "Journey" : "الرحلة"}
               </Button>
             </Link>
@@ -396,18 +443,30 @@ export default function AchievementsPage() {
         >
           <div className="bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-4 text-center">
             <Trophy className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">{unlockedCount}</p>
-            <p className="text-xs text-slate-500">{lang === "en" ? "Unlocked" : "مفتوح"}</p>
+            <p className="text-2xl font-bold text-slate-800 dark:text-white">
+              {unlockedCount}
+            </p>
+            <p className="text-xs text-slate-500">
+              {lang === "en" ? "Unlocked" : "مفتوح"}
+            </p>
           </div>
           <div className="bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-2xl p-4 text-center">
             <Sparkles className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">{totalXP}</p>
-            <p className="text-xs text-slate-500">{lang === "en" ? "XP Earned" : "نقاط مكتسبة"}</p>
+            <p className="text-2xl font-bold text-slate-800 dark:text-white">
+              {totalXP}
+            </p>
+            <p className="text-xs text-slate-500">
+              {lang === "en" ? "XP Earned" : "نقاط مكتسبة"}
+            </p>
           </div>
           <div className="bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-4 text-center">
             <Target className="w-8 h-8 text-purple-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">{achievements.length}</p>
-            <p className="text-xs text-slate-500">{lang === "en" ? "Total" : "المجموع"}</p>
+            <p className="text-2xl font-bold text-slate-800 dark:text-white">
+              {achievements.length}
+            </p>
+            <p className="text-xs text-slate-500">
+              {lang === "en" ? "Total" : "المجموع"}
+            </p>
           </div>
         </motion.div>
 
@@ -423,19 +482,21 @@ export default function AchievementsPage() {
           >
             {lang === "en" ? "All" : "الكل"}
           </button>
-          {(Object.keys(categoryLabels) as Achievement["category"][]).map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                selectedCategory === cat
-                  ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-              }`}
-            >
-              {categoryLabels[cat][lang]}
-            </button>
-          ))}
+          {(Object.keys(categoryLabels) as Achievement["category"][]).map(
+            (cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedCategory === cat
+                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                }`}
+              >
+                {categoryLabels[cat][lang]}
+              </button>
+            ),
+          )}
           <button
             onClick={() => setShowUnlockedOnly(!showUnlockedOnly)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ml-auto ${
@@ -452,7 +513,11 @@ export default function AchievementsPage() {
         <div className="grid gap-4 md:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filteredAchievements.map((achievement) => (
-              <AchievementCard key={achievement.id} achievement={achievement} lang={lang} />
+              <AchievementCard
+                key={achievement.id}
+                achievement={achievement}
+                lang={lang}
+              />
             ))}
           </AnimatePresence>
         </div>
@@ -465,10 +530,14 @@ export default function AchievementsPage() {
           >
             <Trophy className="w-16 h-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">
-              {lang === "en" ? "No achievements found" : "لم يتم العثور على إنجازات"}
+              {lang === "en"
+                ? "No achievements found"
+                : "لم يتم العثور على إنجازات"}
             </h3>
             <p className="text-slate-500 dark:text-slate-400">
-              {lang === "en" ? "Keep learning to unlock achievements!" : "استمر في التعلم لفتح الإنجازات!"}
+              {lang === "en"
+                ? "Keep learning to unlock achievements!"
+                : "استمر في التعلم لفتح الإنجازات!"}
             </p>
           </motion.div>
         )}
@@ -489,9 +558,9 @@ export default function AchievementsPage() {
                 {lang === "en" ? "Next Achievement" : "الإنجاز التالي"}
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
-                {lang === "en" 
-                  ? "You're 2 days away from \"Week Warrior\" - keep your streak going!" 
-                  : "أنت على بعد يومين من \"محارب الأسبوع\" - حافظ على سلسلتك!"}
+                {lang === "en"
+                  ? 'You\'re 2 days away from "Week Warrior" - keep your streak going!'
+                  : 'أنت على بعد يومين من "محارب الأسبوع" - حافظ على سلسلتك!'}
               </p>
               <div className="h-2 bg-white/50 dark:bg-slate-700 rounded-full overflow-hidden">
                 <motion.div

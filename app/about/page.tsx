@@ -42,7 +42,11 @@ export default function AboutPage() {
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/journey">
-            <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+            <Button
+              variant="ghost"
+              size="sm"
+              leftIcon={<ArrowLeft className="w-4 h-4" />}
+            >
               {lang === "en" ? "Back" : "رجوع"}
             </Button>
           </Link>
@@ -112,25 +116,37 @@ export default function AboutPage() {
             {
               icon: <BookOpen className="w-6 h-6" />,
               title: { en: "Interactive Lessons", ar: "دروس تفاعلية" },
-              description: { en: "Engaging content with quizzes and progress tracking", ar: "محتوى جذاب مع اختبارات وتتبع التقدم" },
+              description: {
+                en: "Engaging content with quizzes and progress tracking",
+                ar: "محتوى جذاب مع اختبارات وتتبع التقدم",
+              },
               color: "from-blue-400 to-indigo-500",
             },
             {
               icon: <Sparkles className="w-6 h-6" />,
               title: { en: "Immersive Stories", ar: "قصص غامرة" },
-              description: { en: "Experience history through character narration", ar: "عش التاريخ من خلال رواية الشخصيات" },
+              description: {
+                en: "Experience history through character narration",
+                ar: "عش التاريخ من خلال رواية الشخصيات",
+              },
               color: "from-purple-400 to-pink-500",
             },
             {
               icon: <Globe className="w-6 h-6" />,
               title: { en: "Bilingual Support", ar: "دعم ثنائي اللغة" },
-              description: { en: "Full Arabic and English experience", ar: "تجربة كاملة بالعربية والإنجليزية" },
+              description: {
+                en: "Full Arabic and English experience",
+                ar: "تجربة كاملة بالعربية والإنجليزية",
+              },
               color: "from-emerald-400 to-teal-500",
             },
             {
               icon: <Heart className="w-6 h-6" />,
               title: { en: "Made with Love", ar: "صُنع بحب" },
-              description: { en: "Free, open-source, and community-driven", ar: "مجاني، مفتوح المصدر، ويقوده المجتمع" },
+              description: {
+                en: "Free, open-source, and community-driven",
+                ar: "مجاني، مفتوح المصدر، ويقوده المجتمع",
+              },
               color: "from-rose-400 to-red-500",
             },
           ].map((feature, index) => (
@@ -139,7 +155,9 @@ export default function AboutPage() {
               className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               whileHover={{ y: -4 }}
             >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4`}>
+              <div
+                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4`}
+              >
                 {feature.icon}
               </div>
               <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">
@@ -199,8 +217,12 @@ export default function AboutPage() {
                 <div className="flex-1 text-right">
                   {index % 2 === 0 && (
                     <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm">
-                      <p className="font-bold text-emerald-600 dark:text-emerald-400">{milestone.year}</p>
-                      <p className="text-slate-600 dark:text-slate-300">{milestone.event[lang]}</p>
+                      <p className="font-bold text-emerald-600 dark:text-emerald-400">
+                        {milestone.year}
+                      </p>
+                      <p className="text-slate-600 dark:text-slate-300">
+                        {milestone.event[lang]}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -208,8 +230,12 @@ export default function AboutPage() {
                 <div className="flex-1">
                   {index % 2 !== 0 && (
                     <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm">
-                      <p className="font-bold text-emerald-600 dark:text-emerald-400">{milestone.year}</p>
-                      <p className="text-slate-600 dark:text-slate-300">{milestone.event[lang]}</p>
+                      <p className="font-bold text-emerald-600 dark:text-emerald-400">
+                        {milestone.year}
+                      </p>
+                      <p className="text-slate-600 dark:text-slate-300">
+                        {milestone.event[lang]}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -238,8 +264,12 @@ export default function AboutPage() {
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mx-auto mb-4">
                   <span className="text-4xl">{member.avatar}</span>
                 </div>
-                <h3 className="font-bold text-slate-800 dark:text-white">{member.name}</h3>
-                <p className="text-sm text-slate-500 dark:text-slate-400">{member.role[lang]}</p>
+                <h3 className="font-bold text-slate-800 dark:text-white">
+                  {member.name}
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  {member.role[lang]}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -289,7 +319,9 @@ export default function AboutPage() {
             <Heart className="w-4 h-4 text-red-500 fill-red-500" />
             {lang === "en" ? "for the Ummah" : "للأمة"}
           </p>
-          <p className="text-sm mt-2">© 2024-2025 Islam Journey. All rights reserved.</p>
+          <p className="text-sm mt-2">
+            © 2024-2025 Islam Journey. All rights reserved.
+          </p>
         </motion.div>
       </main>
     </div>

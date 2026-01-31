@@ -22,6 +22,7 @@
     "@capacitor/android": "^8.0.2",
     "@capacitor/core": "^8.0.2",
     "@capacitor/ios": "^8.0.2",
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "@serwist/next": "^9.5.3",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.93.3",

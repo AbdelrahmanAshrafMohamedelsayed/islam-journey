@@ -34,7 +34,8 @@ export interface LessonSection {
     | "image"
     | "video"
     | "audio"
-    | "interactive"
+    | "animation" // Lottie animations
+    | "interactive" // Tap-to-reveal, clickable elements
     | "tip"
     | "warning"
     | "quote"
@@ -44,14 +45,22 @@ export interface LessonSection {
     en: string;
     ar: string;
   };
-  // For media sections
+  // For media sections (video, image, animation, audio)
   mediaUrl?: string;
   mediaAlt?: string;
+  posterUrl?: string; // For video thumbnails
+  loop?: boolean; // For animations - default true
   // For Quran/Hadith - can be string or bilingual object
   reference?: string | { en: string; ar: string };
   transliteration?: string;
   // For Hadith
   source?: { en: string; ar: string };
+  // For interactive sections - array of tap-to-reveal items
+  items?: {
+    label: { en: string; ar: string };
+    detail: { en: string; ar: string };
+    icon?: string;
+  }[];
 }
 
 export interface QuizQuestion {
