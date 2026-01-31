@@ -203,6 +203,45 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
     duration: 10,
     xpReward: 50,
     glossaryTerms: ["sawm", "ramadan", "taqwa"],
+    sections: [
+      {
+        id: "sawm-intro-video",
+        type: "video",
+        content: {
+          en: "Watch: The Beauty and Wisdom of Fasting in Ramadan",
+          ar: "شاهد: جمال وحكمة الصيام في رمضان",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=D1RbSBCNpvQ",
+      },
+      {
+        id: "sawm-animation",
+        type: "animation",
+        content: {
+          en: "The blessed month of Ramadan brings peace and reflection",
+          ar: "شهر رمضان المبارك يجلب السلام والتأمل",
+        },
+        mediaUrl: "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
+        loop: true,
+      },
+      {
+        id: "sawm-quran-audio",
+        type: "audio",
+        content: {
+          en: "Listen: Surah Al-Baqarah verse 183 about fasting",
+          ar: "استمع: سورة البقرة آية 183 عن الصيام",
+        },
+        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/190.mp3",
+      },
+      {
+        id: "sawm-hadith",
+        type: "hadith",
+        content: {
+          en: "The Prophet ﷺ said: 'Whoever fasts Ramadan with faith and seeking reward, his previous sins will be forgiven.'",
+          ar: "قال النبي ﷺ: 'من صام رمضان إيماناً واحتساباً غفر له ما تقدم من ذنبه.'",
+        },
+        source: { en: "Sahih Bukhari & Muslim", ar: "صحيح البخاري ومسلم" },
+      },
+    ],
   },
 
   "sawm-rules": {

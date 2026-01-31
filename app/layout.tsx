@@ -102,6 +102,7 @@ export default async function RootLayout({
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>

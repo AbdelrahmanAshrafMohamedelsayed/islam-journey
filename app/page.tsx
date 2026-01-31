@@ -581,15 +581,6 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                href: "/quran",
-                icon: "📖",
-                title: isArabic ? "القرآن الكريم" : "Quran Reader",
-                description: isArabic
-                  ? "اقرأ واستمع للقرآن مع الترجمة"
-                  : "Read & listen to Quran with translation",
-                color: "emerald",
-              },
-              {
                 href: "/history",
                 icon: "🕰️",
                 title: isArabic ? "آلة الزمن" : "Time Traveler",

@@ -265,6 +265,45 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
     duration: 10,
     xpReward: 50,
     glossaryTerms: ["hajj", "kaaba", "umrah"],
+    sections: [
+      {
+        id: "hajj-intro-video",
+        type: "video",
+        content: {
+          en: "Watch: The Journey of a Lifetime - Understanding Hajj",
+          ar: "شاهد: رحلة العمر - فهم الحج",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=1Yz-kvn8yZE",
+      },
+      {
+        id: "hajj-animation",
+        type: "animation",
+        content: {
+          en: "Millions of pilgrims gather around the Kaaba in unity",
+          ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
+        },
+        mediaUrl: "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        loop: true,
+      },
+      {
+        id: "hajj-quran-audio",
+        type: "audio",
+        content: {
+          en: "Listen: Surah Al-Hajj verse 27 - The Call to Pilgrimage",
+          ar: "استمع: سورة الحج آية 27 - النداء للحج",
+        },
+        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2705.mp3",
+      },
+      {
+        id: "hajj-hadith",
+        type: "hadith",
+        content: {
+          en: "The Prophet ﷺ said: 'Whoever performs Hajj and does not commit any obscenity or transgression, returns free from sin as on the day his mother gave birth to him.'",
+          ar: "قال النبي ﷺ: 'من حج فلم يرفث ولم يفسق رجع من ذنوبه كيوم ولدته أمه.'",
+        },
+        source: { en: "Sahih Bukhari", ar: "صحيح البخاري" },
+      },
+    ],
   },
 
   "hajj-rituals": {

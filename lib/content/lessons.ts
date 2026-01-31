@@ -244,6 +244,15 @@ export const shahadaLessons: LessonContent[] = [
     glossaryTerms: ["shahada", "allah", "islam", "muslim", "prophet", "pbuh"],
     sections: [
       {
+        id: "shahada-video",
+        type: "video",
+        content: {
+          en: "Watch: Understanding the Shahada - The Gateway to Islam",
+          ar: "شاهد: فهم الشهادة - بوابة الإسلام",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=zN3JX8WpBOY",
+      },
+      {
         id: "intro",
         type: "text",
         content: {
@@ -252,12 +261,32 @@ export const shahadaLessons: LessonContent[] = [
         },
       },
       {
+        id: "shahada-animation",
+        type: "animation",
+        content: {
+          en: "The Shahada opens the door to a new life",
+          ar: "الشهادة تفتح باب حياة جديدة",
+        },
+        mediaUrl: "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        loop: true,
+      },
+      {
         id: "what-is",
         type: "text",
         content: {
           en: "The Shahada is just one sentence, but it carries the entire foundation of Islamic belief. By saying it with sincere belief, you become a Muslim.",
           ar: "الشهادة هي جملة واحدة فقط، لكنها تحمل أساس العقيدة الإسلامية بالكامل. بقولها بإيمان صادق، تصبح مسلماً.",
         },
+      },
+      {
+        id: "shahada-audio",
+        type: "audio",
+        content: {
+          en: "Listen to the Shahada recitation",
+          ar: "استمع إلى تلاوة الشهادة",
+        },
+        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+        transliteration: "Ash-hadu an la ilaha illa Allah...",
       },
       {
         id: "arabic-text",

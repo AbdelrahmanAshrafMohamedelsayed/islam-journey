@@ -20,12 +20,11 @@ export const salahLessons: Record<string, LessonContent> = {
         id: "salah-importance-intro-video",
         type: "video",
         content: {
-          en: "Watch: Introduction to Salah - Your Daily Connection with Allah",
-          ar: "شاهد: مقدمة عن الصلاة - اتصالك اليومي بالله",
+          en: "Watch: The Beauty and Importance of Prayer in Islam",
+          ar: "شاهد: جمال وأهمية الصلاة في الإسلام",
         },
-        // Placeholder - replace with actual video URL
-        mediaUrl: "/videos/salah/introduction.mp4",
-        posterUrl: "/images/salah/intro-poster.jpg",
+        // Real YouTube video about Salah importance
+        mediaUrl: "https://www.youtube.com/watch?v=I9fDC9I3pjo",
       },
       {
         id: "salah-importance-section-1",
@@ -42,8 +41,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "The spiritual journey of prayer connects you directly to Allah",
           ar: "الرحلة الروحية للصلاة تربطك مباشرة بالله",
         },
-        // Placeholder - replace with actual Lottie animation URL
-        mediaUrl: "https://lottie.host/embed/prayer-connection.json",
+        // Real Lottie animation - praying person
+        mediaUrl: "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
         loop: true,
       },
       {

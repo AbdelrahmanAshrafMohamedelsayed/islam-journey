@@ -155,6 +155,45 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
     duration: 10,
     xpReward: 50,
     glossaryTerms: ["zakat", "nisab", "sadaqah"],
+    sections: [
+      {
+        id: "zakat-intro-video",
+        type: "video",
+        content: {
+          en: "Watch: What is Zakat and Why is it Important?",
+          ar: "شاهد: ما هي الزكاة ولماذا هي مهمة؟",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=Y5jNXLj8b9Q",
+      },
+      {
+        id: "zakat-animation",
+        type: "animation",
+        content: {
+          en: "Zakat purifies wealth and spreads blessings",
+          ar: "الزكاة تطهر المال وتنشر البركات",
+        },
+        mediaUrl: "https://lottie.host/7e4e7e5e-3e2c-4b8f-9c1c-4b9e8c3d5e1a/giving-charity.json",
+        loop: true,
+      },
+      {
+        id: "zakat-quran-audio",
+        type: "audio",
+        content: {
+          en: "Listen: Quran verse about Zakat (Surah At-Tawbah 9:103)",
+          ar: "استمع: آية قرآنية عن الزكاة (سورة التوبة 9:103)",
+        },
+        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1273.mp3",
+      },
+      {
+        id: "zakat-hadith",
+        type: "hadith",
+        content: {
+          en: "The Prophet ﷺ said: 'Charity does not decrease wealth.'",
+          ar: "قال النبي ﷺ: 'ما نقصت صدقة من مال.'",
+        },
+        source: { en: "Sahih Muslim", ar: "صحيح مسلم" },
+      },
+    ],
   },
 
   "zakat-calculation": {
