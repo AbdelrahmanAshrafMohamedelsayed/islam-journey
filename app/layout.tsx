@@ -6,6 +6,7 @@ import { Navbar, Footer } from "@/components/layout";
 import { ToastContainer } from "@/components/ui";
 import { InstallPrompt, SplashScreen } from "@/components/pwa";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/components/auth";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -113,14 +114,16 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-1 pt-16">{children}</main>
-              <Footer />
-            </div>
-            <ToastContainer />
-            <InstallPrompt />
-            <SplashScreen />
+            <AuthProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1 pt-16">{children}</main>
+                <Footer />
+              </div>
+              <ToastContainer />
+              <InstallPrompt />
+              <SplashScreen />
+            </AuthProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

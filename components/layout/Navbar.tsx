@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
 import { Button } from "@/components/ui";
+import { AuthButton } from "@/components/auth";
 import {
   Menu,
   X,
@@ -258,6 +259,11 @@ export function Navbar() {
             >
               <Settings className="w-5 h-5" />
             </Link>
+
+            {/* Auth Button */}
+            <div className="hidden sm:block">
+              <AuthButton variant="compact" />
+            </div>
 
             {/* Mobile menu button */}
             <button

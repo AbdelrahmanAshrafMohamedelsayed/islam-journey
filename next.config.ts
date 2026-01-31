@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
 import createNextIntlPlugin from "next-intl/plugin";
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+// Bundle analyzer - run with ANALYZE=true npm run build
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 // Check if building for mobile (Capacitor)
 const isMobileBuild = process.env.NEXT_PUBLIC_BUILD_TARGET === "mobile";
@@ -29,6 +35,8 @@ const nextConfig: NextConfig = {
   images: {
     // For static export (Capacitor), use unoptimized images
     unoptimized: isMobileBuild,
+    // Prefer modern image formats
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -50,13 +58,41 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.islamic.network",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.googleusercontent.com",
+      },
     ],
+  },
+
+  // Tree-shaking optimizations for date-fns
+  modularizeImports: {
+    "date-fns": {
+      transform: "date-fns/{{member}}",
+    },
+  },
+
+  // Compiler optimizations - remove console.log in production
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
   },
 
   // Experimental features
   experimental: {
-    // Enable optimized package imports
-    optimizePackageImports: ["lucide-react", "framer-motion"],
+    // Enable optimized package imports for better tree-shaking
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "@supabase/supabase-js",
+      "date-fns",
+    ],
   },
 
   // For Capacitor static export
@@ -66,5 +102,5 @@ const nextConfig: NextConfig = {
   }),
 };
 
-// Apply both plugins - order matters: next-intl first, then Serwist
-export default withSerwist(withNextIntl(nextConfig));
+// Apply plugins - order matters: bundle analyzer, next-intl, then Serwist
+export default withBundleAnalyzer(withSerwist(withNextIntl(nextConfig)));

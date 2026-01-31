@@ -39,13 +39,13 @@ export function Footer() {
             <ul className="space-y-2">
               {[
                 { href: "/journey", label: isArabic ? "الرحلة" : "Journey" },
-                { href: "/quran", label: isArabic ? "القرآن" : "Quran" },
                 {
                   href: "/misconceptions",
                   label: isArabic ? "رد الشبهات" : "Misconceptions",
                 },
                 { href: "/history", label: isArabic ? "التاريخ" : "History" },
                 { href: "/ramadan", label: isArabic ? "رمضان" : "Ramadan" },
+                { href: "/games", label: isArabic ? "الألعاب" : "Games" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link

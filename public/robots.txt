@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://islam-journey.vercel.app/sitemap.xml
+
+# Disallow admin/api routes
+Disallow: /api/
