@@ -9,7 +9,7 @@ export default function OfflinePage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-emerald-900 via-slate-900 to-blue-900 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-linear-to-br from-emerald-900 via-slate-900 to-blue-900 relative overflow-hidden">
       {/* Animated stars background */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (

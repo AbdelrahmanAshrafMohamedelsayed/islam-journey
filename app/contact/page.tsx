@@ -87,7 +87,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50/50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-blue-50/50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -115,7 +115,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
         >
           <motion.div
-            className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 mb-4 shadow-lg shadow-blue-500/30"
+            className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-blue-400 to-indigo-500 mb-4 shadow-lg shadow-blue-500/30"
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
@@ -145,7 +145,7 @@ export default function ContactPage() {
               whileHover={{ y: -4 }}
             >
               <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${method.color} flex items-center justify-center text-white mx-auto mb-4`}
+                className={`w-12 h-12 rounded-xl bg-linear-to-br ${method.color} flex items-center justify-center text-white mx-auto mb-4`}
               >
                 {method.icon}
               </div>

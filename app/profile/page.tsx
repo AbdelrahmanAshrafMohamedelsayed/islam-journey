@@ -195,7 +195,7 @@ export default function ProfilePage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 text-white mb-8 relative overflow-hidden"
+          className="bg-linear-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 text-white mb-8 relative overflow-hidden"
         >
           <div className="absolute inset-0 pattern-arabesque opacity-20" />
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
@@ -251,7 +251,7 @@ export default function ProfilePage() {
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-r from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -403,7 +403,7 @@ export default function ProfilePage() {
                       <div
                         className={`w-14 h-14 rounded-xl flex items-center justify-center text-2xl ${
                           unlocked
-                            ? `bg-gradient-to-r ${achievement.color}`
+                            ? `bg-linear-to-r ${achievement.color}`
                             : "bg-slate-200 dark:bg-slate-700"
                         }`}
                       >

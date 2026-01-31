@@ -70,7 +70,7 @@ export function SplashScreen({
         >
           {/* Animated gradient background */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-emerald-900 via-slate-900 to-blue-900"
+            className="absolute inset-0 bg-linear-to-br from-emerald-900 via-slate-900 to-blue-900"
             animate={{
               background: [
                 "linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e3a5f 100%)",
@@ -343,7 +343,7 @@ export function SplashScreen({
               <div className="h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
                 {/* Animated progress fill */}
                 <motion.div
-                  className="h-full bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-400 rounded-full relative"
+                  className="h-full bg-linear-to-r from-emerald-400 via-teal-400 to-emerald-400 rounded-full relative"
                   style={{ width: `${progress}%` }}
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -351,7 +351,7 @@ export function SplashScreen({
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
                 </motion.div>
               </div>
 
@@ -384,7 +384,7 @@ export function SplashScreen({
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-transparent via-emerald-500 to-transparent"
           />
         </motion.div>
       )}

@@ -218,14 +218,14 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
         ],
       },
       {
-        id: "sawm-animation",
-        type: "animation",
+        id: "sawm-ramadan-image",
+        type: "image",
         content: {
-          en: "The blessed month of Ramadan brings peace and reflection",
-          ar: "شهر رمضان المبارك يجلب السلام والتأمل",
+          en: "The blessed month of Ramadan - a time of spiritual renewal",
+          ar: "شهر رمضان المبارك - وقت للتجديد الروحي",
         },
-        mediaUrl: "https://assets4.lottiefiles.com/packages/lf20_xlmz9xwm.json",
-        loop: true,
+        mediaUrl: "https://images.unsplash.com/photo-1532635241-17e820acc59f?w=800&q=80",
+        mediaAlt: "Iftar meal during Ramadan with dates and water",
       },
       {
         id: "sawm-quran-audio",

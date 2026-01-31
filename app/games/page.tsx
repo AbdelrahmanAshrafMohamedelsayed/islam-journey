@@ -269,7 +269,7 @@ const TriviaGame = ({
         animate={{ opacity: 1, scale: 1 }}
       >
         <motion.div
-          className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-6"
+          className="w-24 h-24 rounded-full bg-linear-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-6"
           animate={{ rotate: [0, 10, -10, 0] }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
@@ -278,7 +278,7 @@ const TriviaGame = ({
         <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">
           {lang === "en" ? "Quiz Complete!" : "انتهت المسابقة!"}
         </h2>
-        <p className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500 mb-4">
+        <p className="text-6xl font-bold text-transparent bg-clip-text bg-linear-to-r from-emerald-500 to-teal-500 mb-4">
           {score}
         </p>
         <p className="text-slate-600 dark:text-slate-300 mb-8">
@@ -344,7 +344,7 @@ const TriviaGame = ({
       {/* Progress bar */}
       <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full mb-8 overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-emerald-500 to-teal-500"
+          className="h-full bg-linear-to-r from-emerald-500 to-teal-500"
           initial={{ width: 0 }}
           animate={{
             width: `${((currentQuestion + 1) / triviaQuestions.length) * 100}%`,
@@ -523,7 +523,7 @@ const MemoryGame = ({
         animate={{ opacity: 1, scale: 1 }}
       >
         <motion.div
-          className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center mb-6"
+          className="w-24 h-24 rounded-full bg-linear-to-br from-purple-400 to-pink-500 flex items-center justify-center mb-6"
           animate={{ rotate: [0, 10, -10, 0] }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
@@ -592,8 +592,8 @@ const MemoryGame = ({
               aspect-square rounded-xl text-center font-bold transition-all
               ${
                 card.isFlipped || card.isMatched
-                  ? "bg-gradient-to-br from-emerald-400 to-teal-500 text-white"
-                  : "bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800"
+                  ? "bg-linear-to-br from-emerald-400 to-teal-500 text-white"
+                  : "bg-linear-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800"
               }
               ${card.isMatched ? "opacity-60" : ""}
             `}
@@ -694,7 +694,7 @@ const WordScrambleGame = ({
         animate={{ opacity: 1, scale: 1 }}
       >
         <motion.div
-          className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center mb-6"
+          className="w-24 h-24 rounded-full bg-linear-to-br from-blue-400 to-indigo-500 flex items-center justify-center mb-6"
           animate={{ rotate: [0, 10, -10, 0] }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
@@ -703,7 +703,7 @@ const WordScrambleGame = ({
         <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">
           {lang === "en" ? "Word Master!" : "سيد الكلمات!"}
         </h2>
-        <p className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500 mb-4">
+        <p className="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-indigo-500 mb-4">
           {score}
         </p>
         <div className="flex gap-4">
@@ -761,7 +761,7 @@ const WordScrambleGame = ({
           className="text-center"
         >
           <motion.div
-            className="text-4xl md:text-5xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500 mb-8"
+            className="text-4xl md:text-5xl font-bold tracking-widest text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-indigo-500 mb-8"
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
@@ -859,7 +859,7 @@ export default function GamesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -907,7 +907,7 @@ export default function GamesPage() {
               {/* Hero */}
               <div className="text-center mb-12">
                 <motion.div
-                  className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 mb-4 shadow-lg shadow-emerald-500/30"
+                  className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-500 mb-4 shadow-lg shadow-emerald-500/30"
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
@@ -937,7 +937,7 @@ export default function GamesPage() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <div
-                      className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${game.color} text-white mb-4 group-hover:scale-110 transition-transform`}
+                      className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br ${game.color} text-white mb-4 group-hover:scale-110 transition-transform`}
                     >
                       {game.icon}
                     </div>
@@ -953,7 +953,7 @@ export default function GamesPage() {
 
               {/* Stats Preview */}
               <motion.div
-                className="mt-12 p-6 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl"
+                className="mt-12 p-6 bg-linear-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}

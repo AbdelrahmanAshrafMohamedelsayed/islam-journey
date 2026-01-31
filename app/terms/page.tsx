@@ -141,7 +141,7 @@ In no event shall Islam Journey be liable for any damages arising from the use o
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -171,7 +171,7 @@ In no event shall Islam Journey be liable for any damages arising from the use o
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 mb-4 shadow-lg shadow-blue-500/30">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-blue-400 to-indigo-500 mb-4 shadow-lg shadow-blue-500/30">
             <FileText className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">
@@ -200,7 +200,7 @@ In no event shall Islam Journey be liable for any damages arising from the use o
               transition={{ delay: index * 0.1 }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0 text-blue-600 dark:text-blue-400">
+                <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0 text-blue-600 dark:text-blue-400">
                   {section.icon}
                 </div>
                 <div>
@@ -226,7 +226,7 @@ In no event shall Islam Journey be liable for any damages arising from the use o
           transition={{ delay: 0.6 }}
         >
           <div className="flex items-start gap-3">
-            <AlertTriangle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
+            <AlertTriangle className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
             <div>
               <h3 className="font-bold text-slate-800 dark:text-white mb-1">
                 {lang === "en" ? "Changes to Terms" : "التغييرات على الشروط"}
@@ -242,7 +242,7 @@ In no event shall Islam Journey be liable for any damages arising from the use o
 
         {/* Contact */}
         <motion.div
-          className="mt-8 bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-2xl p-6 text-center"
+          className="mt-8 bg-linear-to-br from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-2xl p-6 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}

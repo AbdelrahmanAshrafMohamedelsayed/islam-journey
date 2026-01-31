@@ -46,7 +46,7 @@ export function CharacterBubble({
       className={`flex items-end gap-3 mb-6 ${isRight ? "flex-row-reverse" : ""} ${className}`}
     >
       {/* Character Avatar */}
-      <div className="flex-shrink-0">
+      <div className="shrink-0">
         <CharacterAvatar
           character={character}
           emotion={emotion}

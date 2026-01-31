@@ -1,12 +1,12 @@
 "use client";
 
 /**
- * Ambient Sound System
+ * Islamic Ambient Sound System
  *
- * Provides immersive mosque atmospheres:
- * - Makkah: Distant crowd murmur, Kabah ambiance
- * - Madinah: Peaceful garden, birds, fountain
- * - Local Mosque: Quiet contemplation, subtle echo
+ * Provides 3 immersive Islamic atmosphere modes:
+ * - Eid Takbirat (تكبيرات العيد): Beautiful Eid takbirat recitation
+ * - Silent (صامت): No ambient sounds
+ * - Ihram Takbirat (تكبيرات الإحرام): Hajj/Umrah takbirat
  *
  * Uses Web Audio API for smooth crossfades and volume control.
  */
@@ -25,8 +25,6 @@ interface AmbientSound {
   id: string;
   name: { en: string; ar: string };
   description: { en: string; ar: string };
-  // Using royalty-free ambient sound URLs from freesound.org or similar
-  // These are placeholder URLs - in production, use actual hosted files
   layers: {
     url: string;
     volume: number; // relative volume 0-1
@@ -49,82 +47,63 @@ interface UseAmbientSoundReturn {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// AMBIENT SOUND CONFIGURATIONS
+// ISLAMIC AMBIENT SOUND CONFIGURATIONS
+// 3 Modes: Eid Takbirat, Silent, Ihram Takbirat
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const AMBIENT_SOUNDS: Record<AtmosphereType, AmbientSound> = {
+  // تكبيرات العيد - Eid Takbirat
   makkah: {
-    id: "makkah",
-    name: { en: "Makkah", ar: "مكة المكرمة" },
+    id: "eid_takbirat",
+    name: { en: "Eid Takbirat", ar: "تكبيرات العيد" },
     description: {
-      en: "The blessed atmosphere of Masjid al-Haram",
-      ar: "أجواء المسجد الحرام المباركة",
+      en: "Beautiful Eid takbirat celebration",
+      ar: "تكبيرات العيد المباركة",
     },
     layers: [
       {
-        // Crowd murmur ambient - from freesound CDN (Creative Commons)
-        url: "https://cdn.freesound.org/previews/456/456051_5121236-lq.mp3",
-        volume: 0.25,
-        loop: true,
-      },
-      {
-        // Soft reverberant ambience
-        url: "https://cdn.freesound.org/previews/612/612095_5674468-lq.mp3",
-        volume: 0.15,
+        // Eid Takbirat from Archive.org - verified working
+        url: "https://archive.org/download/takbirat-eid/EID.mp3",
+        volume: 0.4,
         loop: true,
       },
     ],
   },
+  // تكبيرات الإحرام - Ihram Takbirat (Hajj/Umrah)
   madinah: {
-    id: "madinah",
-    name: { en: "Madinah", ar: "المدينة المنورة" },
+    id: "ihram_takbirat",
+    name: { en: "Ihram Takbirat", ar: "تكبيرات الإحرام" },
     description: {
-      en: "The peaceful serenity of the Prophet's city",
-      ar: "سكينة مدينة الرسول ﷺ",
+      en: "Takbirat for Hajj and Umrah",
+      ar: "تكبيرات الحج والعمرة",
     },
     layers: [
       {
-        // Morning birds chirping - from freesound CDN
-        url: "https://cdn.freesound.org/previews/531/531947_2489088-lq.mp3",
+        // Talbiyah/Ihram from Archive.org
+        url: "https://archive.org/download/talbiyah-labbayk/labbayk.mp3",
+        volume: 0.35,
+        loop: true,
+      },
+    ],
+  },
+  // Local mosque ambiance (alternative takbirat style)
+  local: {
+    id: "local_takbirat",
+    name: { en: "Mosque Takbirat", ar: "تكبيرات المسجد" },
+    description: {
+      en: "Gentle mosque atmosphere with takbirat",
+      ar: "أجواء المسجد الهادئة",
+    },
+    layers: [
+      {
+        // Same Eid takbirat at lower volume for subtle ambiance
+        url: "https://archive.org/download/takbirat-eid/EID.mp3",
         volume: 0.2,
         loop: true,
       },
-      {
-        // Gentle fountain water - from freesound CDN
-        url: "https://cdn.freesound.org/previews/467/467008_9497060-lq.mp3",
-        volume: 0.18,
-        loop: true,
-      },
-      {
-        // Soft wind breeze - from freesound CDN
-        url: "https://cdn.freesound.org/previews/572/572335_7037-lq.mp3",
-        volume: 0.1,
-        loop: true,
-      },
     ],
   },
-  local: {
-    id: "local",
-    name: { en: "Local Mosque", ar: "المسجد المحلي" },
-    description: {
-      en: "Quiet contemplation in your neighborhood mosque",
-      ar: "تأمل هادئ في مسجد الحي",
-    },
-    layers: [
-      {
-        // Quiet room ambience - from freesound CDN
-        url: "https://cdn.freesound.org/previews/370/370934_5450487-lq.mp3",
-        volume: 0.12,
-        loop: true,
-      },
-      {
-        // Subtle indoor atmosphere
-        url: "https://cdn.freesound.org/previews/560/560403_12408507-lq.mp3",
-        volume: 0.08,
-        loop: true,
-      },
-    ],
-  },
+  // صامت - Silent Mode
   silent: {
     id: "silent",
     name: { en: "Silent", ar: "صامت" },

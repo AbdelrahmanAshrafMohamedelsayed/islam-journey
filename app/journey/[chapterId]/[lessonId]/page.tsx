@@ -58,7 +58,7 @@ export default function LessonPage() {
 
   if (!lessonExists) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 p-4">
         <div className="text-center max-w-md">
           <div className="text-6xl mb-4">📚</div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">

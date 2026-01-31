@@ -163,21 +163,22 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
           en: "Watch: What is Zakat and Why is it Important?",
           ar: "شاهد: ما هي الزكاة ولماذا هي مهمة؟",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=V_rLlPqHv4c",
+        mediaUrl: "https://www.youtube.com/watch?v=OxmRYZ_bEoI",
         backupUrls: [
           "https://www.youtube.com/watch?v=y7X_mLc7E3w",
           "https://www.youtube.com/watch?v=BOqN9cErvgY",
         ],
       },
       {
-        id: "zakat-animation",
-        type: "animation",
+        id: "zakat-charity-image",
+        type: "image",
         content: {
-          en: "Zakat purifies wealth and spreads blessings",
-          ar: "الزكاة تطهر المال وتنشر البركات",
+          en: "Giving Zakat - purifying wealth through charity",
+          ar: "إعطاء الزكاة - تطهير المال من خلال الصدقة",
         },
-        mediaUrl: "https://assets9.lottiefiles.com/packages/lf20_bq485nmk.json",
-        loop: true,
+        mediaUrl:
+          "https://thumbs.dreamstime.com/b/man-giving-zakat-charity-ramadan-man-s-generosity-giving-spirit-image-show-man-handing-over-food-to-274963114.jpg",
+        mediaAlt: "Hands giving charity representing Zakat",
       },
       {
         id: "zakat-quran-audio",

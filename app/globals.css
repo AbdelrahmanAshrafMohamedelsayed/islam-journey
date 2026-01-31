@@ -215,6 +215,13 @@ body {
   font-family: "Amiri", "Noto Naskh Arabic", serif;
 }
 
+/* Arabic Font Class - for explicit Arabic text styling */
+.font-arabic {
+  font-family: var(--font-amiri), "Amiri", "Noto Naskh Arabic", "Noto Sans Arabic", serif;
+  font-feature-settings: "liga" 1, "calt" 1;
+  line-height: 1.8;
+}
+
 /* Selection styling */
 ::selection {
   background: rgba(16, 185, 129, 0.3);

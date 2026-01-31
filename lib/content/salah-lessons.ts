@@ -17,6 +17,19 @@ export const salahLessons: Record<string, LessonContent> = {
     xpReward: 50,
     sections: [
       {
+        id: "salah-learn-to-pray-video",
+        type: "video",
+        content: {
+          en: "📿 Watch: Complete Guide - How to Pray in Islam (Step by Step)",
+          ar: "📿 شاهد: دليل كامل - كيفية الصلاة في الإسلام (خطوة بخطوة)",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=2ZEmsdEOpbk",
+        backupUrls: [
+          "https://www.youtube.com/watch?v=T4auGhmeBlw",
+          "https://www.youtube.com/watch?v=zalLv1AXhPg",
+        ],
+      },
+      {
         id: "salah-importance-intro-video",
         type: "video",
         content: {
@@ -30,22 +43,23 @@ export const salahLessons: Record<string, LessonContent> = {
         ],
       },
       {
+        id: "salah-importance-image",
+        type: "image",
+        content: {
+          en: "Muslims in prayer - the spiritual connection with Allah",
+          ar: "المسلمون في الصلاة - الاتصال الروحي مع الله",
+        },
+        mediaUrl:
+          "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80",
+        mediaAlt: "Muslims praying in congregation",
+      },
+      {
         id: "salah-importance-section-1",
         type: "text",
         content: {
           en: 'Welcome to one of the most important lessons in your Islamic journey! **Salah** (prayer) is the second pillar of Islam and is often called the "backbone" of the religion. While the Shahada brings you into Islam, Salah is what keeps your faith alive and growing every single day.',
           ar: 'مرحباً بكم في أحد أهم الدروس في رحلتكم الإسلامية! **الصلاة** هي الركن الثاني من أركان الإسلام وغالباً ما تُسمى "عمود" الدين. بينما الشهادة تُدخلك الإسلام، الصلاة هي ما يُبقي إيمانك حياً وينمو كل يوم.',
         },
-      },
-      {
-        id: "salah-importance-animation",
-        type: "animation",
-        content: {
-          en: "The spiritual journey of prayer connects you directly to Allah",
-          ar: "الرحلة الروحية للصلاة تربطك مباشرة بالله",
-        },
-        mediaUrl: "https://assets2.lottiefiles.com/packages/lf20_szlepvdh.json",
-        loop: true,
       },
       {
         id: "salah-importance-section-2",
@@ -133,6 +147,7 @@ export const salahLessons: Record<string, LessonContent> = {
           ar: '"إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ ۗ وَلَذِكْرُ اللَّهِ أَكْبَرُ ۗ وَاللَّهُ يَعْلَمُ مَا تَصْنَعُونَ"',
         },
         reference: { en: "Quran 29:45", ar: "القرآن 29:45" },
+        mediaUrl: "https://everyayah.com/data/Alafasy_128kbps/029045.mp3",
       },
       {
         id: "salah-importance-audio",
@@ -141,7 +156,8 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "Listen to the Adhan (Call to Prayer)",
           ar: "استمع إلى الأذان",
         },
-        mediaUrl: "https://cdn.islamic.network/adhans/128/1.mp3",
+        mediaUrl:
+          "https://media.assabile.com/assabile/adhan_3435370/0bf83c80b583.mp3",
         transliteration: "Allahu Akbar, Allahu Akbar...",
       },
       {
@@ -151,16 +167,6 @@ export const salahLessons: Record<string, LessonContent> = {
           en: "### What Salah Does for You\n\n1. **Direct Connection to Allah** - No priests, no intermediaries. You stand directly before your Creator five times a day.\n\n2. **Spiritual Cleansing** - Just as you wash your body, prayer washes your soul. Each prayer erases sins committed since the previous prayer.\n\n3. **Life Structure** - The five daily prayers give rhythm and purpose to your day, reminding you of what truly matters.\n\n4. **Protection from Sin** - Regular prayer naturally keeps you away from harmful actions. When you speak to Allah five times daily, it becomes harder to disobey Him.\n\n5. **Peace and Tranquility** - In a world full of stress, prayer is your sanctuary. It's your time to disconnect from worldly worries and reconnect with your Lord.",
           ar: "### ماذا تفعل الصلاة لك\n\n1. **اتصال مباشر بالله** - لا كهنة، لا وسطاء. تقف مباشرة أمام خالقك خمس مرات في اليوم.\n\n2. **تطهير روحي** - كما تغسل جسمك، الصلاة تغسل روحك. كل صلاة تمحو الذنوب المرتكبة منذ الصلاة السابقة.\n\n3. **هيكلة الحياة** - الصلوات الخمس اليومية تعطي إيقاعاً وهدفاً ليومك، تذكرك بما يهم حقاً.\n\n4. **حماية من الذنب** - الصلاة المنتظمة تبعدك طبيعياً عن الأفعال الضارة. عندما تتحدث إلى الله خمس مرات يومياً، يصبح من الصعب عصيانه.\n\n5. **السلام والطمأنينة** - في عالم مليء بالضغوط، الصلاة هي ملاذك. إنه وقتك للانفصال عن هموم الدنيا والتواصل مع ربك.",
         },
-      },
-      {
-        id: "salah-importance-image",
-        type: "image",
-        content: {
-          en: "The five daily prayers throughout the day",
-          ar: "الصلوات الخمس اليومية على مدار اليوم",
-        },
-        mediaUrl: "/images/salah/five-prayers-timeline.png",
-        mediaAlt: "Timeline showing the five daily prayer times",
       },
       {
         id: "salah-importance-section-6",

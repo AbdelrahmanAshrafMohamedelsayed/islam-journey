@@ -37,7 +37,7 @@ export default function AboutPage() {
   const { language: lang } = useSettingsStore();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50/50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-emerald-50/50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -65,7 +65,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, y: 0 }}
         >
           <motion.div
-            className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-500 mb-6 shadow-xl shadow-emerald-500/30"
+            className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-linear-to-br from-emerald-400 to-teal-500 mb-6 shadow-xl shadow-emerald-500/30"
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{ duration: 6, repeat: Infinity }}
           >
@@ -83,13 +83,13 @@ export default function AboutPage() {
 
         {/* Mission Section */}
         <motion.div
-          className="bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-3xl p-8 mb-8"
+          className="bg-linear-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-3xl p-8 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
           <div className="flex items-start gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-500 flex items-center justify-center shrink-0">
               <Target className="w-7 h-7 text-white" />
             </div>
             <div>
@@ -156,7 +156,7 @@ export default function AboutPage() {
               whileHover={{ y: -4 }}
             >
               <div
-                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4`}
+                className={`w-12 h-12 rounded-xl bg-linear-to-br ${feature.color} flex items-center justify-center text-white mb-4`}
               >
                 {feature.icon}
               </div>
@@ -172,13 +172,13 @@ export default function AboutPage() {
 
         {/* Vision Section */}
         <motion.div
-          className="bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-3xl p-8 mb-8"
+          className="bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-3xl p-8 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
           <div className="flex items-start gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-amber-400 to-orange-500 flex items-center justify-center shrink-0">
               <Lightbulb className="w-7 h-7 text-white" />
             </div>
             <div>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                 className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm"
                 whileHover={{ y: -4, scale: 1.02 }}
               >
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mx-auto mb-4">
+                <div className="w-20 h-20 rounded-full bg-linear-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 flex items-center justify-center mx-auto mb-4">
                   <span className="text-4xl">{member.avatar}</span>
                 </div>
                 <h3 className="font-bold text-slate-800 dark:text-white">
@@ -277,7 +277,7 @@ export default function AboutPage() {
 
         {/* CTA Section */}
         <motion.div
-          className="bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-700 dark:to-slate-800 rounded-3xl p-8 text-center text-white"
+          className="bg-linear-to-br from-slate-800 to-slate-900 dark:from-slate-700 dark:to-slate-800 rounded-3xl p-8 text-center text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}

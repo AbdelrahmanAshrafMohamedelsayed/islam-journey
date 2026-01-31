@@ -136,7 +136,7 @@ export function QuizComponent({ lessonId, chapterId }: QuizComponentProps) {
     const message = getScoreMessage();
 
     return (
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -149,10 +149,10 @@ export function QuizComponent({ lessonId, chapterId }: QuizComponentProps) {
               transition={{ delay: 0.2, type: "spring" }}
               className={`w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 ${
                 percentage >= 80
-                  ? "bg-gradient-to-br from-amber-400 to-yellow-600"
+                  ? "bg-linear-to-br from-amber-400 to-yellow-600"
                   : percentage >= 60
-                    ? "bg-gradient-to-br from-emerald-400 to-green-600"
-                    : "bg-gradient-to-br from-blue-400 to-indigo-600"
+                    ? "bg-linear-to-br from-emerald-400 to-green-600"
+                    : "bg-linear-to-br from-blue-400 to-indigo-600"
               }`}
             >
               <Trophy className="w-12 h-12 text-white" />
@@ -222,7 +222,7 @@ export function QuizComponent({ lessonId, chapterId }: QuizComponentProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-2xl mx-auto px-4 py-4">
@@ -245,7 +245,7 @@ export function QuizComponent({ lessonId, chapterId }: QuizComponentProps) {
           </div>
           <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-emerald-500 to-green-500"
+              className="h-full bg-linear-to-r from-emerald-500 to-green-500"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -355,9 +355,9 @@ export function QuizComponent({ lessonId, chapterId }: QuizComponentProps) {
                   >
                     <div className="flex items-start gap-3">
                       {selectedAnswer === currentQuestion.correctAnswer ? (
-                        <CheckCircle2 className="w-6 h-6 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0 mt-0.5" />
                       ) : (
-                        <XCircle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" />
+                        <XCircle className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
                       )}
                       <div>
                         <p

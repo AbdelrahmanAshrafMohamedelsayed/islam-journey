@@ -111,7 +111,7 @@ export function InstallPrompt() {
           >
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
               {/* Header gradient */}
-              <div className="h-2 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500" />
+              <div className="h-2 bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500" />
 
               <div className="p-5">
                 {/* Close button */}
@@ -125,7 +125,7 @@ export function InstallPrompt() {
 
                 <div className="flex items-start gap-4">
                   {/* App icon */}
-                  <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                  <div className="shrink-0 w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30">
                     <span className="text-3xl">🕌</span>
                   </div>
 
@@ -204,7 +204,7 @@ export function InstallPrompt() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="relative p-6 pb-4 bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+              <div className="relative p-6 pb-4 bg-linear-to-br from-emerald-500 to-teal-600 text-white">
                 <button
                   onClick={handleDismiss}
                   className="absolute top-4 right-4 p-1 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
@@ -255,7 +255,7 @@ export function InstallPrompt() {
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                    <div className="shrink-0 w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                       {item.icon}
                     </div>
                     <div>

@@ -392,7 +392,7 @@ function DawnScene() {
         animate={{ y: 20 }}
         transition={{ duration: 3, ease: "easeOut" }}
       >
-        <div className="w-24 h-24 rounded-full bg-gradient-to-t from-orange-500 to-yellow-300 blur-sm" />
+        <div className="w-24 h-24 rounded-full bg-linear-to-t from-orange-500 to-yellow-300 blur-sm" />
         <motion.div
           className="absolute inset-0 rounded-full bg-yellow-200 blur-3xl"
           animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.7, 0.4] }}

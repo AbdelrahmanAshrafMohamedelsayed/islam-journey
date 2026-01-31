@@ -280,16 +280,6 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
         ],
       },
       {
-        id: "hajj-animation",
-        type: "animation",
-        content: {
-          en: "Millions of pilgrims gather around the Kaaba in unity",
-          ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
-        },
-        mediaUrl: "https://assets5.lottiefiles.com/packages/lf20_fmfcvtbf.json",
-        loop: true,
-      },
-      {
         id: "hajj-quran-audio",
         type: "audio",
         content: {
@@ -298,6 +288,16 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
         },
         mediaUrl:
           "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2705.mp3",
+      },
+      {
+        id: "hajj-kaaba-image",
+        type: "image",
+        content: {
+          en: "Millions of pilgrims gather around the Kaaba in unity",
+          ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
+        },
+        mediaUrl: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80",
+        mediaAlt: "Pilgrims performing Tawaf around the Kaaba during Hajj",
       },
       {
         id: "hajj-hadith",

@@ -210,7 +210,7 @@ export function AchievementModal({
               {/* Rarity banner */}
               <div
                 className={cn(
-                  "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r",
+                  "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-white bg-linear-to-r",
                   rarityColors[achievement.rarity],
                 )}
               >
@@ -223,7 +223,7 @@ export function AchievementModal({
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", delay: 0.2, duration: 0.6 }}
                 className={cn(
-                  "mx-auto w-24 h-24 rounded-2xl flex items-center justify-center text-5xl mb-6 shadow-lg bg-gradient-to-br",
+                  "mx-auto w-24 h-24 rounded-2xl flex items-center justify-center text-5xl mb-6 shadow-lg bg-linear-to-br",
                   rarityColors[achievement.rarity],
                 )}
               >

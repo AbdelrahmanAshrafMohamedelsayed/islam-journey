@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Button, Card } from "@/components/ui";
+import { Button, Card, AudioPlayer } from "@/components/ui";
 import { ProgressBar } from "@/components/ui/Progress";
 import { useSettingsStore, useProgressStore } from "@/lib/stores";
 import {
@@ -21,7 +21,10 @@ import {
   getCharacterGreeting,
   getCharacterEncouragement,
 } from "@/components/narrative";
-import { getCharactersForChapter } from "@/lib/content/characters";
+import {
+  getCharactersForChapter,
+  getKhabibLessonGreeting,
+} from "@/lib/content/characters";
 import {
   ArrowLeft,
   ArrowRight,
@@ -43,9 +46,9 @@ import {
   RotateCcw,
 } from "lucide-react";
 
-// Dynamically import Lottie player to avoid SSR issues
-const Player = dynamic(
-  () => import("@lottiefiles/react-lottie-player").then((mod) => mod.Player),
+// Dynamically import DotLottie player to avoid SSR issues (supports v2 .lottie format)
+const DotLottieReact = dynamic(
+  () => import("@lottiefiles/dotlottie-react").then((mod) => mod.DotLottieReact),
   { ssr: false },
 );
 
@@ -174,13 +177,15 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
     () => getCharactersForChapter(chapterId),
     [chapterId],
   );
-  const primaryCharacter = recommendedCharacters[0]?.id || "yusuf";
+  const primaryCharacter = recommendedCharacters[0]?.id || "khabib";
 
-  // Generate greeting message once
-  const characterGreeting = useMemo(
-    () => getCharacterGreeting(primaryCharacter, lang),
-    [primaryCharacter, lang],
-  );
+  // Generate greeting message once - use lesson-specific greeting for Khabib
+  const characterGreeting = useMemo(() => {
+    if (primaryCharacter === "khabib") {
+      return getKhabibLessonGreeting(lessonId, lang);
+    }
+    return getCharacterGreeting(primaryCharacter, lang);
+  }, [primaryCharacter, lang, lessonId]);
 
   useEffect(() => {
     const lessonData = getLessonById(lessonId);
@@ -321,6 +326,62 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                   {children}
                 </blockquote>
               ),
+              // Table components
+              table: ({ children }) => (
+                <div className="overflow-x-auto my-4">
+                  <table className="min-w-full border-collapse border border-slate-300 dark:border-slate-700">
+                    {children}
+                  </table>
+                </div>
+              ),
+              thead: ({ children }) => (
+                <thead className="bg-emerald-50 dark:bg-emerald-900/30">
+                  {children}
+                </thead>
+              ),
+              tbody: ({ children }) => <tbody>{children}</tbody>,
+              tr: ({ children }) => (
+                <tr className="border-b border-slate-200 dark:border-slate-700">
+                  {children}
+                </tr>
+              ),
+              th: ({ children }) => (
+                <th className="px-4 py-2 text-left font-semibold text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="px-4 py-2 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+                  {children}
+                </td>
+              ),
+              // Link component
+              a: ({ href, children }) => (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700 dark:hover:text-emerald-300"
+                >
+                  {children}
+                </a>
+              ),
+              // Code components
+              code: ({ className, children }) => {
+                const isInline = !className;
+                return isInline ? (
+                  <code className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-sm font-mono text-emerald-600 dark:text-emerald-400">
+                    {children}
+                  </code>
+                ) : (
+                  <code className={className}>{children}</code>
+                );
+              },
+              pre: ({ children }) => (
+                <pre className="overflow-x-auto p-4 my-4 bg-slate-900 dark:bg-slate-950 rounded-lg text-sm">
+                  {children}
+                </pre>
+              ),
             }}
           >
             {content}
@@ -382,6 +443,62 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                       {children}
                     </blockquote>
                   ),
+                  // Table components
+                  table: ({ children }) => (
+                    <div className="overflow-x-auto my-4">
+                      <table className="min-w-full border-collapse border border-slate-300 dark:border-slate-700">
+                        {children}
+                      </table>
+                    </div>
+                  ),
+                  thead: ({ children }) => (
+                    <thead className="bg-emerald-50 dark:bg-emerald-900/30">
+                      {children}
+                    </thead>
+                  ),
+                  tbody: ({ children }) => <tbody>{children}</tbody>,
+                  tr: ({ children }) => (
+                    <tr className="border-b border-slate-200 dark:border-slate-700">
+                      {children}
+                    </tr>
+                  ),
+                  th: ({ children }) => (
+                    <th className="px-4 py-2 text-left font-semibold text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700">
+                      {children}
+                    </th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="px-4 py-2 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+                      {children}
+                    </td>
+                  ),
+                  // Link component
+                  a: ({ href, children }) => (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700 dark:hover:text-emerald-300"
+                    >
+                      {children}
+                    </a>
+                  ),
+                  // Code components
+                  code: ({ className, children }) => {
+                    const isInline = !className;
+                    return isInline ? (
+                      <code className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-sm font-mono text-emerald-600 dark:text-emerald-400">
+                        {children}
+                      </code>
+                    ) : (
+                      <code className={className}>{children}</code>
+                    );
+                  },
+                  pre: ({ children }) => (
+                    <pre className="overflow-x-auto p-4 my-4 bg-slate-900 dark:bg-slate-950 rounded-lg text-sm">
+                      {children}
+                    </pre>
+                  ),
                 }}
               >
                 {content}
@@ -417,6 +534,8 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
           typeof section.reference === "object"
             ? section.reference[lang]
             : section.reference;
+        const arabicText = section.content.ar;
+        const englishText = section.content.en;
         return (
           <motion.div
             key={section.id || `quran-${currentSectionIndex}`}
@@ -424,24 +543,36 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="my-8"
           >
-            <Card
-              variant="glass"
-              padding="lg"
-              className="border-l-4 border-emerald-500"
-            >
-              <div className="flex items-start gap-3 mb-3">
-                <BookMarked className="w-6 h-6 text-emerald-500 flex-shrink-0 mt-1" />
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-6 border-l-4 border-emerald-500">
+              <div className="flex items-start gap-3 mb-4">
+                <BookMarked className="w-6 h-6 text-emerald-500 shrink-0 mt-1" />
                 <span className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
                   {quranRef}
                 </span>
               </div>
+              {/* Always show Arabic first */}
+              <p
+                dir="rtl"
+                className="text-2xl font-arabic text-right text-slate-900 dark:text-white leading-loose mb-4"
+              >
+                {arabicText}
+              </p>
+              {/* Show translation */}
               <p
                 dir={lang === "ar" ? "rtl" : "ltr"}
-                className={`text-xl ${lang === "ar" ? "font-arabic text-right" : ""} text-slate-800 dark:text-slate-200 leading-relaxed`}
+                className={`text-lg ${lang === "ar" ? "text-right" : ""} text-slate-600 dark:text-slate-300 leading-relaxed italic`}
               >
-                "{content}"
+                {englishText}
               </p>
-            </Card>
+              {/* Audio player for the verse */}
+              {section.mediaUrl && (
+                <AudioPlayer
+                  src={section.mediaUrl}
+                  label={lang === "ar" ? "استمع للتلاوة" : "Listen to recitation"}
+                  accentColor="emerald"
+                />
+              )}
+            </div>
           </motion.div>
         );
 
@@ -458,13 +589,9 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             animate={{ opacity: 1, scale: 1 }}
             className="my-8"
           >
-            <Card
-              variant="glass"
-              padding="lg"
-              className="border-l-4 border-amber-500"
-            >
-              <div className="flex items-start gap-3 mb-3">
-                <BookOpen className="w-6 h-6 text-amber-500 flex-shrink-0 mt-1" />
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-6 border-l-4 border-amber-500">
+              <div className="flex items-start gap-3 mb-4">
+                <BookOpen className="w-6 h-6 text-amber-500 shrink-0 mt-1" />
                 <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
                   Hadith - {sourceRef}
                 </span>
@@ -475,7 +602,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
               >
                 {content}
               </p>
-            </Card>
+            </div>
           </motion.div>
         );
 
@@ -494,17 +621,19 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                 <div className="p-2 bg-emerald-100 dark:bg-emerald-800 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                 </div>
-                <div dir={lang === "ar" ? "rtl" : "ltr"}>
+                <div dir={lang === "ar" ? "rtl" : "ltr"} className="flex-1">
                   <p
                     className={`font-semibold text-emerald-800 dark:text-emerald-300 mb-1 ${lang === "ar" ? "text-right" : ""}`}
                   >
                     {lang === "en" ? "Tip" : "نصيحة"}
                   </p>
-                  <p
-                    className={`text-emerald-700 dark:text-emerald-400 ${lang === "ar" ? "text-right font-arabic" : ""}`}
+                  <div
+                    className={`text-emerald-700 dark:text-emerald-400 prose prose-emerald dark:prose-invert prose-sm max-w-none ${lang === "ar" ? "text-right font-arabic" : ""}`}
                   >
-                    {content}
-                  </p>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {content}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               </div>
             </Card>
@@ -545,6 +674,19 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
 
       // Video section - for instructional videos
       case "video":
+        // Handle YouTube Shorts with special formatting
+        const isYouTubeShort = section.mediaUrl?.includes("youtube.com/shorts/");
+        const getYouTubeEmbedUrl = (url: string) => {
+          if (url.includes("youtube.com/shorts/")) {
+            // Extract video ID from shorts URL
+            const videoId = url.split("shorts/")[1]?.split("?")[0];
+            return `https://www.youtube.com/embed/${videoId}`;
+          }
+          return url
+            .replace("watch?v=", "embed/")
+            .replace("youtu.be/", "youtube.com/embed/");
+        };
+        
         return (
           <motion.div
             key={section.id || `video-${currentSectionIndex}`}
@@ -553,14 +695,14 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-8"
           >
             <Card variant="glass" padding="none" className="overflow-hidden">
-              <div className="aspect-video relative bg-slate-900 rounded-t-xl overflow-hidden">
+              <div className={`relative bg-slate-900 rounded-t-xl overflow-hidden ${
+                isYouTubeShort ? "aspect-[9/16] max-w-[280px] mx-auto" : "aspect-video"
+              }`}>
                 {section.mediaUrl ? (
                   section.mediaUrl.includes("youtube.com") ||
                   section.mediaUrl.includes("youtu.be") ? (
                     <iframe
-                      src={section.mediaUrl
-                        .replace("watch?v=", "embed/")
-                        .replace("youtu.be/", "youtube.com/embed/")}
+                      src={getYouTubeEmbedUrl(section.mediaUrl)}
                       title={content}
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -601,6 +743,50 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
           </motion.div>
         );
 
+      // Audio section - for audio files and SoundCloud embeds
+      case "audio":
+        const isSoundCloud = section.mediaUrl?.includes("soundcloud.com");
+        return (
+          <motion.div
+            key={section.id || `audio-${currentSectionIndex}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="my-8"
+          >
+            <Card variant="glass" padding="lg" className="overflow-hidden">
+              {content && (
+                <p className="text-slate-700 dark:text-slate-300 mb-4 font-medium">
+                  {content}
+                </p>
+              )}
+              {isSoundCloud ? (
+                <div className="rounded-xl overflow-hidden bg-slate-800">
+                  <iframe
+                    width="100%"
+                    height="166"
+                    scrolling="no"
+                    frameBorder="no"
+                    allow="autoplay"
+                    src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(section.mediaUrl || "")}&color=%2310b981&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false`}
+                    className="rounded-xl"
+                  />
+                </div>
+              ) : section.mediaUrl ? (
+                <AudioPlayer
+                  src={section.mediaUrl}
+                  label={lang === "ar" ? "استمع" : "Listen"}
+                  accentColor="emerald"
+                />
+              ) : (
+                <div className="text-center text-slate-400 py-8">
+                  <Volume2 className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                  <p>{lang === "en" ? "Audio coming soon" : "الصوت قادم قريباً"}</p>
+                </div>
+              )}
+            </Card>
+          </motion.div>
+        );
+
       // Animation section - for Lottie animations
       case "animation":
         return (
@@ -613,12 +799,12 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             <Card variant="glass" padding="lg" className="text-center">
               <div className="relative w-full max-w-md mx-auto aspect-square">
                 {section.mediaUrl ? (
-                  <Player
+                  <DotLottieReact
                     src={section.mediaUrl}
                     autoplay
                     loop={section.loop !== false}
                     className="w-full h-full"
-                    background="transparent"
+                    style={{ background: "transparent" }}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-xl">
@@ -752,7 +938,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -779,22 +965,24 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
 
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Title */}
-        <motion.div
-          key={`title-${currentSectionIndex}`}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
-        >
-          <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">
-            {lesson.title[lang]}
-          </h1>
-          {lesson.subtitle && (
-            <p className="text-slate-600 dark:text-slate-400">
-              {lesson.subtitle[lang]}
-            </p>
-          )}
-        </motion.div>
+        {/* Title - shown only on first section */}
+        {currentSectionIndex === 0 && (
+          <motion.div
+            key="lesson-title"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-8"
+          >
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">
+              {lesson.title[lang]}
+            </h1>
+            {lesson.subtitle && (
+              <p className="text-slate-600 dark:text-slate-400">
+                {lesson.subtitle[lang]}
+              </p>
+            )}
+          </motion.div>
+        )}
 
         {/* Character Introduction (shown only on first section) */}
         <AnimatePresence>
@@ -888,7 +1076,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                       key={index}
                       className="flex items-start gap-2 text-slate-700 dark:text-slate-300"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                       <span>{point[lang]}</span>
                     </li>
                   ))}
@@ -961,7 +1149,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
-                className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6"
+                className="w-20 h-20 bg-linear-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6"
               >
                 <Trophy className="w-10 h-10 text-white" />
               </motion.div>

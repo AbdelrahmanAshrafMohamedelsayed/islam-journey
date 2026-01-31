@@ -405,7 +405,7 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
   // Welcome screen
   if (!started) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-linear-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -468,7 +468,7 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
   // Completion screen
   if (completed) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-linear-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -479,7 +479,7 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring" }}
-              className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center mx-auto mb-6"
+              className="w-24 h-24 rounded-full bg-linear-to-br from-emerald-400 to-green-600 flex items-center justify-center mx-auto mb-6"
             >
               <Trophy className="w-12 h-12 text-white" />
             </motion.div>
@@ -536,7 +536,7 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
 
   // Main simulation view
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-emerald-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-2xl mx-auto px-4 py-4">
@@ -557,7 +557,7 @@ export function SalahSimulation({ chapterId }: SalahSimulationProps) {
           </div>
           <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-emerald-500 to-green-500"
+              className="h-full bg-linear-to-r from-emerald-500 to-green-500"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}

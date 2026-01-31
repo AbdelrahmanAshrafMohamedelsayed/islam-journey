@@ -103,7 +103,7 @@ const toastStyles: Record<
     iconBg: "bg-amber-100 dark:bg-amber-900/30",
   },
   achievement: {
-    bg: "bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/30 dark:to-yellow-900/30 border-amber-400",
+    bg: "bg-linear-to-r from-amber-50 to-yellow-50 dark:from-amber-900/30 dark:to-yellow-900/30 border-amber-400",
     icon: <Trophy className="w-5 h-5 text-amber-500" />,
     iconBg: "bg-amber-100 dark:bg-amber-900/50",
   },
@@ -136,7 +136,7 @@ function ToastItem({
         style.bg,
       )}
     >
-      <div className={cn("flex-shrink-0 p-1.5 rounded-lg", style.iconBg)}>
+      <div className={cn("shrink-0 p-1.5 rounded-lg", style.iconBg)}>
         {t.icon || style.icon}
       </div>
       <div className="flex-1 min-w-0">
@@ -151,7 +151,7 @@ function ToastItem({
       </div>
       <button
         onClick={onClose}
-        className="flex-shrink-0 p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+        className="shrink-0 p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
       >
         <X className="w-4 h-4" />
       </button>

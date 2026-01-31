@@ -4,11 +4,13 @@
  * CharacterAvatar Component
  *
  * Renders characters as beautiful silhouettes with geometric Islamic patterns.
+ * For characters with imageUrl, renders the actual image instead.
  * Supports multiple emotions and smooth transitions between states.
  */
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo } from "react";
+import Image from "next/image";
 import type { Character, CharacterEmotion } from "@/lib/content/characters";
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -358,7 +360,9 @@ export function CharacterAvatar({
         style={{
           width: dimensions.container,
           height: dimensions.container,
-          background: `linear-gradient(135deg, ${character.primaryColor}20, ${character.secondaryColor}30)`,
+          background: character.imageUrl 
+            ? 'transparent' 
+            : `linear-gradient(135deg, ${character.primaryColor}20, ${character.secondaryColor}30)`,
           border: `2px solid ${character.primaryColor}40`,
         }}
         animate={
@@ -376,21 +380,34 @@ export function CharacterAvatar({
           ease: "easeInOut",
         }}
       >
-        {/* Pattern overlay */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full">
-          <PatternOverlay
-            style={character.patternStyle}
-            color={character.primaryColor}
-            size={dimensions.pattern}
+        {/* Render actual image if available, otherwise silhouette with pattern */}
+        {character.imageUrl ? (
+          <Image
+            src={character.imageUrl}
+            alt={character.name.en}
+            fill
+            className="object-cover rounded-full"
+            sizes={`${dimensions.container}px`}
           />
-        </div>
+        ) : (
+          <>
+            {/* Pattern overlay */}
+            <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full">
+              <PatternOverlay
+                style={character.patternStyle}
+                color={character.primaryColor}
+                size={dimensions.pattern}
+              />
+            </div>
 
-        {/* Silhouette */}
-        <Silhouette
-          size={dimensions.silhouette}
-          primaryColor={character.primaryColor}
-          emotion={currentEmotion}
-        />
+            {/* Silhouette */}
+            <Silhouette
+              size={dimensions.silhouette}
+              primaryColor={character.primaryColor}
+              emotion={currentEmotion}
+            />
+          </>
+        )}
       </motion.div>
 
       {/* Character name */}
@@ -443,7 +460,9 @@ export function MiniAvatar({
       style={{
         width: size,
         height: size,
-        background: `linear-gradient(135deg, ${character.primaryColor}30, ${character.secondaryColor}40)`,
+        background: character.imageUrl 
+          ? 'transparent'
+          : `linear-gradient(135deg, ${character.primaryColor}30, ${character.secondaryColor}40)`,
         border: `1.5px solid ${character.primaryColor}50`,
       }}
       animate={{
@@ -455,11 +474,21 @@ export function MiniAvatar({
         ease: "easeInOut",
       }}
     >
-      <Silhouette
-        size={size * 0.7}
-        primaryColor={character.primaryColor}
-        emotion={currentEmotion}
-      />
+      {character.imageUrl ? (
+        <Image
+          src={character.imageUrl}
+          alt={character.name.en}
+          fill
+          className="object-cover rounded-full"
+          sizes={`${size}px`}
+        />
+      ) : (
+        <Silhouette
+          size={size * 0.7}
+          primaryColor={character.primaryColor}
+          emotion={currentEmotion}
+        />
+      )}
     </motion.div>
   );
 }

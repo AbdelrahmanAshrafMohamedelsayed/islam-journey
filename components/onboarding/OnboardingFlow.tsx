@@ -154,12 +154,12 @@ export function OnboardingFlow() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 flex flex-col">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 flex flex-col">
       {/* Progress bar */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg">
         <div className="h-1 bg-slate-200 dark:bg-slate-800">
           <motion.div
-            className="h-full bg-gradient-to-r from-emerald-500 to-green-500"
+            className="h-full bg-linear-to-r from-emerald-500 to-green-500"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.3 }}
@@ -245,7 +245,7 @@ export function OnboardingFlow() {
                         </div>
                       </div>
                       {selectedMode === "journey" && (
-                        <CheckCircle2 className="w-6 h-6 text-emerald-500 flex-shrink-0" />
+                        <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
                       )}
                     </div>
                   </button>
@@ -288,7 +288,7 @@ export function OnboardingFlow() {
                         </div>
                       </div>
                       {selectedMode === "modules" && (
-                        <CheckCircle2 className="w-6 h-6 text-blue-500 flex-shrink-0" />
+                        <CheckCircle2 className="w-6 h-6 text-blue-500 shrink-0" />
                       )}
                     </div>
                   </button>

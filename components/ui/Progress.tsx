@@ -23,8 +23,8 @@ const sizeVariants = {
 const colorVariants = {
   default: "bg-emerald-500",
   success: "bg-green-500",
-  gold: "bg-gradient-to-r from-amber-500 to-yellow-400",
-  gradient: "bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500",
+  gold: "bg-linear-to-r from-amber-500 to-yellow-400",
+  gradient: "bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500",
 };
 
 export function ProgressBar({
@@ -208,7 +208,7 @@ export function XPProgress({
     <div className={cn("w-full", className)}>
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 text-white font-bold text-sm shadow-md">
+          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-linear-to-br from-amber-400 to-yellow-500 text-white font-bold text-sm shadow-md">
             {level}
           </span>
           <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
@@ -221,13 +221,13 @@ export function XPProgress({
       </div>
       <div className="relative h-3 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
         <motion.div
-          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"
+          className="absolute inset-y-0 left-0 rounded-full bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500"
           initial={{ width: 0 }}
           animate={{ width: `${percentage}%` }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
         {/* Shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent" />
       </div>
     </div>
   );
@@ -250,7 +250,7 @@ export function StreakCounter({
       className={cn(
         "inline-flex items-center gap-2 px-4 py-2 rounded-full",
         isActive
-          ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/30"
+          ? "bg-linear-to-r from-orange-500 to-red-500 text-white shadow-lg shadow-orange-500/30"
           : "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400",
         className,
       )}

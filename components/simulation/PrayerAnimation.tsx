@@ -41,7 +41,7 @@ export function PrayerAnimation({
     <div className={`relative flex items-center justify-center ${className}`}>
       {showGlow && (
         <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-emerald-400/30 to-transparent rounded-full blur-2xl"
+          className="absolute inset-0 bg-linear-to-b from-emerald-400/30 to-transparent rounded-full blur-2xl"
           animate={{
             scale: [1, 1.1, 1],
             opacity: [0.3, 0.5, 0.3],
@@ -300,6 +300,71 @@ function renderPosition(position: PrayerPosition) {
           />
           {/* Taqiyah */}
           <motion.ellipse cx="25" cy="52" rx="8" ry="3" fill="#059669" />
+        </g>
+      );
+
+    case "standing-from-bow":
+      return (
+        <g>
+          {/* Head */}
+          <motion.circle
+            cx="50"
+            cy="25"
+            r="12"
+            fill={headColor}
+            filter="url(#glow)"
+            initial={{ cy: 58 }}
+            animate={{ cy: 25 }}
+            transition={{ duration: 0.5 }}
+          />
+          {/* Body */}
+          <motion.rect
+            x="38"
+            y="37"
+            width="24"
+            height="50"
+            rx="8"
+            fill={bodyColor}
+            initial={{ height: 20, y: 60 }}
+            animate={{ height: 50, y: 37 }}
+            transition={{ duration: 0.5 }}
+          />
+          {/* Legs */}
+          <motion.rect
+            x="40"
+            y="87"
+            width="8"
+            height="50"
+            rx="4"
+            fill={bodyColor}
+          />
+          <motion.rect
+            x="52"
+            y="87"
+            width="8"
+            height="50"
+            rx="4"
+            fill={bodyColor}
+          />
+          {/* Arms at sides */}
+          <motion.rect
+            x="28"
+            y="45"
+            width="8"
+            height="30"
+            rx="4"
+            fill={bodyColor}
+          />
+          <motion.rect
+            x="64"
+            y="45"
+            width="8"
+            height="30"
+            rx="4"
+            fill={bodyColor}
+          />
+          {/* Taqiyah (cap) */}
+          <motion.ellipse cx="50" cy="18" rx="10" ry="4" fill="#059669" />
         </g>
       );
 

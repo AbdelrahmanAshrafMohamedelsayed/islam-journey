@@ -4,55 +4,49 @@ import { useRef, useCallback, useEffect, useState } from "react";
 
 // ==========================================
 // ISLAMIC AUDIO CDN URLS
-// Using islamic.network CDN for authentic recitations
+// Using verified working CDN URLs for authentic recitations
 // ==========================================
 
 const AUDIO_URLS = {
-  // Adhan - Multiple beautiful adhans available (1-9)
-  adhan: "https://cdn.islamic.network/adhans/128/1.mp3",
-  adhan_makkah: "https://cdn.islamic.network/adhans/128/2.mp3",
-  adhan_madinah: "https://cdn.islamic.network/adhans/128/3.mp3",
+  // Adhan - Using verified Archive.org URLs
+  adhan: "https://archive.org/download/adhan-makkah/makkah.mp3",
+  adhan_makkah: "https://archive.org/download/adhan-makkah/makkah.mp3",
+  adhan_madinah: "https://archive.org/download/adhan-madinah/madinah.mp3",
 
-  // Quran recitations (Al-Afasy - high quality)
-  fatiha: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
-  fatiha_v1: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
-  fatiha_v2: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2.mp3",
-  fatiha_v3: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/3.mp3",
-  fatiha_v4: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/4.mp3",
-  fatiha_v5: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/5.mp3",
-  fatiha_v6: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6.mp3",
-  fatiha_v7: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/7.mp3",
+  // Quran recitations - Full Surah audio (Al-Afasy)
+  fatiha: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
+  fatiha_full: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
+  fatiha_v1: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3",
+  fatiha_v2: "https://everyayah.com/data/Alafasy_128kbps/001002.mp3",
+  fatiha_v3: "https://everyayah.com/data/Alafasy_128kbps/001003.mp3",
+  fatiha_v4: "https://everyayah.com/data/Alafasy_128kbps/001004.mp3",
+  fatiha_v5: "https://everyayah.com/data/Alafasy_128kbps/001005.mp3",
+  fatiha_v6: "https://everyayah.com/data/Alafasy_128kbps/001006.mp3",
+  fatiha_v7: "https://everyayah.com/data/Alafasy_128kbps/001007.mp3",
 
-  // Short Surahs for learning
-  ikhlas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6222.mp3",
-  falaq: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6226.mp3",
-  nas: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/6231.mp3",
+  // Short Surahs for learning - Full Surah audio
+  ikhlas: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
+  falaq: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/113.mp3",
+  nas: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/114.mp3",
 
   // Ayatul Kursi (2:255)
   ayatul_kursi:
-    "https://cdn.islamic.network/quran/audio/128/ar.alafasy/262.mp3",
+    "https://everyayah.com/data/Alafasy_128kbps/002255.mp3",
 
-  // Basmala - Surah Fatiha verse 1 contains Basmala
-  basmala: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+  // Basmala - Using EveryAyah.com verified working URL
+  basmala: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3",
 
-  // Prayer phrases - Using Quran verses and islamic.network CDN
-  // For authentic prayer sounds, we use relevant Quran audio
-  takbir: "https://cdn.islamic.network/adhans/128/1.mp3",
+  // Prayer phrases - Using EveryAyah for Takbir (bismillah has takbir-like short audio)
+  takbir: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3",
 
   // Prayer phrases - Using islamic.network CDN with authentic recitations
-  // Tasmee: "Sami Allahu liman hamidah" - Using short verse
-  tasmee: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/1.mp3",
-  // Tahmeed: "Rabbana lakal hamd" - Using Surah Fatiha v2
-  tahmeed: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/2.mp3",
-  // Tasbeeh Ruku: "Subhana Rabbiyal Atheem" - Using short verse
-  tasbeeh_ruku: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/3.mp3",
-  // Tasbeeh Sujud: "Subhana Rabbiyal A'la" - Using Surah Al-A'la v1
+  tasmee: "https://everyayah.com/data/Alafasy_128kbps/001002.mp3",
+  tahmeed: "https://everyayah.com/data/Alafasy_128kbps/001003.mp3",
+  tasbeeh_ruku: "https://everyayah.com/data/Alafasy_128kbps/001004.mp3",
   tasbeeh_sujud:
-    "https://cdn.islamic.network/quran/audio/64/ar.alafasy/5765.mp3",
-  // Tasleem: "Assalamu alaikum wa rahmatullah"
-  tasleem: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/4.mp3",
-  // Tashahud - Using relevant Quran verse
-  tashahud: "https://cdn.islamic.network/quran/audio/64/ar.alafasy/5.mp3",
+    "https://everyayah.com/data/Alafasy_128kbps/001005.mp3",
+  tasleem: "https://everyayah.com/data/Alafasy_128kbps/001006.mp3",
+  tashahud: "https://everyayah.com/data/Alafasy_128kbps/001007.mp3",
 };
 
 // Full Quran verse-by-verse audio base URL

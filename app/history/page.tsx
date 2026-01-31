@@ -457,7 +457,7 @@ const SceneBackground = ({
       case "desert":
         return (
           <>
-            <div className="absolute top-16 right-16 w-24 h-24 rounded-full bg-gradient-to-br from-amber-300 to-orange-500 blur-sm opacity-80" />
+            <div className="absolute top-16 right-16 w-24 h-24 rounded-full bg-linear-to-br from-amber-300 to-orange-500 blur-sm opacity-80" />
             <svg
               className="absolute bottom-0 left-0 right-0 h-1/2"
               viewBox="0 0 1440 320"
@@ -478,9 +478,9 @@ const SceneBackground = ({
       case "cave":
         return (
           <>
-            <div className="absolute top-1/4 right-1/4 w-48 h-64 bg-gradient-to-b from-amber-400/30 to-transparent blur-2xl rounded-full transform -rotate-12" />
+            <div className="absolute top-1/4 right-1/4 w-48 h-64 bg-linear-to-b from-amber-400/30 to-transparent blur-2xl rounded-full transform -rotate-12" />
             <motion.div
-              className="absolute top-1/4 right-1/3 w-32 h-96 bg-gradient-to-b from-amber-300/40 to-transparent"
+              className="absolute top-1/4 right-1/3 w-32 h-96 bg-linear-to-b from-amber-300/40 to-transparent"
               style={{ transform: "rotate(-15deg)" }}
               animate={{ opacity: [0.3, 0.6, 0.3] }}
               transition={{ duration: 4, repeat: Infinity }}
@@ -558,7 +558,7 @@ const SceneBackground = ({
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 6, repeat: Infinity }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-amber-200 rounded-full shadow-lg shadow-amber-200/30" />
+              <div className="absolute inset-0 bg-linear-to-br from-yellow-100 to-amber-200 rounded-full shadow-lg shadow-amber-200/30" />
             </motion.div>
             {[...Array(30)].map((_, i) => (
               <motion.div
@@ -584,9 +584,9 @@ const SceneBackground = ({
       case "dawn":
         return (
           <>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-amber-400/30 via-orange-300/20 to-transparent" />
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-1/2 bg-linear-to-t from-amber-400/30 via-orange-300/20 to-transparent" />
             <motion.div
-              className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-32 h-32 rounded-full bg-gradient-to-t from-amber-400 to-yellow-300"
+              className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 w-32 h-32 rounded-full bg-linear-to-t from-amber-400 to-yellow-300"
               animate={{ y: [20, 0, 20] }}
               transition={{ duration: 10, repeat: Infinity }}
             />
@@ -596,7 +596,7 @@ const SceneBackground = ({
       case "battle":
         return (
           <>
-            <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-red-900/30 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-1/2 bg-linear-to-b from-red-900/30 to-transparent" />
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
@@ -709,10 +709,10 @@ const SceneBackground = ({
 
   return (
     <div
-      className={`absolute inset-0 bg-gradient-to-b ${colors.primary} ${colors.secondary} ${colors.accent} overflow-hidden`}
+      className={`absolute inset-0 bg-linear-to-b ${colors.primary} ${colors.secondary} ${colors.accent} overflow-hidden`}
     >
       {getSceneElements()}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-black/30" />
     </div>
   );
 };
@@ -788,7 +788,7 @@ const NarratorAvatar = ({
       transition={{ delay: 0.3 }}
     >
       <motion.div
-        className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg"
+        className="w-14 h-14 rounded-full bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-lg"
         animate={isActive ? { scale: [1, 1.05, 1] } : {}}
         transition={{ duration: 2, repeat: Infinity }}
       >
@@ -930,7 +930,7 @@ export default function HistoryPage() {
 
             <div className="absolute inset-0 flex flex-col">
               {/* Header */}
-              <div className="relative z-50 flex items-center justify-between p-4 bg-gradient-to-b from-black/50 to-transparent">
+              <div className="relative z-50 flex items-center justify-between p-4 bg-linear-to-b from-black/50 to-transparent">
                 <Link href="/journey">
                   <Button
                     variant="ghost"
@@ -1061,11 +1061,11 @@ export default function HistoryPage() {
               </div>
 
               {/* Navigation */}
-              <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black/80 via-black/50 to-transparent pt-16 pb-6 px-4">
+              <div className="absolute bottom-0 left-0 right-0 z-50 bg-linear-to-t from-black/80 via-black/50 to-transparent pt-16 pb-6 px-4">
                 <div className="max-w-md mx-auto mb-4">
                   <div className="h-1 bg-white/20 rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-amber-400 to-emerald-400"
+                      className="h-full bg-linear-to-r from-amber-400 to-emerald-400"
                       initial={{ width: 0 }}
                       animate={{ width: `${progress}%` }}
                       transition={{ duration: 0.3 }}

@@ -18,3 +18,4 @@ export {
 } from "./Progress";
 export { Modal, AchievementModal } from "./Modal";
 export { toast, ToastContainer } from "./Toast";
+export { AudioPlayer } from "./AudioPlayer";

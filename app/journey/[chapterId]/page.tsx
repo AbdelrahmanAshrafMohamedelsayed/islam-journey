@@ -437,7 +437,7 @@ export default function ChapterPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`bg-gradient-to-r ${chapter.color} rounded-3xl p-8 md:p-12 text-white mb-8 relative overflow-hidden`}
+          className={`bg-linear-to-r ${chapter.color} rounded-3xl p-8 md:p-12 text-white mb-8 relative overflow-hidden`}
         >
           <div className="absolute inset-0 pattern-arabesque opacity-20" />
           <div className="relative z-10">
@@ -481,7 +481,7 @@ export default function ChapterPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-4 mb-8 text-white flex items-center justify-between"
+            className="bg-linear-to-r from-blue-500 to-indigo-600 rounded-2xl p-4 mb-8 text-white flex items-center justify-between"
           >
             <div className="flex items-center gap-3">
               <Unlock className="w-5 h-5" />

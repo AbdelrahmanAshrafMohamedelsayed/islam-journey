@@ -316,10 +316,10 @@ const AchievementCard = ({
           {/* Icon */}
           <div
             className={`
-            w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0
+            w-14 h-14 rounded-xl flex items-center justify-center shrink-0
             ${
               achievement.unlocked
-                ? `bg-gradient-to-br ${rarityColors[achievement.rarity]} text-white shadow-lg`
+                ? `bg-linear-to-br ${rarityColors[achievement.rarity]} text-white shadow-lg`
                 : "bg-slate-200 dark:bg-slate-700 text-slate-400"
             }
           `}
@@ -358,7 +358,7 @@ const AchievementCard = ({
               <div className="space-y-1">
                 <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                   <motion.div
-                    className={`h-full bg-gradient-to-r ${rarityColors[achievement.rarity]}`}
+                    className={`h-full bg-linear-to-r ${rarityColors[achievement.rarity]}`}
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.5, delay: 0.2 }}
@@ -409,7 +409,7 @@ export default function AchievementsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-amber-50/50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -441,7 +441,7 @@ export default function AchievementsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <div className="bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-4 text-center">
+          <div className="bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-4 text-center">
             <Trophy className="w-8 h-8 text-amber-500 mx-auto mb-2" />
             <p className="text-2xl font-bold text-slate-800 dark:text-white">
               {unlockedCount}
@@ -450,7 +450,7 @@ export default function AchievementsPage() {
               {lang === "en" ? "Unlocked" : "مفتوح"}
             </p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-2xl p-4 text-center">
+          <div className="bg-linear-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-2xl p-4 text-center">
             <Sparkles className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
             <p className="text-2xl font-bold text-slate-800 dark:text-white">
               {totalXP}
@@ -459,7 +459,7 @@ export default function AchievementsPage() {
               {lang === "en" ? "XP Earned" : "نقاط مكتسبة"}
             </p>
           </div>
-          <div className="bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-4 text-center">
+          <div className="bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-4 text-center">
             <Target className="w-8 h-8 text-purple-500 mx-auto mb-2" />
             <p className="text-2xl font-bold text-slate-800 dark:text-white">
               {achievements.length}
@@ -544,13 +544,13 @@ export default function AchievementsPage() {
 
         {/* Motivation Section */}
         <motion.div
-          className="mt-12 p-6 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl"
+          className="mt-12 p-6 bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-purple-400 to-pink-500 flex items-center justify-center shrink-0">
               <Crown className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -564,7 +564,7 @@ export default function AchievementsPage() {
               </p>
               <div className="h-2 bg-white/50 dark:bg-slate-700 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-gradient-to-r from-purple-400 to-pink-500"
+                  className="h-full bg-linear-to-r from-purple-400 to-pink-500"
                   initial={{ width: 0 }}
                   animate={{ width: "71%" }}
                   transition={{ duration: 0.8 }}

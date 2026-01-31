@@ -248,14 +248,24 @@ export const shahadaLessons: LessonContent[] = [
         id: "shahada-video",
         type: "video",
         content: {
-          en: "Watch: Understanding the Shahada - The Gateway to Islam",
-          ar: "شاهد: فهم الشهادة - بوابة الإسلام",
+          en: "Watch: How to Say the Shahada - Becoming a Muslim",
+          ar: "شاهد: كيف تقول الشهادة - لتصبح مسلماً",
         },
-        mediaUrl: "https://www.youtube.com/watch?v=a6aGwtBHp7I",
+        mediaUrl: "https://www.youtube.com/watch?v=SsXHcObCLJw",
         backupUrls: [
+          "https://www.youtube.com/watch?v=a6aGwtBHp7I",
           "https://www.youtube.com/watch?v=5DWwJ39N2Lw",
-          "https://www.youtube.com/watch?v=h8_w1xJCGuM",
         ],
+      },
+
+      {
+        id: "welcome-short",
+        type: "video",
+        content: {
+          en: '💝 "I was afraid Muslims wouldn\'t accept me..." - Watch what happens when he enters the masjid',
+          ar: "💝 'كنت خائفاً من أن المسلمين لن يقبلونني...' - شاهد ماذا يحدث عندما دخل المسجد",
+        },
+        mediaUrl: "https://www.youtube.com/shorts/x2k3XHiO3jU",
       },
       {
         id: "intro",
@@ -264,16 +274,6 @@ export const shahadaLessons: LessonContent[] = [
           en: "Welcome to the most important lesson in your Islamic journey! The Shahada (شَهَادَة) is the Islamic declaration of faith. It's a simple but powerful statement that opens the door to Islam.",
           ar: "مرحباً بك في أهم درس في رحلتك الإسلامية! الشهادة هي إعلان الإيمان الإسلامي. إنها عبارة بسيطة ولكنها قوية تفتح باب الإسلام.",
         },
-      },
-      {
-        id: "shahada-animation",
-        type: "animation",
-        content: {
-          en: "The Shahada opens the door to a new life",
-          ar: "الشهادة تفتح باب حياة جديدة",
-        },
-        mediaUrl: "https://assets5.lottiefiles.com/packages/lf20_fclga8fl.json",
-        loop: true,
       },
       {
         id: "what-is",
@@ -287,12 +287,11 @@ export const shahadaLessons: LessonContent[] = [
         id: "shahada-audio",
         type: "audio",
         content: {
-          en: "Listen to the Shahada recitation",
-          ar: "استمع إلى تلاوة الشهادة",
+          en: "🎧 Listen: Shahada Pronunciation Audio",
+          ar: "🎧 استمع: نطق الشهادة",
         },
         mediaUrl:
-          "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
-        transliteration: "Ash-hadu an la ilaha illa Allah...",
+          "https://upload.wikimedia.org/wikipedia/commons/a/ab/Shahadah.ogg",
       },
       {
         id: "arabic-text",
@@ -429,6 +428,8 @@ export const shahadaLessons: LessonContent[] = [
           ar: "قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",
         },
         reference: "Surah Al-Ikhlas (112:1-4)",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
       },
       {
         id: "explanation",
@@ -622,6 +623,7 @@ export const shahadaLessons: LessonContent[] = [
           ar: "وَإِنَّكَ لَعَلَىٰ خُلُقٍ عَظِيمٍ",
         },
         reference: "Surah Al-Qalam (68:4)",
+        mediaUrl: "https://everyayah.com/data/Alafasy_128kbps/068004.mp3",
       },
       {
         id: "his-character",

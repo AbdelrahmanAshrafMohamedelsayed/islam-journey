@@ -128,7 +128,7 @@ const CharacterGreeting = ({
       className="flex items-start gap-4 p-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-lg max-w-md"
     >
       <motion.div
-        className={`w-14 h-14 rounded-full bg-gradient-to-br ${avatarColors[character]} flex items-center justify-center text-white text-xl font-bold shadow-lg flex-shrink-0`}
+        className={`w-14 h-14 rounded-full bg-linear-to-br ${avatarColors[character]} flex items-center justify-center text-white text-xl font-bold shadow-lg shrink-0`}
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
@@ -263,7 +263,7 @@ export default function HomePage() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-linear-to-r from-emerald-500/5 to-cyan-500/5 rounded-full blur-3xl" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
@@ -362,7 +362,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-12 p-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/50"
+            className="mt-12 p-6 bg-linear-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-2xl border border-amber-200/50 dark:border-amber-800/50"
           >
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="w-5 h-5 text-amber-500" />
@@ -463,7 +463,7 @@ export default function HomePage() {
       </section>
 
       {/* Misconceptions Preview */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -682,10 +682,10 @@ export default function HomePage() {
             className="relative"
           >
             {/* Background glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 blur-3xl -z-10" />
+            <div className="absolute inset-0 bg-linear-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 blur-3xl -z-10" />
 
             <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 shadow-xl border border-slate-200 dark:border-slate-800">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-4xl shadow-lg shadow-emerald-500/30">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-linear-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-4xl shadow-lg shadow-emerald-500/30">
                 🕌
               </div>
 

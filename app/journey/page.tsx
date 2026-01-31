@@ -209,7 +209,7 @@ export default function JourneyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 mb-12 text-white"
+            className="bg-linear-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 mb-12 text-white"
           >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
@@ -273,7 +273,7 @@ export default function JourneyPage() {
                     <div className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300">
                       {/* Header with gradient */}
                       <div
-                        className={`h-24 bg-gradient-to-r ${chapter.color} relative overflow-hidden`}
+                        className={`h-24 bg-linear-to-r ${chapter.color} relative overflow-hidden`}
                       >
                         <div className="absolute inset-0 pattern-arabesque opacity-20" />
                         <div className="absolute top-4 left-4 text-4xl">

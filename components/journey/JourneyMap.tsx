@@ -127,7 +127,7 @@ export function JourneyMap() {
   return (
     <div className="relative py-8">
       {/* Connection line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-200 via-emerald-300 to-emerald-200 dark:from-emerald-800 dark:via-emerald-700 dark:to-emerald-800 -translate-x-1/2 hidden md:block" />
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-linear-to-b from-emerald-200 via-emerald-300 to-emerald-200 dark:from-emerald-800 dark:via-emerald-700 dark:to-emerald-800 -translate-x-1/2 hidden md:block" />
 
       <div className="space-y-8 md:space-y-12">
         {chapters.map((chapter, index) => {
@@ -176,11 +176,11 @@ export function JourneyMap() {
                     {/* Icon */}
                     <div
                       className={cn(
-                        "flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl",
+                        "shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl",
                         status === "completed"
                           ? "bg-emerald-500 text-white"
                           : status === "current"
-                            ? `bg-gradient-to-br ${chapterColors[chapter.id].bg} text-white`
+                            ? `bg-linear-to-br ${chapterColors[chapter.id].bg} text-white`
                             : "bg-slate-200 dark:bg-slate-700",
                       )}
                     >
@@ -251,7 +251,7 @@ export function JourneyMap() {
                               viewport={{ once: true }}
                               transition={{ duration: 0.8, delay: 0.3 }}
                               className={cn(
-                                "h-full rounded-full bg-gradient-to-r",
+                                "h-full rounded-full bg-linear-to-r",
                                 chapterColors[chapter.id].bg,
                               )}
                             />
