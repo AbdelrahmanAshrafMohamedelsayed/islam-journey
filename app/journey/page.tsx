@@ -53,6 +53,7 @@ export default function JourneyPage() {
       lessons: 5,
       color: "from-emerald-500 to-green-600",
       icon: "☪️",
+      isPillar: true,
     },
     {
       id: "salah",
@@ -62,6 +63,7 @@ export default function JourneyPage() {
       lessons: 8,
       color: "from-blue-500 to-indigo-600",
       icon: "🙏",
+      isPillar: true,
     },
     {
       id: "zakat",
@@ -71,6 +73,7 @@ export default function JourneyPage() {
       lessons: 4,
       color: "from-amber-500 to-orange-600",
       icon: "💝",
+      isPillar: true,
     },
     {
       id: "sawm",
@@ -80,6 +83,7 @@ export default function JourneyPage() {
       lessons: 6,
       color: "from-purple-500 to-violet-600",
       icon: "🌙",
+      isPillar: true,
     },
     {
       id: "hajj",
@@ -89,6 +93,7 @@ export default function JourneyPage() {
       lessons: 5,
       color: "from-teal-500 to-cyan-600",
       icon: "🕋",
+      isPillar: true,
     },
     {
       id: "quran",
@@ -98,6 +103,7 @@ export default function JourneyPage() {
       lessons: 7,
       color: "from-rose-500 to-pink-600",
       icon: "📖",
+      isPillar: true,
     },
     {
       id: "akhlaq",
@@ -107,6 +113,19 @@ export default function JourneyPage() {
       lessons: 6,
       color: "from-cyan-500 to-sky-600",
       icon: "✨",
+      isPillar: true,
+    },
+    // Special Modules - Available in Free Mode Only
+    {
+      id: "new-muslims",
+      number: 8,
+      title: isArabic ? "دليل المسلم الجديد" : "New Muslim Guide",
+      subtitle: isArabic ? "ما يحتاجه المسلم الجديد" : "Essential Knowledge",
+      lessons: 3,
+      color: "from-yellow-500 to-orange-600",
+      icon: "⭐",
+      isPillar: false,
+      isSpecialModule: true,
     },
   ];
 
@@ -254,11 +273,17 @@ export default function JourneyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {chaptersList.map((chapter, index) => {
               const isCompleted = completedChapters.includes(chapter.id as any);
-              // In Modules mode, nothing is locked
+              // In Modules mode, nothing is locked except special modules in Journey mode
+              const isSpecialModule = (chapter as any).isSpecialModule === true;
+              // In Journey mode: Lock based on progression AND lock special modules entirely
+              // In Free mode: Everything is unlocked
               const isLocked =
                 isJourneyMode &&
-                index > 0 &&
-                !completedChapters.includes(chaptersList[index - 1].id as any);
+                (isSpecialModule ||
+                  (index > 0 &&
+                    !completedChapters.includes(
+                      chaptersList[index - 1].id as any,
+                    )));
 
               return (
                 <motion.div
@@ -279,11 +304,17 @@ export default function JourneyPage() {
                         <div className="absolute top-4 left-4 text-4xl">
                           {chapter.icon}
                         </div>
-                        <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
-                          {isArabic
-                            ? `فصل ${chapter.number}`
-                            : `Chapter ${chapter.number}`}
-                        </div>
+                        {isSpecialModule ? (
+                          <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                            {isArabic ? "وحدة خاصة" : "Special Module"}
+                          </div>
+                        ) : (
+                          <div className="absolute top-4 right-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium">
+                            {isArabic
+                              ? `فصل ${chapter.number}`
+                              : `Chapter ${chapter.number}`}
+                          </div>
+                        )}
                         {isCompleted && isJourneyMode && (
                           <div className="absolute bottom-4 right-4">
                             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -292,8 +323,15 @@ export default function JourneyPage() {
                           </div>
                         )}
                         {isLocked && (
-                          <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center">
+                          <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center flex-col gap-2">
                             <div className="text-4xl">🔒</div>
+                            {isSpecialModule && (
+                              <span className="text-white text-xs bg-black/30 px-2 py-1 rounded">
+                                {isArabic
+                                  ? "متاح في وضع الوحدات الحرة"
+                                  : "Available in Free Mode"}
+                              </span>
+                            )}
                           </div>
                         )}
                       </div>

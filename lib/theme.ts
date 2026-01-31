@@ -226,6 +226,16 @@ export const chapterColors: Record<
     text: "text-rose-500",
     accent: "#f43f5e",
   },
+  "new-muslims": {
+    bg: "from-yellow-500 to-orange-600",
+    text: "text-yellow-500",
+    accent: "#f59e0b",
+  },
+  akhlaq: {
+    bg: "from-indigo-500 to-violet-700",
+    text: "text-indigo-500",
+    accent: "#6366f1",
+  },
 };
 
 // Geometric pattern SVGs

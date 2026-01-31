@@ -96,8 +96,32 @@ export interface ContentSection {
   id: string;
   title?: BilingualText;
   content: BilingualText;
-  type: "text" | "heading" | "quote" | "ayah" | "hadith" | "tip" | "warning";
+  type:
+    | "text"
+    | "heading"
+    | "quote"
+    | "ayah"
+    | "hadith"
+    | "tip"
+    | "warning"
+    | "story"
+    | "narrative"
+    | "media"
+    | "quran"
+    | "video"
+    | "image"
+    | "audio"
+    | "animation"
+    | "interactive";
   reference?: string;
+  storyConfig?: {
+    backgroundImage?: string;
+    character?: string;
+    mood?: string;
+    animation?: string;
+  };
+  mediaUrl?: string;
+  mediaCaption?: BilingualText;
 }
 
 export interface MediaItem {

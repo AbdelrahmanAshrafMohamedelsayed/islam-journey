@@ -138,6 +138,10 @@ export function JourneyMap() {
   const getChapterStatus = (chapterId: ChapterId, index: number) => {
     if (completedChapters.includes(chapterId)) return "completed";
     if (chapterId === currentChapter) return "current";
+    // New Muslims chapter is always accessible (important guide for new converts)
+    if (chapterId === "new-muslims") return "current";
+    // Akhlaq chapter is also always accessible
+    if (chapterId === "akhlaq") return "current";
     // Unlock next chapter if previous is completed
     if (index === 0) return "current"; // First chapter always unlocked
     if (completedChapters.includes(chapters[index - 1].id)) return "current";

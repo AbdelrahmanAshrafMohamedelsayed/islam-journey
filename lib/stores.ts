@@ -226,6 +226,11 @@ export const useAchievementsStore = create<AchievementsState>()(
         const state = get();
         if (state.unlockedAchievements.includes(achievement.id)) return;
 
+        // Award XP for the achievement
+        if (achievement.xpReward) {
+          useProgressStore.getState().addXp(achievement.xpReward);
+        }
+
         set({
           unlockedAchievements: [...state.unlockedAchievements, achievement.id],
           recentAchievement: achievement,
@@ -240,6 +245,73 @@ export const useAchievementsStore = create<AchievementsState>()(
     }),
     {
       name: "islam-journey-achievements",
+    },
+  ),
+);
+
+// ==========================================
+// GAME STATS STORE
+// ==========================================
+interface GameStatsState {
+  gamesPlayed: number;
+  highScores: {
+    trivia: number;
+    memory: number;
+    wordScramble: number;
+  };
+  perfectRounds: number;
+  totalGameXp: number;
+
+  incrementGamesPlayed: () => void;
+  updateHighScore: (
+    game: "trivia" | "memory" | "wordScramble",
+    score: number,
+  ) => void;
+  incrementPerfectRounds: () => void;
+  addGameXp: (amount: number) => void;
+  getOverallHighScore: () => number;
+}
+
+export const useGameStatsStore = create<GameStatsState>()(
+  persist(
+    (set, get) => ({
+      gamesPlayed: 0,
+      highScores: {
+        trivia: 0,
+        memory: 0,
+        wordScramble: 0,
+      },
+      perfectRounds: 0,
+      totalGameXp: 0,
+
+      incrementGamesPlayed: () =>
+        set((state) => ({ gamesPlayed: state.gamesPlayed + 1 })),
+
+      updateHighScore: (game, score) =>
+        set((state) => ({
+          highScores: {
+            ...state.highScores,
+            [game]: Math.max(state.highScores[game], score),
+          },
+        })),
+
+      incrementPerfectRounds: () =>
+        set((state) => ({ perfectRounds: state.perfectRounds + 1 })),
+
+      addGameXp: (amount) =>
+        set((state) => ({ totalGameXp: state.totalGameXp + amount })),
+
+      getOverallHighScore: () => {
+        const { highScores } = get();
+        return Math.max(
+          highScores.trivia,
+          highScores.memory,
+          highScores.wordScramble,
+        );
+      },
+    }),
+    {
+      name: "islam-journey-game-stats",
     },
   ),
 );

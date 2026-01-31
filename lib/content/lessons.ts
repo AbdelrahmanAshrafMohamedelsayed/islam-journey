@@ -40,7 +40,10 @@ export interface LessonSection {
     | "warning"
     | "quote"
     | "hadith"
-    | "quran";
+    | "quran"
+    | "story" // Cinematic story sections
+    | "narrative" // Character-driven narrative
+    | "media"; // Rich media sections
   content: {
     en: string;
     ar: string;
@@ -62,6 +65,14 @@ export interface LessonSection {
     detail: { en: string; ar: string };
     icon?: string;
   }[];
+  // For story/narrative sections
+  storyConfig?: {
+    backgroundImage?: string;
+    character?: string;
+    mood?: string;
+    animation?: string;
+  };
+  mediaCaption?: { en: string; ar: string };
 }
 
 export interface QuizQuestion {

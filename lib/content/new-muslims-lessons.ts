@@ -2,7 +2,28 @@ import { LessonContent } from "./lessons";
 
 // ====================================
 // NEW MUSLIMS CHAPTER - ESSENTIAL GUIDANCE
+// Cinematic, Story-driven learning experience
 // ====================================
+
+// Scene backgrounds for cinematic transitions
+const sceneBackgrounds = {
+  protection:
+    "https://images.unsplash.com/photo-1564769625657-435cc3f91237?w=1200&q=80", // Shield/protection concept
+  family:
+    "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&q=80", // Happy family
+  heart:
+    "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=1200&q=80", // Heart/love
+  light:
+    "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&q=80", // Light through darkness
+  mosque:
+    "https://images.unsplash.com/photo-1564769610726-59cead6a6f65?w=1200&q=80", // Beautiful mosque
+  stars:
+    "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1200&q=80", // Night sky
+  sunrise:
+    "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1200&q=80", // New beginning
+  forgiveness:
+    "https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=1200&q=80", // Peace/serenity
+};
 
 export const newMuslimsLessons: Record<string, LessonContent> = {
   "haram-things": {
@@ -20,6 +41,21 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
     duration: 20,
     xpReward: 100,
     sections: [
+      // SCENE 1: The Opening - Cinematic Introduction
+      {
+        id: "haram-scene-1",
+        type: "story",
+        content: {
+          en: "🎬 CHAPTER ONE: THE SHIELD OF FAITH",
+          ar: "🎬 الفصل الأول: درع الإيمان",
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.protection,
+          character: "imam",
+          mood: "wise",
+          animation: "fadeIn",
+        },
+      },
       {
         id: "haram-intro-video",
         type: "video",
@@ -30,27 +66,68 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         mediaUrl: "https://www.youtube.com/watch?v=6eZ5Jnp2CKI",
       },
       {
-        id: "haram-intro",
-        type: "text",
+        id: "haram-intro-image",
+        type: "media",
         content: {
-          en: "# 🛡️ Protection, Not Restriction\n\nAs a new Muslim, you might hear about things that are \"haram\" (forbidden). But here's a beautiful perspective:\n\n**Allah doesn't forbid things to make life difficult - He forbids things to PROTECT us.**\n\nImagine a loving parent telling their child not to touch fire. The child might not understand why, but the parent knows the danger. Similarly, Allah, who created us and knows us better than we know ourselves, guides us away from harm.\n\nLet's explore what Allah has protected us from, and understand the wisdom behind each...",
-          ar: '# 🛡️ حماية، وليس قيود\n\nكمسلم جديد، قد تسمع عن أشياء "حرام" (محرمة). لكن هنا منظور جميل:\n\n**الله لا يحرم الأشياء ليجعل الحياة صعبة - بل يحرمها ليحمينا.**\n\nتخيل أبًا محبًا يقول لطفله ألا يلمس النار. قد لا يفهم الطفل لماذا، لكن الأب يعرف الخطر. وبالمثل، الله الذي خلقنا ويعرفنا أفضل مما نعرف أنفسنا، يرشدنا بعيدًا عن الضرر.\n\nدعونا نستكشف ما حمانا الله منه، ونفهم الحكمة وراء كل...',
+          en: "![Shield of Protection](https://images.unsplash.com/photo-1564769625657-435cc3f91237?w=800&q=80)\n\n*Every prohibition in Islam is a shield that protects you from harm...*",
+          ar: "![درع الحماية](https://images.unsplash.com/photo-1564769625657-435cc3f91237?w=800&q=80)\n\n*كل تحريم في الإسلام هو درع يحميك من الأذى...*",
+        },
+      },
+      {
+        id: "haram-intro",
+        type: "narrative",
+        content: {
+          en: "# 🛡️ Protection, Not Restriction\n\n*Imagine walking through a dark forest at night...*\n\nA loving guide holds a lantern, showing you the safe path. They warn you: \"Don't step there - that's quicksand. Don't touch that - it's poisonous.\"\n\nAre these warnings to make your journey difficult? **No!** They're given out of love, to protect you.\n\n---\n\n**Allah, who created us and knows us better than we know ourselves, is our Ultimate Guide.**\n\nWhen He forbids something, it's not to make life difficult - it's to **PROTECT** us from harm we may not even see.\n\nLet's explore what Allah has protected us from...",
+          ar: '# 🛡️ حماية، وليس قيود\n\n*تخيل أنك تمشي في غابة مظلمة في الليل...*\n\nدليل محب يحمل فانوسًا، يريك الطريق الآمن. يحذرك: "لا تخطو هناك - تلك رمال متحركة. لا تلمس ذلك - إنه سام."\n\nهل هذه التحذيرات لتجعل رحلتك صعبة؟ **لا!** إنها من المحبة، لحمايتك.\n\n---\n\n**الله، الذي خلقنا ويعرفنا أفضل مما نعرف أنفسنا، هو دليلنا الأعظم.**\n\nعندما يحرم شيئًا، ليس ليجعل الحياة صعبة - بل **ليحمينا** من ضرر قد لا نراه.\n\nدعونا نستكشف ما حمانا الله منه...',
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.light,
+          animation: "slideUp",
+        },
+      },
+      // SCENE 2: Major Sins Introduction
+      {
+        id: "haram-scene-2",
+        type: "story",
+        content: {
+          en: "🎬 SCENE TWO: THE SEVEN SHIELDS",
+          ar: "🎬 المشهد الثاني: الدروع السبعة",
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.mosque,
+          animation: "cinematic",
         },
       },
       {
         id: "haram-major-sins-title",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "---\n\n## ⚠️ The Major Prohibitions\n\nThese are the things Allah has clearly forbidden. Understanding why helps us appreciate His wisdom:",
-          ar: "---\n\n## ⚠️ المحرمات الكبرى\n\nهذه هي الأشياء التي حرمها الله بوضوح. فهم السبب يساعدنا على تقدير حكمته:",
+          en: "## ⚠️ The Major Prohibitions\n\n*Each one is a shield protecting something precious...*\n\n| Shield | Protects |\n|--------|----------|\n| 🛡️ Shield of Chastity | Family & Honor |\n| 🛡️ Shield of Sobriety | Mind & Health |\n| 🛡️ Shield of Trust | Wealth & Relationships |\n| 🛡️ Shield of Truth | Trust & Character |\n| 🛡️ Shield of Brotherhood | Community & Unity |\n| 🛡️ Shield of Modesty | Dignity & Heart |\n| 🛡️ Shield of Life | Humanity |\n\nLet's explore each shield...",
+          ar: "## ⚠️ المحرمات الكبرى\n\n*كل واحدة درع يحمي شيئًا ثمينًا...*\n\n| الدرع | يحمي |\n|--------|----------|\n| 🛡️ درع العفة | الأسرة والشرف |\n| 🛡️ درع الصحو | العقل والصحة |\n| 🛡️ درع الأمانة | المال والعلاقات |\n| 🛡️ درع الصدق | الثقة والأخلاق |\n| 🛡️ درع الأخوة | المجتمع والوحدة |\n| 🛡️ درع الحياء | الكرامة والقلب |\n| 🛡️ درع الحياة | الإنسانية |\n\nدعونا نستكشف كل درع...",
+        },
+        storyConfig: {
+          animation: "slideLeft",
+        },
+      },
+      {
+        id: "haram-zina-image",
+        type: "media",
+        content: {
+          en: "![Family Protection](https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80)",
+          ar: "![حماية الأسرة](https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80)",
         },
       },
       {
         id: "haram-zina",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 🚫 1. Zina (زنا) - Unlawful Relations\n\n**What is it?** Sexual relations outside of marriage.\n\n**Why is it forbidden?**\n- Protects family structure and children's rights\n- Prevents diseases and emotional trauma\n- Honors human dignity and relationships\n- Creates stable societies",
-          ar: "### 🚫 1. الزنا - العلاقات غير الشرعية\n\n**ما هي؟** العلاقات الجنسية خارج الزواج.\n\n**لماذا محرمة؟**\n- تحمي بنية الأسرة وحقوق الأطفال\n- تمنع الأمراض والصدمات العاطفية\n- تكرم كرامة الإنسان والعلاقات\n- تخلق مجتمعات مستقرة",
+          en: "### 🛡️ Shield #1: Zina (زنا) - The Shield of Chastity\n\n**What it forbids:** Sexual relations outside of marriage.\n\n**What it PROTECTS:**\n\n🏠 **Families** - Children deserve to know their parents\n\n💔 **Hearts** - Prevents emotional devastation\n\n🏥 **Bodies** - Protects from diseases\n\n👑 **Honor** - Preserves dignity and respect\n\n*Islam doesn't forbid love - it channels it into the beautiful bond of marriage, where it flourishes with Allah's blessing.*",
+          ar: "### 🛡️ الدرع #1: الزنا - درع العفة\n\n**ما يحرمه:** العلاقات الجنسية خارج الزواج.\n\n**ما يحميه:**\n\n🏠 **العائلات** - الأطفال يستحقون معرفة والديهم\n\n💔 **القلوب** - يمنع الدمار العاطفي\n\n🏥 **الأجسام** - يحمي من الأمراض\n\n👑 **الشرف** - يحفظ الكرامة والاحترام\n\n*الإسلام لا يحرم الحب - بل يوجهه إلى رابطة الزواج الجميلة، حيث يزدهر ببركة الله.*",
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.family,
+          character: "mentor",
+          mood: "caring",
         },
       },
       {
@@ -66,10 +143,14 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
       },
       {
         id: "haram-alcohol",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 🍷 2. Khamr (خمر) - Intoxicants & Alcohol\n\n**What is it?** Alcohol and all substances that intoxicate the mind.\n\n**Why is it forbidden?**\n- Clouds judgment and leads to other sins\n- Destroys families and careers\n- Causes health problems (liver disease, addiction)\n- Wastes money that could help others\n- Disconnects us from Allah during prayer",
-          ar: "### 🍷 2. الخمر - المسكرات والكحول\n\n**ما هي؟** الكحول وكل المواد التي تسكر العقل.\n\n**لماذا محرمة؟**\n- تضبب الحكم وتؤدي إلى ذنوب أخرى\n- تدمر العائلات والوظائف\n- تسبب مشاكل صحية (أمراض الكبد، الإدمان)\n- تهدر المال الذي يمكن أن يساعد الآخرين\n- تفصلنا عن الله أثناء الصلاة",
+          en: "### 🛡️ Shield #2: Khamr (خمر) - The Shield of Sobriety\n\n**What it forbids:** Alcohol and all intoxicants.\n\n**What it PROTECTS:**\n\n🧠 **Your Mind** - Allah's greatest gift to you\n\n💼 **Your Career** - Clear thinking = better decisions\n\n👨‍👩‍👧‍👦 **Your Family** - Alcohol destroys homes\n\n💰 **Your Wealth** - Addiction drains finances\n\n🕌 **Your Connection to Allah** - Can't pray while intoxicated\n\n*The first thing alcohol takes is your judgment - then you can't even see what else it's taking.*",
+          ar: "### 🛡️ الدرع #2: الخمر - درع الصحو\n\n**ما يحرمه:** الكحول وكل المسكرات.\n\n**ما يحميه:**\n\n🧠 **عقلك** - أعظم هبة من الله لك\n\n💼 **عملك** - التفكير الصافي = قرارات أفضل\n\n👨‍👩‍👧‍👦 **عائلتك** - الكحول يدمر البيوت\n\n💰 **مالك** - الإدمان يستنزف المال\n\n🕌 **صلتك بالله** - لا تستطيع الصلاة وأنت سكران\n\n*أول شيء يأخذه الكحول هو حكمك - ثم لا تستطيع حتى رؤية ما يأخذه أيضًا.*",
+        },
+        storyConfig: {
+          character: "scholar",
+          mood: "serious",
         },
       },
       {
@@ -85,18 +166,18 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
       },
       {
         id: "haram-gambling",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 🎰 3. Maysir (ميسر) - Gambling\n\n**What is it?** Any game of chance where money is at stake.\n\n**Why is it forbidden?**\n- Creates addiction and financial ruin\n- Breeds hatred between people when one wins and another loses\n- Based on luck, not honest work\n- Destroys families when savings are gambled away\n- Takes away trust (amanah) from society",
-          ar: "### 🎰 3. الميسر - القمار\n\n**ما هو؟** أي لعبة حظ يكون المال فيها على المحك.\n\n**لماذا محرم؟**\n- يخلق الإدمان والخراب المالي\n- يولد الكراهية بين الناس عندما يفوز أحد ويخسر آخر\n- يعتمد على الحظ، وليس العمل الشريف\n- يدمر العائلات عندما تُقامر المدخرات\n- يأخذ الأمانة من المجتمع",
+          en: "### 🛡️ Shield #3: Maysir (ميسر) - The Shield of Trust\n\n**What it forbids:** Gambling and games of chance with money.\n\n**What it PROTECTS:**\n\n💵 **Your Wealth** - Earned through honest work\n\n🤝 **Relationships** - Gambling breeds enmity\n\n🧘 **Peace of Mind** - No anxiety over losses\n\n👨‍👩‍👧 **Families** - Savings stay safe\n\n*Islam teaches that wealth should come through honest effort, not luck. Work is worship.*",
+          ar: "### 🛡️ الدرع #3: الميسر - درع الأمانة\n\n**ما يحرمه:** القمار وألعاب الحظ بالمال.\n\n**ما يحميه:**\n\n💵 **مالك** - مكتسب بعمل شريف\n\n🤝 **علاقاتك** - القمار يولد العداوة\n\n🧘 **راحة بالك** - لا قلق من الخسائر\n\n👨‍👩‍👧 **عائلتك** - المدخرات تبقى آمنة\n\n*الإسلام يعلم أن المال يجب أن يأتي بالجهد الشريف، لا الحظ. العمل عبادة.*",
         },
       },
       {
         id: "haram-lying",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 🤥 4. Al-Kidhb (الكذب) - Lying\n\n**What is it?** Saying what is not true, deceiving others.\n\n**Why is it forbidden?**\n- Destroys trust in relationships\n- One lie leads to more lies\n- Creates a society where no one can be trusted\n- The Prophet ﷺ said lying leads to wickedness, and wickedness leads to the Fire",
-          ar: "### 🤥 4. الكذب\n\n**ما هو؟** قول ما ليس بحق، خداع الآخرين.\n\n**لماذا محرم؟**\n- يدمر الثقة في العلاقات\n- كذبة واحدة تؤدي إلى المزيد من الكذب\n- يخلق مجتمعًا لا يمكن الوثوق فيه بأحد\n- قال النبي ﷺ أن الكذب يهدي إلى الفجور، والفجور يهدي إلى النار",
+          en: "### 🛡️ Shield #4: Al-Kidhb (الكذب) - The Shield of Truth\n\n**What it forbids:** Lying and deception.\n\n**What it PROTECTS:**\n\n🤝 **Trust** - The foundation of all relationships\n\n💎 **Your Character** - Integrity is priceless\n\n🏛️ **Society** - Civilizations are built on trust\n\n*A single lie requires more lies to cover it. Truth, though sometimes hard, sets you free.*",
+          ar: "### 🛡️ الدرع #4: الكذب - درع الصدق\n\n**ما يحرمه:** الكذب والخداع.\n\n**ما يحميه:**\n\n🤝 **الثقة** - أساس كل العلاقات\n\n💎 **أخلاقك** - النزاهة لا تقدر بثمن\n\n🏛️ **المجتمع** - الحضارات تُبنى على الثقة\n\n*كذبة واحدة تتطلب المزيد من الكذب لتغطيتها. الصدق، وإن كان صعبًا أحيانًا، يحررك.*",
         },
       },
       {
@@ -113,10 +194,14 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
       },
       {
         id: "haram-gheebah",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 🗣️ 5. Al-Gheebah (الغيبة) - Backbiting\n\n**What is it?** Speaking about someone behind their back in a way they would dislike - even if it's TRUE!\n\n**Why is it forbidden?**\n- Destroys community bonds and trust\n- Hurts people who cannot defend themselves\n- Creates suspicion and hatred\n- The Quran compares it to eating the flesh of your dead brother!",
-          ar: "### 🗣️ 5. الغيبة\n\n**ما هي؟** التحدث عن شخص في غيابه بطريقة لا يحبها - حتى لو كان صحيحًا!\n\n**لماذا محرمة؟**\n- تدمر روابط المجتمع والثقة\n- تؤذي أشخاصًا لا يستطيعون الدفاع عن أنفسهم\n- تخلق الشك والكراهية\n- القرآن يشبهها بأكل لحم أخيك ميتًا!",
+          en: "### 🛡️ Shield #5: Al-Gheebah (الغيبة) - The Shield of Brotherhood\n\n**What it forbids:** Backbiting - speaking about someone in their absence in a way they'd dislike (even if TRUE!).\n\n**What it PROTECTS:**\n\n🤝 **Community Bonds** - Unity is strength\n\n💔 **Hearts** - Words wound deeply\n\n🕊️ **Peace** - No suspicion or hatred\n\n*The Quran uses a powerful image: backbiting is like eating the flesh of your dead brother!*",
+          ar: "### 🛡️ الدرع #5: الغيبة - درع الأخوة\n\n**ما يحرمه:** الغيبة - التحدث عن شخص في غيابه بما يكرهه (حتى لو كان صحيحًا!).\n\n**ما يحميه:**\n\n🤝 **روابط المجتمع** - الوحدة قوة\n\n💔 **القلوب** - الكلمات تجرح بعمق\n\n🕊️ **السلام** - لا شك ولا كراهية\n\n*القرآن يستخدم صورة قوية: الغيبة كأكل لحم أخيك ميتًا!*",
+        },
+        storyConfig: {
+          character: "companion",
+          mood: "thoughtful",
         },
       },
       {
@@ -132,10 +217,10 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
       },
       {
         id: "haram-gaze",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 👁️ 6. Lowering the Gaze\n\n**What is it?** Avoiding looking at what Allah has forbidden - inappropriate images, the opposite gender with desire.\n\n**Why is it commanded?**\n- Protects the heart from temptation\n- First glance is forgiven, but looking again is a choice\n- Looking leads to thinking, thinking leads to action\n- Preserves modesty and respect",
-          ar: "### 👁️ 6. غض البصر\n\n**ما هو؟** تجنب النظر إلى ما حرمه الله - الصور غير اللائقة، الجنس الآخر بشهوة.\n\n**لماذا مأمور به؟**\n- يحمي القلب من الفتنة\n- النظرة الأولى مغفورة، لكن النظر مرة أخرى اختيار\n- النظر يؤدي إلى التفكير، والتفكير يؤدي إلى الفعل\n- يحفظ الحياء والاحترام",
+          en: "### 🛡️ Shield #6: Lowering the Gaze - The Shield of Modesty\n\n**What it requires:** Avoiding looking at what Allah has forbidden.\n\n**What it PROTECTS:**\n\n💖 **Your Heart** - What enters through eyes reaches the heart\n\n🧠 **Your Mind** - No obsessive thoughts\n\n💑 **Your Future Marriage** - Eyes trained for your spouse\n\n*The first glance is forgiven - it's accidental. The second is a choice. Guard your eyes to guard your heart.*",
+          ar: "### 🛡️ الدرع #6: غض البصر - درع الحياء\n\n**ما يتطلبه:** تجنب النظر إلى ما حرمه الله.\n\n**ما يحميه:**\n\n💖 **قلبك** - ما يدخل من العين يصل القلب\n\n🧠 **عقلك** - لا أفكار وسواسية\n\n💑 **زواجك المستقبلي** - عيون مدربة لزوجك\n\n*النظرة الأولى مغفورة - عرضية. الثانية اختيار. احفظ عينيك لتحفظ قلبك.*",
         },
       },
       {
@@ -150,30 +235,11 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
           "Tell the believing men to lower their gaze and guard their chastity. That is purer for them.",
       },
       {
-        id: "haram-hijab",
-        type: "text",
-        content: {
-          en: "### 👳‍♀️ 7. Hijab - Modesty in Dress\n\n**What is it?** For women, covering the body except face and hands. For men, covering from navel to knee and dressing modestly.\n\n**Why is it commanded?**\n- Identity as a Muslim\n- Protection from unwanted attention\n- Judged by character, not appearance\n- Obedience to Allah's command\n- Dignity and self-respect",
-          ar: "### 👳‍♀️ 7. الحجاب - الاحتشام في اللباس\n\n**ما هو؟** للنساء، تغطية الجسم ما عدا الوجه والكفين. للرجال، التغطية من السرة إلى الركبة واللباس المحتشم.\n\n**لماذا مأمور به؟**\n- هوية كمسلم\n- حماية من الانتباه غير المرغوب فيه\n- الحكم بالأخلاق، وليس المظهر\n- طاعة لأمر الله\n- الكرامة واحترام الذات",
-        },
-      },
-      {
-        id: "haram-hijab-quran",
-        type: "quran",
-        content: {
-          en: "يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا يُؤْذَيْنَ",
-          ar: "يَا أَيُّهَا النَّبِيُّ قُل لِّأَزْوَاجِكَ وَبَنَاتِكَ وَنِسَاءِ الْمُؤْمِنِينَ يُدْنِينَ عَلَيْهِنَّ مِن جَلَابِيبِهِنَّ ۚ ذَٰلِكَ أَدْنَىٰ أَن يُعْرَفْنَ فَلَا يُؤْذَيْنَ",
-        },
-        reference: { en: "Quran 33:59", ar: "سورة الأحزاب ٣٣:٥٩" },
-        transliteration:
-          "O Prophet, tell your wives and your daughters and the women of the believers to bring down over themselves their outer garments. That is more suitable that they will be known and not be abused.",
-      },
-      {
         id: "haram-murder",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "### 💀 8. Murder (القتل) - Taking a Life\n\n**What is it?** Killing an innocent person unjustly.\n\n**Why is it forbidden?**\n- Human life is sacred - given by Allah alone\n- Killing one innocent person is like killing all of humanity\n- Creates cycles of revenge and violence\n- One of the greatest sins that can never be forgiven without the victim's forgiveness",
-          ar: "### 💀 8. القتل - أخذ الحياة\n\n**ما هو؟** قتل شخص بريء ظلمًا.\n\n**لماذا محرم؟**\n- حياة الإنسان مقدسة - من الله وحده\n- قتل شخص بريء واحد كقتل البشرية جمعاء\n- يخلق دورات من الانتقام والعنف\n- من أعظم الذنوب التي لا يمكن مغفرتها بدون مسامحة الضحية",
+          en: "### 🛡️ Shield #7: Murder (القتل) - The Shield of Life\n\n**What it forbids:** Taking an innocent life.\n\n**What it PROTECTS:**\n\n🌍 **All of Humanity** - One life = all of mankind\n\n⚖️ **Justice** - Only Allah gives and takes life\n\n🕊️ **Peace** - Prevents cycles of revenge\n\n*Islam values life so highly that saving one person is like saving all of humanity.*",
+          ar: "### 🛡️ الدرع #7: القتل - درع الحياة\n\n**ما يحرمه:** أخذ حياة بريئة.\n\n**ما يحميه:**\n\n🌍 **كل البشرية** - حياة واحدة = كل البشر\n\n⚖️ **العدل** - الله وحده يعطي ويأخذ الحياة\n\n🕊️ **السلام** - يمنع دورات الانتقام\n\n*الإسلام يقدر الحياة لدرجة أن إنقاذ شخص واحد كإنقاذ البشرية جمعاء.*",
         },
       },
       {
@@ -187,12 +253,39 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         transliteration:
           "Whoever kills a soul unless for a soul or for corruption in the land - it is as if he had slain mankind entirely. And whoever saves one - it is as if he had saved mankind entirely.",
       },
+      // SCENE 3: Hope and Forgiveness
+      {
+        id: "haram-scene-3",
+        type: "story",
+        content: {
+          en: "🎬 FINAL SCENE: THE DOOR THAT NEVER CLOSES",
+          ar: "🎬 المشهد الأخير: الباب الذي لا يُغلق",
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.sunrise,
+          animation: "cinematic",
+        },
+      },
+      {
+        id: "haram-hope-image",
+        type: "media",
+        content: {
+          en: "![New Beginning](https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800&q=80)\n\n*Every sunrise is a reminder: You can always start again...*",
+          ar: "![بداية جديدة](https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800&q=80)\n\n*كل شروق شمس تذكير: يمكنك دائمًا البدء من جديد...*",
+        },
+      },
       {
         id: "haram-hope",
-        type: "text",
+        type: "narrative",
         content: {
-          en: "---\n\n## 🌟 The Door of Repentance is ALWAYS Open\n\nIf you've done any of these things in the past - **don't despair!**\n\nWhen you became Muslim, all your previous sins were forgiven. And for ongoing struggles, Allah says:",
-          ar: "---\n\n## 🌟 باب التوبة مفتوح دائمًا\n\nإذا فعلت أيًا من هذه الأشياء في الماضي - **لا تيأس!**\n\nعندما أصبحت مسلمًا، غُفرت جميع ذنوبك السابقة. وللصراعات المستمرة، يقول الله:",
+          en: "## 🌟 The Door of Repentance is ALWAYS Open\n\n**If you've done any of these things in the past - don't despair!**\n\n✨ When you became Muslim, **ALL your previous sins were forgiven** - you were born anew.\n\n✨ For any future mistakes, Allah's mercy is greater than any sin.\n\n✨ **Struggling against sin is itself rewarded** - the battle is the victory.\n\nAllah loves those who repent. He's not waiting to punish - He's waiting to forgive.",
+          ar: "## 🌟 باب التوبة مفتوح دائمًا\n\n**إذا فعلت أيًا من هذه الأشياء في الماضي - لا تيأس!**\n\n✨ عندما أصبحت مسلمًا، **غُفرت جميع ذنوبك السابقة** - ولدت من جديد.\n\n✨ لأي أخطاء مستقبلية، رحمة الله أعظم من أي ذنب.\n\n✨ **مجاهدة الذنب بحد ذاتها مثابة** - المعركة هي الانتصار.\n\nالله يحب التوابين. هو لا ينتظر ليعاقب - بل ينتظر ليغفر.",
+        },
+        storyConfig: {
+          backgroundImage: sceneBackgrounds.forgiveness,
+          character: "mentor",
+          mood: "hopeful",
+          animation: "glow",
         },
       },
       {
@@ -210,8 +303,8 @@ export const newMuslimsLessons: Record<string, LessonContent> = {
         id: "haram-conclusion",
         type: "tip",
         content: {
-          en: '**Remember:**\n\n✅ Every prohibition has wisdom behind it\n✅ Allah wants to protect you, not punish you\n✅ Struggling against sin is itself rewarded\n✅ The door of repentance is always open\n✅ Progress, not perfection - take it one step at a time\n\n*"Indeed, with hardship comes ease."* - Quran 94:6',
-          ar: '**تذكر:**\n\n✅ كل تحريم له حكمة وراءه\n✅ الله يريد أن يحميك، لا أن يعاقبك\n✅ مجاهدة الذنب بحد ذاتها مُثابة\n✅ باب التوبة مفتوح دائمًا\n✅ التقدم، وليس الكمال - خطوة بخطوة\n\n*"إِنَّ مَعَ الْعُسْرِ يُسْرًا"* - القرآن ٩٤:٦',
+          en: '**🎯 Your Takeaways:**\n\n✅ Every prohibition is a **shield of protection**, not a restriction\n\n✅ Allah wants to **guide you to success**, not trip you up\n\n✅ Struggling against temptation is **itself a form of worship**\n\n✅ The door of repentance **never closes** - Allah loves to forgive\n\n✅ Progress over perfection - **one step at a time**\n\n---\n\n*"Indeed, with hardship comes ease."* — Quran 94:6\n\n🤲 **Du\'a:** "O Allah, help me to remember You, thank You, and worship You properly."',
+          ar: '**🎯 خلاصاتك:**\n\n✅ كل تحريم هو **درع حماية**، وليس قيد\n\n✅ الله يريد أن **يرشدك للنجاح**، لا أن يعثرك\n\n✅ مجاهدة الإغراء **بحد ذاتها عبادة**\n\n✅ باب التوبة **لا يُغلق أبدًا** - الله يحب أن يغفر\n\n✅ التقدم فوق الكمال - **خطوة بخطوة**\n\n---\n\n*"إِنَّ مَعَ الْعُسْرِ يُسْرًا"* — القرآن ٩٤:٦\n\n🤲 **دعاء:** "اللهم أعني على ذكرك وشكرك وحسن عبادتك."',
         },
       },
     ],

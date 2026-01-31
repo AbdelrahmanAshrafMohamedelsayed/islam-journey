@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,19 +22,14 @@ import {
   Sun,
   Globe,
   User,
+  ChevronDown,
+  MoreHorizontal,
 } from "lucide-react";
 
-const navItems = [
+// Core navigation items (always visible)
+const coreNavItems = [
   { href: "/", label: "Home", labelAr: "الرئيسية", icon: Home },
   { href: "/journey", label: "Journey", labelAr: "الرحلة", icon: Map },
-  { href: "/history", label: "History", labelAr: "التاريخ", icon: History },
-  {
-    href: "/misconceptions",
-    label: "Misconceptions",
-    labelAr: "رد الشبهات",
-    icon: MessageCircleQuestion,
-  },
-  { href: "/ramadan", label: "Ramadan", labelAr: "رمضان", icon: Moon },
   { href: "/games", label: "Games", labelAr: "الألعاب", icon: Gamepad2 },
   {
     href: "/achievements",
@@ -44,11 +39,45 @@ const navItems = [
   },
 ];
 
+// Secondary navigation items (in dropdown on desktop, shown in mobile)
+const moreNavItems = [
+  { href: "/history", label: "History", labelAr: "التاريخ", icon: History },
+  {
+    href: "/misconceptions",
+    label: "Misconceptions",
+    labelAr: "رد الشبهات",
+    icon: MessageCircleQuestion,
+  },
+  { href: "/ramadan", label: "Ramadan", labelAr: "رمضان", icon: Moon },
+];
+
+// All items for mobile menu
+const allNavItems = [...coreNavItems, ...moreNavItems];
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { language, theme, setLanguage, setTheme } = useSettingsStore();
   const { totalXp, level, streakDays } = useProgressStore();
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        moreDropdownRef.current &&
+        !moreDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsMoreOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Check if current path is in "more" items
+  const isMoreActive = moreNavItems.some((item) => pathname === item.href);
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "ar" : "en");
@@ -105,7 +134,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navItems.slice(0, 7).map((item) => {
+            {coreNavItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -123,6 +152,62 @@ export function Navbar() {
                 </Link>
               );
             })}
+
+            {/* More dropdown */}
+            <div className="relative" ref={moreDropdownRef}>
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className={cn(
+                  "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                  isMoreActive
+                    ? "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300"
+                    : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800",
+                )}
+              >
+                <MoreHorizontal className="w-4 h-4" />
+                <span>{language === "ar" ? "المزيد" : "More"}</span>
+                <ChevronDown
+                  className={cn(
+                    "w-3 h-3 transition-transform",
+                    isMoreOpen && "rotate-180",
+                  )}
+                />
+              </button>
+
+              <AnimatePresence>
+                {isMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className="absolute top-full left-0 mt-2 w-52 py-2 bg-white dark:bg-slate-800 rounded-xl shadow-2xl border border-slate-200/80 dark:border-slate-700 overflow-hidden z-5000"
+                  >
+                    {moreNavItems.map((item) => {
+                      const isActive = pathname === item.href;
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setIsMoreOpen(false)}
+                          className={cn(
+                            "flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors",
+                            isActive
+                              ? "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300"
+                              : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700",
+                          )}
+                        >
+                          <item.icon className="w-4 h-4" />
+                          <span>
+                            {language === "ar" ? item.labelAr : item.label}
+                          </span>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Right side */}
@@ -161,7 +246,7 @@ export function Navbar() {
             >
               {themeInfo.icon}
               {/* Tooltip */}
-              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-800 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+              <span className="absolute top-full mt-2 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
                 {themeInfo.label}
               </span>
             </button>
@@ -199,7 +284,7 @@ export function Navbar() {
             className="lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
           >
             <div className="px-4 py-4 space-y-1">
-              {navItems.map((item) => {
+              {allNavItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
