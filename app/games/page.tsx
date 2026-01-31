@@ -34,6 +34,7 @@ interface MemoryCard {
   id: number;
   content: string;
   arabic: string;
+  isEnglish: boolean;
   isFlipped: boolean;
   isMatched: boolean;
 }
@@ -444,15 +445,24 @@ const MemoryGame = ({
   const [isChecking, setIsChecking] = useState(false);
 
   const initGame = useCallback(() => {
-    const shuffled = [...memoryPairs, ...memoryPairs]
-      .map((pair, index) => ({
-        id: index,
-        content: index < memoryPairs.length ? pair.content : pair.arabic,
-        arabic: pair.arabic,
-        isFlipped: false,
-        isMatched: false,
-      }))
-      .sort(() => Math.random() - 0.5);
+    // Create English cards and Arabic cards
+    const englishCards = memoryPairs.map((pair, index) => ({
+      id: index,
+      content: pair.content,
+      arabic: pair.arabic,
+      isEnglish: true,
+      isFlipped: false,
+      isMatched: false,
+    }));
+    const arabicCards = memoryPairs.map((pair, index) => ({
+      id: index + memoryPairs.length,
+      content: pair.arabic,
+      arabic: pair.arabic,
+      isEnglish: false,
+      isFlipped: false,
+      isMatched: false,
+    }));
+    const shuffled = [...englishCards, ...arabicCards].sort(() => Math.random() - 0.5);
     setCards(shuffled);
     setFlippedCards([]);
     setMoves(0);
@@ -567,7 +577,7 @@ const MemoryGame = ({
 
   return (
     <div className="max-w-lg mx-auto px-4">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Brain className="w-5 h-5 text-purple-500" />
           <span className="text-slate-600 dark:text-slate-300">
@@ -583,16 +593,35 @@ const MemoryGame = ({
         </div>
       </div>
 
+      {/* Instructions */}
+      <div className="mb-4 p-3 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm text-slate-600 dark:text-slate-400">
+        <p className="mb-2">
+          {lang === "en" 
+            ? "🎯 Find matching pairs: Match each English word with its Arabic translation"
+            : "🎯 اعثر على الأزواج: طابق كل كلمة إنجليزية مع ترجمتها العربية"}
+        </p>
+        <div className="flex gap-4 text-xs">
+          <span className="flex items-center gap-1">
+            <span className="w-4 h-4 rounded bg-blue-500"></span> {lang === "en" ? "English" : "إنجليزي"}
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-4 h-4 rounded bg-emerald-500"></span> {lang === "en" ? "Arabic" : "عربي"}
+          </span>
+        </div>
+      </div>
+
       <div className="grid grid-cols-3 gap-3">
         {cards.map((card) => (
           <motion.button
             key={card.id}
             onClick={() => handleCardClick(card.id)}
             className={`
-              aspect-square rounded-xl text-center font-bold transition-all
+              aspect-square rounded-xl text-center font-bold transition-all relative
               ${
                 card.isFlipped || card.isMatched
-                  ? "bg-linear-to-br from-emerald-400 to-teal-500 text-white"
+                  ? card.isEnglish
+                    ? "bg-linear-to-br from-blue-400 to-indigo-500 text-white"
+                    : "bg-linear-to-br from-emerald-400 to-teal-500 text-white"
                   : "bg-linear-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800"
               }
               ${card.isMatched ? "opacity-60" : ""}
@@ -603,11 +632,16 @@ const MemoryGame = ({
             whileTap={!card.isFlipped && !card.isMatched ? { scale: 0.95 } : {}}
             animate={card.isFlipped ? { rotateY: 180 } : { rotateY: 0 }}
           >
-            <span
-              className={`text-lg ${card.isFlipped || card.isMatched ? "block" : "hidden"}`}
-            >
-              {card.content}
-            </span>
+            {(card.isFlipped || card.isMatched) && (
+              <>
+                <span className="absolute top-1 left-1 text-xs opacity-75 px-1 rounded bg-white/20">
+                  {card.isEnglish ? "EN" : "عربي"}
+                </span>
+                <span className={`text-lg ${card.isEnglish ? "" : "font-arabic"}`}>
+                  {card.content}
+                </span>
+              </>
+            )}
             {!card.isFlipped && !card.isMatched && (
               <Sparkles className="w-6 h-6 mx-auto text-slate-400 dark:text-slate-500" />
             )}

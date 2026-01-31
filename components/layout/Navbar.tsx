@@ -105,7 +105,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navItems.slice(0, 5).map((item) => {
+            {navItems.slice(0, 7).map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link

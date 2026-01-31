@@ -124,9 +124,11 @@ export const useProgressStore = create<ProgressState>()(
           "sawm",
           "zakat",
           "hajj",
+          "new-muslims",
+          "akhlaq",
         ];
         const currentIndex = chapters.indexOf(chapterId);
-        const nextChapter = chapters[currentIndex + 1] || "hajj";
+        const nextChapter = chapters[currentIndex + 1] || "akhlaq";
 
         set({
           completedChapters: [...state.completedChapters, chapterId],

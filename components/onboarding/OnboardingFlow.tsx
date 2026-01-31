@@ -115,6 +115,11 @@ export function OnboardingFlow() {
   const [selectedLanguage, setSelectedLanguage] = useState(language);
   const [selectedMode, setSelectedMode] = useState<LearningMode>(learningMode);
 
+  // Sync selectedLanguage with store language when it changes (e.g., from hydration)
+  useEffect(() => {
+    setSelectedLanguage(language);
+  }, [language]);
+
   const lang = selectedLanguage as "en" | "ar";
   const step = onboardingSteps[currentStep];
   const progress = ((currentStep + 1) / onboardingSteps.length) * 100;

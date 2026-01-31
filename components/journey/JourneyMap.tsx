@@ -103,6 +103,30 @@ const chapters: Chapter[] = [
     icon: "🕋",
     lessonsCount: 8,
   },
+  {
+    id: "new-muslims",
+    number: 8,
+    title: { en: "New Muslim Guide", ar: "دليل المسلم الجديد" },
+    subtitle: { en: "Essential Knowledge", ar: "المعرفة الأساسية" },
+    description: {
+      en: "Learn what is forbidden in Islam and how to protect your faith",
+      ar: "تعلم المحرمات في الإسلام وكيف تحمي إيمانك",
+    },
+    icon: "⭐",
+    lessonsCount: 3,
+  },
+  {
+    id: "akhlaq",
+    number: 9,
+    title: { en: "Character & Ethics", ar: "الأخلاق" },
+    subtitle: { en: "Akhlaq", ar: "الأخلاق" },
+    description: {
+      en: "Develop noble character and Islamic manners",
+      ar: "طور الخلق النبيل والآداب الإسلامية",
+    },
+    icon: "💎",
+    lessonsCount: 5,
+  },
 ];
 
 export function JourneyMap() {

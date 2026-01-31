@@ -354,6 +354,30 @@ const chaptersData = {
       },
     ],
   },
+  "new-muslims": {
+    title: { en: "New Muslim Guide", ar: "دليل المسلم الجديد" },
+    subtitle: { en: "Essential Knowledge", ar: "المعرفة الأساسية" },
+    description: {
+      en: "A comprehensive guide for new Muslims covering what is forbidden (haram) in Islam. Learn to protect your faith and avoid major sins.",
+      ar: "دليل شامل للمسلمين الجدد يغطي ما هو محرم في الإسلام. تعلم كيف تحمي إيمانك وتتجنب الكبائر.",
+    },
+    color: "from-yellow-500 to-amber-600",
+    icon: "⭐",
+    lessons: [
+      {
+        id: "haram-things",
+        title: { en: "What is Forbidden in Islam", ar: "المحرمات في الإسلام" },
+        duration: 20,
+        type: "lesson",
+      },
+      {
+        id: "new-muslims-quiz",
+        title: { en: "Chapter Quiz", ar: "اختبار الفصل" },
+        duration: 5,
+        type: "quiz",
+      },
+    ],
+  },
 };
 
 export default function ChapterPage() {

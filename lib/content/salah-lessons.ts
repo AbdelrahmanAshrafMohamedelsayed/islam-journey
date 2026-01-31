@@ -392,7 +392,16 @@ export const salahLessons: Record<string, LessonContent> = {
     xpReward: 125,
     sections: [
       {
-        id: "salah-recitations-section-1",
+        id: "salah-recitations-video",
+        type: "video",
+        content: {
+          en: "🎬 Watch: Complete Guide - How to Pray Step by Step",
+          ar: "🎬 شاهد: دليل كامل - كيفية الصلاة خطوة بخطوة",
+        },
+        mediaUrl: "https://www.youtube.com/watch?v=2ZEmsdEOpbk",
+      },
+      {
+        id: "salah-recitations-intro",
         type: "text",
         content: {
           en: "One of the most beautiful parts of Salah is that Muslims all around the world recite the same words in Arabic, connecting us across time and space. Don't worry if you don't know Arabic - millions of converts have learned these recitations, and so can you!\n\n**Important:** It's completely okay to read from a paper or phone when you're learning. Allah knows your intention and appreciates your effort!",
@@ -400,87 +409,188 @@ export const salahLessons: Record<string, LessonContent> = {
         },
       },
       {
-        id: "salah-recitations-section-2",
-        type: "text",
+        id: "salah-takbir",
+        type: "quran",
         content: {
-          en: "## Takbiratul Ihram (تكبيرة الإحرام) - Opening the Prayer\n\nThis is said once at the very beginning of the prayer while raising your hands:\n\n### Arabic:\n**الله أكبر**\n\n### Transliteration:\n**Allahu Akbar**\n\n### Meaning:\n**Allah is the Greatest**\n\n*This phrase transitions you from the ordinary world into a sacred state of prayer. From this moment, you are in conversation with Allah.*",
-          ar: "## تكبيرة الإحرام - افتتاح الصلاة\n\nتُقال مرة واحدة في بداية الصلاة مع رفع اليدين:\n\n### العربية:\n**الله أكبر**\n\n### النطق:\n**Allahu Akbar**\n\n### المعنى:\n**الله أكبر**\n\n*هذه العبارة تنقلك من العالم العادي إلى حالة الصلاة المقدسة. من هذه اللحظة، أنت في حوار مع الله.*",
+          en: "اللَّهُ أَكْبَرُ",
+          ar: "اللَّهُ أَكْبَرُ",
+        },
+        reference: {
+          en: "Takbiratul Ihram - Opening the Prayer",
+          ar: "تكبيرة الإحرام - افتتاح الصلاة",
+        },
+        transliteration: "Allahu Akbar - Allah is the Greatest",
+      },
+      {
+        id: "salah-takbir-explanation",
+        type: "tip",
+        content: {
+          en: "**How to perform:** Raise your hands to ear level (or shoulders) while saying 'Allahu Akbar'. This transitions you from the ordinary world into a sacred state of prayer. From this moment, you are in conversation with Allah!",
+          ar: "**كيفية الأداء:** ارفع يديك إلى مستوى الأذنين (أو الكتفين) أثناء قول 'الله أكبر'. هذا ينقلك من العالم العادي إلى حالة الصلاة المقدسة. من هذه اللحظة، أنت في حوار مع الله!",
         },
       },
       {
-        id: "salah-recitations-section-3",
+        id: "salah-fatiha-title",
         type: "text",
         content: {
-          en: "## Surah Al-Fatiha (سورة الفاتحة) - The Opening Chapter\n\nThis is the most important surah and must be recited in every rak'ah of prayer:\n\n### Arabic:\nبِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ\nالرَّحْمَٰنِ الرَّحِيمِ\nمَالِكِ يَوْمِ الدِّينِ\nإِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ\nاهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ\nصِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ\nغَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ\n\n### Transliteration:\n**Bismillah ir-Rahman ir-Raheem**\n**Alhamdu lillahi Rabbil 'aalameen**\n**Ar-Rahman ir-Raheem**\n**Maaliki yawmid-deen**\n**Iyyaaka na'budu wa iyyaaka nasta'een**\n**Ihdinas-siraatal mustaqeem**\n**Siraatal-latheena an'amta 'alayhim**\n**Ghayril maghdoobi 'alayhim walad-daalleen**\n\n### Meaning:\nIn the name of Allah, the Most Gracious, the Most Merciful\nAll praise is for Allah, Lord of all worlds\nThe Most Gracious, the Most Merciful\nMaster of the Day of Judgment\nYou alone we worship, and You alone we ask for help\nGuide us on the Straight Path\nThe path of those who have received Your grace\nNot of those who have brought down wrath upon themselves, nor of those who have gone astray",
-          ar: "## سورة الفاتحة - الفاتحة\n\nهذه أهم سورة ويجب تلاوتها في كل ركعة:\n\n### العربية:\nبِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\nالْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ\nالرَّحْمَٰنِ الرَّحِيمِ\nمَالِكِ يَوْمِ الدِّينِ\nإِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ\nاهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ\nصِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ\nغَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+          en: "## 📖 Surah Al-Fatiha - The Opening\n\nThis is the **most important surah** and must be recited in every rak'ah of prayer. It's like a conversation between you and Allah!",
+          ar: "## 📖 سورة الفاتحة - الافتتاحية\n\nهذه **أهم سورة** ويجب تلاوتها في كل ركعة من الصلاة. إنها كحوار بينك وبين الله!",
         },
       },
       {
-        id: "salah-recitations-section-4",
+        id: "salah-fatiha",
+        type: "quran",
+        content: {
+          en: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+          ar: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+        },
+        reference: { en: "Surah Al-Fatiha 1:1-7", ar: "سورة الفاتحة ١:١-٧" },
+        mediaUrl: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
+      },
+      {
+        id: "salah-fatiha-transliteration",
         type: "text",
         content: {
-          en: "## Ruku (ركوع) - Bowing Position\n\nSaid while bowing with your back parallel to the ground:\n\n### Arabic:\n**سُبْحَانَ رَبِّيَ الْعَظِيمِ**\n\n### Transliteration:\n**Subhana Rabbiyal 'Atheem**\n\n### Meaning:\n**Glory be to my Lord, the Most Great**\n\n*Say this 3 times (minimum once)*",
-          ar: "## الركوع - وضع الانحناء\n\nتُقال أثناء الانحناء والظهر موازٍ للأرض:\n\n### العربية:\n**سُبْحَانَ رَبِّيَ الْعَظِيمِ**\n\n### النطق:\n**Subhana Rabbiyal 'Atheem**\n\n### المعنى:\n**سبحان ربي العظيم**\n\n*قلها 3 مرات (الحد الأدنى مرة واحدة)*",
+          en: "### Transliteration:\n\n**Bismillah ir-Rahman ir-Raheem**\n*In the name of Allah, the Most Gracious, Most Merciful*\n\n**Alhamdu lillahi Rabbil 'aalameen**\n*All praise is for Allah, Lord of all worlds*\n\n**Ar-Rahman ir-Raheem**\n*The Most Gracious, Most Merciful*\n\n**Maaliki yawmid-deen**\n*Master of the Day of Judgment*\n\n**Iyyaaka na'budu wa iyyaaka nasta'een**\n*You alone we worship, and You alone we ask for help*\n\n**Ihdinas-siraatal mustaqeem**\n*Guide us on the Straight Path*\n\n**Siraatal-latheena an'amta 'alayhim, ghayril maghdoobi 'alayhim walad-daalleen**\n*The path of those who have received Your grace, not of those who have brought down wrath, nor of those who have gone astray*\n\n**Say 'Ameen' (آمين) after finishing!**",
+          ar: "### التفسير:\n\nالفاتحة هي أعظم سورة في القرآن. عندما تقرأها، الله يرد عليك!\n\n**آمين** - قلها بعد الانتهاء من الفاتحة",
         },
       },
       {
-        id: "salah-recitations-section-5",
+        id: "salah-ruku-title",
         type: "text",
         content: {
-          en: "## Rising from Ruku\n\nSaid while standing up from bowing:\n\n### Arabic:\n**سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ**\n\n### Transliteration:\n**Sami' Allahu liman hamidah**\n\n### Meaning:\n**Allah hears those who praise Him**\n\n---\n\n**Then, once standing straight:**\n\n### Arabic:\n**رَبَّنَا لَكَ الْحَمْدُ**\n\n### Transliteration:\n**Rabbana lakal hamd**\n\n### Meaning:\n**Our Lord, to You belongs all praise**",
-          ar: "## القيام من الركوع\n\nتُقال عند الوقوف من الركوع:\n\n### العربية:\n**سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ**\n\n### النطق:\n**Sami' Allahu liman hamidah**\n\n### المعنى:\n**سمع الله لمن حمده**\n\n---\n\n**ثم، عند الوقوف مستقيماً:**\n\n### العربية:\n**رَبَّنَا لَكَ الْحَمْدُ**\n\n### النطق:\n**Rabbana lakal hamd**\n\n### المعنى:\n**ربنا لك الحمد**",
+          en: "## 🙇 Ruku (Bowing)\n\nAfter reciting, say 'Allahu Akbar' and bow with your back parallel to the ground, hands on your knees:",
+          ar: "## 🙇 الركوع\n\nبعد التلاوة، قل 'الله أكبر' واركع بظهرك موازياً للأرض، ويداك على ركبتيك:",
         },
       },
       {
-        id: "salah-recitations-section-6",
+        id: "salah-ruku",
+        type: "quran",
+        content: {
+          en: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+          ar: "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+        },
+        reference: {
+          en: "Dhikr of Ruku - Say 3 times",
+          ar: "ذكر الركوع - قلها 3 مرات",
+        },
+        transliteration: "Subhana Rabbiyal 'Atheem - Glory be to my Lord, the Most Great",
+      },
+      {
+        id: "salah-rise-ruku",
+        type: "quran",
+        content: {
+          en: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ۝ رَبَّنَا وَلَكَ الْحَمْدُ",
+          ar: "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ۝ رَبَّنَا وَلَكَ الْحَمْدُ",
+        },
+        reference: {
+          en: "Rising from Ruku",
+          ar: "القيام من الركوع",
+        },
+        transliteration: "Sami' Allahu liman hamidah, Rabbana wa lakal hamd - Allah hears those who praise Him, Our Lord, to You belongs all praise",
+      },
+      {
+        id: "salah-sujud-title",
         type: "text",
         content: {
-          en: "## Sujud (سجود) - Prostration\n\nSaid while prostrating with forehead, nose, palms, knees, and toes touching the ground:\n\n### Arabic:\n**سُبْحَانَ رَبِّيَ الأَعْلَى**\n\n### Transliteration:\n**Subhana Rabbiyal A'la**\n\n### Meaning:\n**Glory be to my Lord, the Most High**\n\n*Say this 3 times (minimum once). This is the closest you get to Allah in prayer - make du'a (personal supplication) here!*",
-          ar: "## السجود - وضع السجود\n\nتُقال أثناء السجود مع وضع الجبهة والأنف والكفين والركبتين وأطراف القدمين على الأرض:\n\n### العربية:\n**سُبْحَانَ رَبِّيَ الأَعْلَى**\n\n### النطق:\n**Subhana Rabbiyal A'la**\n\n### المعنى:\n**سبحان ربي الأعلى**\n\n*قلها 3 مرات (الحد الأدنى مرة واحدة). هذا أقرب ما تكون إلى الله في الصلاة - ادعُ (دعاء شخصي) هنا!*",
+          en: "## 🤲 Sujud (Prostration)\n\nThis is the **closest you get to Allah** in prayer! Say 'Allahu Akbar' and prostrate with your forehead, nose, palms, knees, and toes on the ground:",
+          ar: "## 🤲 السجود\n\nهذا **أقرب ما تكون إلى الله** في الصلاة! قل 'الله أكبر' واسجد بجبهتك وأنفك وكفيك وركبتيك وأصابع قدميك على الأرض:",
         },
       },
       {
-        id: "salah-recitations-section-7",
+        id: "salah-sujud",
+        type: "quran",
+        content: {
+          en: "سُبْحَانَ رَبِّيَ الأَعْلَى",
+          ar: "سُبْحَانَ رَبِّيَ الأَعْلَى",
+        },
+        reference: {
+          en: "Dhikr of Sujud - Say 3 times",
+          ar: "ذكر السجود - قلها 3 مرات",
+        },
+        transliteration: "Subhana Rabbiyal A'la - Glory be to my Lord, the Most High",
+      },
+      {
+        id: "salah-sujud-hadith",
         type: "hadith",
         content: {
           en: '"The closest that a servant is to his Lord is when he is in prostration, so increase your supplications (du\'a) therein."',
           ar: '"أقرب ما يكون العبد من ربه وهو ساجد، فأكثروا الدعاء."',
         },
         source: {
-          en: "Prophet Muhammad ﷺ (Muslim)",
-          ar: "النبي محمد ﷺ (مسلم)",
+          en: "Prophet Muhammad ﷺ (Sahih Muslim)",
+          ar: "النبي محمد ﷺ (صحيح مسلم)",
         },
       },
       {
-        id: "salah-recitations-section-8",
+        id: "salah-tashahhud-title",
         type: "text",
         content: {
-          en: "## At-Tashahhud (التشهد) - Sitting Testimony\n\nRecited while sitting after every two rak'ah:\n\n### Arabic:\nالتَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ\nالسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ\nالسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ\nأَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ\n\n### Transliteration:\n**At-tahiyyatu lillahi was-salawatu wat-tayyibat**\n**As-salamu 'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh**\n**As-salamu 'alayna wa 'ala 'ibadillahis-saliheen**\n**Ashhadu an la ilaha illallah wa ashhadu anna Muhammadan 'abduhu wa rasuluh**\n\n### Meaning:\nAll greetings, prayers and good things are for Allah\nPeace be upon you, O Prophet, and the mercy of Allah and His blessings\nPeace be upon us and upon the righteous servants of Allah\nI bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and messenger",
-          ar: "## التشهد - جلسة الشهادة\n\nتُتلى أثناء الجلوس بعد كل ركعتين:\n\n### العربية:\nالتَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ\nالسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ\nالسَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ\nأَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+          en: "## 🪑 At-Tashahhud (Sitting Testimony)\n\nAfter every two rak'ah, sit and recite the Tashahhud. Point your right index finger while reciting:",
+          ar: "## 🪑 التشهد (جلسة الشهادة)\n\nبعد كل ركعتين، اجلس واقرأ التشهد. أشر بسبابتك اليمنى أثناء التلاوة:",
         },
       },
       {
-        id: "salah-recitations-section-9",
+        id: "salah-tashahhud",
+        type: "quran",
+        content: {
+          en: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ۝ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+          ar: "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ ۝ السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ۝ السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ۝ أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+        },
+        reference: {
+          en: "At-Tashahhud - The Testimony",
+          ar: "التشهد",
+        },
+        transliteration: "At-tahiyyatu lillahi was-salawatu wat-tayyibat, As-salamu 'alayka ayyuhan-Nabiyyu wa rahmatullahi wa barakatuh, As-salamu 'alayna wa 'ala 'ibadillahis-saliheen, Ashhadu an la ilaha illallah wa ashhadu anna Muhammadan 'abduhu wa rasuluh",
+      },
+      {
+        id: "salah-salawat-title",
         type: "text",
         content: {
-          en: "## Salawat (الصلاة على النبي) - Blessings upon the Prophet\n\nAdded in the final sitting (last tashahhud) before ending prayer:\n\n### Arabic:\nاللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ\nكَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ\nاللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ\nكَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ\n\n### Transliteration:\n**Allahumma salli 'ala Muhammad wa 'ala aali Muhammad**\n**Kama sallayta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed**\n**Allahumma barik 'ala Muhammad wa 'ala aali Muhammad**\n**Kama barakta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed**\n\n### Meaning:\nO Allah, send blessings upon Muhammad and upon the family of Muhammad\nAs You sent blessings upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious\nO Allah, bless Muhammad and the family of Muhammad\nAs You blessed Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious",
-          ar: "## الصلاة على النبي - الصلوات على النبي\n\nتُضاف في الجلسة الأخيرة (التشهد الأخير) قبل إنهاء الصلاة:\n\n### العربية:\nاللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ\nكَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ\nاللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ\nكَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+          en: "## 🤲 Salawat (In Final Sitting Only)\n\nIn the **last** rak'ah, after Tashahhud, add the Salawat (blessings on the Prophet):",
+          ar: "## 🤲 الصلوات (في الجلسة الأخيرة فقط)\n\nفي الركعة **الأخيرة**، بعد التشهد، أضف الصلوات على النبي:",
         },
       },
       {
-        id: "salah-recitations-section-10",
+        id: "salah-salawat",
+        type: "quran",
+        content: {
+          en: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ۝ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+          ar: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ ۝ اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ",
+        },
+        reference: {
+          en: "As-Salawat Al-Ibrahimiyyah",
+          ar: "الصلوات الإبراهيمية",
+        },
+        transliteration: "Allahumma salli 'ala Muhammad wa 'ala aali Muhammad, kama sallayta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed. Allahumma barik 'ala Muhammad wa 'ala aali Muhammad, kama barakta 'ala Ibrahim wa 'ala aali Ibrahim, innaka Hamidun Majeed",
+      },
+      {
+        id: "salah-tasleem-title",
         type: "text",
         content: {
-          en: "## Tasleem (التسليم) - Ending the Prayer\n\nSaid while turning your head to the right, then to the left:\n\n### Arabic:\n**السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ**\n\n### Transliteration:\n**As-salamu 'alaykum wa rahmatullah**\n\n### Meaning:\n**Peace and mercy of Allah be upon you**\n\n*Turn right first, say it, then turn left and say it again. This concludes your prayer.*",
-          ar: "## التسليم - إنهاء الصلاة\n\nتُقال مع توجيه الرأس إلى اليمين، ثم إلى اليسار:\n\n### العربية:\n**السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ**\n\n### النطق:\n**As-salamu 'alaykum wa rahmatullah**\n\n### المعنى:\n**السلام عليكم ورحمة الله**\n\n*التفت يميناً أولاً، قلها، ثم التفت يساراً وقلها مرة أخرى. هذا يختم صلاتك.*",
+          en: "## ✨ Tasleem (Ending the Prayer)\n\nTo conclude your prayer, turn your head to the right, then to the left, saying:",
+          ar: "## ✨ التسليم (إنهاء الصلاة)\n\nلإنهاء صلاتك، أدر رأسك إلى اليمين، ثم إلى اليسار، قائلاً:",
         },
       },
       {
-        id: "salah-recitations-section-11",
+        id: "salah-tasleem",
+        type: "quran",
+        content: {
+          en: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+          ar: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+        },
+        reference: {
+          en: "Tasleem - Say twice (right then left)",
+          ar: "التسليم - قلها مرتين (يميناً ثم يساراً)",
+        },
+        transliteration: "As-salamu 'alaykum wa rahmatullah - Peace and mercy of Allah be upon you",
+      },
+      {
+        id: "salah-recitations-tips",
         type: "tip",
         content: {
-          en: "**Learning Tips:**\n\n1. **Start with Al-Fatiha** - This is the most important. Learn it first and learn it well.\n\n2. **Use Audio** - Listen to recordings while reading along. Hearing proper pronunciation is essential.\n\n3. **Practice daily** - Even 10 minutes of practice each day will help you memorize quickly.\n\n4. **Be patient with yourself** - The Companions of the Prophet ﷺ also learned these words, and so have millions of converts throughout history. You will too, insha'Allah!",
-          ar: "**نصائح للتعلم:**\n\n1. **ابدأ بالفاتحة** - هذه الأهم. تعلمها أولاً وأتقنها.\n\n2. **استخدم الصوت** - استمع للتسجيلات أثناء القراءة. سماع النطق الصحيح ضروري.\n\n3. **تدرب يومياً** - حتى 10 دقائق من التدريب كل يوم ستساعدك على الحفظ بسرعة.\n\n4. **كن صبوراً مع نفسك** - صحابة النبي ﷺ أيضاً تعلموا هذه الكلمات، وكذلك ملايين المهتدين عبر التاريخ. وأنت أيضاً ستتعلم، إن شاء الله!",
+          en: "**🎯 Learning Tips:**\n\n1. **Start with Al-Fatiha** - This is the most important. Learn it first!\n\n2. **Use Audio** - Listen to recordings while reading. Tap the play button above!\n\n3. **Practice daily** - Even 10 minutes will help you memorize quickly.\n\n4. **Be patient** - Millions of converts have learned these. You will too, insha'Allah!",
+          ar: "**🎯 نصائح للتعلم:**\n\n1. **ابدأ بالفاتحة** - هذه الأهم. تعلمها أولاً!\n\n2. **استخدم الصوت** - استمع للتسجيلات أثناء القراءة.\n\n3. **تدرب يومياً** - حتى 10 دقائق ستساعدك على الحفظ.\n\n4. **كن صبوراً** - ملايين المهتدين تعلموا هذه. وأنت أيضاً، إن شاء الله!",
         },
       },
     ],

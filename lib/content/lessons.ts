@@ -830,6 +830,7 @@ import { sawmLessons } from "./sawm-lessons";
 import { hajjLessons } from "./hajj-lessons";
 import { quranLessons } from "./quran-lessons";
 import { akhlaqLessons } from "./akhlaq-lessons";
+import { newMuslimsLessons } from "./new-muslims-lessons";
 
 // Convert lessons objects to arrays
 const salahLessonArray = Object.values(salahLessons);
@@ -838,6 +839,7 @@ const sawmLessonArray = Object.values(sawmLessons);
 const hajjLessonArray = Object.values(hajjLessons);
 const quranLessonArray = Object.values(quranLessons);
 const akhlaqLessonArray = Object.values(akhlaqLessons);
+const newMuslimsLessonArray = Object.values(newMuslimsLessons);
 
 // Export all lessons
 export const allLessons: LessonContent[] = [
@@ -848,6 +850,7 @@ export const allLessons: LessonContent[] = [
   ...hajjLessonArray,
   ...quranLessonArray,
   ...akhlaqLessonArray,
+  ...newMuslimsLessonArray,
 ];
 
 // Helper function to get lesson by ID

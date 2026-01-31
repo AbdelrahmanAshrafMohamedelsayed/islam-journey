@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -9,571 +9,534 @@ import {
   Star,
   Flame,
   BookOpen,
-  Moon,
+  Target,
+  Zap,
+  Award,
+  Crown,
   Sparkles,
   Medal,
-  Crown,
-  Zap,
-  Target,
-  Heart,
-  Calendar,
-  Clock,
   Lock,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { useSettingsStore } from "@/lib/stores";
+import { Card } from "@/components/ui/Card";
+import { ProgressBar } from "@/components/ui/Progress";
+import { useSettingsStore, useProgressStore, useAchievementsStore } from "@/lib/stores";
+import type { Achievement } from "@/types";
 
-interface Achievement {
+interface AchievementDefinition {
   id: string;
   title: { en: string; ar: string };
   description: { en: string; ar: string };
-  icon: React.ReactNode;
-  category: "learning" | "streak" | "milestone" | "special";
-  progress: number;
-  maxProgress: number;
-  unlocked: boolean;
-  unlockedAt?: string;
+  icon: React.ComponentType<{ className?: string }>;
+  iconName: string;
+  category: "learning" | "streak" | "mastery" | "special";
   rarity: "common" | "rare" | "epic" | "legendary";
+  requiredValue: number;
+  getProgress: () => number;
   xpReward: number;
 }
 
-const achievements: Achievement[] = [
-  // Learning Achievements
-  {
-    id: "first-lesson",
-    title: { en: "First Steps", ar: "الخطوات الأولى" },
-    description: { en: "Complete your first lesson", ar: "أكمل درسك الأول" },
-    icon: <BookOpen className="w-6 h-6" />,
-    category: "learning",
-    progress: 1,
-    maxProgress: 1,
-    unlocked: true,
-    unlockedAt: "2024-01-15",
-    rarity: "common",
-    xpReward: 50,
-  },
-  {
-    id: "five-pillars",
-    title: { en: "Pillar Master", ar: "سيد الأركان" },
-    description: {
-      en: "Complete all Five Pillars chapters",
-      ar: "أكمل جميع فصول أركان الإسلام الخمسة",
-    },
-    icon: <Star className="w-6 h-6" />,
-    category: "learning",
-    progress: 3,
-    maxProgress: 5,
-    unlocked: false,
-    rarity: "epic",
-    xpReward: 500,
-  },
-  {
-    id: "quran-explorer",
-    title: { en: "Quran Explorer", ar: "مستكشف القرآن" },
-    description: { en: "Read 10 different surahs", ar: "اقرأ 10 سور مختلفة" },
-    icon: <BookOpen className="w-6 h-6" />,
-    category: "learning",
-    progress: 4,
-    maxProgress: 10,
-    unlocked: false,
-    rarity: "rare",
-    xpReward: 200,
-  },
-  {
-    id: "dua-collector",
-    title: { en: "Dua Collector", ar: "جامع الأدعية" },
-    description: {
-      en: "Save 20 duas to your collection",
-      ar: "احفظ 20 دعاء في مجموعتك",
-    },
-    icon: <Heart className="w-6 h-6" />,
-    category: "learning",
-    progress: 5,
-    maxProgress: 20,
-    unlocked: false,
-    rarity: "rare",
-    xpReward: 150,
-  },
-
-  // Streak Achievements
-  {
-    id: "week-streak",
-    title: { en: "Week Warrior", ar: "محارب الأسبوع" },
-    description: {
-      en: "Maintain a 7-day learning streak",
-      ar: "حافظ على سلسلة تعلم لمدة 7 أيام",
-    },
-    icon: <Flame className="w-6 h-6" />,
-    category: "streak",
-    progress: 5,
-    maxProgress: 7,
-    unlocked: false,
-    rarity: "common",
-    xpReward: 100,
-  },
-  {
-    id: "month-streak",
-    title: { en: "Month Master", ar: "سيد الشهر" },
-    description: {
-      en: "Maintain a 30-day learning streak",
-      ar: "حافظ على سلسلة تعلم لمدة 30 يوماً",
-    },
-    icon: <Calendar className="w-6 h-6" />,
-    category: "streak",
-    progress: 5,
-    maxProgress: 30,
-    unlocked: false,
-    rarity: "epic",
-    xpReward: 500,
-  },
-  {
-    id: "ramadan-complete",
-    title: { en: "Ramadan Champion", ar: "بطل رمضان" },
-    description: {
-      en: "Complete daily lessons throughout Ramadan",
-      ar: "أكمل الدروس اليومية طوال رمضان",
-    },
-    icon: <Moon className="w-6 h-6" />,
-    category: "streak",
-    progress: 0,
-    maxProgress: 30,
-    unlocked: false,
-    rarity: "legendary",
-    xpReward: 1000,
-  },
-
-  // Milestone Achievements
-  {
-    id: "level-5",
-    title: { en: "Rising Scholar", ar: "العالم الصاعد" },
-    description: { en: "Reach Level 5", ar: "الوصول إلى المستوى 5" },
-    icon: <Zap className="w-6 h-6" />,
-    category: "milestone",
-    progress: 3,
-    maxProgress: 5,
-    unlocked: false,
-    rarity: "common",
-    xpReward: 100,
-  },
-  {
-    id: "level-10",
-    title: { en: "Knowledge Seeker", ar: "طالب العلم" },
-    description: { en: "Reach Level 10", ar: "الوصول إلى المستوى 10" },
-    icon: <Target className="w-6 h-6" />,
-    category: "milestone",
-    progress: 3,
-    maxProgress: 10,
-    unlocked: false,
-    rarity: "rare",
-    xpReward: 250,
-  },
-  {
-    id: "level-25",
-    title: { en: "Wisdom Master", ar: "سيد الحكمة" },
-    description: { en: "Reach Level 25", ar: "الوصول إلى المستوى 25" },
-    icon: <Crown className="w-6 h-6" />,
-    category: "milestone",
-    progress: 3,
-    maxProgress: 25,
-    unlocked: false,
-    rarity: "legendary",
-    xpReward: 1000,
-  },
-  {
-    id: "xp-1000",
-    title: { en: "XP Hunter", ar: "صياد النقاط" },
-    description: { en: "Earn 1,000 total XP", ar: "اكسب 1,000 نقطة خبرة" },
-    icon: <Sparkles className="w-6 h-6" />,
-    category: "milestone",
-    progress: 450,
-    maxProgress: 1000,
-    unlocked: false,
-    rarity: "common",
-    xpReward: 100,
-  },
-
-  // Special Achievements
-  {
-    id: "night-owl",
-    title: { en: "Night Owl", ar: "بومة الليل" },
-    description: {
-      en: "Complete a lesson after midnight",
-      ar: "أكمل درساً بعد منتصف الليل",
-    },
-    icon: <Moon className="w-6 h-6" />,
-    category: "special",
-    progress: 0,
-    maxProgress: 1,
-    unlocked: false,
-    rarity: "rare",
-    xpReward: 150,
-  },
-  {
-    id: "early-bird",
-    title: { en: "Early Bird", ar: "الطائر المبكر" },
-    description: {
-      en: "Complete a lesson before Fajr",
-      ar: "أكمل درساً قبل الفجر",
-    },
-    icon: <Clock className="w-6 h-6" />,
-    category: "special",
-    progress: 1,
-    maxProgress: 1,
-    unlocked: true,
-    unlockedAt: "2024-01-20",
-    rarity: "rare",
-    xpReward: 150,
-  },
-  {
-    id: "perfectionist",
-    title: { en: "Perfectionist", ar: "الكمالي" },
-    description: {
-      en: "Get 100% on 10 quizzes",
-      ar: "احصل على 100% في 10 اختبارات",
-    },
-    icon: <Medal className="w-6 h-6" />,
-    category: "special",
-    progress: 3,
-    maxProgress: 10,
-    unlocked: false,
-    rarity: "epic",
-    xpReward: 400,
-  },
-  {
-    id: "historian",
-    title: { en: "Islamic Historian", ar: "المؤرخ الإسلامي" },
-    description: {
-      en: "View all historical events in Time Traveler",
-      ar: "شاهد جميع الأحداث التاريخية في آلة الزمن",
-    },
-    icon: <Clock className="w-6 h-6" />,
-    category: "special",
-    progress: 6,
-    maxProgress: 10,
-    unlocked: false,
-    rarity: "epic",
-    xpReward: 300,
-  },
-];
-
-const categoryLabels = {
-  learning: { en: "Learning", ar: "التعلم" },
-  streak: { en: "Streaks", ar: "السلاسل" },
-  milestone: { en: "Milestones", ar: "المراحل" },
-  special: { en: "Special", ar: "خاصة" },
-};
-
-const rarityColors = {
-  common: "from-slate-400 to-slate-500",
-  rare: "from-blue-400 to-blue-600",
-  epic: "from-purple-400 to-purple-600",
-  legendary: "from-amber-400 to-orange-500",
-};
-
-const rarityBgColors = {
-  common: "bg-slate-100 dark:bg-slate-800",
-  rare: "bg-blue-50 dark:bg-blue-900/20",
-  epic: "bg-purple-50 dark:bg-purple-900/20",
-  legendary: "bg-amber-50 dark:bg-amber-900/20",
-};
-
-const rarityLabels = {
-  common: { en: "Common", ar: "عادي" },
-  rare: { en: "Rare", ar: "نادر" },
-  epic: { en: "Epic", ar: "ملحمي" },
-  legendary: { en: "Legendary", ar: "أسطوري" },
-};
-
-// Achievement Card Component
-const AchievementCard = ({
-  achievement,
-  lang,
-}: {
-  achievement: Achievement;
-  lang: "en" | "ar";
-}) => {
-  const progress = (achievement.progress / achievement.maxProgress) * 100;
-
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className={`
-        relative rounded-2xl overflow-hidden
-        ${achievement.unlocked ? rarityBgColors[achievement.rarity] : "bg-slate-100 dark:bg-slate-800 opacity-70"}
-      `}
-    >
-      {/* Locked overlay */}
-      {!achievement.unlocked && (
-        <div className="absolute inset-0 bg-slate-900/10 dark:bg-slate-900/30 backdrop-blur-[1px] z-10 flex items-center justify-center">
-          <Lock className="w-8 h-8 text-slate-400 dark:text-slate-500" />
-        </div>
-      )}
-
-      <div className="p-4">
-        <div className="flex items-start gap-4">
-          {/* Icon */}
-          <div
-            className={`
-            w-14 h-14 rounded-xl flex items-center justify-center shrink-0
-            ${
-              achievement.unlocked
-                ? `bg-linear-to-br ${rarityColors[achievement.rarity]} text-white shadow-lg`
-                : "bg-slate-200 dark:bg-slate-700 text-slate-400"
-            }
-          `}
-          >
-            {achievement.icon}
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <h3
-                className={`font-bold truncate ${achievement.unlocked ? "text-slate-800 dark:text-white" : "text-slate-500 dark:text-slate-400"}`}
-              >
-                {achievement.title[lang]}
-              </h3>
-              {achievement.unlocked && (
-                <span
-                  className={`
-                  text-xs px-2 py-0.5 rounded-full font-medium
-                  ${achievement.rarity === "legendary" ? "bg-amber-200 text-amber-800" : ""}
-                  ${achievement.rarity === "epic" ? "bg-purple-200 text-purple-800" : ""}
-                  ${achievement.rarity === "rare" ? "bg-blue-200 text-blue-800" : ""}
-                  ${achievement.rarity === "common" ? "bg-slate-200 text-slate-700" : ""}
-                `}
-                >
-                  {rarityLabels[achievement.rarity][lang]}
-                </span>
-              )}
-            </div>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
-              {achievement.description[lang]}
-            </p>
-
-            {/* Progress bar */}
-            {!achievement.unlocked && (
-              <div className="space-y-1">
-                <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                  <motion.div
-                    className={`h-full bg-linear-to-r ${rarityColors[achievement.rarity]}`}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                  />
-                </div>
-                <div className="flex justify-between text-xs text-slate-400">
-                  <span>
-                    {achievement.progress} / {achievement.maxProgress}
-                  </span>
-                  <span>+{achievement.xpReward} XP</span>
-                </div>
-              </div>
-            )}
-
-            {/* Unlocked date */}
-            {achievement.unlocked && achievement.unlockedAt && (
-              <div className="flex items-center gap-2 text-xs text-slate-400">
-                <Trophy className="w-3 h-3" />
-                <span>
-                  {lang === "en" ? "Unlocked" : "فُتح"} {achievement.unlockedAt}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 export default function AchievementsPage() {
   const { language: lang } = useSettingsStore();
-  const [selectedCategory, setSelectedCategory] = useState<
-    "all" | Achievement["category"]
-  >("all");
-  const [showUnlockedOnly, setShowUnlockedOnly] = useState(false);
+  const {
+    completedLessons,
+    completedChapters,
+    totalXp,
+    level,
+    streakDays,
+  } = useProgressStore();
+  const { unlockedAchievements, unlockAchievement } = useAchievementsStore();
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const unlockedCount = achievements.filter((a) => a.unlocked).length;
-  const totalXP = achievements
-    .filter((a) => a.unlocked)
-    .reduce((sum, a) => sum + a.xpReward, 0);
+  const achievementDefinitions: AchievementDefinition[] = [
+    // Learning Achievements
+    {
+      id: "first-lesson",
+      title: { en: "First Steps", ar: "الخطوات الأولى" },
+      description: { en: "Complete your first lesson", ar: "أكمل درسك الأول" },
+      icon: BookOpen,
+      iconName: "book-open",
+      category: "learning",
+      rarity: "common",
+      requiredValue: 1,
+      getProgress: () => completedLessons.length,
+      xpReward: 50,
+    },
+    {
+      id: "lesson-master-5",
+      title: { en: "Eager Learner", ar: "متعلم متحمس" },
+      description: { en: "Complete 5 lessons", ar: "أكمل 5 دروس" },
+      icon: Star,
+      iconName: "star",
+      category: "learning",
+      rarity: "common",
+      requiredValue: 5,
+      getProgress: () => completedLessons.length,
+      xpReward: 100,
+    },
+    {
+      id: "lesson-master-10",
+      title: { en: "Knowledge Seeker", ar: "طالب العلم" },
+      description: { en: "Complete 10 lessons", ar: "أكمل 10 دروس" },
+      icon: BookOpen,
+      iconName: "book-open",
+      category: "learning",
+      rarity: "rare",
+      requiredValue: 10,
+      getProgress: () => completedLessons.length,
+      xpReward: 200,
+    },
+    {
+      id: "lesson-master-25",
+      title: { en: "Dedicated Student", ar: "طالب مجتهد" },
+      description: { en: "Complete 25 lessons", ar: "أكمل 25 درساً" },
+      icon: Medal,
+      iconName: "medal",
+      category: "learning",
+      rarity: "epic",
+      requiredValue: 25,
+      getProgress: () => completedLessons.length,
+      xpReward: 500,
+    },
+    {
+      id: "lesson-master-50",
+      title: { en: "Scholar", ar: "عالم" },
+      description: { en: "Complete 50 lessons", ar: "أكمل 50 درساً" },
+      icon: Crown,
+      iconName: "crown",
+      category: "learning",
+      rarity: "legendary",
+      requiredValue: 50,
+      getProgress: () => completedLessons.length,
+      xpReward: 1000,
+    },
+    {
+      id: "chapter-complete-1",
+      title: { en: "Chapter Champion", ar: "بطل الفصل" },
+      description: { en: "Complete your first chapter", ar: "أكمل فصلك الأول" },
+      icon: Trophy,
+      iconName: "trophy",
+      category: "learning",
+      rarity: "common",
+      requiredValue: 1,
+      getProgress: () => completedChapters.length,
+      xpReward: 150,
+    },
+    {
+      id: "chapter-complete-3",
+      title: { en: "Journey Traveler", ar: "مسافر الرحلة" },
+      description: { en: "Complete 3 chapters", ar: "أكمل 3 فصول" },
+      icon: Target,
+      iconName: "target",
+      category: "learning",
+      rarity: "rare",
+      requiredValue: 3,
+      getProgress: () => completedChapters.length,
+      xpReward: 300,
+    },
+    {
+      id: "chapter-complete-5",
+      title: { en: "Path Master", ar: "سيد الطريق" },
+      description: { en: "Complete 5 chapters", ar: "أكمل 5 فصول" },
+      icon: Award,
+      iconName: "award",
+      category: "learning",
+      rarity: "epic",
+      requiredValue: 5,
+      getProgress: () => completedChapters.length,
+      xpReward: 500,
+    },
+    // Streak Achievements
+    {
+      id: "streak-3",
+      title: { en: "Getting Started", ar: "البداية" },
+      description: { en: "Maintain a 3-day streak", ar: "حافظ على سلسلة 3 أيام" },
+      icon: Flame,
+      iconName: "flame",
+      category: "streak",
+      rarity: "common",
+      requiredValue: 3,
+      getProgress: () => streakDays,
+      xpReward: 75,
+    },
+    {
+      id: "streak-7",
+      title: { en: "Week Warrior", ar: "محارب الأسبوع" },
+      description: { en: "Maintain a 7-day streak", ar: "حافظ على سلسلة 7 أيام" },
+      icon: Flame,
+      iconName: "flame",
+      category: "streak",
+      rarity: "rare",
+      requiredValue: 7,
+      getProgress: () => streakDays,
+      xpReward: 150,
+    },
+    {
+      id: "streak-14",
+      title: { en: "Fortnight Fighter", ar: "مقاتل الأسبوعين" },
+      description: { en: "Maintain a 14-day streak", ar: "حافظ على سلسلة 14 يوماً" },
+      icon: Flame,
+      iconName: "flame",
+      category: "streak",
+      rarity: "epic",
+      requiredValue: 14,
+      getProgress: () => streakDays,
+      xpReward: 300,
+    },
+    {
+      id: "streak-30",
+      title: { en: "Monthly Master", ar: "سيد الشهر" },
+      description: { en: "Maintain a 30-day streak", ar: "حافظ على سلسلة 30 يوماً" },
+      icon: Flame,
+      iconName: "flame",
+      category: "streak",
+      rarity: "legendary",
+      requiredValue: 30,
+      getProgress: () => streakDays,
+      xpReward: 750,
+    },
+    // Milestone Achievements
+    {
+      id: "xp-100",
+      title: { en: "XP Hunter", ar: "صياد النقاط" },
+      description: { en: "Earn 100 XP", ar: "اكسب 100 نقطة خبرة" },
+      icon: Zap,
+      iconName: "zap",
+      category: "mastery",
+      rarity: "common",
+      requiredValue: 100,
+      getProgress: () => totalXp,
+      xpReward: 25,
+    },
+    {
+      id: "xp-500",
+      title: { en: "XP Collector", ar: "جامع النقاط" },
+      description: { en: "Earn 500 XP", ar: "اكسب 500 نقطة خبرة" },
+      icon: Zap,
+      iconName: "zap",
+      category: "mastery",
+      rarity: "rare",
+      requiredValue: 500,
+      getProgress: () => totalXp,
+      xpReward: 100,
+    },
+    {
+      id: "xp-1000",
+      title: { en: "XP Master", ar: "سيد النقاط" },
+      description: { en: "Earn 1,000 XP", ar: "اكسب 1000 نقطة خبرة" },
+      icon: Zap,
+      iconName: "zap",
+      category: "mastery",
+      rarity: "epic",
+      requiredValue: 1000,
+      getProgress: () => totalXp,
+      xpReward: 250,
+    },
+    {
+      id: "level-5",
+      title: { en: "Rising Star", ar: "نجم صاعد" },
+      description: { en: "Reach level 5", ar: "الوصول إلى المستوى 5" },
+      icon: Star,
+      iconName: "star",
+      category: "mastery",
+      rarity: "rare",
+      requiredValue: 5,
+      getProgress: () => level,
+      xpReward: 200,
+    },
+    {
+      id: "level-10",
+      title: { en: "Bright Light", ar: "نور ساطع" },
+      description: { en: "Reach level 10", ar: "الوصول إلى المستوى 10" },
+      icon: Sparkles,
+      iconName: "sparkles",
+      category: "mastery",
+      rarity: "epic",
+      requiredValue: 10,
+      getProgress: () => level,
+      xpReward: 500,
+    },
+    // Special Achievements
+    {
+      id: "first-quiz",
+      title: { en: "Quiz Taker", ar: "مشارك الاختبار" },
+      description: { en: "Complete your first quiz", ar: "أكمل أول اختبار لك" },
+      icon: Target,
+      iconName: "target",
+      category: "special",
+      rarity: "common",
+      requiredValue: 1,
+      getProgress: () => completedLessons.length > 0 ? 1 : 0,
+      xpReward: 50,
+    },
+    {
+      id: "perfect-score",
+      title: { en: "Perfect Score", ar: "علامة كاملة" },
+      description: { en: "Get 100% on any quiz", ar: "احصل على 100% في أي اختبار" },
+      icon: Crown,
+      iconName: "crown",
+      category: "special",
+      rarity: "epic",
+      requiredValue: 1,
+      getProgress: () => 0,
+      xpReward: 100,
+    },
+  ];
 
-  const filteredAchievements = achievements.filter((a) => {
-    const matchesCategory =
-      selectedCategory === "all" || a.category === selectedCategory;
-    const matchesUnlocked = !showUnlockedOnly || a.unlocked;
-    return matchesCategory && matchesUnlocked;
+  // Convert definition to store Achievement format
+  const convertToAchievement = (def: AchievementDefinition): Achievement => ({
+    id: def.id,
+    name: def.title,
+    description: def.description,
+    icon: def.iconName || "trophy",
+    category: def.category,
+    rarity: def.rarity || "common",
+    xpReward: def.xpReward,
+    condition: {
+      type: "custom",
+      target: def.requiredValue,
+      current: def.getProgress(),
+    },
   });
 
+  // Check for newly unlocked achievements
+  useEffect(() => {
+    achievementDefinitions.forEach((achievement) => {
+      const progress = achievement.getProgress();
+      if (progress >= achievement.requiredValue && !unlockedAchievements.includes(achievement.id)) {
+        unlockAchievement(convertToAchievement(achievement));
+      }
+    });
+  }, [completedLessons, completedChapters, totalXp, level, streakDays, unlockedAchievements, unlockAchievement]);
+
+  const categories = [
+    { id: "all", label: { en: "All", ar: "الكل" }, icon: Trophy },
+    { id: "learning", label: { en: "Learning", ar: "التعلم" }, icon: BookOpen },
+    { id: "streak", label: { en: "Streaks", ar: "السلاسل" }, icon: Flame },
+    { id: "mastery", label: { en: "Mastery", ar: "الإتقان" }, icon: Target },
+    { id: "special", label: { en: "Special", ar: "خاصة" }, icon: Sparkles },
+  ];
+
+  const filteredAchievements = selectedCategory === "all"
+    ? achievementDefinitions
+    : achievementDefinitions.filter((a) => a.category === selectedCategory);
+
+  const totalUnlocked = unlockedAchievements.length;
+  const totalAchievements = achievementDefinitions.length;
+
   return (
-    <div className="min-h-screen bg-linear-to-b from-amber-50/50 to-white dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/journey">
-              <Button
-                variant="ghost"
-                size="sm"
-                leftIcon={<ArrowLeft className="w-4 h-4" />}
-              >
-                {lang === "en" ? "Journey" : "الرحلة"}
+              <Button variant="ghost" size="sm" leftIcon={<ArrowLeft className="w-4 h-4" />}>
+                {lang === "en" ? "Back" : "رجوع"}
               </Button>
             </Link>
-            <div className="flex items-center gap-2">
-              <Trophy className="w-6 h-6 text-amber-500" />
-              <h1 className="text-lg font-bold text-slate-800 dark:text-white">
-                {lang === "en" ? "Achievements" : "الإنجازات"}
-              </h1>
-            </div>
+            <h1 className="text-lg font-bold text-slate-900 dark:text-white">
+              {lang === "en" ? "Achievements" : "الإنجازات"}
+            </h1>
             <div className="w-20" />
           </div>
         </div>
-      </header>
+      </div>
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
-        {/* Stats Overview */}
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Hero Section */}
         <motion.div
-          className="grid grid-cols-3 gap-4 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
         >
-          <div className="bg-linear-to-br from-amber-100 to-orange-100 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-4 text-center">
-            <Trophy className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">
-              {unlockedCount}
-            </p>
-            <p className="text-xs text-slate-500">
-              {lang === "en" ? "Unlocked" : "مفتوح"}
-            </p>
+          <div className="w-20 h-20 bg-linear-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <Trophy className="w-10 h-10 text-white" />
           </div>
-          <div className="bg-linear-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-2xl p-4 text-center">
-            <Sparkles className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">
-              {totalXP}
-            </p>
-            <p className="text-xs text-slate-500">
-              {lang === "en" ? "XP Earned" : "نقاط مكتسبة"}
-            </p>
-          </div>
-          <div className="bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/30 dark:to-pink-900/30 rounded-2xl p-4 text-center">
-            <Target className="w-8 h-8 text-purple-500 mx-auto mb-2" />
-            <p className="text-2xl font-bold text-slate-800 dark:text-white">
-              {achievements.length}
-            </p>
-            <p className="text-xs text-slate-500">
-              {lang === "en" ? "Total" : "المجموع"}
-            </p>
-          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-2">
+            {lang === "en" ? "Your Achievements" : "إنجازاتك"}
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400">
+            {lang === "en"
+              ? `You've unlocked ${totalUnlocked} of ${totalAchievements} achievements`
+              : `لقد فتحت ${totalUnlocked} من ${totalAchievements} إنجاز`}
+          </p>
         </motion.div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          <button
-            onClick={() => setSelectedCategory("all")}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              selectedCategory === "all"
-                ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-            }`}
-          >
-            {lang === "en" ? "All" : "الكل"}
-          </button>
-          {(Object.keys(categoryLabels) as Achievement["category"][]).map(
-            (cat) => (
+        {/* Progress Overview */}
+        <Card variant="gradient" padding="lg" className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                {lang === "en" ? "Overall Progress" : "التقدم العام"}
+              </h2>
+              <p className="text-sm text-slate-500">
+                {Math.round((totalUnlocked / totalAchievements) * 100)}% {lang === "en" ? "complete" : "مكتمل"}
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-3xl font-bold text-amber-500">{totalUnlocked}</p>
+              <p className="text-sm text-slate-500">/ {totalAchievements}</p>
+            </div>
+          </div>
+          <ProgressBar value={(totalUnlocked / totalAchievements) * 100} showLabel={false} />
+        </Card>
+
+        {/* Category Filter */}
+        <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            return (
               <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedCategory === cat
-                    ? "bg-amber-500 text-white shadow-lg shadow-amber-500/30"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${
+                  selectedCategory === cat.id
+                    ? "bg-amber-500 text-white"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
                 }`}
               >
-                {categoryLabels[cat][lang]}
+                <Icon className="w-4 h-4" />
+                {cat.label[lang]}
               </button>
-            ),
-          )}
-          <button
-            onClick={() => setShowUnlockedOnly(!showUnlockedOnly)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ml-auto ${
-              showUnlockedOnly
-                ? "bg-emerald-500 text-white"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-            }`}
-          >
-            {lang === "en" ? "Unlocked Only" : "المفتوحة فقط"}
-          </button>
+            );
+          })}
         </div>
 
         {/* Achievement Grid */}
-        <div className="grid gap-4 md:grid-cols-2">
-          <AnimatePresence mode="popLayout">
-            {filteredAchievements.map((achievement) => (
-              <AchievementCard
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredAchievements.map((achievement, index) => {
+            const Icon = achievement.icon;
+            const progress = achievement.getProgress();
+            const isUnlocked = unlockedAchievements.includes(achievement.id);
+            const progressPercent = Math.min((progress / achievement.requiredValue) * 100, 100);
+
+            return (
+              <motion.div
                 key={achievement.id}
-                achievement={achievement}
-                lang={lang}
-              />
-            ))}
-          </AnimatePresence>
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <Card
+                  variant={isUnlocked ? "gradient" : "default"}
+                  padding="md"
+                  className={`relative overflow-hidden ${
+                    isUnlocked ? "border-amber-200 dark:border-amber-800" : "opacity-80"
+                  }`}
+                >
+                  {isUnlocked && (
+                    <div className="absolute top-3 right-3">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    </div>
+                  )}
+
+                  <div className="flex items-start gap-4">
+                    <div
+                      className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 ${
+                        isUnlocked
+                          ? "bg-linear-to-br from-amber-400 to-amber-600"
+                          : "bg-slate-200 dark:bg-slate-700"
+                      }`}
+                    >
+                      {isUnlocked ? (
+                        <Icon className="w-7 h-7 text-white" />
+                      ) : (
+                        <Lock className="w-6 h-6 text-slate-400 dark:text-slate-500" />
+                      )}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-slate-900 dark:text-white truncate">
+                        {achievement.title[lang]}
+                      </h3>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+                        {achievement.description[lang]}
+                      </p>
+
+                      {!isUnlocked && (
+                        <div className="space-y-1">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-slate-500">
+                              {progress} / {achievement.requiredValue}
+                            </span>
+                            <span className="text-amber-500 font-medium">
+                              +{achievement.xpReward} XP
+                            </span>
+                          </div>
+                          <div className="h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-amber-500 rounded-full transition-all"
+                              style={{ width: `${progressPercent}%` }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {isUnlocked && (
+                        <span className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                          <Sparkles className="w-3 h-3" />
+                          {lang === "en" ? "Unlocked!" : "تم الفتح!"}
+                          <span className="text-amber-500 ml-2">+{achievement.xpReward} XP</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {filteredAchievements.length === 0 && (
-          <motion.div
-            className="text-center py-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <Trophy className="w-16 h-16 text-slate-300 dark:text-slate-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">
-              {lang === "en"
-                ? "No achievements found"
-                : "لم يتم العثور على إنجازات"}
-            </h3>
-            <p className="text-slate-500 dark:text-slate-400">
-              {lang === "en"
-                ? "Keep learning to unlock achievements!"
-                : "استمر في التعلم لفتح الإنجازات!"}
-            </p>
-          </motion.div>
-        )}
-
-        {/* Motivation Section */}
-        <motion.div
-          className="mt-12 p-6 bg-linear-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-purple-400 to-pink-500 flex items-center justify-center shrink-0">
-              <Crown className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-800 dark:text-white mb-1">
-                {lang === "en" ? "Next Achievement" : "الإنجاز التالي"}
-              </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mb-2">
-                {lang === "en"
-                  ? 'You\'re 2 days away from "Week Warrior" - keep your streak going!'
-                  : 'أنت على بعد يومين من "محارب الأسبوع" - حافظ على سلسلتك!'}
+        {/* Stats Summary */}
+        <Card variant="default" padding="lg" className="mt-8">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
+            {lang === "en" ? "Your Stats" : "إحصائياتك"}
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+              <BookOpen className="w-6 h-6 text-emerald-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                {completedLessons.length}
               </p>
-              <div className="h-2 bg-white/50 dark:bg-slate-700 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-linear-to-r from-purple-400 to-pink-500"
-                  initial={{ width: 0 }}
-                  animate={{ width: "71%" }}
-                  transition={{ duration: 0.8 }}
-                />
-              </div>
+              <p className="text-xs text-slate-500">
+                {lang === "en" ? "Lessons" : "دروس"}
+              </p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+              <Flame className="w-6 h-6 text-orange-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">{streakDays}</p>
+              <p className="text-xs text-slate-500">
+                {lang === "en" ? "Day Streak" : "أيام متتالية"}
+              </p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+              <Zap className="w-6 h-6 text-amber-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalXp}</p>
+              <p className="text-xs text-slate-500">
+                {lang === "en" ? "Total XP" : "مجموع النقاط"}
+              </p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+              <Star className="w-6 h-6 text-purple-500 mx-auto mb-2" />
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">{level}</p>
+              <p className="text-xs text-slate-500">
+                {lang === "en" ? "Level" : "المستوى"}
+              </p>
             </div>
           </div>
-        </motion.div>
-      </main>
+        </Card>
+
+        {/* Back Button */}
+        <div className="text-center mt-8">
+          <Link href="/journey">
+            <Button variant="outline">
+              {lang === "en" ? "Back to Journey" : "العودة للرحلة"}
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -49,7 +49,9 @@ export type ChapterId =
   | "quran"
   | "sawm"
   | "zakat"
-  | "hajj";
+  | "hajj"
+  | "new-muslims"
+  | "akhlaq";
 
 export interface Chapter {
   id: ChapterId;
