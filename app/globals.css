@@ -217,8 +217,11 @@ body {
 
 /* Arabic Font Class - for explicit Arabic text styling */
 .font-arabic {
-  font-family: var(--font-amiri), "Amiri", "Noto Naskh Arabic", "Noto Sans Arabic", serif;
-  font-feature-settings: "liga" 1, "calt" 1;
+  font-family:
+    var(--font-amiri), "Amiri", "Noto Naskh Arabic", "Noto Sans Arabic", serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
   line-height: 1.8;
 }
 

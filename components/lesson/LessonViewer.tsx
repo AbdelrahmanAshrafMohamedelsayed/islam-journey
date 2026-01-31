@@ -48,7 +48,8 @@ import {
 
 // Dynamically import DotLottie player to avoid SSR issues (supports v2 .lottie format)
 const DotLottieReact = dynamic(
-  () => import("@lottiefiles/dotlottie-react").then((mod) => mod.DotLottieReact),
+  () =>
+    import("@lottiefiles/dotlottie-react").then((mod) => mod.DotLottieReact),
   { ssr: false },
 );
 
@@ -568,7 +569,9 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
               {section.mediaUrl && (
                 <AudioPlayer
                   src={section.mediaUrl}
-                  label={lang === "ar" ? "استمع للتلاوة" : "Listen to recitation"}
+                  label={
+                    lang === "ar" ? "استمع للتلاوة" : "Listen to recitation"
+                  }
                   accentColor="emerald"
                 />
               )}
@@ -675,7 +678,9 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
       // Video section - for instructional videos
       case "video":
         // Handle YouTube Shorts with special formatting
-        const isYouTubeShort = section.mediaUrl?.includes("youtube.com/shorts/");
+        const isYouTubeShort = section.mediaUrl?.includes(
+          "youtube.com/shorts/",
+        );
         const getYouTubeEmbedUrl = (url: string) => {
           if (url.includes("youtube.com/shorts/")) {
             // Extract video ID from shorts URL
@@ -686,7 +691,7 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             .replace("watch?v=", "embed/")
             .replace("youtu.be/", "youtube.com/embed/");
         };
-        
+
         return (
           <motion.div
             key={section.id || `video-${currentSectionIndex}`}
@@ -695,9 +700,13 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
             className="my-8"
           >
             <Card variant="glass" padding="none" className="overflow-hidden">
-              <div className={`relative bg-slate-900 rounded-t-xl overflow-hidden ${
-                isYouTubeShort ? "aspect-[9/16] max-w-[280px] mx-auto" : "aspect-video"
-              }`}>
+              <div
+                className={`relative bg-slate-900 rounded-t-xl overflow-hidden ${
+                  isYouTubeShort
+                    ? "aspect-[9/16] max-w-[280px] mx-auto"
+                    : "aspect-video"
+                }`}
+              >
                 {section.mediaUrl ? (
                   section.mediaUrl.includes("youtube.com") ||
                   section.mediaUrl.includes("youtu.be") ? (
@@ -780,7 +789,9 @@ export function LessonViewer({ lessonId, chapterId }: LessonViewerProps) {
               ) : (
                 <div className="text-center text-slate-400 py-8">
                   <Volume2 className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>{lang === "en" ? "Audio coming soon" : "الصوت قادم قريباً"}</p>
+                  <p>
+                    {lang === "en" ? "Audio coming soon" : "الصوت قادم قريباً"}
+                  </p>
                 </div>
               )}
             </Card>

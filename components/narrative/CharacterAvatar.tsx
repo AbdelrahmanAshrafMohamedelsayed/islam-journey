@@ -360,8 +360,8 @@ export function CharacterAvatar({
         style={{
           width: dimensions.container,
           height: dimensions.container,
-          background: character.imageUrl 
-            ? 'transparent' 
+          background: character.imageUrl
+            ? "transparent"
             : `linear-gradient(135deg, ${character.primaryColor}20, ${character.secondaryColor}30)`,
           border: `2px solid ${character.primaryColor}40`,
         }}
@@ -460,8 +460,8 @@ export function MiniAvatar({
       style={{
         width: size,
         height: size,
-        background: character.imageUrl 
-          ? 'transparent'
+        background: character.imageUrl
+          ? "transparent"
           : `linear-gradient(135deg, ${character.primaryColor}30, ${character.secondaryColor}40)`,
         border: `1.5px solid ${character.primaryColor}50`,
       }}

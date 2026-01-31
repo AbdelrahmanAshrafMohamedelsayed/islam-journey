@@ -728,141 +728,145 @@ export function checkCharacterUnlock(
 /**
  * Lesson-specific greetings for Khabib
  */
-const KHABIB_LESSON_GREETINGS: Record<string, { en: string[]; ar: string[] }> = {
-  // Shahada lessons
-  "shahada-meaning": {
-    en: [
-      "Brother, sister! Today we learn the Shahada - the most important words you will ever say. Let's go!",
-      "Assalamu Alaikum! The Shahada changed my life. It will change yours too. Bismillah!",
-      "You know what? The Shahada is like the foundation of a building. Without it, nothing stands. Let's learn!",
-    ],
-    ar: [
-      "أخي، أختي! اليوم نتعلم الشهادة - أهم كلمات ستقولها. هيا بنا!",
-      "السلام عليكم! الشهادة غيرت حياتي. ستغير حياتك أيضاً. بسم الله!",
-      "تعرف ماذا؟ الشهادة مثل أساس البناء. بدونها لا شيء يقف. لنتعلم!",
-    ],
-  },
-  "shahada-tawheed": {
-    en: [
-      "Tawheed, brother! One God, one focus, one purpose. This is what makes us strong.",
-      "In the cage, I focus on one thing - winning. In life, we focus on One - Allah. Let's learn Tawheed!",
-      "My father taught me: 'Allah is One, and everything else is temporary.' This is Tawheed.",
-    ],
-    ar: [
-      "التوحيد يا أخي! إله واحد، تركيز واحد، هدف واحد. هذا ما يجعلنا أقوياء.",
-      "في القفص، أركز على شيء واحد - الفوز. في الحياة، نركز على واحد - الله. لنتعلم التوحيد!",
-      "أبي علمني: 'الله واحد، وكل شيء آخر مؤقت.' هذا هو التوحيد.",
-    ],
-  },
-  "shahada-conditions": {
-    en: [
-      "The conditions of Shahada, brother. Like training - you need to know the technique properly!",
-      "You can't just say words without meaning. Shahada needs sincerity. Let me explain.",
-      "In fighting, technique matters. In Shahada, the conditions matter. Let's learn them!",
-    ],
-    ar: [
-      "شروط الشهادة يا أخي. مثل التدريب - تحتاج معرفة التقنية بشكل صحيح!",
-      "لا يمكنك قول الكلمات بدون معنى. الشهادة تحتاج الإخلاص. دعني أشرح.",
-      "في القتال، التقنية مهمة. في الشهادة، الشروط مهمة. لنتعلمها!",
-    ],
-  },
-  "shahada-prophet": {
-    en: [
-      "The Prophet Muhammad ﷺ - the greatest man who ever lived. Let me tell you about him, brother.",
-      "My father would tell us stories about the Prophet ﷺ every night. Now I share with you.",
-      "You want to know a true champion? The Prophet ﷺ - undefeated in character. Let's learn!",
-    ],
-    ar: [
-      "النبي محمد ﷺ - أعظم رجل عاش. دعني أخبرك عنه يا أخي.",
-      "أبي كان يخبرنا قصصاً عن النبي ﷺ كل ليلة. الآن أشاركها معك.",
-      "تريد معرفة بطل حقيقي؟ النبي ﷺ - غير مهزوم في الأخلاق. لنتعلم!",
-    ],
-  },
-  // Salah lessons
-  "salah-importance": {
-    en: [
-      "Salah, brother! This is the most important thing after Shahada. It's our direct line to Allah.",
-      "Before every fight, I pray. Salah gives me strength. Let me show you why it's so important.",
-      "My father said: 'A Muslim without salah is like a fighter without training.' Let's learn!",
-    ],
-    ar: [
-      "الصلاة يا أخي! هذا أهم شيء بعد الشهادة. خطنا المباشر مع الله.",
-      "قبل كل قتال، أصلي. الصلاة تعطيني القوة. دعني أريك لماذا هي مهمة جداً.",
-      "أبي قال: 'المسلم بدون صلاة كالمقاتل بدون تدريب.' لنتعلم!",
-    ],
-  },
-  "salah-wudu": {
-    en: [
-      "Wudu - purification before prayer. Like warming up before a fight. Essential!",
-      "You can't pray without wudu, brother. Let me teach you the proper way.",
-      "Clean body, clean heart, ready for salah. This is wudu. Let's learn!",
-    ],
-    ar: [
-      "الوضوء - الطهارة قبل الصلاة. مثل الإحماء قبل القتال. ضروري!",
-      "لا يمكنك الصلاة بدون وضوء يا أخي. دعني أعلمك الطريقة الصحيحة.",
-      "جسم نظيف، قلب نظيف، جاهز للصلاة. هذا الوضوء. لنتعلم!",
-    ],
-  },
-  // Sawm lessons
-  "sawm-meaning": {
-    en: [
-      "Ramadan, brother! The month that made me who I am. Fasting builds discipline like nothing else.",
-      "In Dagestan, we all fast together. It builds community, builds character. Let me explain.",
-      "Fasting is training for the soul. You control your desires. This is real strength!",
-    ],
-    ar: [
-      "رمضان يا أخي! الشهر الذي صنعني. الصيام يبني الانضباط كلا شيء آخر.",
-      "في داغستان، كلنا نصوم معاً. يبني المجتمع، يبني الشخصية. دعني أشرح.",
-      "الصيام تدريب للروح. تتحكم في رغباتك. هذه القوة الحقيقية!",
-    ],
-  },
-  // Zakat lessons
-  "zakat-meaning": {
-    en: [
-      "Zakat - giving back, brother. Allah blessed me with success, I must help others.",
-      "In Islam, we don't just keep everything for ourselves. Zakat purifies our wealth.",
-      "My father taught me: 'The hand that gives is better than the hand that receives.' This is zakat.",
-    ],
-    ar: [
-      "الزكاة - العطاء يا أخي. الله باركني بالنجاح، يجب أن أساعد الآخرين.",
-      "في الإسلام، لا نحتفظ بكل شيء لأنفسنا. الزكاة تطهر أموالنا.",
-      "أبي علمني: 'اليد التي تعطي خير من اليد التي تأخذ.' هذه الزكاة.",
-    ],
-  },
-  // Hajj lessons
-  "hajj-overview": {
-    en: [
-      "Hajj - the journey of a lifetime, brother. Millions of Muslims, all equal before Allah.",
-      "When I did Hajj, I felt like nothing else mattered. Just me and Allah. SubhanAllah!",
-      "Hajj shows us: rich, poor, black, white - we are all the same in front of Allah.",
-    ],
-    ar: [
-      "الحج - رحلة العمر يا أخي. ملايين المسلمين، كلهم متساوون أمام الله.",
-      "عندما حججت، شعرت أن لا شيء آخر يهم. فقط أنا والله. سبحان الله!",
-      "الحج يرينا: غني، فقير، أسود، أبيض - كلنا متساوون أمام الله.",
-    ],
-  },
-};
+const KHABIB_LESSON_GREETINGS: Record<string, { en: string[]; ar: string[] }> =
+  {
+    // Shahada lessons
+    "shahada-meaning": {
+      en: [
+        "Brother, sister! Today we learn the Shahada - the most important words you will ever say. Let's go!",
+        "Assalamu Alaikum! The Shahada changed my life. It will change yours too. Bismillah!",
+        "You know what? The Shahada is like the foundation of a building. Without it, nothing stands. Let's learn!",
+      ],
+      ar: [
+        "أخي، أختي! اليوم نتعلم الشهادة - أهم كلمات ستقولها. هيا بنا!",
+        "السلام عليكم! الشهادة غيرت حياتي. ستغير حياتك أيضاً. بسم الله!",
+        "تعرف ماذا؟ الشهادة مثل أساس البناء. بدونها لا شيء يقف. لنتعلم!",
+      ],
+    },
+    "shahada-tawheed": {
+      en: [
+        "Tawheed, brother! One God, one focus, one purpose. This is what makes us strong.",
+        "In the cage, I focus on one thing - winning. In life, we focus on One - Allah. Let's learn Tawheed!",
+        "My father taught me: 'Allah is One, and everything else is temporary.' This is Tawheed.",
+      ],
+      ar: [
+        "التوحيد يا أخي! إله واحد، تركيز واحد، هدف واحد. هذا ما يجعلنا أقوياء.",
+        "في القفص، أركز على شيء واحد - الفوز. في الحياة، نركز على واحد - الله. لنتعلم التوحيد!",
+        "أبي علمني: 'الله واحد، وكل شيء آخر مؤقت.' هذا هو التوحيد.",
+      ],
+    },
+    "shahada-conditions": {
+      en: [
+        "The conditions of Shahada, brother. Like training - you need to know the technique properly!",
+        "You can't just say words without meaning. Shahada needs sincerity. Let me explain.",
+        "In fighting, technique matters. In Shahada, the conditions matter. Let's learn them!",
+      ],
+      ar: [
+        "شروط الشهادة يا أخي. مثل التدريب - تحتاج معرفة التقنية بشكل صحيح!",
+        "لا يمكنك قول الكلمات بدون معنى. الشهادة تحتاج الإخلاص. دعني أشرح.",
+        "في القتال، التقنية مهمة. في الشهادة، الشروط مهمة. لنتعلمها!",
+      ],
+    },
+    "shahada-prophet": {
+      en: [
+        "The Prophet Muhammad ﷺ - the greatest man who ever lived. Let me tell you about him, brother.",
+        "My father would tell us stories about the Prophet ﷺ every night. Now I share with you.",
+        "You want to know a true champion? The Prophet ﷺ - undefeated in character. Let's learn!",
+      ],
+      ar: [
+        "النبي محمد ﷺ - أعظم رجل عاش. دعني أخبرك عنه يا أخي.",
+        "أبي كان يخبرنا قصصاً عن النبي ﷺ كل ليلة. الآن أشاركها معك.",
+        "تريد معرفة بطل حقيقي؟ النبي ﷺ - غير مهزوم في الأخلاق. لنتعلم!",
+      ],
+    },
+    // Salah lessons
+    "salah-importance": {
+      en: [
+        "Salah, brother! This is the most important thing after Shahada. It's our direct line to Allah.",
+        "Before every fight, I pray. Salah gives me strength. Let me show you why it's so important.",
+        "My father said: 'A Muslim without salah is like a fighter without training.' Let's learn!",
+      ],
+      ar: [
+        "الصلاة يا أخي! هذا أهم شيء بعد الشهادة. خطنا المباشر مع الله.",
+        "قبل كل قتال، أصلي. الصلاة تعطيني القوة. دعني أريك لماذا هي مهمة جداً.",
+        "أبي قال: 'المسلم بدون صلاة كالمقاتل بدون تدريب.' لنتعلم!",
+      ],
+    },
+    "salah-wudu": {
+      en: [
+        "Wudu - purification before prayer. Like warming up before a fight. Essential!",
+        "You can't pray without wudu, brother. Let me teach you the proper way.",
+        "Clean body, clean heart, ready for salah. This is wudu. Let's learn!",
+      ],
+      ar: [
+        "الوضوء - الطهارة قبل الصلاة. مثل الإحماء قبل القتال. ضروري!",
+        "لا يمكنك الصلاة بدون وضوء يا أخي. دعني أعلمك الطريقة الصحيحة.",
+        "جسم نظيف، قلب نظيف، جاهز للصلاة. هذا الوضوء. لنتعلم!",
+      ],
+    },
+    // Sawm lessons
+    "sawm-meaning": {
+      en: [
+        "Ramadan, brother! The month that made me who I am. Fasting builds discipline like nothing else.",
+        "In Dagestan, we all fast together. It builds community, builds character. Let me explain.",
+        "Fasting is training for the soul. You control your desires. This is real strength!",
+      ],
+      ar: [
+        "رمضان يا أخي! الشهر الذي صنعني. الصيام يبني الانضباط كلا شيء آخر.",
+        "في داغستان، كلنا نصوم معاً. يبني المجتمع، يبني الشخصية. دعني أشرح.",
+        "الصيام تدريب للروح. تتحكم في رغباتك. هذه القوة الحقيقية!",
+      ],
+    },
+    // Zakat lessons
+    "zakat-meaning": {
+      en: [
+        "Zakat - giving back, brother. Allah blessed me with success, I must help others.",
+        "In Islam, we don't just keep everything for ourselves. Zakat purifies our wealth.",
+        "My father taught me: 'The hand that gives is better than the hand that receives.' This is zakat.",
+      ],
+      ar: [
+        "الزكاة - العطاء يا أخي. الله باركني بالنجاح، يجب أن أساعد الآخرين.",
+        "في الإسلام، لا نحتفظ بكل شيء لأنفسنا. الزكاة تطهر أموالنا.",
+        "أبي علمني: 'اليد التي تعطي خير من اليد التي تأخذ.' هذه الزكاة.",
+      ],
+    },
+    // Hajj lessons
+    "hajj-overview": {
+      en: [
+        "Hajj - the journey of a lifetime, brother. Millions of Muslims, all equal before Allah.",
+        "When I did Hajj, I felt like nothing else mattered. Just me and Allah. SubhanAllah!",
+        "Hajj shows us: rich, poor, black, white - we are all the same in front of Allah.",
+      ],
+      ar: [
+        "الحج - رحلة العمر يا أخي. ملايين المسلمين، كلهم متساوون أمام الله.",
+        "عندما حججت، شعرت أن لا شيء آخر يهم. فقط أنا والله. سبحان الله!",
+        "الحج يرينا: غني، فقير، أسود، أبيض - كلنا متساوون أمام الله.",
+      ],
+    },
+  };
 
 /**
  * Get a lesson-specific greeting for Khabib, or fall back to general greetings
  */
-export function getKhabibLessonGreeting(lessonId: string, lang: "en" | "ar"): string {
+export function getKhabibLessonGreeting(
+  lessonId: string,
+  lang: "en" | "ar",
+): string {
   const lessonGreetings = KHABIB_LESSON_GREETINGS[lessonId];
-  
+
   if (lessonGreetings) {
     const greetings = lessonGreetings[lang];
     return greetings[Math.floor(Math.random() * greetings.length)];
   }
-  
+
   // Fall back to general Khabib greetings
   const khabib = CHARACTERS.khabib;
   if (khabib) {
     const greetings = khabib.greetings[lang];
     return greetings[Math.floor(Math.random() * greetings.length)];
   }
-  
-  return lang === "en" 
+
+  return lang === "en"
     ? "Assalamu Alaikum! Let's learn together, brother!"
     : "السلام عليكم! لنتعلم معاً يا أخي!";
 }

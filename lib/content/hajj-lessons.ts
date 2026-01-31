@@ -296,7 +296,8 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
           en: "Millions of pilgrims gather around the Kaaba in unity",
           ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
         },
-        mediaUrl: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80",
+        mediaUrl:
+          "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80",
         mediaAlt: "Pilgrims performing Tawaf around the Kaaba during Hajj",
       },
       {

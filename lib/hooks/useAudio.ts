@@ -15,7 +15,8 @@ const AUDIO_URLS = {
 
   // Quran recitations - Full Surah audio (Al-Afasy)
   fatiha: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
-  fatiha_full: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
+  fatiha_full:
+    "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/1.mp3",
   fatiha_v1: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3",
   fatiha_v2: "https://everyayah.com/data/Alafasy_128kbps/001002.mp3",
   fatiha_v3: "https://everyayah.com/data/Alafasy_128kbps/001003.mp3",
@@ -25,13 +26,13 @@ const AUDIO_URLS = {
   fatiha_v7: "https://everyayah.com/data/Alafasy_128kbps/001007.mp3",
 
   // Short Surahs for learning - Full Surah audio
-  ikhlas: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
+  ikhlas:
+    "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/112.mp3",
   falaq: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/113.mp3",
   nas: "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/114.mp3",
 
   // Ayatul Kursi (2:255)
-  ayatul_kursi:
-    "https://everyayah.com/data/Alafasy_128kbps/002255.mp3",
+  ayatul_kursi: "https://everyayah.com/data/Alafasy_128kbps/002255.mp3",
 
   // Basmala - Using EveryAyah.com verified working URL
   basmala: "https://everyayah.com/data/Alafasy_128kbps/001001.mp3",
@@ -43,8 +44,7 @@ const AUDIO_URLS = {
   tasmee: "https://everyayah.com/data/Alafasy_128kbps/001002.mp3",
   tahmeed: "https://everyayah.com/data/Alafasy_128kbps/001003.mp3",
   tasbeeh_ruku: "https://everyayah.com/data/Alafasy_128kbps/001004.mp3",
-  tasbeeh_sujud:
-    "https://everyayah.com/data/Alafasy_128kbps/001005.mp3",
+  tasbeeh_sujud: "https://everyayah.com/data/Alafasy_128kbps/001005.mp3",
   tasleem: "https://everyayah.com/data/Alafasy_128kbps/001006.mp3",
   tashahud: "https://everyayah.com/data/Alafasy_128kbps/001007.mp3",
 };
