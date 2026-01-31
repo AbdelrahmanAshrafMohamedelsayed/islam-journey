@@ -282,7 +282,8 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
           en: "Millions of pilgrims gather around the Kaaba in unity",
           ar: "ملايين الحجاج يجتمعون حول الكعبة في وحدة",
         },
-        mediaUrl: "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        mediaUrl:
+          "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
         loop: true,
       },
       {
@@ -292,7 +293,8 @@ In the next lesson, we'll explore the rituals of Hajj in detail.
           en: "Listen: Surah Al-Hajj verse 27 - The Call to Pilgrimage",
           ar: "استمع: سورة الحج آية 27 - النداء للحج",
         },
-        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2705.mp3",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio/128/ar.alafasy/2705.mp3",
       },
       {
         id: "hajj-hadith",

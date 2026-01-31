@@ -42,7 +42,8 @@ export const salahLessons: Record<string, LessonContent> = {
           ar: "الرحلة الروحية للصلاة تربطك مباشرة بالله",
         },
         // Real Lottie animation - praying person
-        mediaUrl: "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
+        mediaUrl:
+          "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
         loop: true,
       },
       {

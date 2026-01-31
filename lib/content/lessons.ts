@@ -267,7 +267,8 @@ export const shahadaLessons: LessonContent[] = [
           en: "The Shahada opens the door to a new life",
           ar: "الشهادة تفتح باب حياة جديدة",
         },
-        mediaUrl: "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
+        mediaUrl:
+          "https://lottie.host/2a9f6399-6ce7-4d7f-9c53-20c07a5a1e21/mN8MHkCMnR.json",
         loop: true,
       },
       {
@@ -285,7 +286,8 @@ export const shahadaLessons: LessonContent[] = [
           en: "Listen to the Shahada recitation",
           ar: "استمع إلى تلاوة الشهادة",
         },
-        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
         transliteration: "Ash-hadu an la ilaha illa Allah...",
       },
       {

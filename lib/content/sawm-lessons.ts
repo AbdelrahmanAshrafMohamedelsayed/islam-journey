@@ -220,7 +220,8 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
           en: "The blessed month of Ramadan brings peace and reflection",
           ar: "شهر رمضان المبارك يجلب السلام والتأمل",
         },
-        mediaUrl: "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
+        mediaUrl:
+          "https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.json",
         loop: true,
       },
       {
@@ -230,7 +231,8 @@ In the next lesson, we'll learn the specific rules and requirements of fasting.
           en: "Listen: Surah Al-Baqarah verse 183 about fasting",
           ar: "استمع: سورة البقرة آية 183 عن الصيام",
         },
-        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/190.mp3",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio/128/ar.alafasy/190.mp3",
       },
       {
         id: "sawm-hadith",

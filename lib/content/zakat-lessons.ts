@@ -172,7 +172,8 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
           en: "Zakat purifies wealth and spreads blessings",
           ar: "الزكاة تطهر المال وتنشر البركات",
         },
-        mediaUrl: "https://lottie.host/7e4e7e5e-3e2c-4b8f-9c1c-4b9e8c3d5e1a/giving-charity.json",
+        mediaUrl:
+          "https://lottie.host/7e4e7e5e-3e2c-4b8f-9c1c-4b9e8c3d5e1a/giving-charity.json",
         loop: true,
       },
       {
@@ -182,7 +183,8 @@ In the next lesson, we'll learn exactly how to calculate your Zakat.
           en: "Listen: Quran verse about Zakat (Surah At-Tawbah 9:103)",
           ar: "استمع: آية قرآنية عن الزكاة (سورة التوبة 9:103)",
         },
-        mediaUrl: "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1273.mp3",
+        mediaUrl:
+          "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1273.mp3",
       },
       {
         id: "zakat-hadith",
