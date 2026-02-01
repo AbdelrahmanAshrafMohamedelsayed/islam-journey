@@ -21,6 +21,16 @@ interface AuthState {
   // Actions
   initialize: () => Promise<void>;
   signInWithGoogle: () => Promise<{ error: Error | null }>;
+  signInWithEmail: (
+    email: string,
+    password: string,
+  ) => Promise<{ error: Error | null }>;
+  signUp: (
+    email: string,
+    password: string,
+    fullName: string,
+  ) => Promise<{ error: Error | null }>;
+  resendVerificationEmail: (email: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   setUser: (user: User | null) => void;
   setSession: (session: Session | null) => void;
@@ -104,6 +114,94 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       }
 
       return { error: null };
+    } catch (error) {
+      set({ isLoading: false });
+      return { error: error as Error };
+    }
+  },
+
+  signInWithEmail: async (email, password) => {
+    if (!isSupabaseConfigured()) {
+      return { error: new Error("Supabase not configured") };
+    }
+
+    set({ isLoading: true });
+
+    try {
+      const { createClient } = await import("@/lib/supabase/client");
+      const supabase = createClient();
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        set({ isLoading: false });
+        // Return a cleaner error message
+        return { error: new Error(error.message) };
+      }
+
+      // Session update will be handled by onAuthStateChange listener
+      return { error: null };
+    } catch (error) {
+      set({ isLoading: false });
+      return { error: error as Error };
+    }
+  },
+
+  signUp: async (email, password, fullName) => {
+    if (!isSupabaseConfigured()) {
+      return { error: new Error("Supabase not configured") };
+    }
+
+    set({ isLoading: true });
+
+    try {
+      const { createClient } = await import("@/lib/supabase/client");
+      const supabase = createClient();
+
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+          },
+        },
+      });
+
+      if (error) {
+        set({ isLoading: false });
+        return { error: new Error(error.message) };
+      }
+
+      set({ isLoading: false });
+      return { error: null };
+    } catch (error) {
+      set({ isLoading: false });
+      return { error: error as Error };
+    }
+  },
+
+  resendVerificationEmail: async (email) => {
+    if (!isSupabaseConfigured()) {
+      return { error: new Error("Supabase not configured") };
+    }
+
+    set({ isLoading: true });
+
+    try {
+      const { createClient } = await import("@/lib/supabase/client");
+      const supabase = createClient();
+
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email,
+      });
+
+      set({ isLoading: false });
+      return { error: error ? new Error(error.message) : null };
     } catch (error) {
       set({ isLoading: false });
       return { error: error as Error };

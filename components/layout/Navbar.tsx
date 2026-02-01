@@ -326,6 +326,11 @@ export function Navbar() {
                   </div>
                 )}
               </div>
+
+              {/* Mobile Auth Button */}
+              <div className="px-4 py-4 border-t border-slate-200 dark:border-slate-800">
+                <AuthButton className="w-full justify-center" />
+              </div>
             </div>
           </motion.div>
         )}

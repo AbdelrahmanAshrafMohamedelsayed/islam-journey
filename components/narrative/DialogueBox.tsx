@@ -29,6 +29,7 @@ interface DialogueBoxProps {
   autoAdvance?: boolean;
   autoAdvanceDelay?: number;
   className?: string;
+  priority?: boolean;
 }
 
 interface DialogueSequenceProps {
@@ -40,6 +41,7 @@ interface DialogueSequenceProps {
   }>;
   onComplete?: () => void;
   className?: string;
+  priority?: boolean;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -100,6 +102,7 @@ export function DialogueBox({
   autoAdvance = false,
   autoAdvanceDelay = 2000,
   className = "",
+  priority = false,
 }: DialogueBoxProps) {
   const { dialogueSpeedMultiplier } = useNarrativeStore();
   const baseSpeed = 30 / dialogueSpeedMultiplier;
@@ -150,6 +153,7 @@ export function DialogueBox({
             character={character}
             emotion={currentEmotion}
             size={48}
+            priority={priority}
           />
         </motion.div>
 

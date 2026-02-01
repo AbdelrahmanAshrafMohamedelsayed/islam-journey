@@ -310,7 +310,8 @@ export function CharacterAvatar({
   animate = true,
   onClick,
   className = "",
-}: CharacterAvatarProps) {
+  priority = false,
+}: CharacterAvatarProps & { priority?: boolean }) {
   const currentEmotion = emotion || character.defaultEmotion;
   const dimensions = SIZES[size];
   const animationVariant = EMOTION_ANIMATIONS[currentEmotion];
@@ -388,6 +389,7 @@ export function CharacterAvatar({
             fill
             className="object-cover rounded-full"
             sizes={`${dimensions.container}px`}
+            priority={priority}
           />
         ) : (
           <>
@@ -444,6 +446,7 @@ interface MiniAvatarProps {
   emotion?: CharacterEmotion;
   size?: number;
   className?: string;
+  priority?: boolean;
 }
 
 export function MiniAvatar({
@@ -451,6 +454,7 @@ export function MiniAvatar({
   emotion,
   size = 40,
   className = "",
+  priority = false,
 }: MiniAvatarProps) {
   const currentEmotion = emotion || character.defaultEmotion;
 
@@ -481,6 +485,7 @@ export function MiniAvatar({
           fill
           className="object-cover rounded-full"
           sizes={`${size}px`}
+          priority={priority}
         />
       ) : (
         <Silhouette

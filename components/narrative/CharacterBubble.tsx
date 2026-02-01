@@ -31,7 +31,8 @@ export function CharacterBubble({
   position = "left",
   lang = "en",
   className = "",
-}: CharacterBubbleProps) {
+  priority = false, // Add priority prop
+}: CharacterBubbleProps & { priority?: boolean }) {
   const character = CHARACTERS[characterId];
 
   if (!character) return null;
@@ -53,6 +54,7 @@ export function CharacterBubble({
           size="md"
           showGlow
           animate
+          priority={priority}
         />
       </div>
 
